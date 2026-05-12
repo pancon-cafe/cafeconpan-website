@@ -1,16 +1,48 @@
-# React + Vite
+# Cafe Con Pan Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The official website for **Cafe Con Pan** — a cozy cafe built on good food, good coffee, and good vibes.
 
-Currently, two official plugins are available:
+🌐 Live site: [pancon.cafe](https://pancon.cafe)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## About
 
-## React Compiler
+This is the source code for the Cafe Con Pan website, built with [React](https://react.dev/) and [Vite](https://vitejs.dev/).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- **React** — UI framework
+- **Vite** — Build tool and dev server
+- **CSS** — Styling
+- **GitHub Pages** — Hosting
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Getting Started
+
+To run the project locally:
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/pancon-cafe/cafeconpan-website.git
+
+# 2. Navigate into the project folder
+cd cafeconpan-website
+
+# 3. Install dependencies
+npm install
+
+# 4. Start the development server
+npm run dev
+```
+
+Then open [http://localhost:5173](http://localhost:5173) in your browser.
+
+## Building for Production
+
+```bash
+npm run build
+```
+
+The built files will be in the `dist/` folder.
+
+## Contact
+
+For questions, reach out at [jason@pancon.cafe](mailto:jason@pancon.cafe).
