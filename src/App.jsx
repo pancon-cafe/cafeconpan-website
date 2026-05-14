@@ -15,7 +15,7 @@ const fonts = `@import url('https://fonts.googleapis.com/css2?family=Lilita+One&
 
 // SVG textile border pattern (huipil-inspired weave)
 const TextileBorder = ({ flip = false }) => (
-  <svg width="100%" height="24" viewBox="0 0 120 24" preserveAspectRatio="repeat" style={{ display: "block", transform: flip ? "scaleY(-1)" : "none" }}>
+  <svg width="100%" height="24" style={{ display: "block", transform: flip ? "scaleY(-1)" : "none" }}>
     <defs>
       <pattern id="weave" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
         <rect width="24" height="24" fill={C.beige} />
@@ -58,17 +58,22 @@ const Sunburst = ({ size = 500, color = C.beige, opacity = 0.25 }) => {
 
 // Coffee steam animation
 const SteamSVG = () => (
-  <svg width="40" height="40" viewBox="0 0 40 40">
+  <svg width="72" height="88" viewBox="0 0 72 88">
     <style>{`
-      @keyframes steam1 { 0%,100%{transform:translateY(0) scaleX(1);opacity:0.7} 50%{transform:translateY(-8px) scaleX(1.3);opacity:0.3} }
-      @keyframes steam2 { 0%,100%{transform:translateY(0) scaleX(1);opacity:0.5} 50%{transform:translateY(-10px) scaleX(0.8);opacity:0.2} }
+      @keyframes steam1 { 0%,100%{transform:translateY(0) scaleX(1);opacity:0.6} 50%{transform:translateY(-8px) scaleX(1.3);opacity:0.15} }
+      @keyframes steam2 { 0%,100%{transform:translateY(0) scaleX(1);opacity:0.45} 50%{transform:translateY(-10px) scaleX(0.8);opacity:0.1} }
       .s1{animation:steam1 2s ease-in-out infinite}
       .s2{animation:steam2 2.4s ease-in-out infinite 0.4s}
       .s3{animation:steam1 1.8s ease-in-out infinite 0.8s}
     `}</style>
-    <path className="s1" d="M14 24 Q12 18 14 12 Q16 6 14 2" stroke={C.beige} strokeWidth="2" fill="none" strokeLinecap="round" />
-    <path className="s2" d="M20 24 Q18 17 20 11 Q22 5 20 1" stroke={C.beige} strokeWidth="2" fill="none" strokeLinecap="round" />
-    <path className="s3" d="M26 24 Q24 18 26 12 Q28 6 26 2" stroke={C.beige} strokeWidth="2" fill="none" strokeLinecap="round" />
+    <path className="s1" d="M25 36 Q23 29 25 22 Q27 15 25 8" stroke={C.espresso} strokeWidth="2" fill="none" strokeLinecap="round"/>
+    <path className="s2" d="M36 34 Q34 26 36 19 Q38 12 36 5" stroke={C.espresso} strokeWidth="2" fill="none" strokeLinecap="round"/>
+    <path className="s3" d="M47 36 Q45 29 47 22 Q49 15 47 8" stroke={C.espresso} strokeWidth="2" fill="none" strokeLinecap="round"/>
+    <path d="M13 40 L59 40 L55 74 L17 74 Z" fill={C.espresso}/>
+    <ellipse cx="36" cy="40" rx="23" ry="5" fill={C.beige}/>
+    <path d="M17 52 L16 65" stroke={C.cream} strokeWidth="2.5" opacity="0.12" strokeLinecap="round"/>
+    <path d="M55 50 Q66 50 66 59 Q66 68 55 68" stroke={C.espresso} strokeWidth="5" fill="none" strokeLinecap="round"/>
+    <ellipse cx="36" cy="75" rx="26" ry="5.5" fill={C.espresso} opacity="0.2"/>
   </svg>
 );
 
@@ -295,7 +300,7 @@ function HomePage({ go }) {
           <div className="hero-stamp">☕ Honduras-Rooted · Est. 2025</div>
           <h1 className="hero-title">
             <span className="line-red">Café</span>
-            con
+            Con
             <span className="line-teal"> Pan</span>
           </h1>
           <p className="hero-subtitle">Tech · Coffee · Culture · Community</p>
@@ -315,6 +320,16 @@ function HomePage({ go }) {
           </button>
           <div className="hero-domain">pancon.cafe</div>
         </div>
+      </section>
+
+      <TextileBorder />
+
+      <section className="section">
+        <div className="section-header">
+          <div className="section-eyebrow">Our Story</div>
+          <h2 className="section-title">More Than a <span>Cup of Coffee</span></h2>
+        </div>
+        <p className="section-sub" style={{maxWidth:640,margin:"0 auto",textAlign:"center"}}>At Café Con Pan, we believe coffee is more than a drink — it's a connection. Rooted in our Honduran heritage, we started with a simple idea: to share authentic coffee and bread with our community. That same spirit drives everything we do — from helping small businesses launch and grow through technology, to building a space where culture and community come together. One cup and one connection at a time.</p>
       </section>
 
       <TextileBorder />
@@ -356,16 +371,43 @@ function HomePage({ go }) {
       </section>
 
       <TextileBorder flip />
+
+      <section className="section section-dark">
+        <div className="section-header">
+          <div className="section-eyebrow" style={{color:C.teal}}>The Bigger Picture</div>
+          <h2 className="section-title section-title-light">What's Next for <span>Café Con Pan</span></h2>
+          <p className="section-sub section-sub-light">The tech arm leads because it's ready. But this brand was always meant to be more — and these are the chapters still being written.</p>
+        </div>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:20,maxWidth:900,margin:"0 auto"}}>
+          {[
+            {icon:"☕", title:"Coffee From Home", badge:"In Planning", desc:"Single-origin Honduran coffee sourced from family's land in Central America. Grown with care, brought to your cup."},
+            {icon:"🫓", title:"The Café Experience", badge:"In Development", desc:"An authentic Central American cafe — pan dulce, café de olla, and a space that feels like walking into an abuela's kitchen."},
+            {icon:"🎉", title:"Cultural Events", badge:"Building Soon", desc:"Community programming that celebrates Central American roots. Music, food, storytelling, and people worth knowing."},
+          ].map(c => (
+            <div key={c.title} style={{background:"rgba(255,255,255,0.05)",border:`2px solid ${C.beige}33`,padding:32}}>
+              <div style={{fontSize:36,marginBottom:12}}>{c.icon}</div>
+              <div style={{fontFamily:"'Lilita One',cursive",fontSize:20,color:C.cream,marginBottom:8}}>{c.title}</div>
+              <span style={{display:"inline-block",background:C.teal,color:C.cream,fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",padding:"4px 10px",marginBottom:12}}>{c.badge}</span>
+              <p style={{fontSize:14,lineHeight:1.8,color:"rgba(245,237,214,0.65)",fontWeight:600}}>{c.desc}</p>
+            </div>
+          ))}
+        </div>
+        <div className="email-row" style={{marginTop:48,maxWidth:420,margin:"48px auto 0"}}>
+          <input className="email-input" placeholder="Stay in the loop — drop your email" />
+          <button className="email-btn">I'm In</button>
+        </div>
+      </section>
     </>
   );
 }
 
 function TechPage({ go }) {
-  const services = [
-    { icon:"🖥️", name:"MDM Project Setup", desc:"Full Jamf or Mosyle deployment. Enrollment, policy config, app management, and handoff documentation. One-time project, done right.", price:"Project-based" },
-    { icon:"🔁", name:"Managed Device Retainer", desc:"Ongoing monthly support for your device fleet. Updates, compliance, remote support, and proactive management so you don't have to think about it.", price:"Monthly retainer" },
-    { icon:"💡", name:"IT Consulting", desc:"Strategic and hands-on consulting for small businesses in the Apple ecosystem. Infrastructure decisions, vendor selection, and operational tech clarity.", price:"Hourly rate" },
-    { icon:"📡", name:"Carrier Services", desc:"Carrier plan auditing, negotiation, number porting, and account setup. 100% carrier-agnostic — we work for you, not the carrier.", price:"Audit + negotiation" },
+  const packages = [
+    { icon:"🚀", name:"Open for Business", tag:"Launch Package", desc:"Complete business launch: LLC/EIN guidance, banking, domain + email, website, payment setup, Apple device procurement, MDM enrollment, and full Brands setup.", price:"$2,500 – $5,000+" },
+    { icon:"🍎", name:"Apple Presence", tag:"Visibility Package", desc:"For existing businesses ready to show up in Apple's ecosystem: Apple Maps, Branded Mail, Tap to Pay branding, Brand Profile, and Maps Ads readiness.", price:"$500 – $1,500" },
+    { icon:"🔁", name:"Apple Operations", tag:"Managed Services", desc:"Ongoing device management, helpdesk, user onboarding/offboarding, software updates, app licensing, and security policy maintenance.", price:"$35 – $50 / device / month" },
+    { icon:"📡", name:"Connectivity Consulting", tag:"Carrier & ISP", desc:"Carrier plan audit, negotiation, number porting, new service activation, and ISP setup. 100% carrier-agnostic — we work for you, not the carrier.", price:"$150 – $300 / hr or flat fee" },
+    { icon:"🤝", name:"Tech Concierge", tag:"On-Call Support", desc:"Relationship-based on-call tech support for owners who want one trusted number to call. Monthly add-on to any package.", price:"$200 – $500 / month" },
   ];
   return (
     <>
@@ -375,13 +417,14 @@ function TechPage({ go }) {
           <h2 className="section-title">Tech Services for <span>Small Business</span></h2>
           <p className="section-sub">Apple-focused MDM and device management, IT consulting, and carrier services — through one trusted, independent partner.</p>
         </div>
-        <div className="services-grid">
-          {services.map(s => (
-            <div key={s.name} className="service-card">
-              <span className="service-card-icon">{s.icon}</span>
-              <div className="service-card-name">{s.name}</div>
-              <p className="service-card-desc">{s.desc}</p>
-              <span className="service-card-price">{s.price}</span>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:20,maxWidth:900,margin:"0 auto"}}>
+          {packages.map((p, i) => (
+            <div key={p.name} className="service-card" style={packages.length % 2 !== 0 && i === packages.length - 1 ? {gridColumn:"1 / -1",maxWidth:"calc(50% - 10px)",margin:"0 auto",width:"100%"} : {}}>
+              <span className="service-card-icon">{p.icon}</span>
+              <div className="service-card-name">{p.name}</div>
+              <p className="service-card-desc">{p.desc}</p>
+              <div style={{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",fontWeight:700,color:C.teal,marginBottom:6,marginTop:16}}>{p.tag}</div>
+              <span className="service-card-price">{p.price}</span>
             </div>
           ))}
         </div>
@@ -443,7 +486,7 @@ function TeaserPage({ eyebrow, title, accent, body, quote, placeholder }) {
           lineHeight:1.5,maxWidth:600,margin:"0 auto",
           paddingBottom:24,borderBottom:`2px solid ${C.beige}33`
         }}>"{quote}"</blockquote>
-        <div className="section-eyebrow" style={{marginTop:20}}>— Café con Pan</div>
+        <div className="section-eyebrow" style={{marginTop:20}}>— Café Con Pan</div>
       </section>
       <TextileBorder flip />
     </>
@@ -463,19 +506,19 @@ function AboutPage() {
             <div className="about-frame">
               <div style={{fontSize:48,marginBottom:16}}>☕🫓</div>
               <div className="about-quote">"Three things my culture always did well: make great coffee, take care of each other, and build things that last."</div>
-              <div className="about-quote-attr">— Café con Pan</div>
+              <div className="about-quote-attr">— Café Con Pan</div>
             </div>
           </div>
           <div>
             <div className="about-body">
-              <p>Café con Pan is a multi-arm brand rooted in Central American heritage — specifically Honduran culture — and built around three interconnected pillars: technology services, coffee and food, and community programming.</p>
+              <p>Café Con Pan is a multi-arm brand rooted in Central American heritage — specifically Honduran culture — and built around three interconnected pillars: technology services, coffee and food, and community programming.</p>
               <p>The tech arm leads because it's ready. Years of hands-on experience at Apple and in carrier services, now channeled through an independent practice built with the right credentials: LLC, EIN, reseller exemption, Jamf and Mosyle certifications in progress, and ACN on the horizon.</p>
               <p>The cafe and events arms are developing in parallel — not as afterthoughts, but as the beating heart of what this brand is ultimately becoming. A place. A gathering point. Something that tastes and feels like home.</p>
             </div>
             <div className="about-stats">
               <div><div className="about-stat-num">3</div><div className="about-stat-label">Brand Pillars</div></div>
               <div><div className="about-stat-num">2</div><div className="about-stat-label">Certs In Progress</div></div>
-              <div><div className="about-stat-num">HN</div><div className="about-stat-label">Honduran Roots</div></div>
+              <div><div className="about-stat-num">🇭🇳</div><div className="about-stat-label">Honduras Roots</div></div>
             </div>
           </div>
         </div>
@@ -491,14 +534,14 @@ function ContactPage() {
       <div className="section-header">
         <div className="section-eyebrow">Get in Touch</div>
         <h2 className="section-title">Let's <span>Talk</span></h2>
-        <p className="section-sub">Ready to talk tech services, or just want to follow the Café con Pan journey?</p>
+        <p className="section-sub">Ready to talk tech services, or just want to follow the Café Con Pan journey?</p>
       </div>
       <div className="contact-grid">
         <div>
           {[
             {label:"Email",val:"hello@pancon.cafe"},
             {label:"Website",val:"pancon.cafe"},
-            {label:"Business",val:"Café con Pan LLC"},
+            {label:"Business",val:"Cafe Con Pan LLC"},
             {label:"Services",val:"Tech · Coffee · Culture"},
           ].map(i => (
             <div key={i.label} className="contact-info-item">
@@ -517,7 +560,7 @@ function ContactPage() {
           </div>
           <div className="form-field">
             <label className="form-label">Email Address</label>
-            <input className="form-input" placeholder="you@yourcompany.com" />
+            <input className="form-input" placeholder="you@company.com" />
           </div>
           <div className="form-field">
             <label className="form-label">Inquiry Type</label>
@@ -526,7 +569,7 @@ function ContactPage() {
               <option>Tech Services — Carrier Audit & Negotiation</option>
               <option>Tech Services — IT Consulting</option>
               <option>Partnership Inquiry</option>
-              <option>General / Just Saying Hi</option>
+              <option>Coffee & Events — Stay in the Loop</option>
             </select>
           </div>
           <div className="form-field">
@@ -573,7 +616,7 @@ export default function CafeConPan() {
       <div className="grain" />
       <nav>
         <div className="nav-logo" onClick={() => go("Home")}>
-          Café con <span>Pan</span>
+          Café Con <span>Pan</span>
         </div>
         <div className="nav-links">
           {navItems.map(n => (
@@ -585,9 +628,9 @@ export default function CafeConPan() {
       <main style={{paddingTop:0}}>{renderPage()}</main>
       <TextileBorder />
       <footer>
-        <div className="footer-logo">Café con <span>Pan</span></div>
+        <div className="footer-logo">Café Con <span>Pan</span></div>
         <div className="footer-tagline">Tech · Coffee · Culture</div>
-        <div className="footer-copy">© 2025 Café con Pan LLC · pancon.cafe</div>
+        <div className="footer-copy">© 2026 Cafe Con Pan LLC · pancon.cafe</div>
       </footer>
     </>
   );
