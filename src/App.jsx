@@ -378,7 +378,7 @@ const css = `
     border:3px solid ${C.espresso};
     box-shadow:4px 4px 0 ${C.espresso}}
   .email-input{flex:1;padding:14px 18px;border:none;outline:none;
-    background:${C.cream};font-family:'Nunito',sans-serif;font-size:14px;
+    background:${C.cream};font-family:'Nunito',sans-serif;font-size:16px;
     font-weight:600;color:${C.espresso}}
   .email-input::placeholder{color:#bbb}
   .email-btn{background:${C.espresso};color:${C.cream};border:none;
@@ -399,7 +399,7 @@ const css = `
   .form-input,.form-select,.form-textarea{width:100%;padding:13px 16px;
     border:3px solid ${C.espresso};
     background:${C.cream};font-family:'Nunito',sans-serif;
-    font-size:14px;font-weight:600;outline:none;
+    font-size:16px;font-weight:600;outline:none;
     transition:border-color 0.2s,box-shadow 0.2s}
   .form-input:focus,.form-select:focus,.form-textarea:focus{
     box-shadow:3px 3px 0 ${C.espresso}}
