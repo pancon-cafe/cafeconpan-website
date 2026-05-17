@@ -77,8 +77,8 @@ const SteamSVG = () => (
 
 const STRINGS = {
   en: {
-    nav: { items:["Home","Tech Services","Coffee & Food","Events","Our Story","Contact"], cta:"Get a Quote", langBtn:"ES" },
-    hero: { stamp:"☕ Honduras-Rooted · Est. 2025", subtitle:"Tech · Coffee · Culture · Community", pillars:["Tech Services","Coffee & Food","Events"], cta:"Get Tech Services →" },
+    nav: { items:["Home","Tech Services","Community","Our Story","Contact"], cta:"Get a Quote", langBtn:"ES" },
+    hero: { stamp:"☕ Honduras-Rooted · Est. 2025", subtitle:"Tech · Coffee · Culture · Community", pillars:["Tech Services","Community"], cta:"Get Tech Services →" },
     story: { eyebrow:"Our Story", title:"More Than a", titleSpan:"Cup of Coffee", body:"At Café Con Pan, we believe coffee is more than a drink — it's a connection. Rooted in our Honduran heritage, we started with a simple idea: to share authentic coffee and bread with our community. That same spirit drives everything we do — from helping small businesses launch and grow through technology, to building a space where culture and community come together. One cup and one connection at a time." },
     painPoints: {
       eyebrow:"Real Talk",
@@ -100,8 +100,8 @@ const STRINGS = {
       eyebrow:"Three Pillars, One Brand", title:"What We're", titleSpan:"Building",
       cards:[
         { n:"01", icon:"⌨️", title:"Tech Services", desc:"MDM setup, managed device retainers, IT consulting, and carrier services. Apple-focused. Carrier-agnostic. Client-first.", cta:"Available Now", page:"Tech Services" },
-        { n:"02", icon:"☕", title:"Coffee & Food", desc:"A Central American cafe experience rooted in Honduran heritage. Pan dulce, café de olla, and the warmth of home.", cta:"Coming Soon", page:"Coffee & Food" },
-        { n:"03", icon:"🎉", title:"Community", desc:"Cultural programming and events that honor and celebrate Central American roots. A gathering point for community.", cta:"Coming Soon", page:"Events" },
+        { n:"02", icon:"☕", title:"Coffee & Food", desc:"A Central American cafe experience rooted in Honduran heritage. Pan dulce, café de olla, and the warmth of home.", cta:"Coming Soon", page:"Community" },
+        { n:"03", icon:"🎉", title:"Community", desc:"Cultural programming and events that honor and celebrate Central American roots. A gathering point for community.", cta:"Coming Soon", page:"Community" },
       ],
     },
     biggerPicture: {
@@ -137,8 +137,26 @@ const STRINGS = {
         cta:"Request a Consultation →",
       },
     },
-    coffeeTeaser:{ eyebrow:"Pillar Two", title:"Coffee &", accent:"Food", body:"A cafe experience rooted in Central American tradition. Pan dulce fresh from the oven, café de olla brewed the right way, and a space that feels like walking into an abuela's kitchen.", quote:"Coffee is how Central Americans say good morning, welcome home, and I'm glad you're here.", placeholder:"Your email — we'll let you know when we open", emailBtn:"Notify Me" },
-    eventsTeaser:{ eyebrow:"Pillar Three", title:"Community &", accent:"Events", body:"Cultural programming, community gatherings, and events that celebrate Central American roots. Music, food, storytelling, and people worth knowing. Something worth showing up for.", quote:"Community isn't a feature. It's the whole point.", placeholder:"Get notified when events are announced", emailBtn:"Notify Me" },
+    community:{
+      eyebrow:"Pillars Two & Three",
+      title:"Coffee, Culture &",
+      titleSpan:"Community",
+      sub:"Two chapters still being written — and the heart of what this brand is ultimately becoming.",
+      coffeeEyebrow:"Coming Soon — The Café",
+      coffeeTitle:"Coffee &",
+      coffeeTitleSpan:"Food",
+      coffeeBody:"A cafe experience rooted in Central American tradition. Pan dulce fresh from the oven, café de olla brewed the right way, and a space that feels like walking into an abuela's kitchen. Not just a coffee shop — a place where business gets done, community gathers, and culture is celebrated.",
+      coffeeQuote:"Coffee is how Central Americans say good morning, welcome home, and I'm glad you're here.",
+      coffeePlaceholder:"Your email — we'll let you know when we open",
+      coffeeEmailBtn:"Notify Me",
+      eventsEyebrow:"Coming Soon — Events & Culture",
+      eventsTitle:"Community &",
+      eventsTitleSpan:"Events",
+      eventsBody:"Cultural programming, community gatherings, and events that celebrate Central American roots. Music, food, storytelling, and people worth knowing. Sponsored art shows, cultural nights, and eventually — a boardroom in our café where businesses can meet, plan, and grow together.",
+      eventsQuote:"Community isn't a feature. It's the whole point.",
+      eventsPlaceholder:"Get notified when events are announced",
+      eventsEmailBtn:"Notify Me",
+    },
     about:{
       eyebrow:"The Story", title:"Roots,", titleSpan:"Community,", titleEnd:"Purpose",
       quote:"She served it in a bowl with rosquillas and ojaldras, like soup. I was five years old and I've never stopped thinking about that cup.",
@@ -170,8 +188,8 @@ const STRINGS = {
     footer:{ tagline:"Tech · Coffee · Culture", copy:"© 2026 Cafe Con Pan LLC · pancon.cafe", disclaimer:"We provide guidance and implementation support — not legal, tax, or financial advice. For those needs, we recommend working with a licensed professional." },
   },
   es: {
-    nav: { items:["Inicio","Servicios Tech","Café & Pan","Eventos","Nuestra Historia","Contacto"], cta:"Cotización", langBtn:"EN" },
-    hero: { stamp:"☕ Raíces Hondureñas · Est. 2025", subtitle:"Tech · Café · Cultura · Comunidad", pillars:["Servicios Tech","Café & Pan","Eventos"], cta:"Ver Servicios Tech →", culturalSignal:"Hablamos tu idioma — literal y culturalmente." },
+    nav: { items:["Inicio","Servicios Tech","Comunidad","Nuestra Historia","Contacto"], cta:"Cotización", langBtn:"EN" },
+    hero: { stamp:"☕ Raíces Hondureñas · Est. 2025", subtitle:"Tech · Café · Cultura · Comunidad", pillars:["Servicios Tech","Comunidad"], cta:"Ver Servicios Tech →", culturalSignal:"Hablamos tu idioma — literal y culturalmente." },
     story: { eyebrow:"Nuestra Historia", title:"Más Que una", titleSpan:"Taza de Café", body:"En Café Con Pan, creemos que el café es más que una bebida — es una conexión. Con raíces en nuestra herencia hondureña, comenzamos con una idea simple: compartir café y pan auténtico con nuestra comunidad. Ese mismo espíritu impulsa todo lo que hacemos — desde ayudar a pequeños negocios a crecer mediante la tecnología, hasta construir un espacio donde la cultura y la comunidad se unen. Una taza y una conexión a la vez." },
     paraTi: {
       eyebrow:"Para Ti",
@@ -205,8 +223,8 @@ const STRINGS = {
       eyebrow:"Tres Pilares, Una Marca", title:"Lo Que Estamos", titleSpan:"Construyendo",
       cards:[
         { n:"01", icon:"⌨️", title:"Servicios Tech", desc:"Configuración de MDM, gestión de dispositivos, consultoría IT y servicios de carrier. Enfocados en Apple. Independientes del carrier. El cliente primero.", cta:"Disponible Ahora", page:"Tech Services" },
-        { n:"02", icon:"☕", title:"Café & Pan", desc:"Una experiencia de café centroamericano con raíces hondureñas. Pan dulce, café de olla y el calor del hogar.", cta:"Próximamente", page:"Coffee & Food" },
-        { n:"03", icon:"🎉", title:"Comunidad", desc:"Programas culturales y eventos que honran y celebran las raíces centroamericanas. Un punto de encuentro para la comunidad.", cta:"Próximamente", page:"Events" },
+        { n:"02", icon:"☕", title:"Café & Pan", desc:"Una experiencia de café centroamericano con raíces hondureñas. Pan dulce, café de olla y el calor del hogar.", cta:"Próximamente", page:"Community" },
+        { n:"03", icon:"🎉", title:"Comunidad", desc:"Programas culturales y eventos que honran y celebran las raíces centroamericanas. Un punto de encuentro para la comunidad.", cta:"Próximamente", page:"Community" },
       ],
     },
     biggerPicture: {
@@ -242,8 +260,26 @@ const STRINGS = {
         cta:"Solicitar una Consulta →",
       },
     },
-    coffeeTeaser:{ eyebrow:"Pilar Dos", title:"Café &", accent:"Pan", body:"Una experiencia de café con raíces en la tradición centroamericana. Pan dulce recién salido del horno, café de olla preparado de la manera correcta y un espacio que se siente como entrar a la cocina de una abuela.", quote:"El café es como los centroamericanos dicen buenos días, bienvenido a casa y me alegra que estés aquí.", placeholder:"Tu correo — te avisaremos cuando abramos", emailBtn:"Avísame" },
-    eventsTeaser:{ eyebrow:"Pilar Tres", title:"Comunidad &", accent:"Eventos", body:"Programas culturales, encuentros comunitarios y eventos que celebran las raíces centroamericanas. Música, comida, historias y personas que vale la pena conocer. Algo por lo que vale la pena aparecer.", quote:"La comunidad no es una característica. Es el punto central.", placeholder:"Recibe notificación cuando se anuncien eventos", emailBtn:"Avísame" },
+    community:{
+      eyebrow:"Pilares Dos y Tres",
+      title:"Café, Cultura y",
+      titleSpan:"Comunidad",
+      sub:"Dos capítulos que aún se están escribiendo — y el corazón de lo que esta marca está destinada a convertirse.",
+      coffeeEyebrow:"Próximamente — El Café",
+      coffeeTitle:"Café &",
+      coffeeTitleSpan:"Pan",
+      coffeeBody:"Una experiencia de café con raíces en la tradición centroamericana. Pan dulce recién salido del horno, café de olla preparado de la manera correcta y un espacio que se siente como entrar a la cocina de una abuela. No solo una cafetería — un lugar donde se hacen negocios, se reúne la comunidad y se celebra la cultura.",
+      coffeeQuote:"El café es como los centroamericanos dicen buenos días, bienvenido a casa y me alegra que estés aquí.",
+      coffeePlaceholder:"Tu correo — te avisaremos cuando abramos",
+      coffeeEmailBtn:"Avísame",
+      eventsEyebrow:"Próximamente — Eventos y Cultura",
+      eventsTitle:"Comunidad &",
+      eventsTitleSpan:"Eventos",
+      eventsBody:"Programas culturales, encuentros comunitarios y eventos que celebran las raíces centroamericanas. Música, comida, historias y personas que vale la pena conocer. Shows de arte patrocinados, noches culturales y eventualmente — una sala de juntas en nuestro café donde los negocios pueden reunirse, planificar y crecer juntos.",
+      eventsQuote:"La comunidad no es una característica. Es el punto central.",
+      eventsPlaceholder:"Recibe notificación cuando se anuncien eventos",
+      eventsEmailBtn:"Avísame",
+    },
     about:{
       eyebrow:"La Historia", title:"Raíces,", titleSpan:"Comunidad,", titleEnd:"Propósito",
       quote:"Lo servía en un tazón con rosquillas y ojaldras, como sopa. Tenía cinco años y nunca he dejado de pensar en esa taza.",
@@ -518,11 +554,11 @@ const css = `
   }
 `;
 
-const navKeys = ["Home","Tech Services","Coffee & Food","Events","Our Story","Contact"];
+const navKeys = ["Home","Tech Services","Community","Our Story","Contact"];
 
 const PAGE_HASH = {
-  "Home":"home","Tech Services":"tech-services","Coffee & Food":"coffee-food",
-  "Events":"events","Our Story":"our-story","Contact":"contact",
+  "Home":"home","Tech Services":"tech-services","Community":"community",
+  "Our Story":"our-story","Contact":"contact",
 };
 const HASH_PAGE = Object.fromEntries(Object.entries(PAGE_HASH).map(([k,v])=>[v,k]));
 const getPageFromHash = () => HASH_PAGE[window.location.hash.replace("#","")] || "Home";
@@ -666,11 +702,8 @@ function HomePage({ go, t, lang }) {
             <button className="hero-pillar" onClick={() => go("Tech Services")}>
               <span className="hero-pillar-icon">⌨️</span> {t.hero.pillars[0]}
             </button>
-            <button className="hero-pillar" onClick={() => go("Coffee & Food")}>
+            <button className="hero-pillar" onClick={() => go("Community")}>
               <span className="hero-pillar-icon">☕</span> {t.hero.pillars[1]}
-            </button>
-            <button className="hero-pillar" onClick={() => go("Events")}>
-              <span className="hero-pillar-icon">🎉</span> {t.hero.pillars[2]}
             </button>
           </div>
           <button className="hero-cta" onClick={() => go("Tech Services")}>{t.hero.cta}</button>
@@ -971,6 +1004,72 @@ function ContactPage({ t }) {
   );
 }
 
+function CommunityPage({ t }) {
+  return (
+    <>
+      <section className="section" style={{paddingTop:100}}>
+        <div className="section-header">
+          <div className="section-eyebrow">{t.community.eyebrow}</div>
+          <h2 className="section-title">{t.community.title} <span>{t.community.titleSpan}</span></h2>
+          <p className="section-sub">{t.community.sub}</p>
+        </div>
+      </section>
+
+      <TextileBorder />
+
+      <section className="section section-alt" style={{position:"relative",overflow:"hidden"}}>
+        <div style={{position:"absolute",left:-80,top:"50%",transform:"translateY(-50%)",opacity:0.1,pointerEvents:"none"}}>
+          <Sunburst size={500} color={C.gold} opacity={0.8} />
+        </div>
+        <div className="teaser-inner" style={{position:"relative",zIndex:2}}>
+          <span className="coming-tag">{t.community.coffeeEyebrow}</span>
+          <h2 className="teaser-title">{t.community.coffeeTitle} <span>{t.community.coffeeTitleSpan}</span></h2>
+          <p className="teaser-body">{t.community.coffeeBody}</p>
+          <EmailCapture placeholder={t.community.coffeePlaceholder} btnLabel={t.community.coffeeEmailBtn} />
+        </div>
+      </section>
+
+      <TextileBorder flip />
+
+      <section className="section section-dark" style={{textAlign:"center"}}>
+        <blockquote style={{
+          fontFamily:"'Pacifico',cursive",fontSize:28,color:C.blush,
+          lineHeight:1.5,maxWidth:600,margin:"0 auto",
+          paddingBottom:24,borderBottom:`2px solid ${C.beige}33`
+        }}>"{t.community.coffeeQuote}"</blockquote>
+        <div className="section-eyebrow" style={{marginTop:20}}>— Café Con Pan</div>
+      </section>
+
+      <TextileBorder />
+
+      <section className="section" style={{position:"relative",overflow:"hidden"}}>
+        <div style={{position:"absolute",right:-80,top:"50%",transform:"translateY(-50%)",opacity:0.1,pointerEvents:"none"}}>
+          <Sunburst size={500} color={C.gold} opacity={0.8} />
+        </div>
+        <div className="teaser-inner" style={{position:"relative",zIndex:2}}>
+          <span className="coming-tag">{t.community.eventsEyebrow}</span>
+          <h2 className="teaser-title">{t.community.eventsTitle} <span>{t.community.eventsTitleSpan}</span></h2>
+          <p className="teaser-body">{t.community.eventsBody}</p>
+          <EmailCapture placeholder={t.community.eventsPlaceholder} btnLabel={t.community.eventsEmailBtn} />
+        </div>
+      </section>
+
+      <TextileBorder flip />
+
+      <section className="section section-dark" style={{textAlign:"center"}}>
+        <blockquote style={{
+          fontFamily:"'Pacifico',cursive",fontSize:28,color:C.blush,
+          lineHeight:1.5,maxWidth:600,margin:"0 auto",
+          paddingBottom:24,borderBottom:`2px solid ${C.beige}33`
+        }}>"{t.community.eventsQuote}"</blockquote>
+        <div className="section-eyebrow" style={{marginTop:20}}>— Café Con Pan</div>
+      </section>
+
+      <TextileBorder flip />
+    </>
+  );
+}
+
 export default function CafeConPan() {
   const [page, setPage] = useState(getPageFromHash);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -1013,8 +1112,7 @@ export default function CafeConPan() {
     switch(page) {
       case "Home": return <HomePage go={go} t={t} lang={lang} />;
       case "Tech Services": return <TechPage go={go} t={t} />;
-      case "Coffee & Food": return <TeaserPage {...t.coffeeTeaser} />;
-      case "Events": return <TeaserPage {...t.eventsTeaser} />;
+      case "Community": return <CommunityPage t={t} />;
       case "Our Story": return <AboutPage t={t} />;
       case "Contact": return <ContactPage t={t} />;
       default: return <HomePage go={go} t={t} lang={lang} />;
