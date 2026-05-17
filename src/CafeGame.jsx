@@ -119,17 +119,12 @@ function drawObstacle(ctx, x, type) {
 
 // ── Collision ─────────────────────────────────────────────────────────────────
 
-const HB = {
-  pan:   {dx:-22, dy:-50, w:44, h:50},
-  laptop:{dx:-22, dy:-50, w:44, h:50},
-  wifi:  {dx:-22, dy:-50, w:44, h:50},
-};
-const CHB = {dx:-26, dy:-56, w:52, h:56}; // relative to charY
+const OHB = {dx:-22, dy:-50, w:44, h:50};
+const CHB = {dx:-26, dy:-56, w:52, h:56};
 
 function collides(charY, obs) {
   const cx1=CX+CHB.dx, cy1=charY+CHB.dy, cx2=cx1+CHB.w, cy2=cy1+CHB.h;
-  const h=HB[obs.type];
-  const ox1=obs.x+h.dx, oy1=GY+h.dy, ox2=ox1+h.w, oy2=oy1+h.h;
+  const ox1=obs.x+OHB.dx, oy1=GY+OHB.dy, ox2=ox1+OHB.w, oy2=oy1+OHB.h;
   return cx1<ox2 && cx2>ox1 && cy1<oy2 && cy2>oy1;
 }
 
@@ -151,7 +146,7 @@ export default function CafeGame({ onClose }) {
   const g = useRef({
     phase:"start", frame:0, score:0, best:0,
     charY:GY, vy:0, jumping:false, speed:5,
-    obstacles:[], nextIn:380, shake:0,
+    obstacles:[], nextIn:380,
   });
   const raf = useRef(null);
 
@@ -159,7 +154,7 @@ export default function CafeGame({ onClose }) {
     const s = g.current;
     if (s.phase==="start") { s.phase="playing"; return; }
     if (s.phase==="dead") {
-      Object.assign(s,{phase:"playing",frame:0,score:0,charY:GY,vy:0,jumping:false,speed:5,obstacles:[],nextIn:49*5+80,shake:0});
+      Object.assign(s,{phase:"playing",frame:0,score:0,charY:GY,vy:0,jumping:false,speed:5,obstacles:[],nextIn:49*5+80});
       return;
     }
     if (!s.jumping) { s.vy=JUMP_V; s.jumping=true; }
@@ -201,12 +196,10 @@ export default function CafeGame({ onClose }) {
           s.phase="dead"; s.best=Math.max(s.best,s.score);
         }
         s.score++;
-        if (s.shake>0) s.shake--;
       }
 
       // ── Render ──
       ctx.save();
-      if (s.shake>0) ctx.translate((Math.random()-.5)*s.shake*0.8,(Math.random()-.5)*s.shake*0.4);
 
       drawBg(ctx, s.frame);
       s.obstacles.forEach(o=>{
