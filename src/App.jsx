@@ -148,7 +148,7 @@ const STRINGS = {
       stats:[{num:"3",label:"Brand Pillars"},{num:"2",label:"Certs In Progress"},{num:"🇭🇳",label:"Honduras Roots"}],
     },
     socials:{
-      instagram:"https://instagram.com/cafeconpan",
+      instagram:"https://instagram.com/icafeconpan",
       linkedin:"https://linkedin.com/company/cafeconpan",
       instagramLabel:"Instagram",
       linkedinLabel:"LinkedIn",
@@ -157,7 +157,7 @@ const STRINGS = {
     contact:{
       eyebrow:"Get in Touch", title:"Let's", titleSpan:"Talk",
       sub:"Ready to talk tech services, or just want to follow the Café Con Pan journey?",
-      info:[{label:"Email",val:"hello@pancon.cafe"},{label:"Website",val:"pancon.cafe"},{label:"Business",val:"Cafe Con Pan LLC"},{label:"Services",val:"Tech · Coffee · Culture"},{label:"Instagram",val:"@cafeconpan"},{label:"LinkedIn",val:"Café Con Pan LLC"}],
+      info:[{label:"Email",val:"hello@pancon.cafe"},{label:"Website",val:"pancon.cafe"},{label:"Business",val:"Cafe Con Pan LLC"},{label:"Services",val:"Tech · Coffee · Culture"},{label:"Instagram",val:"@icafeconpan"},{label:"LinkedIn",val:"Cafe Con Pan LLC"}],
       nameLabel:"Your Name", namePlaceholder:"Full name",
       emailLabel:"Email Address", emailPlaceholder:"you@company.com",
       inquiryLabel:"Inquiry Type", messageLabel:"Message", messagePlaceholder:"Tell us about your business and what you need...",
@@ -253,7 +253,7 @@ const STRINGS = {
       stats:[{num:"3",label:"Pilares de Marca"},{num:"2",label:"Certs en Progreso"},{num:"🇭🇳",label:"Raíces Hondureñas"}],
     },
     socials:{
-      instagram:"https://instagram.com/cafeconpan",
+      instagram:"https://instagram.com/icafeconpan",
       linkedin:"https://linkedin.com/company/cafeconpan",
       instagramLabel:"Instagram",
       linkedinLabel:"LinkedIn",
@@ -262,7 +262,7 @@ const STRINGS = {
     contact:{
       eyebrow:"Ponte en Contacto", title:"", titleSpan:"Hablemos",
       sub:"¿Listo para hablar de servicios tech o simplemente quieres seguir el viaje de Café Con Pan?",
-      info:[{label:"Correo",val:"hello@pancon.cafe"},{label:"Sitio Web",val:"pancon.cafe"},{label:"Negocio",val:"Cafe Con Pan LLC"},{label:"Servicios",val:"Tech · Café · Cultura"},{label:"Instagram",val:"@cafeconpan"},{label:"LinkedIn",val:"Café Con Pan LLC"}],
+      info:[{label:"Correo",val:"hello@pancon.cafe"},{label:"Sitio Web",val:"pancon.cafe"},{label:"Negocio",val:"Cafe Con Pan LLC"},{label:"Servicios",val:"Tech · Café · Cultura"},{label:"Instagram",val:"@icafeconpan"},{label:"LinkedIn",val:"Cafe Con Pan LLC"}],
       nameLabel:"Tu Nombre", namePlaceholder:"Nombre completo",
       emailLabel:"Correo Electrónico", emailPlaceholder:"tu@empresa.com",
       inquiryLabel:"Tipo de Consulta", messageLabel:"Mensaje", messagePlaceholder:"Cuéntanos sobre tu negocio y lo que necesitas...",
@@ -928,7 +928,7 @@ function ContactPage({ t }) {
               <a href={t.socials.linkedin} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}}
                 onMouseEnter={e=>e.currentTarget.style.opacity=1}
                 onMouseLeave={e=>e.currentTarget.style.opacity=0.5}
-              >in {t.socials.linkedinLabel}</a>
+              >{t.socials.linkedinLabel}</a>
             </div>
           </div>
         </div>
@@ -1057,7 +1057,7 @@ export default function CafeConPan() {
             <a href={t.socials.linkedin} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.cream,opacity:0.6,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}}
               onMouseEnter={e=>e.currentTarget.style.opacity=1}
               onMouseLeave={e=>e.currentTarget.style.opacity=0.6}
-            >in {t.socials.linkedinLabel}</a>
+            >{t.socials.linkedinLabel}</a>
           </div>
         </div>
         <div style={{fontSize:11,color:`rgba(245,237,214,0.35)`,fontWeight:600,textAlign:"center",maxWidth:480,lineHeight:1.6}}>{t.footer.disclaimer}</div>
