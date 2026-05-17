@@ -721,7 +721,13 @@ function HomePage({ go, t, lang }) {
         <p className="section-sub" style={{maxWidth:640,margin:"0 auto",textAlign:"center"}}>{t.story.body}</p>
       </section>
 
-      <TextileBorder />
+      <TextileBorder flip />
+
+      {lang === "es" && <ParaTiSection t={t} />}
+
+      <PainPointsSection go={go} t={t} />
+
+      <TextileBorder flip />
 
       <section className="section section-alt">
         <div className="section-header">
@@ -754,12 +760,6 @@ function HomePage({ go, t, lang }) {
           ))}
         </div>
       </section>
-
-      <TextileBorder flip />
-
-      {lang === "es" && <ParaTiSection t={t} />}
-
-      <PainPointsSection go={go} t={t} />
 
       <TextileBorder flip />
 
