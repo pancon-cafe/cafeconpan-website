@@ -190,7 +190,10 @@ const STRINGS = {
       refSub:"Already a La Mesa partner? Submit a referral here and we'll take it from there.",
       refYourName:"Your Name", refYourNamePlaceholder:"Your full name",
       refTheirName:"Their Name", refTheirNamePlaceholder:"Who are you referring?",
-      refTheirContact:"Their Email or Phone", refTheirContactPlaceholder:"Best way to reach them",
+      refTheirEmail:"Their Email", refTheirEmailPlaceholder:"their@email.com",
+      refTheirPhone:"Their Phone", refTheirPhonePlaceholder:"Best number to reach them",
+      refTheirBiz:"Business Name", refTheirBizPlaceholder:"Legal registered name preferred",
+      refTheirWeb:"Website", refTheirWebPlaceholder:"Optional — if they have one",
       refNeed:"What Do They Need Help With",
       refOptions:["Not sure — general intro","Tech Services — Device Management","Tech Services — Carrier Audit","Tech Services — IT Consulting","Business Setup — LLC / EIN / Email / Domain","Something else"],
       refNotes:"Anything else we should know", refNotesPlaceholder:"Optional — any context helps",
@@ -355,7 +358,10 @@ const STRINGS = {
       refSub:"¿Ya eres socio de La Mesa? Envía un referido aquí y nosotros nos encargamos del resto.",
       refYourName:"Tu Nombre", refYourNamePlaceholder:"Tu nombre completo",
       refTheirName:"Su Nombre", refTheirNamePlaceholder:"¿A quién nos estás refiriendo?",
-      refTheirContact:"Su Correo o Teléfono", refTheirContactPlaceholder:"La mejor manera de contactarlos",
+      refTheirEmail:"Su Correo", refTheirEmailPlaceholder:"su@correo.com",
+      refTheirPhone:"Su Teléfono", refTheirPhonePlaceholder:"Mejor número para contactarlos",
+      refTheirBiz:"Nombre del Negocio", refTheirBizPlaceholder:"Nombre legal registrado de preferencia",
+      refTheirWeb:"Sitio Web", refTheirWebPlaceholder:"Opcional — si tiene uno",
       refNeed:"¿En Qué Necesitan Ayuda?",
       refOptions:["No estoy seguro — presentación general","Servicios Tech — Gestión de Dispositivos","Servicios Tech — Auditoría de Carrier","Servicios Tech — Consultoría IT","Configuración de Negocio — LLC / EIN / Correo / Dominio","Otra cosa"],
       refNotes:"Algo más que debamos saber", refNotesPlaceholder:"Opcional — cualquier contexto ayuda",
@@ -1143,7 +1149,7 @@ function LaMesaPage({ t }) {
   const [status, setStatus] = useState("idle");
   const handle = e => setForm({...form, [e.target.name]: e.target.value});
 
-  const [ref, setRef] = useState({yourName:"",theirName:"",theirContact:"",need:t.laMesa.refOptions[0],notes:""});
+  const [ref, setRef] = useState({yourName:"",theirName:"",theirEmail:"",theirPhone:"",theirBiz:"",theirWeb:"",need:t.laMesa.refOptions[0],notes:""});
   const [refStatus, setRefStatus] = useState("idle");
   const handleRef = e => setRef({...ref, [e.target.name]: e.target.value});
 
@@ -1158,7 +1164,7 @@ function LaMesaPage({ t }) {
           access_key:"bb35de9c-0515-4e74-9f2f-202d6fd033b8",
           subject:`La Mesa Referral — ${ref.theirName} via ${ref.yourName}`,
           name:ref.yourName,
-          message:`Referred by: ${ref.yourName}\nTheir name: ${ref.theirName}\nContact: ${ref.theirContact}\nNeeds: ${ref.need}\n\n${ref.notes || "No additional notes."}`,
+          message:`Referred by: ${ref.yourName}\nTheir name: ${ref.theirName}\nEmail: ${ref.theirEmail}\nPhone: ${ref.theirPhone}\nBusiness: ${ref.theirBiz || "Not provided"}\nWebsite: ${ref.theirWeb || "Not provided"}\nNeeds: ${ref.need}\n\n${ref.notes || "No additional notes."}`,
         }),
       });
       const data = await res.json();
@@ -1295,8 +1301,20 @@ function LaMesaPage({ t }) {
                 <input className="form-input" name="theirName" placeholder={m.refTheirNamePlaceholder} value={ref.theirName} onChange={handleRef} required />
               </div>
               <div className="form-field">
-                <label className="form-label">{m.refTheirContact}</label>
-                <input className="form-input" name="theirContact" placeholder={m.refTheirContactPlaceholder} value={ref.theirContact} onChange={handleRef} required />
+                <label className="form-label">{m.refTheirEmail}</label>
+                <input className="form-input" type="email" name="theirEmail" placeholder={m.refTheirEmailPlaceholder} value={ref.theirEmail} onChange={handleRef} required />
+              </div>
+              <div className="form-field">
+                <label className="form-label">{m.refTheirPhone}</label>
+                <input className="form-input" type="tel" name="theirPhone" placeholder={m.refTheirPhonePlaceholder} value={ref.theirPhone} onChange={handleRef} required />
+              </div>
+              <div className="form-field">
+                <label className="form-label">{m.refTheirBiz}</label>
+                <input className="form-input" name="theirBiz" placeholder={m.refTheirBizPlaceholder} value={ref.theirBiz} onChange={handleRef} required />
+              </div>
+              <div className="form-field">
+                <label className="form-label">{m.refTheirWeb}</label>
+                <input className="form-input" name="theirWeb" placeholder={m.refTheirWebPlaceholder} value={ref.theirWeb} onChange={handleRef} />
               </div>
               <div className="form-field">
                 <label className="form-label">{m.refNeed}</label>
