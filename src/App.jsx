@@ -149,6 +149,10 @@ const STRINGS = {
       coffeeQuote:"Coffee is how Central Americans say good morning, welcome home, and I'm glad you're here.",
       coffeePlaceholder:"Your email — we'll let you know when we open",
       coffeeEmailBtn:"Notify Me",
+      combinedEmailEyebrow:"Stay in the Loop",
+      combinedPlaceholder:"Your email — we'll keep you posted on both",
+      combinedEmailBtn:"Notify Me",
+      techCta:"In the meantime — our tech services are open for business →",
       eventsEyebrow:"Coming Soon — Events & Culture",
       eventsTitle:"Community &",
       eventsTitleSpan:"Events",
@@ -273,6 +277,10 @@ const STRINGS = {
       coffeeQuote:"El café es como los centroamericanos dicen buenos días, bienvenido a casa y me alegra que estés aquí.",
       coffeePlaceholder:"Tu correo — te avisaremos cuando abramos",
       coffeeEmailBtn:"Avísame",
+      combinedEmailEyebrow:"Mantente al Día",
+      combinedPlaceholder:"Tu correo — te mantendremos informado de todo",
+      combinedEmailBtn:"Avísame",
+      techCta:"Mientras tanto — nuestros servicios tech están disponibles ahora →",
       eventsEyebrow:"Próximamente — Eventos y Cultura",
       eventsTitle:"Comunidad &",
       eventsTitleSpan:"Eventos",
@@ -995,20 +1003,10 @@ function ContactPage({ t }) {
   );
 }
 
-function CommunityPage({ t }) {
+function CommunityPage({ t, go }) {
   return (
     <>
-      <section className="section" style={{paddingTop:100}}>
-        <div className="section-header">
-          <div className="section-eyebrow">{t.community.eyebrow}</div>
-          <h2 className="section-title">{t.community.title} <span>{t.community.titleSpan}</span></h2>
-          <p className="section-sub">{t.community.sub}</p>
-        </div>
-      </section>
-
-      <TextileBorder />
-
-      <section className="section section-alt" style={{position:"relative",overflow:"hidden"}}>
+      <section className="section section-alt" style={{paddingTop:100,position:"relative",overflow:"hidden"}}>
         <div style={{position:"absolute",left:-80,top:"50%",transform:"translateY(-50%)",opacity:0.1,pointerEvents:"none"}}>
           <Sunburst size={500} color={C.gold} opacity={0.8} />
         </div>
@@ -1016,7 +1014,6 @@ function CommunityPage({ t }) {
           <span className="coming-tag">{t.community.coffeeEyebrow}</span>
           <h2 className="teaser-title">{t.community.coffeeTitle} <span>{t.community.coffeeTitleSpan}</span></h2>
           <p className="teaser-body">{t.community.coffeeBody}</p>
-          <EmailCapture placeholder={t.community.coffeePlaceholder} btnLabel={t.community.coffeeEmailBtn} />
         </div>
       </section>
 
@@ -1041,19 +1038,25 @@ function CommunityPage({ t }) {
           <span className="coming-tag">{t.community.eventsEyebrow}</span>
           <h2 className="teaser-title">{t.community.eventsTitle} <span>{t.community.eventsTitleSpan}</span></h2>
           <p className="teaser-body">{t.community.eventsBody}</p>
-          <EmailCapture placeholder={t.community.eventsPlaceholder} btnLabel={t.community.eventsEmailBtn} />
         </div>
       </section>
 
       <TextileBorder flip />
 
-      <section className="section section-dark" style={{textAlign:"center"}}>
-        <blockquote style={{
-          fontFamily:"'Pacifico',cursive",fontSize:28,color:C.blush,
-          lineHeight:1.5,maxWidth:600,margin:"0 auto",
-          paddingBottom:24,borderBottom:`2px solid ${C.beige}33`
-        }}>"{t.community.eventsQuote}"</blockquote>
-        <div className="section-eyebrow" style={{marginTop:20}}>— Café Con Pan</div>
+      <section className="section" style={{background:C.parchment,textAlign:"center"}}>
+        <div className="section-eyebrow" style={{marginBottom:16}}>{t.community.combinedEmailEyebrow}</div>
+        <div style={{maxWidth:420,margin:"0 auto 36px"}}>
+          <EmailCapture placeholder={t.community.combinedPlaceholder} btnLabel={t.community.combinedEmailBtn} />
+        </div>
+        <button onClick={() => go("Tech Services")} style={{
+          background:"none",border:"none",cursor:"pointer",
+          fontFamily:"'Nunito',sans-serif",fontSize:13,fontWeight:700,
+          color:C.espresso,letterSpacing:"0.06em",opacity:0.6,
+          textDecoration:"underline",transition:"opacity 0.2s"
+        }}
+        onMouseEnter={e=>e.currentTarget.style.opacity=1}
+        onMouseLeave={e=>e.currentTarget.style.opacity=0.6}
+        >{t.community.techCta}</button>
       </section>
 
       <TextileBorder flip />
@@ -1103,7 +1106,7 @@ export default function CafeConPan() {
     switch(page) {
       case "Home": return <HomePage go={go} t={t} lang={lang} />;
       case "Tech Services": return <TechPage go={go} t={t} />;
-      case "Community": return <CommunityPage t={t} />;
+      case "Community": return <CommunityPage t={t} go={go} />;
       case "Our Story": return <AboutPage t={t} />;
       case "Contact": return <ContactPage t={t} />;
       default: return <HomePage go={go} t={t} lang={lang} />;
