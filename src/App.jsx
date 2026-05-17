@@ -80,6 +80,22 @@ const STRINGS = {
     nav: { items:["Home","Tech Services","Coffee & Food","Events","Our Story","Contact"], cta:"Get a Quote", langBtn:"ES" },
     hero: { stamp:"☕ Honduras-Rooted · Est. 2025", subtitle:"Tech · Coffee · Culture · Community", pillars:["Tech Services","Coffee & Food","Events"], cta:"Get Tech Services →" },
     story: { eyebrow:"Our Story", title:"More Than a", titleSpan:"Cup of Coffee", body:"At Café Con Pan, we believe coffee is more than a drink — it's a connection. Rooted in our Honduran heritage, we started with a simple idea: to share authentic coffee and bread with our community. That same spirit drives everything we do — from helping small businesses launch and grow through technology, to building a space where culture and community come together. One cup and one connection at a time." },
+    painPoints: {
+      eyebrow:"Real Talk",
+      title:"Does This Sound",
+      titleSpan:"Familiar?",
+      sub:"You didn't start your business to become an IT person. But somewhere along the way, the tech stuff started costing you time, money, and headaches you didn't sign up for.",
+      cards:[
+        { title:"Your business email is a Gmail.", desc:"Nothing wrong with Gmail — except when it's the email on your business card. Clients notice. It signals you're not quite official yet, even when you absolutely are." },
+        { title:"Your personal phone is your business phone.", desc:"Same number for family, clients, vendors, and late-night emergencies. No separation. No boundary. No way to ever really clock out." },
+        { title:"Someone bought iPhones at Best Buy and set them up with personal Apple IDs.", desc:"It worked — until someone quit. Now those devices have company contacts, emails, and apps tied to a personal account you can't access or control." },
+        { title:"You don't know if you're overpaying your carrier.", desc:"Most small businesses are — by hundreds of dollars a month — on plans that made sense two years ago and haven't been looked at since." },
+        { title:"Your business doesn't show up on Apple Maps.", desc:"Your customers are on iPhones. They search for businesses like yours every day. If you're not showing up — or showing up wrong — that's real revenue walking past your door." },
+        { title:"When something breaks, everything stops.", desc:"No IT person to call. No system for fixing it fast. Just you, on hold, trying to figure it out — while your actual work piles up." },
+      ],
+      bridge:"This is exactly the kind of thing we fix. Not with complicated systems or corporate contracts — just the right setup, done once, done right.",
+      cta:"Let's Talk →",
+    },
     pillars: {
       eyebrow:"Three Pillars, One Brand", title:"What We're", titleSpan:"Building",
       cards:[
@@ -149,6 +165,22 @@ const STRINGS = {
     nav: { items:["Inicio","Servicios Tech","Café & Pan","Eventos","Nuestra Historia","Contacto"], cta:"Cotización", langBtn:"EN" },
     hero: { stamp:"☕ Raíces Hondureñas · Est. 2025", subtitle:"Tech · Café · Cultura · Comunidad", pillars:["Servicios Tech","Café & Pan","Eventos"], cta:"Ver Servicios Tech →" },
     story: { eyebrow:"Nuestra Historia", title:"Más Que una", titleSpan:"Taza de Café", body:"En Café Con Pan, creemos que el café es más que una bebida — es una conexión. Con raíces en nuestra herencia hondureña, comenzamos con una idea simple: compartir café y pan auténtico con nuestra comunidad. Ese mismo espíritu impulsa todo lo que hacemos — desde ayudar a pequeños negocios a crecer mediante la tecnología, hasta construir un espacio donde la cultura y la comunidad se unen. Una taza y una conexión a la vez." },
+    painPoints: {
+      eyebrow:"La Verdad",
+      title:"¿Te Suena",
+      titleSpan:"Conocido?",
+      sub:"No empezaste tu negocio para convertirte en experto de tecnología. Pero en algún momento, todo ese tema tech empezó a costarte tiempo, dinero y dolores de cabeza que no tenías planeados.",
+      cards:[
+        { title:"El correo de tu negocio es un Gmail.", desc:"No hay nada malo con Gmail — excepto cuando es el correo en tu tarjeta de presentación. Los clientes lo notan. Da la impresión de que aún no estás del todo establecido, aunque llevas años trabajando duro." },
+        { title:"Tu teléfono personal es tu teléfono de negocio.", desc:"El mismo número para la familia, los clientes, los proveedores y las emergencias de la noche. Sin separación. Sin límites. Sin manera de verdad desconectarte." },
+        { title:"Alguien compró los iPhones en una tienda y los configuró con un Apple ID personal.", desc:"Funcionó — hasta que alguien se fue. Ahora esos dispositivos tienen contactos, correos y aplicaciones del negocio vinculados a una cuenta personal a la que no tienes acceso." },
+        { title:"No sabes si estás pagando de más con tu carrier.", desc:"La mayoría de los negocios pequeños sí están pagando de más — cientos de dólares al mes — en planes que tenían sentido hace dos años y nadie ha revisado desde entonces." },
+        { title:"Tu negocio no aparece en Apple Maps.", desc:"Tus clientes tienen iPhones. Buscan negocios como el tuyo todos los días. Si no apareces — o apareces mal — eso es dinero real pasando de largo." },
+        { title:"Cuando algo falla, todo se detiene.", desc:"Nadie a quien llamar. Ningún sistema para resolverlo rápido. Solo tú, esperando en el teléfono, tratando de averiguarlo — mientras el trabajo real se acumula." },
+      ],
+      bridge:"Para eso estamos aquí. No con sistemas complicados ni contratos corporativos — solo la configuración correcta, hecha una vez, hecha bien.",
+      cta:"Hablemos →",
+    },
     pillars: {
       eyebrow:"Tres Pilares, Una Marca", title:"Lo Que Estamos", titleSpan:"Construyendo",
       cards:[
@@ -467,6 +499,35 @@ const PAGE_HASH = {
 const HASH_PAGE = Object.fromEntries(Object.entries(PAGE_HASH).map(([k,v])=>[v,k]));
 const getPageFromHash = () => HASH_PAGE[window.location.hash.replace("#","")] || "Home";
 
+function PainPointsSection({ go, t }) {
+  return (
+    <section className="section section-alt">
+      <div className="section-header">
+        <div className="section-eyebrow">{t.painPoints.eyebrow}</div>
+        <h2 className="section-title">{t.painPoints.title} <span>{t.painPoints.titleSpan}</span></h2>
+        <p className="section-sub">{t.painPoints.sub}</p>
+      </div>
+      <div className="grid-2" style={{maxWidth:900,margin:"0 auto"}}>
+        {t.painPoints.cards.map(c => (
+          <div key={c.title} style={{
+            background:C.cream,
+            border:`3px solid ${C.espresso}`,
+            padding:"28px 32px",
+            boxShadow:`4px 4px 0 ${C.red}`,
+          }}>
+            <div style={{fontFamily:"'Lilita One',cursive",fontSize:16,color:C.espresso,marginBottom:10,lineHeight:1.3}}>{c.title}</div>
+            <p style={{fontSize:14,lineHeight:1.8,color:"#555",fontWeight:600,margin:0}}>{c.desc}</p>
+          </div>
+        ))}
+      </div>
+      <div style={{textAlign:"center",maxWidth:640,margin:"56px auto 0"}}>
+        <p style={{fontFamily:"'Pacifico',cursive",fontSize:20,color:C.espresso,lineHeight:1.6,marginBottom:32}}>"{t.painPoints.bridge}"</p>
+        <button className="hero-cta" onClick={() => go("Contact")}>{t.painPoints.cta}</button>
+      </div>
+    </section>
+  );
+}
+
 function HomePage({ go, t }) {
   return (
     <>
@@ -541,6 +602,10 @@ function HomePage({ go, t }) {
           ))}
         </div>
       </section>
+
+      <TextileBorder flip />
+
+      <PainPointsSection go={go} t={t} />
 
       <TextileBorder flip />
 
