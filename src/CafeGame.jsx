@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback } from "react";
+import { useRef, useEffect, useCallback, useState } from "react";
 
 const W = 800, H = 290, GY = 238;
 const CX = 110;
@@ -209,9 +209,21 @@ const TYPES = ["pan","laptop","wifi"];
 
 // ── Component ─────────────────────────────────────────────────────────────────
 
+function getScale() {
+  const vw = window.visualViewport?.width ?? window.innerWidth;
+  return Math.min(1, (vw - 8) / (W + 8));
+}
+
 export default function CafeGame({ onClose }) {
-  const DW = Math.min(W, window.innerWidth - 16);
-  const DH = Math.round(H * DW / W);
+  const [scale, setScale] = useState(getScale);
+
+  useEffect(() => {
+    const update = () => setScale(getScale());
+    const vp = window.visualViewport;
+    if (vp) { vp.addEventListener("resize", update); return () => vp.removeEventListener("resize", update); }
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
   const canvasRef = useRef(null);
   const g = useRef({
@@ -350,41 +362,44 @@ export default function CafeGame({ onClose }) {
     <div style={{
       position:"fixed",inset:0,zIndex:1000,
       background:"rgba(20,10,5,0.88)",
-      display:"flex",flexDirection:"column",
-      alignItems:"center",justifyContent:"center",
+      display:"flex",alignItems:"center",justifyContent:"center",
+      overflow:"hidden",
     }}
       onClick={e => { if (e.target===e.currentTarget) onClose(); }}
     >
-      <div style={{boxShadow:`0 0 0 3px ${K.beige}, 0 8px 40px rgba(0,0,0,0.6)`, width:DW}}>
+      <div style={{
+        width:W, flexShrink:0,
+        transform:`scale(${scale})`,transformOrigin:"center center",
+        boxShadow:`0 0 0 3px ${K.beige}, 0 8px 40px rgba(0,0,0,0.6)`,
+      }}>
         {/* Header */}
         <div style={{
           background:K.espresso,borderBottom:`3px solid ${K.beige}`,
-          padding:"8px 12px",display:"flex",justifyContent:"space-between",alignItems:"center",
-          flexWrap:"wrap",gap:"4px",
+          padding:"10px 20px",display:"flex",justifyContent:"space-between",alignItems:"center",
         }}>
-          <span style={{fontFamily:"'Pacifico',cursive",fontSize:Math.min(18, 14 + DW/100),color:K.cream}}>
+          <span style={{fontFamily:"'Pacifico',cursive",fontSize:18,color:K.cream}}>
             Café Con <span style={{color:K.blush}}>Pan</span>
-            <span style={{fontFamily:"'Nunito',sans-serif",fontSize:10,letterSpacing:"0.18em",textTransform:"uppercase",color:K.beige,marginLeft:10,fontWeight:700}}>
+            <span style={{fontFamily:"'Nunito',sans-serif",fontSize:11,letterSpacing:"0.2em",textTransform:"uppercase",color:K.beige,marginLeft:14,fontWeight:700}}>
               CAFÉ RUN
             </span>
           </span>
           <button onClick={onClose} style={{
             background:"none",border:`2px solid rgba(212,169,122,0.5)`,color:K.cream,
-            cursor:"pointer",fontSize:11,fontWeight:700,letterSpacing:"0.1em",
-            padding:"4px 10px",fontFamily:"'Nunito',sans-serif",
+            cursor:"pointer",fontSize:12,fontWeight:700,letterSpacing:"0.12em",
+            padding:"5px 14px",fontFamily:"'Nunito',sans-serif",
           }}>✕ CLOSE</button>
         </div>
 
         {/* Canvas */}
         <canvas ref={canvasRef} width={W} height={H}
-          style={{display:"block",width:DW,height:DH,cursor:"pointer"}} />
+          style={{display:"block",cursor:"pointer"}} />
 
         {/* Footer */}
         <div style={{
-          background:K.espresso,padding:"6px 12px",textAlign:"center",
+          background:K.espresso,padding:"8px 20px",textAlign:"center",
           borderTop:`2px solid rgba(212,169,122,0.2)`,
         }}>
-          <span style={{fontSize:10,color:"rgba(245,237,214,0.45)",letterSpacing:"0.08em",textTransform:"uppercase",fontFamily:"'Nunito',sans-serif"}}>
+          <span style={{fontSize:11,color:"rgba(245,237,214,0.45)",letterSpacing:"0.14em",textTransform:"uppercase",fontFamily:"'Nunito',sans-serif"}}>
             TAP to jump &nbsp;·&nbsp; Avoid pan dulce, laptops & dead WiFi
           </span>
         </div>
