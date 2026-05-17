@@ -349,11 +349,10 @@ export default function CafeGame({ onClose }) {
       background:"rgba(20,10,5,0.88)",
       display:"flex",flexDirection:"column",
       alignItems:"center",justifyContent:"center",
-      padding:"0 8px",
     }}
       onClick={e => { if (e.target===e.currentTarget) onClose(); }}
     >
-      <div style={{boxShadow:`0 0 0 3px ${K.beige}, 0 8px 40px rgba(0,0,0,0.6)`, width:"100%", maxWidth:"800px", overflow:"hidden"}}>
+      <div style={{boxShadow:`0 0 0 3px ${K.beige}, 0 8px 40px rgba(0,0,0,0.6)`, width:"calc(100vw - 24px)", maxWidth:"800px", overflow:"hidden"}}>
         {/* Header */}
         <div style={{
           background:K.espresso,borderBottom:`3px solid ${K.beige}`,
