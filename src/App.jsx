@@ -785,13 +785,20 @@ export default function CafeConPan() {
   useEffect(() => { window.scrollTo(0,0); }, [page]);
 
   useEffect(() => {
-    const handler = e => {
+    const onKey = e => {
       if (e.key.length !== 1) return;
       typedRef.current = (typedRef.current + e.key).slice(-4).toUpperCase();
       if (typedRef.current === "CAFE") setGameActive(true);
     };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
+    const onInput = e => {
+      if (e.target.value && e.target.value.toLowerCase().includes("cafe")) setGameActive(true);
+    };
+    window.addEventListener("keydown", onKey);
+    document.addEventListener("input", onInput);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.removeEventListener("input", onInput);
+    };
   }, []);
 
   const renderPage = () => {

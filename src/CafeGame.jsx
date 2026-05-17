@@ -352,7 +352,7 @@ export default function CafeGame({ onClose }) {
     }}
       onClick={e => { if (e.target===e.currentTarget) onClose(); }}
     >
-      <div style={{boxShadow:`0 0 0 3px ${K.beige}, 0 8px 40px rgba(0,0,0,0.6)`}}>
+      <div style={{boxShadow:`0 0 0 3px ${K.beige}, 0 8px 40px rgba(0,0,0,0.6)`, width:"min(800px, 100vw)", maxWidth:"100vw"}}>
         {/* Header */}
         <div style={{
           background:K.espresso,borderBottom:`3px solid ${K.beige}`,
@@ -373,7 +373,7 @@ export default function CafeGame({ onClose }) {
 
         {/* Canvas */}
         <canvas ref={canvasRef} width={W} height={H}
-          style={{display:"block",maxWidth:"100vw",cursor:"pointer"}} />
+          style={{display:"block",width:"100%",height:"auto",cursor:"pointer"}} />
 
         {/* Footer */}
         <div style={{
