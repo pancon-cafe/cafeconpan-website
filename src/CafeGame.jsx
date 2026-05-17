@@ -210,6 +210,9 @@ const TYPES = ["pan","laptop","wifi"];
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export default function CafeGame({ onClose }) {
+  const DW = Math.min(W, window.innerWidth - 16);
+  const DH = Math.round(H * DW / W);
+
   const canvasRef = useRef(null);
   const g = useRef({
     phase:"start", frame:0, score:0, best:0,
@@ -352,36 +355,36 @@ export default function CafeGame({ onClose }) {
     }}
       onClick={e => { if (e.target===e.currentTarget) onClose(); }}
     >
-      <div style={{boxShadow:`0 0 0 3px ${K.beige}, 0 8px 40px rgba(0,0,0,0.6)`, width:"calc(100vw - 24px)", maxWidth:"800px", overflow:"hidden"}}>
+      <div style={{boxShadow:`0 0 0 3px ${K.beige}, 0 8px 40px rgba(0,0,0,0.6)`, width:DW}}>
         {/* Header */}
         <div style={{
           background:K.espresso,borderBottom:`3px solid ${K.beige}`,
-          padding:"10px 16px",display:"flex",justifyContent:"space-between",alignItems:"center",
-          flexWrap:"wrap",gap:"6px",
+          padding:"8px 12px",display:"flex",justifyContent:"space-between",alignItems:"center",
+          flexWrap:"wrap",gap:"4px",
         }}>
-          <span style={{fontFamily:"'Pacifico',cursive",fontSize:18,color:K.cream}}>
+          <span style={{fontFamily:"'Pacifico',cursive",fontSize:Math.min(18, 14 + DW/100),color:K.cream}}>
             Café Con <span style={{color:K.blush}}>Pan</span>
-            <span style={{fontFamily:"'Nunito',sans-serif",fontSize:11,letterSpacing:"0.2em",textTransform:"uppercase",color:K.beige,marginLeft:14,fontWeight:700}}>
+            <span style={{fontFamily:"'Nunito',sans-serif",fontSize:10,letterSpacing:"0.18em",textTransform:"uppercase",color:K.beige,marginLeft:10,fontWeight:700}}>
               CAFÉ RUN
             </span>
           </span>
           <button onClick={onClose} style={{
             background:"none",border:`2px solid rgba(212,169,122,0.5)`,color:K.cream,
-            cursor:"pointer",fontSize:12,fontWeight:700,letterSpacing:"0.12em",
-            padding:"5px 14px",fontFamily:"'Nunito',sans-serif",transition:"border-color 0.2s",
+            cursor:"pointer",fontSize:11,fontWeight:700,letterSpacing:"0.1em",
+            padding:"4px 10px",fontFamily:"'Nunito',sans-serif",
           }}>✕ CLOSE</button>
         </div>
 
         {/* Canvas */}
         <canvas ref={canvasRef} width={W} height={H}
-          style={{display:"block",width:"100%",height:"auto",cursor:"pointer"}} />
+          style={{display:"block",width:DW,height:DH,cursor:"pointer"}} />
 
         {/* Footer */}
         <div style={{
-          background:K.espresso,padding:"8px 20px",textAlign:"center",
+          background:K.espresso,padding:"6px 12px",textAlign:"center",
           borderTop:`2px solid rgba(212,169,122,0.2)`,
         }}>
-          <span style={{fontSize:11,color:"rgba(245,237,214,0.45)",letterSpacing:"0.1em",textTransform:"uppercase",fontFamily:"'Nunito',sans-serif",wordBreak:"break-word"}}>
+          <span style={{fontSize:10,color:"rgba(245,237,214,0.45)",letterSpacing:"0.08em",textTransform:"uppercase",fontFamily:"'Nunito',sans-serif"}}>
             TAP to jump &nbsp;·&nbsp; Avoid pan dulce, laptops & dead WiFi
           </span>
         </div>
