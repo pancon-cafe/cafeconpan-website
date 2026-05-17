@@ -99,18 +99,18 @@ const STRINGS = {
     pillars: {
       eyebrow:"Three Pillars, One Brand", title:"What We're", titleSpan:"Building",
       cards:[
-        { n:"01", icon:"⌨️", title:"Tech Services", desc:"MDM setup, managed device retainers, IT consulting, and carrier services. Apple-focused. Carrier-agnostic. Client-first.", cta:"Available Now", page:"Tech Services" },
-        { n:"02", icon:"☕", title:"Coffee & Food", desc:"A Central American cafe experience rooted in Honduran heritage. Pan dulce, café de olla, and the warmth of home.", cta:"Coming Soon", page:"Community" },
-        { n:"03", icon:"🎉", title:"Community", desc:"Cultural programming and events that honor and celebrate Central American roots. A gathering point for community.", cta:"Coming Soon", page:"Community" },
+        { n:"01", icon:"⌨️", title:"Tech Services", desc:"Apple-focused device management, IT consulting, and carrier services. Available now.", cta:"Explore →", page:"Tech Services" },
+        { n:"02", icon:"☕", title:"Coffee & Community", desc:"A Honduran-rooted café experience and cultural programming. Coming together.", cta:"See What's Coming →", page:"Community" },
+        { n:"03", icon:"🌱", title:"The Bigger Vision", desc:"Family land in Honduras. A café with a boardroom. An investment arm. The full picture.", cta:"Read Our Story →", page:"Our Story" },
       ],
     },
     biggerPicture: {
       eyebrow:"The Bigger Picture", title:"What's Next for", titleSpan:"Café Con Pan",
       sub:"The tech arm leads because it's ready. But this brand was always meant to be more — and these are the chapters still being written.",
       cards:[
-        { icon:"☕", title:"Coffee From Home", badge:"In Planning", desc:"Single-origin Honduran coffee sourced from family's land in Central America. Grown with care, brought to your cup." },
-        { icon:"🫓", title:"The Café Experience", badge:"In Development", desc:"An authentic Central American cafe — pan dulce, café de olla, and a space that feels like walking into an abuela's kitchen." },
-        { icon:"🎉", title:"Cultural Events", badge:"Building Soon", desc:"Community programming that celebrates Central American roots. Music, food, storytelling, and people worth knowing." },
+        { icon:"☕", title:"Honduran Single-Origin Coffee", badge:"In Planning", desc:"Coffee sourced from family land in Honduras — the same fields we worked as children. From seed to cup, entirely ours." },
+        { icon:"🫓", title:"The Café & Boardroom", badge:"In Development", desc:"A physical café with a reserved boardroom — where clients can meet, deals get done, and the community gathers over something warm." },
+        { icon:"💼", title:"Investing in People", badge:"On the Horizon", desc:"For the businesses and people we believe in — a future arm dedicated to going beyond services and into shared growth with the clients we align with." },
       ],
       emailPlaceholder:"Stay in the loop — drop your email", emailBtn:"I'm In",
     },
@@ -222,18 +222,18 @@ const STRINGS = {
     pillars: {
       eyebrow:"Tres Pilares, Una Marca", title:"Lo Que Estamos", titleSpan:"Construyendo",
       cards:[
-        { n:"01", icon:"⌨️", title:"Servicios Tech", desc:"Configuración de MDM, gestión de dispositivos, consultoría IT y servicios de carrier. Enfocados en Apple. Independientes del carrier. El cliente primero.", cta:"Disponible Ahora", page:"Tech Services" },
-        { n:"02", icon:"☕", title:"Café & Pan", desc:"Una experiencia de café centroamericano con raíces hondureñas. Pan dulce, café de olla y el calor del hogar.", cta:"Próximamente", page:"Community" },
-        { n:"03", icon:"🎉", title:"Comunidad", desc:"Programas culturales y eventos que honran y celebran las raíces centroamericanas. Un punto de encuentro para la comunidad.", cta:"Próximamente", page:"Community" },
+        { n:"01", icon:"⌨️", title:"Servicios Tech", desc:"Gestión de dispositivos Apple, consultoría IT y servicios de carrier. Disponible ahora.", cta:"Explorar →", page:"Tech Services" },
+        { n:"02", icon:"☕", title:"Café & Comunidad", desc:"Una experiencia de café con raíces hondureñas y programas culturales. Tomando forma.", cta:"Ver lo que Viene →", page:"Community" },
+        { n:"03", icon:"🌱", title:"La Visión Completa", desc:"Tierras familiares en Honduras. Un café con sala de juntas. Un brazo de inversión. El panorama completo.", cta:"Nuestra Historia →", page:"Our Story" },
       ],
     },
     biggerPicture: {
       eyebrow:"El Panorama General", title:"Lo Que Sigue para", titleSpan:"Café Con Pan",
       sub:"El brazo tecnológico lidera porque está listo. Pero esta marca siempre fue pensada para ser más — y estos son los capítulos que aún se están escribiendo.",
       cards:[
-        { icon:"☕", title:"Café de Casa", badge:"En Planificación", desc:"Café hondureño de origen único cultivado en tierras familiares en Centroamérica. Cultivado con cuidado, llevado a tu taza." },
-        { icon:"🫓", title:"La Experiencia del Café", badge:"En Desarrollo", desc:"Un café centroamericano auténtico — pan dulce, café de olla y un espacio que se siente como entrar a la cocina de una abuela." },
-        { icon:"🎉", title:"Eventos Culturales", badge:"Próximamente", desc:"Programas comunitarios que celebran las raíces centroamericanas. Música, comida, historias y personas que vale la pena conocer." },
+        { icon:"☕", title:"Café Hondureño de Origen Único", badge:"En Planificación", desc:"Café cultivado en tierras familiares en Honduras — los mismos campos que trabajamos de niños. De la semilla a la taza, completamente nuestro." },
+        { icon:"🫓", title:"El Café & La Sala de Juntas", badge:"En Desarrollo", desc:"Un café físico con una sala de juntas reservable — donde los clientes se reúnen, se cierran tratos y la comunidad se junta alrededor de algo caliente." },
+        { icon:"💼", title:"Invirtiendo en Personas", badge:"En el Horizonte", desc:"Para los negocios y las personas en las que creemos — un brazo futuro dedicado a ir más allá de los servicios hacia un crecimiento compartido con los clientes con quienes nos alineamos." },
       ],
       emailPlaceholder:"Mantente al día — deja tu correo", emailBtn:"¡Apúntame!",
     },
@@ -744,8 +744,8 @@ function HomePage({ go, t, lang }) {
               <p style={{fontSize:14,lineHeight:1.8,color:"#555",fontWeight:600,marginBottom:16}}>{p.desc}</p>
               <span style={{
                 display:"inline-block",
-                background: p.cta === "Available Now" || p.cta === "Disponible Ahora" ? C.espresso : "transparent",
-                color: p.cta === "Available Now" || p.cta === "Disponible Ahora" ? C.cream : C.espresso,
+                background:"transparent",
+                color:C.espresso,
                 border:`2px solid ${C.espresso}`,
                 fontSize:11,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",
                 padding:"5px 12px"
