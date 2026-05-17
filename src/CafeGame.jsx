@@ -209,20 +209,14 @@ const TYPES = ["pan","laptop","wifi"];
 
 // ── Component ─────────────────────────────────────────────────────────────────
 
-function getScale() {
-  const vw = window.visualViewport?.width ?? window.innerWidth;
-  return Math.min(1, (vw - 8) / (W + 8));
-}
-
 export default function CafeGame({ onClose }) {
-  const [scale, setScale] = useState(getScale);
+  const [portrait, setPortrait] = useState(() => window.innerWidth <= window.innerHeight);
 
   useEffect(() => {
-    const update = () => setScale(getScale());
-    const vp = window.visualViewport;
-    if (vp) { vp.addEventListener("resize", update); return () => vp.removeEventListener("resize", update); }
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
+    const check = () => setPortrait(window.innerWidth <= window.innerHeight);
+    window.addEventListener("resize", check);
+    window.addEventListener("orientationchange", check);
+    return () => { window.removeEventListener("resize", check); window.removeEventListener("orientationchange", check); };
   }, []);
 
   const canvasRef = useRef(null);
@@ -358,20 +352,36 @@ export default function CafeGame({ onClose }) {
     return () => cancelAnimationFrame(raf.current);
   }, []);
 
+  const overlay = {
+    position:"fixed",inset:0,zIndex:1000,
+    background:"rgba(20,10,5,0.92)",
+    display:"flex",alignItems:"center",justifyContent:"center",
+  };
+
+  if (portrait) {
+    return (
+      <div style={overlay} onClick={e => { if (e.target===e.currentTarget) onClose(); }}>
+        <div style={{textAlign:"center",padding:"40px 32px"}}>
+          <div style={{fontSize:72,lineHeight:1,color:K.beige}}>↻</div>
+          <p style={{fontFamily:"'Nunito',sans-serif",fontSize:18,color:K.beige,margin:"24px 0 8px",letterSpacing:"0.04em"}}>
+            Rotate your phone to play
+          </p>
+          <p style={{fontFamily:"'Pacifico',cursive",fontSize:30,color:K.cream,margin:"0 0 36px"}}>
+            Café Run
+          </p>
+          <button onClick={onClose} style={{
+            background:"none",border:`2px solid ${K.beige}`,color:K.beige,
+            padding:"10px 28px",fontFamily:"'Nunito',sans-serif",
+            fontSize:12,fontWeight:700,letterSpacing:"0.14em",cursor:"pointer",
+          }}>CLOSE</button>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div style={{
-      position:"fixed",inset:0,zIndex:1000,
-      background:"rgba(20,10,5,0.88)",
-      display:"flex",alignItems:"center",justifyContent:"center",
-      overflow:"hidden",
-    }}
-      onClick={e => { if (e.target===e.currentTarget) onClose(); }}
-    >
-      <div style={{
-        width:W, flexShrink:0,
-        transform:`scale(${scale})`,transformOrigin:"center center",
-        boxShadow:`0 0 0 3px ${K.beige}, 0 8px 40px rgba(0,0,0,0.6)`,
-      }}>
+    <div style={overlay} onClick={e => { if (e.target===e.currentTarget) onClose(); }}>
+      <div style={{boxShadow:`0 0 0 3px ${K.beige}, 0 8px 40px rgba(0,0,0,0.6)`}}>
         {/* Header */}
         <div style={{
           background:K.espresso,borderBottom:`3px solid ${K.beige}`,
@@ -400,7 +410,7 @@ export default function CafeGame({ onClose }) {
           borderTop:`2px solid rgba(212,169,122,0.2)`,
         }}>
           <span style={{fontSize:11,color:"rgba(245,237,214,0.45)",letterSpacing:"0.14em",textTransform:"uppercase",fontFamily:"'Nunito',sans-serif"}}>
-            TAP to jump &nbsp;·&nbsp; Avoid pan dulce, laptops & dead WiFi
+            SPACE / TAP to jump &nbsp;·&nbsp; Avoid pan dulce, laptops & dead WiFi
           </span>
         </div>
       </div>
