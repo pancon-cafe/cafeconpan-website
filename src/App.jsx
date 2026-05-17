@@ -161,6 +161,32 @@ const STRINGS = {
       eventsPlaceholder:"Get notified when events are announced",
       eventsEmailBtn:"Notify Me",
     },
+    laMesa:{
+      badge:"By Invitation Only",
+      title:"La Mesa",
+      sub:"The table where community, business, and coffee come together. If you're reading this, you were invited for a reason.",
+      whatTitle:"What La Mesa Is",
+      whatBody:"La Mesa is Café Con Pan's inner circle — people we trust, who move in the same circles we do, and who believe in what we're building. Not just a referral program. A partnership. When you send someone our way, you're not just making an introduction. You're vouching for them, and we're vouching for you.",
+      howTitle:"How It Works",
+      howBody:"When someone in your world needs tech help, a proper business setup, or just doesn't know where to start — you send them our way. We take good care of them. You get taken care of. Details are shared personally when you're in.",
+      tiersTitle:"Your Place at the Table",
+      tiers:[
+        { name:"Regular", icon:"☕", desc:"You've sent someone our way. You're part of the table." },
+        { name:"Barista", icon:"⌨️", desc:"3–5 referrals. You're trusted. Partners get compensated." },
+        { name:"La Mesa", icon:"🌱", desc:"6+ referrals. Founding partner. When the café opens, your seat is waiting." },
+      ],
+      promiseTitle:"The Long Game",
+      promiseBody:"This brand is becoming a physical place — a café with a real boardroom. When that day comes, La Mesa partners don't just get a coffee. They get a seat at the actual table. Founding status. Named. Remembered.",
+      formTitle:"You're In — Let's Make It Official",
+      formSub:"Fill this out and we'll follow up personally.",
+      nameLabel:"Your Name", namePlaceholder:"Full name",
+      emailLabel:"Email", emailPlaceholder:"you@email.com",
+      roleLabel:"Your Role / How We Know Each Other", rolePlaceholder:"e.g. Fitness coach, friend of Jason",
+      messageLabel:"Anything else you want us to know", messagePlaceholder:"Optional — no pressure",
+      submit:"I'm In →", submitting:"Sending...",
+      success:"Welcome to La Mesa. We'll be in touch soon. ☕",
+      error:"Something went wrong. Email us directly at hello@pancon.cafe.",
+    },
     about:{
       eyebrow:"The Story", title:"Roots,", titleSpan:"Community,", titleEnd:"Purpose",
       quote:"She served it in a bowl with rosquillas and ojaldras, like soup. I was five years old and I've never stopped thinking about that cup.",
@@ -288,6 +314,32 @@ const STRINGS = {
       eventsQuote:"La comunidad no es una característica. Es el punto central.",
       eventsPlaceholder:"Tu correo — te notificamos",
       eventsEmailBtn:"Avísame",
+    },
+    laMesa:{
+      badge:"Solo por Invitación",
+      title:"La Mesa",
+      sub:"El lugar donde la comunidad, los negocios y el café se encuentran. Si estás leyendo esto, fuiste invitado por una razón.",
+      whatTitle:"Qué Es La Mesa",
+      whatBody:"La Mesa es el círculo de confianza de Café Con Pan — personas en las que creemos, que se mueven en los mismos círculos que nosotros, y que creen en lo que estamos construyendo. No es solo un programa de referidos. Es una alianza. Cuando nos mandas a alguien, no solo estás haciendo una presentación. Estás dando tu palabra por ellos, y nosotros damos la nuestra por ti.",
+      howTitle:"Cómo Funciona",
+      howBody:"Cuando alguien en tu mundo necesita ayuda con tecnología, una configuración adecuada para su negocio, o simplemente no sabe por dónde empezar — nos lo mandas. Nosotros los atendemos bien. Tú también eres atendido. Los detalles se comparten personalmente cuando ya estás adentro.",
+      tiresTitle:"Tu Lugar en la Mesa",
+      tiers:[
+        { name:"Regular", icon:"☕", desc:"Nos mandaste a alguien. Ya eres parte de la mesa." },
+        { name:"Barista", icon:"⌨️", desc:"3–5 referidos. Eres de confianza. Los socios son compensados." },
+        { name:"La Mesa", icon:"🌱", desc:"6+ referidos. Socio fundador. Cuando el café abra, tu lugar te espera." },
+      ],
+      promiseTitle:"El Juego Largo",
+      promiseBody:"Esta marca se está convirtiendo en un lugar físico — un café con una sala de juntas de verdad. Cuando llegue ese día, los socios de La Mesa no solo reciben un café. Reciben un lugar en la mesa real. Estatus de fundador. Nombrados. Recordados.",
+      formTitle:"Estás Adentro — Hagámoslo Oficial",
+      formSub:"Llena esto y te contactamos personalmente.",
+      nameLabel:"Tu Nombre", namePlaceholder:"Nombre completo",
+      emailLabel:"Correo", emailPlaceholder:"tu@correo.com",
+      roleLabel:"Tu Rol / Cómo Nos Conocemos", rolePlaceholder:"Ej. Entrenador, amigo de Jason",
+      messageLabel:"Algo más que quieras que sepamos", messagePlaceholder:"Opcional — sin presión",
+      submit:"Estoy Adentro →", submitting:"Enviando...",
+      success:"Bienvenido a La Mesa. Estaremos en contacto pronto. ☕",
+      error:"Algo salió mal. Escríbenos directamente a hello@pancon.cafe.",
     },
     about:{
       eyebrow:"La Historia", title:"Raíces,", titleSpan:"Comunidad,", titleEnd:"Propósito",
@@ -568,7 +620,7 @@ const navKeys = ["Home","Tech Services","Community","Our Story","Contact"];
 
 const PAGE_HASH = {
   "Home":"home","Tech Services":"tech-services","Community":"community",
-  "Our Story":"our-story","Contact":"contact",
+  "Our Story":"our-story","Contact":"contact","La Mesa":"la-mesa",
 };
 const HASH_PAGE = Object.fromEntries(Object.entries(PAGE_HASH).map(([k,v])=>[v,k]));
 const getPageFromHash = () => HASH_PAGE[window.location.hash.replace("#","")] || "Home";
@@ -1064,6 +1116,166 @@ function CommunityPage({ t, go }) {
   );
 }
 
+function LaMesaPage({ t }) {
+  const [form, setForm] = useState({name:"",email:"",role:"",message:""});
+  const [status, setStatus] = useState("idle");
+  const handle = e => setForm({...form, [e.target.name]: e.target.value});
+
+  const submit = async e => {
+    e.preventDefault();
+    setStatus("submitting");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          access_key:"bb35de9c-0515-4e74-9f2f-202d6fd033b8",
+          subject:`La Mesa Partner Interest — ${form.name}`,
+          name:form.name, email:form.email, replyto:form.email,
+          message:`Role: ${form.role}\n\n${form.message || "No additional message."}`,
+        }),
+      });
+      const data = await res.json();
+      setStatus(data.success ? "success" : "error");
+    } catch { setStatus("error"); }
+  };
+
+  const m = t.laMesa;
+  return (
+    <>
+      {/* Hero */}
+      <section style={{
+        background:C.espresso,paddingTop:100,paddingBottom:72,
+        paddingLeft:40,paddingRight:40,textAlign:"center",
+        position:"relative",overflow:"hidden",
+      }}>
+        <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",opacity:0.06,pointerEvents:"none"}}>
+          <Sunburst size={700} color={C.gold} opacity={0.8} />
+        </div>
+        <div style={{position:"relative",zIndex:2}}>
+          <div style={{
+            display:"inline-block",border:`2px solid ${C.teal}`,
+            padding:"5px 20px",marginBottom:28,
+            fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",
+            fontWeight:700,color:C.teal,
+          }}>{m.badge}</div>
+          <h1 style={{
+            fontFamily:"'Pacifico',cursive",fontSize:"clamp(52px,9vw,96px)",
+            color:C.cream,lineHeight:1,marginBottom:24,
+          }}>{m.title}</h1>
+          <p style={{
+            fontFamily:"'Nunito',sans-serif",fontSize:17,color:`rgba(245,237,214,0.7)`,
+            fontWeight:600,maxWidth:560,margin:"0 auto",lineHeight:1.8,
+          }}>{m.sub}</p>
+        </div>
+      </section>
+
+      <TextileBorder flip />
+
+      {/* What + How */}
+      <section className="section" style={{background:C.parchment}}>
+        <div style={{maxWidth:760,margin:"0 auto",display:"flex",flexDirection:"column",gap:48}}>
+          <div>
+            <div className="section-eyebrow" style={{marginBottom:12}}>{m.whatTitle}</div>
+            <p style={{fontSize:16,lineHeight:1.9,color:"#4a3728",fontWeight:600}}>{m.whatBody}</p>
+          </div>
+          <div>
+            <div className="section-eyebrow" style={{marginBottom:12}}>{m.howTitle}</div>
+            <p style={{fontSize:16,lineHeight:1.9,color:"#4a3728",fontWeight:600}}>{m.howBody}</p>
+          </div>
+        </div>
+      </section>
+
+      <TextileBorder />
+
+      {/* Tiers */}
+      <section className="section section-dark">
+        <div className="section-header">
+          <div className="section-eyebrow" style={{color:C.teal}}>{m.tiresTitle || m.tiersTitle}</div>
+        </div>
+        <div className="grid-3" style={{maxWidth:860,margin:"0 auto"}}>
+          {m.tiers.map((tier, i) => (
+            <div key={tier.name} style={{
+              border:`3px solid ${i===2?C.gold:C.beige}33`,
+              padding:"36px 28px",textAlign:"center",
+              background: i===2 ? `rgba(200,146,42,0.08)` : "rgba(255,255,255,0.04)",
+              position:"relative",
+            }}>
+              {i===2 && <div style={{
+                position:"absolute",top:-1,left:"50%",transform:"translateX(-50%)",
+                background:C.gold,color:C.espresso,
+                fontSize:9,fontWeight:800,letterSpacing:"0.18em",textTransform:"uppercase",
+                padding:"3px 14px",
+              }}>Founding Status</div>}
+              <div style={{fontSize:36,marginBottom:12}}>{tier.icon}</div>
+              <div style={{fontFamily:"'Lilita One',cursive",fontSize:22,color:i===2?C.gold:C.cream,marginBottom:10}}>{tier.name}</div>
+              <p style={{fontSize:14,lineHeight:1.8,color:"rgba(245,237,214,0.65)",fontWeight:600,margin:0}}>{tier.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <TextileBorder />
+
+      {/* The Long Game */}
+      <section className="section" style={{background:C.parchment,textAlign:"center"}}>
+        <div style={{maxWidth:640,margin:"0 auto"}}>
+          <div className="section-eyebrow" style={{marginBottom:16}}>{m.promiseTitle}</div>
+          <p style={{fontFamily:"'Pacifico',cursive",fontSize:22,color:C.espresso,lineHeight:1.7}}>{m.promiseBody}</p>
+        </div>
+      </section>
+
+      <TextileBorder flip />
+
+      {/* Form */}
+      <section className="section section-dark">
+        <div style={{maxWidth:560,margin:"0 auto"}}>
+          <div style={{textAlign:"center",marginBottom:40}}>
+            <h2 style={{fontFamily:"'Lilita One',cursive",fontSize:32,color:C.cream,marginBottom:10}}>{m.formTitle}</h2>
+            <p style={{fontSize:14,color:`rgba(245,237,214,0.55)`,fontWeight:600,letterSpacing:"0.04em"}}>{m.formSub}</p>
+          </div>
+          {status === "success" ? (
+            <div style={{
+              textAlign:"center",padding:"24px",border:`2px solid ${C.teal}`,
+              color:C.cream,fontFamily:"'Pacifico',cursive",fontSize:20,lineHeight:1.6,
+            }}>{m.success}</div>
+          ) : (
+            <form onSubmit={submit}>
+              <div className="form-field">
+                <label className="form-label" style={{color:C.beige}}>{m.nameLabel}</label>
+                <input className="form-input" name="name" placeholder={m.namePlaceholder} value={form.name} onChange={handle} required style={{background:"rgba(255,255,255,0.06)",color:C.cream,borderColor:`${C.beige}55`}} />
+              </div>
+              <div className="form-field">
+                <label className="form-label" style={{color:C.beige}}>{m.emailLabel}</label>
+                <input className="form-input" name="email" type="email" placeholder={m.emailPlaceholder} value={form.email} onChange={handle} required style={{background:"rgba(255,255,255,0.06)",color:C.cream,borderColor:`${C.beige}55`}} />
+              </div>
+              <div className="form-field">
+                <label className="form-label" style={{color:C.beige}}>{m.roleLabel}</label>
+                <input className="form-input" name="role" placeholder={m.rolePlaceholder} value={form.role} onChange={handle} required style={{background:"rgba(255,255,255,0.06)",color:C.cream,borderColor:`${C.beige}55`}} />
+              </div>
+              <div className="form-field">
+                <label className="form-label" style={{color:C.beige}}>{m.messageLabel}</label>
+                <textarea className="form-textarea" name="message" placeholder={m.messagePlaceholder} value={form.message} onChange={handle} style={{background:"rgba(255,255,255,0.06)",color:C.cream,borderColor:`${C.beige}55`,minHeight:90}} />
+              </div>
+              {status === "error" && (
+                <div style={{background:"#B8503E22",border:`2px solid ${C.red}`,padding:"14px 18px",marginBottom:16,color:C.cream,fontWeight:700,fontSize:14}}>
+                  {m.error}
+                </div>
+              )}
+              <button className="submit-btn" type="submit" disabled={status === "submitting"}
+                style={{background:C.red,borderColor:C.blush,boxShadow:`4px 4px 0 ${C.beige}44`}}>
+                {status === "submitting" ? m.submitting : m.submit}
+              </button>
+            </form>
+          )}
+        </div>
+      </section>
+
+      <TextileBorder flip />
+    </>
+  );
+}
+
 export default function CafeConPan() {
   const [page, setPage] = useState(getPageFromHash);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -1109,6 +1321,7 @@ export default function CafeConPan() {
       case "Community": return <CommunityPage t={t} go={go} />;
       case "Our Story": return <AboutPage t={t} />;
       case "Contact": return <ContactPage t={t} />;
+      case "La Mesa": return <LaMesaPage t={t} />;
       default: return <HomePage go={go} t={t} lang={lang} />;
     }
   };
