@@ -611,6 +611,15 @@ const css = `
   .divider-line{flex:1;height:2px;background:${C.espresso};opacity:0.15}
   .divider-icon{font-size:20px;opacity:0.4}
 
+  .soft-cta-row{display:flex;gap:48px;align-items:flex-start;justify-content:center;max-width:860px;margin:0 auto}
+  .soft-cta-panel{flex:1 1 0;min-width:0;text-align:center}
+  .soft-cta-divider{width:2px;background:${C.espresso}22;align-self:stretch;flex-shrink:0}
+  @media(max-width:620px){
+    .soft-cta-row{flex-direction:column;align-items:center;gap:40px}
+    .soft-cta-divider{display:none}
+    .soft-cta-panel{width:100%;max-width:360px}
+  }
+
   .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:960px;margin:0 auto}
   .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:900px;margin:0 auto}
   .grid-2>*:last-child:nth-child(odd){grid-column:1/-1;max-width:calc(50% - 10px);margin:0 auto;width:100%}
@@ -874,14 +883,14 @@ function HomePage({ go, t, lang }) {
       <TextileBorder />
 
       <section className="section" style={{background:C.parchment}}>
-        <div style={{maxWidth:860,margin:"0 auto",display:"flex",gap:48,flexWrap:"wrap",alignItems:"flex-start",justifyContent:"center"}}>
-          <div style={{flex:"1 1 320px",textAlign:"center"}}>
+        <div className="soft-cta-row">
+          <div className="soft-cta-panel">
             <div className="section-eyebrow" style={{marginBottom:12}}>{t.softCta.eyebrow}</div>
             <p style={{fontSize:15,lineHeight:1.8,color:"#555",fontWeight:600,marginBottom:28,maxWidth:320,margin:"0 auto 28px"}}>{t.softCta.body}</p>
             <button className="hero-cta" onClick={() => go("Contact")}>{t.softCta.btn}</button>
           </div>
-          <div style={{width:2,background:`${C.espresso}22`,alignSelf:"stretch",flexShrink:0}} />
-          <div style={{flex:"1 1 320px",textAlign:"center"}}>
+          <div className="soft-cta-divider" />
+          <div className="soft-cta-panel">
             <div className="section-eyebrow" style={{marginBottom:12}}>{t.softCta.emailEyebrow}</div>
             <p style={{fontSize:15,lineHeight:1.8,color:"#555",fontWeight:600,marginBottom:28,maxWidth:320,margin:"0 auto 28px"}}>{t.softCta.emailBody}</p>
             <EmailCapture placeholder={t.biggerPicture.emailPlaceholder} btnLabel={t.biggerPicture.emailBtn} />
