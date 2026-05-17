@@ -241,12 +241,13 @@ export default function CafeGame({ onClose }) {
     const onKey = e => { if (e.code==="Space"||e.code==="ArrowUp") { e.preventDefault(); action(); } };
     window.addEventListener("keydown", onKey);
     const cv = canvasRef.current;
-    cv.addEventListener("click", action);
-    return () => { window.removeEventListener("keydown", onKey); cv.removeEventListener("click", action); };
-  }, [action]);
+    if (cv) cv.addEventListener("click", action);
+    return () => { window.removeEventListener("keydown", onKey); if (cv) cv.removeEventListener("click", action); };
+  }, [action, portrait]);
 
   useEffect(() => {
     const cv = canvasRef.current;
+    if (!cv) return;
     const ctx = cv.getContext("2d");
 
     function loop() {
@@ -350,7 +351,7 @@ export default function CafeGame({ onClose }) {
 
     raf.current = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(raf.current);
-  }, []);
+  }, [portrait]);
 
   const overlay = {
     position:"fixed",inset:0,zIndex:1000,
