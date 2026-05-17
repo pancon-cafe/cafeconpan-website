@@ -52,11 +52,6 @@ function drawBg(ctx, frame) {
   }
 }
 
-function _stroke(ctx, outer, inner, ow, iw) {
-  ctx.strokeStyle = outer; ctx.lineWidth = ow; ctx.lineCap = "round"; ctx.stroke();
-  ctx.strokeStyle = inner; ctx.lineWidth = iw; ctx.stroke();
-}
-
 function drawChar(ctx, charY, frame, jumping) {
   const bob = jumping ? 0 : Math.sin(frame * 0.25) * 2;
   const tilt = jumping ? 0 : Math.sin(frame * 0.22) * 3;
@@ -107,94 +102,27 @@ function drawChar(ctx, charY, frame, jumping) {
   ctx.restore();
 }
 
-function drawPanDulce(ctx, x) {
-  ctx.save(); ctx.translate(x, GY);
-  // shadow
-  ctx.beginPath(); ctx.ellipse(0,0,22,6,0,0,Math.PI*2);
-  ctx.fillStyle = "rgba(61,43,31,0.15)"; ctx.fill();
-  // bun
-  ctx.beginPath(); ctx.arc(0,-24,27,0,Math.PI*2);
-  ctx.fillStyle = K.beige; ctx.fill();
-  ctx.strokeStyle = K.espresso; ctx.lineWidth = 2.5; ctx.stroke();
-  // concha ring
-  ctx.beginPath(); ctx.arc(0,-24,17,0,Math.PI*2);
-  ctx.strokeStyle = K.cream; ctx.lineWidth = 2; ctx.stroke();
-  // cross
-  ctx.beginPath();
-  ctx.moveTo(-15,-24); ctx.lineTo(15,-24);
-  ctx.moveTo(0,-39); ctx.lineTo(0,-9);
-  ctx.strokeStyle = K.cream; ctx.lineWidth = 2; ctx.stroke();
-  // gloss
-  ctx.beginPath(); ctx.arc(-8,-32,6,0,Math.PI*2);
-  ctx.fillStyle = "rgba(255,255,255,0.18)"; ctx.fill();
-  ctx.restore();
-}
+const EMOJI = { pan:"🥐", laptop:"💻", wifi:"📵" };
 
-function drawLaptop(ctx, x) {
-  ctx.save(); ctx.translate(x, GY);
+function drawObstacle(ctx, x, type) {
+  ctx.save();
   // shadow
-  ctx.beginPath(); ctx.ellipse(0,0,30,6,0,0,Math.PI*2);
-  ctx.fillStyle = "rgba(61,43,31,0.15)"; ctx.fill();
-  // base
-  ctx.beginPath();
-  ctx.moveTo(-36,-2); ctx.lineTo(36,-2); ctx.lineTo(32,0); ctx.lineTo(-32,0);
-  ctx.closePath();
-  ctx.fillStyle = "#2a1c12"; ctx.fill();
-  // hinge detail
-  ctx.beginPath(); ctx.rect(-4,-4,8,4);
-  ctx.fillStyle = "#1a0f08"; ctx.fill();
-  // screen body
-  ctx.beginPath();
-  ctx.moveTo(-30,-64); ctx.lineTo(30,-64);
-  ctx.lineTo(30,-2); ctx.lineTo(-30,-2);
-  ctx.closePath();
-  ctx.fillStyle = K.espresso; ctx.fill();
-  ctx.strokeStyle = K.beige; ctx.lineWidth = 2; ctx.stroke();
-  // screen face
-  ctx.beginPath(); ctx.rect(-24,-58,48,48);
-  ctx.fillStyle = "#0d0705"; ctx.fill();
-  // dead X
-  ctx.beginPath();
-  ctx.moveTo(-12,-48); ctx.lineTo(12,-22);
-  ctx.moveTo(12,-48); ctx.lineTo(-12,-22);
-  ctx.strokeStyle = K.red; ctx.lineWidth = 4; ctx.lineCap="round"; ctx.stroke();
-  // keyboard dots
-  ctx.fillStyle = "rgba(212,169,122,0.3)";
-  for (let kx=-22; kx<=22; kx+=8) {
-    ctx.beginPath(); ctx.arc(kx,-3,2,0,Math.PI*2); ctx.fill();
-  }
-  ctx.restore();
-}
-
-function drawWifi(ctx, x) {
-  ctx.save(); ctx.translate(x, GY-18);
-  // shadow
-  ctx.beginPath(); ctx.ellipse(0,18,22,5,0,0,Math.PI*2);
-  ctx.fillStyle = "rgba(61,43,31,0.12)"; ctx.fill();
-  // arcs
-  [[40,K.espresso,5],[28,K.teal,4],[16,K.teal,3.5]].forEach(([r,col,lw]) => {
-    ctx.beginPath();
-    ctx.arc(0,0,r,Math.PI*1.18,Math.PI*1.82);
-    ctx.strokeStyle=col; ctx.lineWidth=lw; ctx.stroke();
-  });
-  // dot
-  ctx.beginPath(); ctx.arc(0,0,5.5,0,Math.PI*2);
-  ctx.fillStyle=K.teal; ctx.fill();
-  ctx.strokeStyle=K.espresso; ctx.lineWidth=2; ctx.stroke();
-  // strike X
-  ctx.beginPath();
-  ctx.moveTo(-16,-55); ctx.lineTo(16,-25);
-  ctx.moveTo(16,-55); ctx.lineTo(-16,-25);
-  ctx.strokeStyle=K.red; ctx.lineWidth=5.5; ctx.lineCap="round"; ctx.stroke();
+  ctx.beginPath(); ctx.ellipse(x, GY, 24, 5, 0, 0, Math.PI*2);
+  ctx.fillStyle = "rgba(61,43,31,0.18)"; ctx.fill();
+  // emoji
+  ctx.font = "52px serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "bottom";
+  ctx.fillText(EMOJI[type], x, GY);
   ctx.restore();
 }
 
 // ── Collision ─────────────────────────────────────────────────────────────────
 
 const HB = {
-  pan:   {dx:-20, dy:-50, w:40, h:50},
-  laptop:{dx:-28, dy:-64, w:56, h:64},
-  wifi:  {dx:-30, dy:-72, w:60, h:72},
+  pan:   {dx:-22, dy:-50, w:44, h:50},
+  laptop:{dx:-22, dy:-50, w:44, h:50},
+  wifi:  {dx:-22, dy:-50, w:44, h:50},
 };
 const CHB = {dx:-26, dy:-56, w:52, h:56}; // relative to charY
 
@@ -282,9 +210,7 @@ export default function CafeGame({ onClose }) {
 
       drawBg(ctx, s.frame);
       s.obstacles.forEach(o=>{
-        if (o.type==="pan") drawPanDulce(ctx,o.x);
-        else if (o.type==="laptop") drawLaptop(ctx,o.x);
-        else drawWifi(ctx,o.x);
+        drawObstacle(ctx, o.x, o.type);
       });
       drawChar(ctx, s.charY, s.frame, s.jumping);
 
@@ -316,7 +242,7 @@ export default function CafeGame({ onClose }) {
 
         ctx.font="13px 'Nunito',sans-serif";
         ctx.fillStyle=K.beige;
-        ctx.fillText("Jump the pan dulce, laptops & dead WiFi", W/2, H/2+2);
+        ctx.fillText("Jump the 🥐  💻  📵 — don't get blocked!", W/2, H/2+2);
 
         ctx.font="bold 13px 'Nunito',sans-serif";
         ctx.fillStyle=K.blush;
