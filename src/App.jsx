@@ -285,6 +285,40 @@ const css = `
   .divider-row{display:flex;align-items:center;gap:16px;margin:32px 0}
   .divider-line{flex:1;height:2px;background:${C.espresso};opacity:0.15}
   .divider-icon{font-size:20px;opacity:0.4}
+
+  /* RESPONSIVE GRIDS */
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:960px;margin:0 auto}
+  .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:900px;margin:0 auto}
+  .grid-2>*:last-child:nth-child(odd){grid-column:1/-1;max-width:calc(50% - 10px);margin:0 auto;width:100%}
+
+  /* HAMBURGER */
+  .nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+  .nav-hamburger span{display:block;width:22px;height:2px;background:${C.cream};border-radius:2px}
+
+  /* MOBILE */
+  @media(max-width:768px){
+    nav{padding:0 20px}
+    .nav-links{display:none}
+    .nav-links.open{display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:${C.espresso};padding:16px 20px 24px;gap:2px;z-index:99;border-bottom:3px solid ${C.beige}}
+    .nav-btn{width:100%;text-align:left;padding:12px 10px;font-size:14px}
+    .nav-cta-btn{width:100%;text-align:center;margin-top:12px;padding:14px 20px}
+    .nav-hamburger{display:flex}
+    .hero{padding:100px 24px 48px;min-height:auto}
+    .hero-pillars{flex-direction:column;align-items:stretch}
+    .hero-pillar{justify-content:center}
+    .section{padding:56px 24px}
+    .services-grid{grid-template-columns:1fr}
+    .about-grid{grid-template-columns:1fr;gap:36px}
+    .contact-grid{grid-template-columns:1fr;gap:36px}
+    .grid-3,.grid-2{grid-template-columns:1fr}
+    .grid-2>*:last-child:nth-child(odd){max-width:100%;grid-column:auto}
+    .creds-row{gap:12px}
+    .about-stats{gap:24px}
+    footer{flex-direction:column;text-align:center;padding:40px 24px;gap:16px}
+    .email-row{flex-direction:column}
+    .email-input,.email-btn{width:100%;box-sizing:border-box}
+    .email-btn{padding:14px 20px;text-align:center}
+  }
 `;
 
 const navItems = ["Home","Tech Services","Coffee & Food","Events","About","Contact"];
@@ -339,7 +373,7 @@ function HomePage({ go }) {
           <div className="section-eyebrow">Three Pillars, One Brand</div>
           <h2 className="section-title">What We're <span>Building</span></h2>
         </div>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:20,maxWidth:960,margin:"0 auto"}}>
+        <div className="grid-3">
           {[
             { n:"01", icon:"⌨️", title:"Tech Services", col:C.teal, desc:"MDM setup, managed device retainers, IT consulting, and carrier services. Apple-focused. Carrier-agnostic. Client-first.", cta:"Available Now", page:"Tech Services" },
             { n:"02", icon:"☕", title:"Coffee & Food", col:C.red, desc:"A Central American cafe experience rooted in Honduran heritage. Pan dulce, café de olla, and the warmth of home.", cta:"Coming Soon", page:"Coffee & Food" },
@@ -378,7 +412,7 @@ function HomePage({ go }) {
           <h2 className="section-title section-title-light">What's Next for <span>Café Con Pan</span></h2>
           <p className="section-sub section-sub-light">The tech arm leads because it's ready. But this brand was always meant to be more — and these are the chapters still being written.</p>
         </div>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:20,maxWidth:900,margin:"0 auto"}}>
+        <div className="grid-3">
           {[
             {icon:"☕", title:"Coffee From Home", badge:"In Planning", desc:"Single-origin Honduran coffee sourced from family's land in Central America. Grown with care, brought to your cup."},
             {icon:"🫓", title:"The Café Experience", badge:"In Development", desc:"An authentic Central American cafe — pan dulce, café de olla, and a space that feels like walking into an abuela's kitchen."},
@@ -417,9 +451,9 @@ function TechPage({ go }) {
           <h2 className="section-title">Tech Services for <span>Small Business</span></h2>
           <p className="section-sub">Apple-focused MDM and device management, IT consulting, and carrier services — through one trusted, independent partner.</p>
         </div>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:20,maxWidth:900,margin:"0 auto"}}>
+        <div className="grid-2">
           {packages.map((p, i) => (
-            <div key={p.name} className="service-card" style={packages.length % 2 !== 0 && i === packages.length - 1 ? {gridColumn:"1 / -1",maxWidth:"calc(50% - 10px)",margin:"0 auto",width:"100%"} : {}}>
+            <div key={p.name} className="service-card">
               <span className="service-card-icon">{p.icon}</span>
               <div className="service-card-name">{p.name}</div>
               <p className="service-card-desc">{p.desc}</p>
@@ -529,6 +563,39 @@ function AboutPage() {
 }
 
 function ContactPage() {
+  const [form, setForm] = useState({name:"",email:"",inquiry:"Tech Services — MDM & Device Management",message:""});
+  const [status, setStatus] = useState("idle");
+
+  const handle = e => setForm({...form, [e.target.name]: e.target.value});
+
+  const submit = async e => {
+    e.preventDefault();
+    setStatus("submitting");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          access_key:"bb35de9c-0515-4e74-9f2f-202d6fd033b8",
+          name:form.name,
+          email:form.email,
+          subject:form.inquiry,
+          message:form.message,
+          replyto:form.email,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus("success");
+        setForm({name:"",email:"",inquiry:"Tech Services — MDM & Device Management",message:""});
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
+
   return (
     <section className="section" style={{paddingTop:100}}>
       <div className="section-header">
@@ -553,18 +620,18 @@ function ContactPage() {
             <SteamSVG />
           </div>
         </div>
-        <div>
+        <form onSubmit={submit}>
           <div className="form-field">
             <label className="form-label">Your Name</label>
-            <input className="form-input" placeholder="Full name" />
+            <input className="form-input" name="name" placeholder="Full name" value={form.name} onChange={handle} required />
           </div>
           <div className="form-field">
             <label className="form-label">Email Address</label>
-            <input className="form-input" placeholder="you@company.com" />
+            <input className="form-input" name="email" type="email" placeholder="you@company.com" value={form.email} onChange={handle} required />
           </div>
           <div className="form-field">
             <label className="form-label">Inquiry Type</label>
-            <select className="form-select">
+            <select className="form-select" name="inquiry" value={form.inquiry} onChange={handle}>
               <option>Tech Services — MDM & Device Management</option>
               <option>Tech Services — Carrier Audit & Negotiation</option>
               <option>Tech Services — IT Consulting</option>
@@ -574,10 +641,22 @@ function ContactPage() {
           </div>
           <div className="form-field">
             <label className="form-label">Message</label>
-            <textarea className="form-textarea" placeholder="Tell us about your business and what you need..." />
+            <textarea className="form-textarea" name="message" placeholder="Tell us about your business and what you need..." value={form.message} onChange={handle} required />
           </div>
-          <button className="submit-btn">Send It →</button>
-        </div>
+          {status === "success" && (
+            <div style={{background:"#5A9E9622",border:`2px solid ${C.teal}`,padding:"14px 18px",marginBottom:16,color:C.espresso,fontWeight:700,fontSize:14}}>
+              Message sent! We'll be in touch soon. ☕
+            </div>
+          )}
+          {status === "error" && (
+            <div style={{background:"#B8503E22",border:`2px solid ${C.red}`,padding:"14px 18px",marginBottom:16,color:C.espresso,fontWeight:700,fontSize:14}}>
+              Something went wrong. Please try again or email us directly at hello@pancon.cafe.
+            </div>
+          )}
+          <button className="submit-btn" type="submit" disabled={status === "submitting"}>
+            {status === "submitting" ? "Sending..." : "Send It →"}
+          </button>
+        </form>
       </div>
     </section>
   );
@@ -585,8 +664,9 @@ function ContactPage() {
 
 export default function CafeConPan() {
   const [page, setPage] = useState("Home");
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const go = (p) => { setPage(p); window.scrollTo(0,0); };
+  const go = (p) => { setPage(p); setMenuOpen(false); window.scrollTo(0,0); };
 
   useEffect(() => { window.scrollTo(0,0); }, [page]);
 
@@ -618,12 +698,15 @@ export default function CafeConPan() {
         <div className="nav-logo" onClick={() => go("Home")}>
           Café Con <span>Pan</span>
         </div>
-        <div className="nav-links">
+        <div className={`nav-links${menuOpen ? " open" : ""}`}>
           {navItems.map(n => (
             <button key={n} className={`nav-btn ${page===n?"active":""}`} onClick={() => go(n)}>{n}</button>
           ))}
           <button className="nav-cta-btn" onClick={() => go("Contact")}>Get a Quote</button>
         </div>
+        <button className="nav-hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
+          <span /><span /><span />
+        </button>
       </nav>
       <main style={{paddingTop:0}}>{renderPage()}</main>
       <TextileBorder />
