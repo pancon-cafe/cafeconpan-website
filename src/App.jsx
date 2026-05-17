@@ -108,7 +108,7 @@ const STRINGS = {
       eyebrow:"The Bigger Picture", title:"What's Next for", titleSpan:"Café Con Pan",
       sub:"The tech arm leads because it's ready. But this brand was always meant to be more — and these are the chapters still being written.",
       cards:[
-        { icon:"☕", title:"Central American Single-Origin Coffee", badge:"In Planning", desc:"Coffee sourced from family land across Central America — Honduras, Guatemala, El Salvador. From seed to cup, rooted in where we come from." },
+        { icon:"☕", title:"Central American Single-Origin Coffee", badge:"In Planning", desc:"Coffee sourced from family land across Central America — starting with Honduras, Guatemala, and El Salvador, with more countries to come. From seed to cup, rooted in where we come from." },
         { icon:"🫓", title:"The Café & Boardroom", badge:"In Development", desc:"A physical café with a reserved boardroom — where clients can meet, deals get done, and the community gathers over something warm." },
         { icon:"💼", title:"Investing in People", badge:"On the Horizon", desc:"For the businesses and people we believe in — a future arm dedicated to going beyond services and into shared growth with the clients we align with." },
       ],
@@ -231,7 +231,7 @@ const STRINGS = {
       eyebrow:"El Panorama General", title:"Lo Que Sigue para", titleSpan:"Café Con Pan",
       sub:"El brazo tecnológico lidera porque está listo. Pero esta marca siempre fue pensada para ser más — y estos son los capítulos que aún se están escribiendo.",
       cards:[
-        { icon:"☕", title:"Café Centroamericano de Origen Único", badge:"En Planificación", desc:"Café cultivado en tierras familiares en Centroamérica — Honduras, Guatemala, El Salvador. De la semilla a la taza, con raíces en de donde venimos." },
+        { icon:"☕", title:"Café Centroamericano de Origen Único", badge:"En Planificación", desc:"Café cultivado en tierras familiares en Centroamérica — empezando con Honduras, Guatemala y El Salvador, con más países por venir. De la semilla a la taza, con raíces en de donde venimos." },
         { icon:"🫓", title:"El Café & La Sala de Juntas", badge:"En Desarrollo", desc:"Un café físico con una sala de juntas reservable — donde los clientes se reúnen, se cierran tratos y la comunidad se junta alrededor de algo caliente." },
         { icon:"💼", title:"Invirtiendo en Personas", badge:"En el Horizonte", desc:"Para los negocios y las personas en las que creemos — un brazo futuro dedicado a ir más allá de los servicios hacia un crecimiento compartido con los clientes con quienes nos alineamos." },
       ],
