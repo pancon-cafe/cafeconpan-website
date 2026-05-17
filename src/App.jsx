@@ -186,6 +186,17 @@ const STRINGS = {
       submit:"I'm In →", submitting:"Sending...",
       success:"Welcome to La Mesa. We'll be in touch soon. ☕",
       error:"Something went wrong. Email us directly at hello@pancon.cafe.",
+      refTitle:"Send Someone Our Way",
+      refSub:"Already a La Mesa partner? Submit a referral here and we'll take it from there.",
+      refYourName:"Your Name", refYourNamePlaceholder:"Your full name",
+      refTheirName:"Their Name", refTheirNamePlaceholder:"Who are you referring?",
+      refTheirContact:"Their Email or Phone", refTheirContactPlaceholder:"Best way to reach them",
+      refNeed:"What Do They Need Help With",
+      refOptions:["Not sure — general intro","Tech Services — Device Management","Tech Services — Carrier Audit","Tech Services — IT Consulting","Business Setup — LLC / EIN / Email / Domain","Something else"],
+      refNotes:"Anything else we should know", refNotesPlaceholder:"Optional — any context helps",
+      refSubmit:"Send the Referral →", refSubmitting:"Sending...",
+      refSuccess:"Got it — we'll reach out to them and let you know. ☕",
+      refError:"Something went wrong. Email us directly at hello@pancon.cafe.",
     },
     about:{
       eyebrow:"The Story", title:"Roots,", titleSpan:"Community,", titleEnd:"Purpose",
@@ -340,6 +351,17 @@ const STRINGS = {
       submit:"Estoy Adentro →", submitting:"Enviando...",
       success:"Bienvenido a La Mesa. Estaremos en contacto pronto. ☕",
       error:"Algo salió mal. Escríbenos directamente a hello@pancon.cafe.",
+      refTitle:"Mándanos a Alguien",
+      refSub:"¿Ya eres socio de La Mesa? Envía un referido aquí y nosotros nos encargamos del resto.",
+      refYourName:"Tu Nombre", refYourNamePlaceholder:"Tu nombre completo",
+      refTheirName:"Su Nombre", refTheirNamePlaceholder:"¿A quién nos estás refiriendo?",
+      refTheirContact:"Su Correo o Teléfono", refTheirContactPlaceholder:"La mejor manera de contactarlos",
+      refNeed:"¿En Qué Necesitan Ayuda?",
+      refOptions:["No estoy seguro — presentación general","Servicios Tech — Gestión de Dispositivos","Servicios Tech — Auditoría de Carrier","Servicios Tech — Consultoría IT","Configuración de Negocio — LLC / EIN / Correo / Dominio","Otra cosa"],
+      refNotes:"Algo más que debamos saber", refNotesPlaceholder:"Opcional — cualquier contexto ayuda",
+      refSubmit:"Enviar el Referido →", refSubmitting:"Enviando...",
+      refSuccess:"Recibido — les contactaremos y te avisamos. ☕",
+      refError:"Algo salió mal. Escríbenos directamente a hello@pancon.cafe.",
     },
     about:{
       eyebrow:"La Historia", title:"Raíces,", titleSpan:"Comunidad,", titleEnd:"Propósito",
@@ -1121,6 +1143,29 @@ function LaMesaPage({ t }) {
   const [status, setStatus] = useState("idle");
   const handle = e => setForm({...form, [e.target.name]: e.target.value});
 
+  const [ref, setRef] = useState({yourName:"",theirName:"",theirContact:"",need:t.laMesa.refOptions[0],notes:""});
+  const [refStatus, setRefStatus] = useState("idle");
+  const handleRef = e => setRef({...ref, [e.target.name]: e.target.value});
+
+  const submitRef = async e => {
+    e.preventDefault();
+    setRefStatus("submitting");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          access_key:"bb35de9c-0515-4e74-9f2f-202d6fd033b8",
+          subject:`La Mesa Referral — ${ref.theirName} via ${ref.yourName}`,
+          name:ref.yourName,
+          message:`Referred by: ${ref.yourName}\nTheir name: ${ref.theirName}\nContact: ${ref.theirContact}\nNeeds: ${ref.need}\n\n${ref.notes || "No additional notes."}`,
+        }),
+      });
+      const data = await res.json();
+      setRefStatus(data.success ? "success" : "error");
+    } catch { setRefStatus("error"); }
+  };
+
   const submit = async e => {
     e.preventDefault();
     setStatus("submitting");
@@ -1225,9 +1270,60 @@ function LaMesaPage({ t }) {
         </div>
       </section>
 
+      <TextileBorder />
+
+      {/* Referral form */}
+      <section className="section" style={{background:C.parchment}}>
+        <div style={{maxWidth:560,margin:"0 auto"}}>
+          <div style={{textAlign:"center",marginBottom:40}}>
+            <div className="section-eyebrow" style={{marginBottom:10}}>{m.refTitle}</div>
+            <p style={{fontSize:14,color:"#666",fontWeight:600,lineHeight:1.8}}>{m.refSub}</p>
+          </div>
+          {refStatus === "success" ? (
+            <div style={{
+              textAlign:"center",padding:"24px",border:`2px solid ${C.teal}`,
+              color:C.espresso,fontFamily:"'Pacifico',cursive",fontSize:18,lineHeight:1.6,
+            }}>{m.refSuccess}</div>
+          ) : (
+            <form onSubmit={submitRef}>
+              <div className="form-field">
+                <label className="form-label">{m.refYourName}</label>
+                <input className="form-input" name="yourName" placeholder={m.refYourNamePlaceholder} value={ref.yourName} onChange={handleRef} required />
+              </div>
+              <div className="form-field">
+                <label className="form-label">{m.refTheirName}</label>
+                <input className="form-input" name="theirName" placeholder={m.refTheirNamePlaceholder} value={ref.theirName} onChange={handleRef} required />
+              </div>
+              <div className="form-field">
+                <label className="form-label">{m.refTheirContact}</label>
+                <input className="form-input" name="theirContact" placeholder={m.refTheirContactPlaceholder} value={ref.theirContact} onChange={handleRef} required />
+              </div>
+              <div className="form-field">
+                <label className="form-label">{m.refNeed}</label>
+                <select className="form-select" name="need" value={ref.need} onChange={handleRef}>
+                  {m.refOptions.map(o => <option key={o}>{o}</option>)}
+                </select>
+              </div>
+              <div className="form-field">
+                <label className="form-label">{m.refNotes}</label>
+                <textarea className="form-textarea" name="notes" placeholder={m.refNotesPlaceholder} value={ref.notes} onChange={handleRef} style={{minHeight:80}} />
+              </div>
+              {refStatus === "error" && (
+                <div style={{background:"#B8503E22",border:`2px solid ${C.red}`,padding:"14px 18px",marginBottom:16,color:C.espresso,fontWeight:700,fontSize:14}}>
+                  {m.refError}
+                </div>
+              )}
+              <button className="submit-btn" type="submit" disabled={refStatus === "submitting"}>
+                {refStatus === "submitting" ? m.refSubmitting : m.refSubmit}
+              </button>
+            </form>
+          )}
+        </div>
+      </section>
+
       <TextileBorder flip />
 
-      {/* Form */}
+      {/* Join form */}
       <section className="section section-dark">
         <div style={{maxWidth:560,margin:"0 auto"}}>
           <div style={{textAlign:"center",marginBottom:40}}>
