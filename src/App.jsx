@@ -542,6 +542,7 @@ function EmailCapture({ placeholder, btnLabel }) {
           access_key:"bb35de9c-0515-4e74-9f2f-202d6fd033b8",
           subject:"New Email Signup — Café Con Pan",
           email,
+          replyto:email,
           message:"New subscriber joined the Café Con Pan waitlist.",
         }),
       });
