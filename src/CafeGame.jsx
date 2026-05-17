@@ -349,14 +349,16 @@ export default function CafeGame({ onClose }) {
       background:"rgba(20,10,5,0.88)",
       display:"flex",flexDirection:"column",
       alignItems:"center",justifyContent:"center",
+      padding:"0 8px",
     }}
       onClick={e => { if (e.target===e.currentTarget) onClose(); }}
     >
-      <div style={{boxShadow:`0 0 0 3px ${K.beige}, 0 8px 40px rgba(0,0,0,0.6)`, width:"min(800px, 100vw)", maxWidth:"100vw"}}>
+      <div style={{boxShadow:`0 0 0 3px ${K.beige}, 0 8px 40px rgba(0,0,0,0.6)`, width:"100%", maxWidth:"800px", overflow:"hidden"}}>
         {/* Header */}
         <div style={{
           background:K.espresso,borderBottom:`3px solid ${K.beige}`,
-          padding:"10px 20px",display:"flex",justifyContent:"space-between",alignItems:"center",
+          padding:"10px 16px",display:"flex",justifyContent:"space-between",alignItems:"center",
+          flexWrap:"wrap",gap:"6px",
         }}>
           <span style={{fontFamily:"'Pacifico',cursive",fontSize:18,color:K.cream}}>
             Café Con <span style={{color:K.blush}}>Pan</span>
@@ -380,8 +382,8 @@ export default function CafeGame({ onClose }) {
           background:K.espresso,padding:"8px 20px",textAlign:"center",
           borderTop:`2px solid rgba(212,169,122,0.2)`,
         }}>
-          <span style={{fontSize:11,color:"rgba(245,237,214,0.45)",letterSpacing:"0.14em",textTransform:"uppercase",fontFamily:"'Nunito',sans-serif"}}>
-            SPACE / TAP to jump &nbsp;·&nbsp; Avoid pan dulce, laptops & dead WiFi
+          <span style={{fontSize:11,color:"rgba(245,237,214,0.45)",letterSpacing:"0.1em",textTransform:"uppercase",fontFamily:"'Nunito',sans-serif",wordBreak:"break-word"}}>
+            TAP to jump &nbsp;·&nbsp; Avoid pan dulce, laptops & dead WiFi
           </span>
         </div>
       </div>
