@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import CafeGame from "./CafeGame";
 
 const C = {
   cream: "#F5EDD6",
@@ -775,11 +776,22 @@ export default function CafeConPan() {
   const [page, setPage] = useState("Home");
   const [menuOpen, setMenuOpen] = useState(false);
   const [lang, setLang] = useState(getBrowserLang);
+  const [gameActive, setGameActive] = useState(false);
+  const typedRef = useRef("");
 
   const t = STRINGS[lang];
   const go = (p) => { setPage(p); setMenuOpen(false); window.scrollTo(0,0); };
 
   useEffect(() => { window.scrollTo(0,0); }, [page]);
+
+  useEffect(() => {
+    const handler = e => {
+      typedRef.current = (typedRef.current + e.key).slice(-4).toUpperCase();
+      if (typedRef.current === "CAFE") setGameActive(true);
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
 
   const renderPage = () => {
     switch(page) {
@@ -795,6 +807,7 @@ export default function CafeConPan() {
 
   return (
     <>
+      {gameActive && <CafeGame onClose={() => setGameActive(false)} />}
       <style>{fonts + css}</style>
       <div className="grain" />
       <nav>
