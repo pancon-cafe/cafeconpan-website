@@ -122,7 +122,7 @@ const STRINGS = {
         { icon:"🍎", name:"Apple Presence", tag:"Visibility Package", desc:"For existing businesses ready to show up in Apple's ecosystem: Apple Maps, Branded Mail, Tap to Pay branding, Brand Profile, and Maps Ads readiness.", price:"$500 – $1,500" },
         { icon:"🔁", name:"Apple Operations", tag:"Managed Services", desc:"Ongoing device management, helpdesk, user onboarding/offboarding, software updates, app licensing, and security policy maintenance.", price:"$35 – $50 / device / month" },
         { icon:"📡", name:"Connectivity Consulting", tag:"Carrier & ISP", desc:"Carrier plan audit, negotiation, number porting, new service activation, and ISP setup. 100% carrier-agnostic — we work for you, not the carrier.", price:"$150 – $300 / hr or flat fee" },
-        { icon:"🤝", name:"Tech Concierge", tag:"On-Call Support", desc:"Relationship-based on-call tech support for owners who want one trusted number to call. Monthly add-on to any package.", price:"$200 – $500 / month" },
+        { icon:"🤝", name:"Tech Concierge", tag:"On-Call Support", desc:"Relationship-based on-call tech support for owners who want one trusted number to call. Monthly add-on to any package.", price:"$300 – $600 / month" },
       ],
       creds:{
         eyebrow:"Credentials & Structure", title:"Built to", titleSpan:"Back It Up",
@@ -137,20 +137,27 @@ const STRINGS = {
         cta:"Request a Consultation →",
       },
     },
-    coffeeTeaser:{ eyebrow:"Pillar Two", title:"Coffee &", accent:"Food", body:"A cafe experience rooted in Central American tradition. Pan dulce fresh from the oven, café de olla brewed the right way, and a space that feels like walking into an abuela's kitchen.", quote:"Coffee is how Central Americans say good morning, welcome home, and I'm glad you're here.", placeholder:"Your email — we'll let you know when we open" },
-    eventsTeaser:{ eyebrow:"Pillar Three", title:"Community &", accent:"Events", body:"Cultural programming, community gatherings, and events that celebrate Central American roots. Music, food, storytelling, and people worth knowing. Something worth showing up for.", quote:"Community isn't a feature. It's the whole point.", placeholder:"Get notified when events are announced" },
+    coffeeTeaser:{ eyebrow:"Pillar Two", title:"Coffee &", accent:"Food", body:"A cafe experience rooted in Central American tradition. Pan dulce fresh from the oven, café de olla brewed the right way, and a space that feels like walking into an abuela's kitchen.", quote:"Coffee is how Central Americans say good morning, welcome home, and I'm glad you're here.", placeholder:"Your email — we'll let you know when we open", emailBtn:"Notify Me" },
+    eventsTeaser:{ eyebrow:"Pillar Three", title:"Community &", accent:"Events", body:"Cultural programming, community gatherings, and events that celebrate Central American roots. Music, food, storytelling, and people worth knowing. Something worth showing up for.", quote:"Community isn't a feature. It's the whole point.", placeholder:"Get notified when events are announced", emailBtn:"Notify Me" },
     about:{
       eyebrow:"The Story", title:"Roots,", titleSpan:"Community,", titleEnd:"Purpose",
-      quote:"She served it in a bowl with rosquillas and ojaldras, like cereal. I was five years old and I've never stopped thinking about that cup.",
+      quote:"She served it in a bowl with rosquillas and ojaldras, like soup. I was five years old and I've never stopped thinking about that cup.",
       quoteAttr:"— Café Con Pan",
-      body1:"I remember being very little, visiting my family in Honduras. Every morning without fail, my grandmother would make coffee. Not in a mug — in a bowl. She'd add rosquillas and ojaldras and let them soak until they were soft enough to eat with a spoon, like cereal. I was instantly hooked. I still am.",
+      body1:"I remember being very little, visiting my family in Honduras. Every morning without fail, my grandmother would make coffee. Not in a mug — in a bowl. She'd add rosquillas and ojaldras and let them soak until they were soft enough to eat with a spoon, like soup. I was instantly hooked. I still am.",
       body2:"That bowl of coffee is where the name came from. And it's where the whole idea started — coffee as a bridge. To family, to community, to work, to the conversations that change things. I realized I could build something around that idea. Tech services to help small businesses thrive. A real café experience rooted in that Honduran morning. Events and culture that bring people together. And eventually, the ability to invest in the businesses we believe in. One cup and one connection at a time.",
       stats:[{num:"3",label:"Brand Pillars"},{num:"2",label:"Certs In Progress"},{num:"🇭🇳",label:"Honduras Roots"}],
+    },
+    socials:{
+      instagram:"https://instagram.com/cafeconpan",
+      linkedin:"https://linkedin.com/company/cafeconpan",
+      instagramLabel:"Instagram",
+      linkedinLabel:"LinkedIn",
+      followLabel:"Follow the Journey",
     },
     contact:{
       eyebrow:"Get in Touch", title:"Let's", titleSpan:"Talk",
       sub:"Ready to talk tech services, or just want to follow the Café Con Pan journey?",
-      info:[{label:"Email",val:"hello@pancon.cafe"},{label:"Website",val:"pancon.cafe"},{label:"Business",val:"Cafe Con Pan LLC"},{label:"Services",val:"Tech · Coffee · Culture"}],
+      info:[{label:"Email",val:"hello@pancon.cafe"},{label:"Website",val:"pancon.cafe"},{label:"Business",val:"Cafe Con Pan LLC"},{label:"Services",val:"Tech · Coffee · Culture"},{label:"Instagram",val:"@cafeconpan"},{label:"LinkedIn",val:"Café Con Pan LLC"}],
       nameLabel:"Your Name", namePlaceholder:"Full name",
       emailLabel:"Email Address", emailPlaceholder:"you@company.com",
       inquiryLabel:"Inquiry Type", messageLabel:"Message", messagePlaceholder:"Tell us about your business and what you need...",
@@ -220,7 +227,7 @@ const STRINGS = {
         { icon:"🍎", name:"Presencia Apple", tag:"Paquete de Visibilidad", desc:"Para negocios existentes listos para aparecer en el ecosistema de Apple: Apple Maps, correo con marca, branding Tap to Pay, Perfil de Marca y preparación para Maps Ads.", price:"$500 – $1,500" },
         { icon:"🔁", name:"Operaciones Apple", tag:"Servicios Gestionados", desc:"Gestión continua de dispositivos, helpdesk, incorporación y desvinculación de usuarios, actualizaciones de software, licencias de apps y mantenimiento de políticas de seguridad.", price:"$35 – $50 / dispositivo / mes" },
         { icon:"📡", name:"Consultoría de Conectividad", tag:"Carrier e ISP", desc:"Auditoría de plan de carrier, negociación, portabilidad de número, activación de nuevo servicio y configuración de ISP. 100% independiente del carrier — trabajamos para ti, no para el carrier.", price:"$150 – $300 / hr o tarifa fija" },
-        { icon:"🤝", name:"Tech Concierge", tag:"Soporte On-Call", desc:"Soporte técnico on-call basado en relaciones para propietarios que quieren un número de confianza al que llamar. Complemento mensual a cualquier paquete.", price:"$200 – $500 / mes" },
+        { icon:"🤝", name:"Tech Concierge", tag:"Soporte On-Call", desc:"Soporte técnico on-call basado en relaciones para propietarios que quieren un número de confianza al que llamar. Complemento mensual a cualquier paquete.", price:"$300 – $600 / mes" },
       ],
       creds:{
         eyebrow:"Credenciales y Estructura", title:"Construido para", titleSpan:"Respaldarlo",
@@ -235,20 +242,27 @@ const STRINGS = {
         cta:"Solicitar una Consulta →",
       },
     },
-    coffeeTeaser:{ eyebrow:"Pilar Dos", title:"Café &", accent:"Pan", body:"Una experiencia de café con raíces en la tradición centroamericana. Pan dulce recién salido del horno, café de olla preparado de la manera correcta y un espacio que se siente como entrar a la cocina de una abuela.", quote:"El café es como los centroamericanos dicen buenos días, bienvenido a casa y me alegra que estés aquí.", placeholder:"Tu correo — te avisaremos cuando abramos" },
-    eventsTeaser:{ eyebrow:"Pilar Tres", title:"Comunidad &", accent:"Eventos", body:"Programas culturales, encuentros comunitarios y eventos que celebran las raíces centroamericanas. Música, comida, historias y personas que vale la pena conocer. Algo por lo que vale la pena aparecer.", quote:"La comunidad no es una característica. Es el punto central.", placeholder:"Recibe notificación cuando se anuncien eventos" },
+    coffeeTeaser:{ eyebrow:"Pilar Dos", title:"Café &", accent:"Pan", body:"Una experiencia de café con raíces en la tradición centroamericana. Pan dulce recién salido del horno, café de olla preparado de la manera correcta y un espacio que se siente como entrar a la cocina de una abuela.", quote:"El café es como los centroamericanos dicen buenos días, bienvenido a casa y me alegra que estés aquí.", placeholder:"Tu correo — te avisaremos cuando abramos", emailBtn:"Avísame" },
+    eventsTeaser:{ eyebrow:"Pilar Tres", title:"Comunidad &", accent:"Eventos", body:"Programas culturales, encuentros comunitarios y eventos que celebran las raíces centroamericanas. Música, comida, historias y personas que vale la pena conocer. Algo por lo que vale la pena aparecer.", quote:"La comunidad no es una característica. Es el punto central.", placeholder:"Recibe notificación cuando se anuncien eventos", emailBtn:"Avísame" },
     about:{
       eyebrow:"La Historia", title:"Raíces,", titleSpan:"Comunidad,", titleEnd:"Propósito",
-      quote:"Lo servía en un tazón con rosquillas y ojaldras, como cereal. Tenía cinco años y nunca he dejado de pensar en esa taza.",
+      quote:"Lo servía en un tazón con rosquillas y ojaldras, como sopa. Tenía cinco años y nunca he dejado de pensar en esa taza.",
       quoteAttr:"— Café Con Pan",
-      body1:"Recuerdo siendo muy pequeño, visitando a mi familia en Honduras. Cada mañana sin falta, mi abuela preparaba café. No en una taza — en un tazón. Le añadía rosquillas y ojaldras y las dejaba remojar hasta que estaban suaves para comerlas con cuchara, como cereal. Quedé completamente enamorado de ese ritual. Y lo sigo estando.",
+      body1:"Recuerdo siendo muy pequeño, visitando a mi familia en Honduras. Cada mañana sin falta, mi abuela preparaba café. No en una taza — en un tazón. Le añadía rosquillas y ojaldras y las dejaba remojar hasta que estaban suaves para comerlas con cuchara, como sopa. Quedé completamente enamorado de ese ritual. Y lo sigo estando.",
       body2:"Ese tazón de café es de donde viene el nombre. Y es donde nació toda la idea — el café como puente. A la familia, a la comunidad, al trabajo, a las conversaciones que cambian las cosas. Me di cuenta de que podía construir algo alrededor de esa idea. Servicios tech para ayudar a pequeños negocios a crecer. Una experiencia de café auténtica con raíces en esa mañana hondureña. Eventos y cultura que unen a la gente. Y eventualmente, la capacidad de invertir en los negocios en los que creemos. Una taza y una conexión a la vez.",
       stats:[{num:"3",label:"Pilares de Marca"},{num:"2",label:"Certs en Progreso"},{num:"🇭🇳",label:"Raíces Hondureñas"}],
+    },
+    socials:{
+      instagram:"https://instagram.com/cafeconpan",
+      linkedin:"https://linkedin.com/company/cafeconpan",
+      instagramLabel:"Instagram",
+      linkedinLabel:"LinkedIn",
+      followLabel:"Síguenos",
     },
     contact:{
       eyebrow:"Ponte en Contacto", title:"", titleSpan:"Hablemos",
       sub:"¿Listo para hablar de servicios tech o simplemente quieres seguir el viaje de Café Con Pan?",
-      info:[{label:"Correo",val:"hello@pancon.cafe"},{label:"Sitio Web",val:"pancon.cafe"},{label:"Negocio",val:"Cafe Con Pan LLC"},{label:"Servicios",val:"Tech · Café · Cultura"}],
+      info:[{label:"Correo",val:"hello@pancon.cafe"},{label:"Sitio Web",val:"pancon.cafe"},{label:"Negocio",val:"Cafe Con Pan LLC"},{label:"Servicios",val:"Tech · Café · Cultura"},{label:"Instagram",val:"@cafeconpan"},{label:"LinkedIn",val:"Café Con Pan LLC"}],
       nameLabel:"Tu Nombre", namePlaceholder:"Nombre completo",
       emailLabel:"Correo Electrónico", emailPlaceholder:"tu@empresa.com",
       inquiryLabel:"Tipo de Consulta", messageLabel:"Mensaje", messagePlaceholder:"Cuéntanos sobre tu negocio y lo que necesitas...",
@@ -328,7 +342,7 @@ const css = `
   .hero-title .line-teal{color:${C.teal};display:block}
   .hero-subtitle{font-size:16px;color:${C.espresso};opacity:0.75;
     font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
-    margin-bottom:40px}
+    margin-bottom:16px}
   .hero-pillars{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
   .hero-pillar{background:${C.espresso};color:${C.cream};
     padding:12px 24px;
@@ -513,6 +527,58 @@ const PAGE_HASH = {
 const HASH_PAGE = Object.fromEntries(Object.entries(PAGE_HASH).map(([k,v])=>[v,k]));
 const getPageFromHash = () => HASH_PAGE[window.location.hash.replace("#","")] || "Home";
 
+function EmailCapture({ placeholder, btnLabel }) {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("idle");
+
+  const submit = async () => {
+    if (!email || !email.includes("@")) return;
+    setStatus("submitting");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          access_key:"bb35de9c-0515-4e74-9f2f-202d6fd033b8",
+          subject:"New Email Signup — Café Con Pan",
+          email,
+          message:"New subscriber joined the Café Con Pan waitlist.",
+        }),
+      });
+      const data = await res.json();
+      setStatus(data.success ? "success" : "error");
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  if (status === "success") return (
+    <div style={{
+      textAlign:"center",padding:"16px 24px",
+      border:`2px solid ${C.teal}`,color:C.cream,
+      fontFamily:"'Nunito',sans-serif",fontWeight:700,
+      fontSize:14,letterSpacing:"0.06em",
+      maxWidth:420,margin:"0 auto",
+    }}>☕ You're on the list. We'll be in touch.</div>
+  );
+
+  return (
+    <div className="email-row" style={{maxWidth:420,margin:"0 auto"}}>
+      <input
+        className="email-input"
+        placeholder={placeholder}
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+        onKeyDown={e => e.key === "Enter" && submit()}
+        type="email"
+      />
+      <button className="email-btn" onClick={submit} disabled={status === "submitting"}>
+        {status === "submitting" ? "..." : btnLabel}
+      </button>
+    </div>
+  );
+}
+
 function ParaTiSection({ t }) {
   return (
     <>
@@ -594,8 +660,8 @@ function HomePage({ go, t, lang }) {
             <span className="line-teal"> Pan</span>
           </h1>
           <p className="hero-subtitle">{t.hero.subtitle}</p>
-          {lang === "es" && <p style={{fontSize:14,color:C.espresso,fontWeight:700,letterSpacing:"0.06em",marginBottom:40,opacity:0.85}}>{t.hero.culturalSignal}</p>}
-          <div className="hero-pillars">
+          {lang === "es" && <p style={{fontSize:14,color:C.espresso,fontWeight:700,letterSpacing:"0.06em",marginBottom:24,opacity:0.85}}>{t.hero.culturalSignal}</p>}
+          <div className="hero-pillars" style={{marginTop:24}}>
             <button className="hero-pillar" onClick={() => go("Tech Services")}>
               <span className="hero-pillar-icon">⌨️</span> {t.hero.pillars[0]}
             </button>
@@ -679,9 +745,8 @@ function HomePage({ go, t, lang }) {
             </div>
           ))}
         </div>
-        <div className="email-row" style={{marginTop:48,maxWidth:420,margin:"48px auto 0"}}>
-          <input className="email-input" placeholder={t.biggerPicture.emailPlaceholder} />
-          <button className="email-btn">{t.biggerPicture.emailBtn}</button>
+        <div style={{marginTop:48}}>
+          <EmailCapture placeholder={t.biggerPicture.emailPlaceholder} btnLabel={t.biggerPicture.emailBtn} />
         </div>
       </section>
     </>
@@ -736,7 +801,7 @@ function TechPage({ go, t }) {
   );
 }
 
-function TeaserPage({ eyebrow, title, accent, body, quote, placeholder }) {
+function TeaserPage({ eyebrow, title, accent, body, quote, placeholder, emailBtn }) {
   return (
     <>
       <section className="section" style={{paddingTop:100,background:C.cream,position:"relative",overflow:"hidden",minHeight:"60vh",display:"flex",alignItems:"center"}}>
@@ -747,10 +812,7 @@ function TeaserPage({ eyebrow, title, accent, body, quote, placeholder }) {
           <span className="coming-tag">{eyebrow}</span>
           <h2 className="teaser-title">{title} <span>{accent}</span></h2>
           <p className="teaser-body">{body}</p>
-          <div className="email-row">
-            <input className="email-input" placeholder={placeholder} />
-            <button className="email-btn">Notify Me</button>
-          </div>
+          <EmailCapture placeholder={placeholder} btnLabel={emailBtn} />
         </div>
       </section>
       <TextileBorder />
@@ -855,6 +917,19 @@ function ContactPage({ t }) {
           ))}
           <div style={{marginTop:16}}>
             <SteamSVG />
+          </div>
+          <div style={{display:"flex",flexDirection:"column",gap:8,marginTop:24}}>
+            <div style={{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:4}}>{t.socials.followLabel}</div>
+            <div style={{display:"flex",gap:16}}>
+              <a href={t.socials.instagram} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}}
+                onMouseEnter={e=>e.currentTarget.style.opacity=1}
+                onMouseLeave={e=>e.currentTarget.style.opacity=0.5}
+              >@ {t.socials.instagramLabel}</a>
+              <a href={t.socials.linkedin} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}}
+                onMouseEnter={e=>e.currentTarget.style.opacity=1}
+                onMouseLeave={e=>e.currentTarget.style.opacity=0.5}
+              >in {t.socials.linkedinLabel}</a>
+            </div>
           </div>
         </div>
         <form onSubmit={submit}>
@@ -972,6 +1047,19 @@ export default function CafeConPan() {
       <footer>
         <div className="footer-logo">Café Con <span>Pan</span></div>
         <div className="footer-tagline">{t.footer.tagline}</div>
+        <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:8}}>
+          <div style={{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:4}}>{t.socials.followLabel}</div>
+          <div style={{display:"flex",gap:16}}>
+            <a href={t.socials.instagram} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.cream,opacity:0.6,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}}
+              onMouseEnter={e=>e.currentTarget.style.opacity=1}
+              onMouseLeave={e=>e.currentTarget.style.opacity=0.6}
+            >@ {t.socials.instagramLabel}</a>
+            <a href={t.socials.linkedin} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.cream,opacity:0.6,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}}
+              onMouseEnter={e=>e.currentTarget.style.opacity=1}
+              onMouseLeave={e=>e.currentTarget.style.opacity=0.6}
+            >in {t.socials.linkedinLabel}</a>
+          </div>
+        </div>
         <div style={{fontSize:11,color:`rgba(245,237,214,0.35)`,fontWeight:600,textAlign:"center",maxWidth:480,lineHeight:1.6}}>{t.footer.disclaimer}</div>
         <div className="footer-copy">{t.footer.copy}</div>
       </footer>
