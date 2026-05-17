@@ -173,7 +173,7 @@ const STRINGS = {
       tiers:[
         { name:"Regular", icon:"☕", desc:"1–2 closed referrals. You earn 5% of their first invoice once payment clears." },
         { name:"Barista", icon:"⌨️", desc:"3–5 closed referrals. You earn 8% of each first invoice. You're trusted at this table." },
-        { name:"La Mesa", icon:"🌱", desc:"6+ closed referrals. You earn 10% of each first invoice. Founding partner status — recurring revenue share coming soon." },
+        { name:"La Mesa", icon:"🌱", desc:"6+ closed referrals. You earn 10% of each first invoice. Founding partner status — your seat at the table when the café opens." },
       ],
       promiseTitle:"The Long Game",
       promiseBody:"This brand is becoming a physical place — a café with a real boardroom. When that day comes, La Mesa partners don't just get a coffee. They get a seat at the actual table. Founding status. Named. Remembered.",
@@ -341,7 +341,7 @@ const STRINGS = {
       tiers:[
         { name:"Regular", icon:"☕", desc:"1–2 referidos cerrados. Ganas el 5% de su primera factura cuando el pago se confirme." },
         { name:"Barista", icon:"⌨️", desc:"3–5 referidos cerrados. Ganas el 8% de cada primera factura. Eres de confianza en esta mesa." },
-        { name:"La Mesa", icon:"🌱", desc:"6+ referidos cerrados. Ganas el 10% de cada primera factura. Socio fundador — participación en ingresos recurrentes próximamente." },
+        { name:"La Mesa", icon:"🌱", desc:"6+ referidos cerrados. Ganas el 10% de cada primera factura. Socio fundador — tu lugar en la mesa cuando el café abra." },
       ],
       promiseTitle:"El Juego Largo",
       promiseBody:"Esta marca se está convirtiendo en un lugar físico — un café con una sala de juntas de verdad. Cuando llegue ese día, los socios de La Mesa no solo reciben un café. Reciben un lugar en la mesa real. Estatus de fundador. Nombrados. Recordados.",
