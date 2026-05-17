@@ -58,101 +58,51 @@ function _stroke(ctx, outer, inner, ow, iw) {
 }
 
 function drawChar(ctx, charY, frame, jumping) {
-  const bob = jumping ? 0 : Math.sin(frame*0.25)*2;
-  const phase = frame*0.22;
-  const blink = frame % 115 < 5;
+  const bob = jumping ? 0 : Math.sin(frame * 0.25) * 2;
+  const tilt = jumping ? 0 : Math.sin(frame * 0.22) * 3;
 
   ctx.save();
   ctx.translate(CX, charY + bob);
+  ctx.rotate((tilt * Math.PI) / 180);
 
-  // — Legs —
-  if (jumping) {
-    [[-13,-16,-26],[13,16,-26]].forEach(([sx,qx,ty]) => {
-      ctx.beginPath(); ctx.moveTo(sx,0);
-      ctx.quadraticCurveTo(sx+qx,-12, sx+qx*1.3,ty);
-      _stroke(ctx, K.espresso, K.cream, 11, 7);
-    });
-  } else {
-    const l1 = Math.sin(phase)*20, l2 = -l1;
-    [[-13,l1],[13,l2]].forEach(([sx,sw]) => {
-      ctx.beginPath(); ctx.moveTo(sx,0);
-      ctx.quadraticCurveTo(sx+sw*0.5,-12, sx+sw*0.95,-26);
-      _stroke(ctx, K.espresso, K.cream, 11, 7);
-    });
-  }
-
-  // — Arms —
-  const as = jumping ? -22 : Math.sin(phase)*16;
-  [[-21,as],[21,-as]].forEach(([ax,sw],i) => {
-    ctx.beginPath(); ctx.moveTo(ax,-46);
-    ctx.quadraticCurveTo(ax+(i===0?-9:9)+sw*0.4,-34, ax+sw*0.85,-24);
-    _stroke(ctx, K.espresso, K.cream, 10, 6);
-  });
-
-  // — Cup body —
+  // Cup body
   ctx.beginPath();
-  ctx.moveTo(-21,-72); ctx.lineTo(21,-72);
-  ctx.lineTo(25,-28); ctx.lineTo(-25,-28);
+  ctx.moveTo(-22, -50); ctx.lineTo(22, -50);
+  ctx.lineTo(26, 0); ctx.lineTo(-26, 0);
   ctx.closePath();
   ctx.fillStyle = K.cream; ctx.fill();
   ctx.strokeStyle = K.espresso; ctx.lineWidth = 3; ctx.stroke();
 
-  // Stripe on cup
+  // Decorative stripes
   ctx.beginPath();
-  ctx.moveTo(-24,-44); ctx.lineTo(24,-44);
-  ctx.moveTo(-23,-54); ctx.lineTo(23,-54);
+  ctx.moveTo(-25, -20); ctx.lineTo(25, -20);
+  ctx.moveTo(-24, -33); ctx.lineTo(24, -33);
   ctx.strokeStyle = K.red; ctx.lineWidth = 1.5; ctx.globalAlpha = 0.3; ctx.stroke();
   ctx.globalAlpha = 1;
 
-  // — Coffee surface —
+  // Coffee surface
   ctx.beginPath();
-  ctx.ellipse(0,-72,21,5.5,0,0,Math.PI*2);
+  ctx.ellipse(0, -50, 22, 6, 0, 0, Math.PI * 2);
   ctx.fillStyle = K.beige; ctx.fill();
   ctx.strokeStyle = K.espresso; ctx.lineWidth = 2; ctx.stroke();
 
-  // — Handle —
+  // Handle
   ctx.beginPath();
-  ctx.arc(29,-50,12,-Math.PI*0.58,Math.PI*0.58);
-  ctx.strokeStyle = K.espresso; ctx.lineWidth = 4.5; ctx.stroke();
+  ctx.arc(30, -26, 13, -Math.PI * 0.55, Math.PI * 0.55);
+  ctx.strokeStyle = K.espresso; ctx.lineWidth = 5; ctx.stroke();
 
-  // — Eyes —
-  if (blink) {
+  // Steam wisps
+  const sPhase = frame * 0.09;
+  [[-8, 0], [0, -4], [8, 0]].forEach(([sx, offset], i) => {
+    const mx = sx + Math.sin(sPhase + i * 1.3) * 5;
     ctx.beginPath();
-    [-9,9].forEach(ex => { ctx.moveTo(ex-4,-58); ctx.lineTo(ex+4,-58); });
-    ctx.strokeStyle = K.espresso; ctx.lineWidth = 2.5; ctx.stroke();
-  } else {
-    [-9,9].forEach(ex => {
-      ctx.beginPath(); ctx.arc(ex,-59,5.5,0,Math.PI*2);
-      ctx.fillStyle = "white"; ctx.fill();
-      ctx.strokeStyle = K.espresso; ctx.lineWidth = 1.5; ctx.stroke();
-      ctx.beginPath(); ctx.arc(ex+1,-58,2.8,0,Math.PI*2);
-      ctx.fillStyle = K.espresso; ctx.fill();
-      // shine
-      ctx.beginPath(); ctx.arc(ex-0.5,-59.5,1,0,Math.PI*2);
-      ctx.fillStyle = "white"; ctx.fill();
-    });
-  }
-
-  // — Smile —
-  ctx.beginPath();
-  ctx.arc(0,-48,7.5,0.12*Math.PI,0.88*Math.PI);
-  ctx.strokeStyle = K.espresso; ctx.lineWidth = 2; ctx.stroke();
-
-  // — Beret brim —
-  ctx.beginPath();
-  ctx.ellipse(0,-75,19,5,0,0,Math.PI*2);
-  ctx.fillStyle = K.red; ctx.fill();
-  ctx.strokeStyle = K.espresso; ctx.lineWidth = 2; ctx.stroke();
-
-  // — Beret top —
-  ctx.beginPath();
-  ctx.arc(-4,-82,11,0,Math.PI*2);
-  ctx.fillStyle = K.red; ctx.fill();
-  ctx.strokeStyle = K.espresso; ctx.lineWidth = 2; ctx.stroke();
-
-  // — Beret button —
-  ctx.beginPath(); ctx.arc(-4,-91,3,0,Math.PI*2);
-  ctx.fillStyle = K.espresso; ctx.fill();
+    ctx.moveTo(sx, -52);
+    ctx.bezierCurveTo(sx - 4, -59 + offset, mx + 4, -65 + offset, mx, -72 + offset);
+    ctx.strokeStyle = "rgba(61,43,31,0.22)";
+    ctx.lineWidth = 2.5;
+    ctx.lineCap = "round";
+    ctx.stroke();
+  });
 
   ctx.restore();
 }
@@ -246,7 +196,7 @@ const HB = {
   laptop:{dx:-28, dy:-64, w:56, h:64},
   wifi:  {dx:-30, dy:-72, w:60, h:72},
 };
-const CHB = {dx:-16, dy:-80, w:32, h:70}; // relative to charY
+const CHB = {dx:-26, dy:-56, w:52, h:56}; // relative to charY
 
 function collides(charY, obs) {
   const cx1=CX+CHB.dx, cy1=charY+CHB.dy, cx2=cx1+CHB.w, cy2=cy1+CHB.h;
@@ -272,7 +222,7 @@ export default function CafeGame({ onClose }) {
     const s = g.current;
     if (s.phase==="start") { s.phase="playing"; return; }
     if (s.phase==="dead") {
-      Object.assign(s,{phase:"playing",frame:0,score:0,charY:GY,vy:0,jumping:false,speed:5,obstacles:[],nextIn:380,shake:0});
+      Object.assign(s,{phase:"playing",frame:0,score:0,charY:GY,vy:0,jumping:false,speed:5,obstacles:[],nextIn:49*5+80,shake:0});
       return;
     }
     if (!s.jumping) { s.vy=JUMP_V; s.jumping=true; }
@@ -305,12 +255,12 @@ export default function CafeGame({ onClose }) {
 
         if (s.nextIn<=0) {
           s.obstacles.push({x:W+50, type:TYPES[Math.floor(Math.random()*3)]});
-          s.nextIn = 260 + Math.random()*220;
+          s.nextIn = 49 * s.speed + 80 + Math.random() * 180;
         }
         s.obstacles = s.obstacles.map(o=>({...o,x:o.x-s.speed})).filter(o=>o.x>-120);
 
         if (s.obstacles.some(o=>collides(s.charY,o))) {
-          s.phase="dead"; s.best=Math.max(s.best,s.score); s.shake=14;
+          s.phase="dead"; s.best=Math.max(s.best,s.score);
         }
         s.score++;
         if (s.shake>0) s.shake--;
