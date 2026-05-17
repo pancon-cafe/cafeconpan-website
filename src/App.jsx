@@ -462,6 +462,13 @@ const css = `
 
 const navKeys = ["Home","Tech Services","Coffee & Food","Events","About","Contact"];
 
+const PAGE_HASH = {
+  "Home":"home","Tech Services":"tech-services","Coffee & Food":"coffee-food",
+  "Events":"events","About":"about","Contact":"contact",
+};
+const HASH_PAGE = Object.fromEntries(Object.entries(PAGE_HASH).map(([k,v])=>[v,k]));
+const getPageFromHash = () => HASH_PAGE[window.location.hash.replace("#","")] || "Home";
+
 function HomePage({ go, t }) {
   return (
     <>
@@ -773,16 +780,25 @@ function ContactPage({ t }) {
 }
 
 export default function CafeConPan() {
-  const [page, setPage] = useState("Home");
+  const [page, setPage] = useState(getPageFromHash);
   const [menuOpen, setMenuOpen] = useState(false);
   const [lang, setLang] = useState(getBrowserLang);
   const [gameActive, setGameActive] = useState(false);
   const typedRef = useRef("");
 
   const t = STRINGS[lang];
-  const go = (p) => { setPage(p); setMenuOpen(false); window.scrollTo(0,0); };
+  const go = (p) => {
+    setPage(p); setMenuOpen(false); window.scrollTo(0,0);
+    window.location.hash = PAGE_HASH[p];
+  };
 
   useEffect(() => { window.scrollTo(0,0); }, [page]);
+
+  useEffect(() => {
+    const onHash = () => { const p = getPageFromHash(); setPage(p); window.scrollTo(0,0); };
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, []);
 
   useEffect(() => {
     const onKey = e => {
