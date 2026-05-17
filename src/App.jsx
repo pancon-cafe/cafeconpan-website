@@ -835,34 +835,6 @@ function TechPage({ go, t }) {
   );
 }
 
-function TeaserPage({ eyebrow, title, accent, body, quote, placeholder, emailBtn }) {
-  return (
-    <>
-      <section className="section" style={{paddingTop:100,background:C.cream,position:"relative",overflow:"hidden",minHeight:"60vh",display:"flex",alignItems:"center"}}>
-        <div style={{position:"absolute",right:-100,top:"50%",transform:"translateY(-50%)",opacity:0.12}}>
-          <Sunburst size={500} color={C.gold} opacity={0.8} />
-        </div>
-        <div className="teaser-inner" style={{position:"relative",zIndex:2}}>
-          <span className="coming-tag">{eyebrow}</span>
-          <h2 className="teaser-title">{title} <span>{accent}</span></h2>
-          <p className="teaser-body">{body}</p>
-          <EmailCapture placeholder={placeholder} btnLabel={emailBtn} />
-        </div>
-      </section>
-      <TextileBorder />
-      <section className="section section-dark" style={{textAlign:"center"}}>
-        <blockquote style={{
-          fontFamily:"'Pacifico',cursive",fontSize:28,color:C.blush,
-          lineHeight:1.5,maxWidth:600,margin:"0 auto",
-          paddingBottom:24,borderBottom:`2px solid ${C.beige}33`
-        }}>"{quote}"</blockquote>
-        <div className="section-eyebrow" style={{marginTop:20}}>— Café Con Pan</div>
-      </section>
-      <TextileBorder flip />
-    </>
-  );
-}
-
 function AboutPage({ t }) {
   return (
     <>
