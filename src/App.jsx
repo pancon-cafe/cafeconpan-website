@@ -184,6 +184,7 @@ const STRINGS = {
       success:"Message sent! We'll be in touch soon. ☕",
       error:"Something went wrong. Please try again or email us directly at hello@pancon.cafe.",
     },
+    softCta:{ eyebrow:"Not Sure Where to Start?", body:"No pitch, no pressure. Just a conversation about where your business is and what might actually help.", btn:"Let's Just Talk →", emailEyebrow:"Not Ready Yet?", emailBody:"Follow the journey and we'll reach out when the time is right." },
     disclaimer:"We provide guidance and implementation support — not legal, tax, or financial advice. For those needs, we recommend working with a licensed professional.",
     footer:{ tagline:"Tech · Coffee · Culture", copy:"© 2026 Cafe Con Pan LLC · pancon.cafe", disclaimer:"We provide guidance and implementation support — not legal, tax, or financial advice. For those needs, we recommend working with a licensed professional." },
   },
@@ -307,6 +308,7 @@ const STRINGS = {
       success:"¡Mensaje enviado! Estaremos en contacto pronto. ☕",
       error:"Algo salió mal. Inténtalo de nuevo o escríbenos directamente a hello@pancon.cafe.",
     },
+    softCta:{ eyebrow:"¿No Sabes Por Dónde Empezar?", body:"Sin presión, sin discurso. Solo una conversación sobre dónde está tu negocio y qué podría ayudar.", btn:"Hablemos →", emailEyebrow:"¿Todavía No Estás Listo?", emailBody:"Síguenos y te contactaremos cuando sea el momento." },
     disclaimer:"Ofrecemos orientación y apoyo operativo — no asesoría legal, fiscal ni financiera. Para esas necesidades, recomendamos trabajar con un profesional licenciado.",
     footer:{ tagline:"Tech · Café · Cultura", copy:"© 2026 Cafe Con Pan LLC · pancon.cafe", disclaimer:"Ofrecemos orientación y apoyo operativo — no asesoría legal, fiscal ni financiera. Para esas necesidades, recomendamos trabajar con un profesional licenciado." },
   },
@@ -779,10 +781,27 @@ function HomePage({ go, t, lang }) {
             </div>
           ))}
         </div>
-        <div style={{marginTop:48}}>
-          <EmailCapture placeholder={t.biggerPicture.emailPlaceholder} btnLabel={t.biggerPicture.emailBtn} />
+      </section>
+
+      <TextileBorder />
+
+      <section className="section" style={{background:C.parchment}}>
+        <div style={{maxWidth:860,margin:"0 auto",display:"flex",gap:48,flexWrap:"wrap",alignItems:"flex-start",justifyContent:"center"}}>
+          <div style={{flex:"1 1 320px",textAlign:"center"}}>
+            <div className="section-eyebrow" style={{marginBottom:12}}>{t.softCta.eyebrow}</div>
+            <p style={{fontSize:15,lineHeight:1.8,color:"#555",fontWeight:600,marginBottom:28,maxWidth:320,margin:"0 auto 28px"}}>{t.softCta.body}</p>
+            <button className="hero-cta" onClick={() => go("Contact")}>{t.softCta.btn}</button>
+          </div>
+          <div style={{width:2,background:`${C.espresso}22`,alignSelf:"stretch",flexShrink:0}} />
+          <div style={{flex:"1 1 320px",textAlign:"center"}}>
+            <div className="section-eyebrow" style={{marginBottom:12}}>{t.softCta.emailEyebrow}</div>
+            <p style={{fontSize:15,lineHeight:1.8,color:"#555",fontWeight:600,marginBottom:28,maxWidth:320,margin:"0 auto 28px"}}>{t.softCta.emailBody}</p>
+            <EmailCapture placeholder={t.biggerPicture.emailPlaceholder} btnLabel={t.biggerPicture.emailBtn} />
+          </div>
         </div>
       </section>
+
+      <TextileBorder flip />
     </>
   );
 }
