@@ -125,11 +125,11 @@ const STRINGS = {
     eventsTeaser:{ eyebrow:"Pillar Three", title:"Community &", accent:"Events", body:"Cultural programming, community gatherings, and events that celebrate Central American roots. Music, food, storytelling, and people worth knowing. Something worth showing up for.", quote:"Community isn't a feature. It's the whole point.", placeholder:"Get notified when events are announced" },
     about:{
       eyebrow:"The Story", title:"Roots,", titleSpan:"Community,", titleEnd:"Purpose",
-      quote:"Three things my culture always did well: make great coffee, take care of each other, and build things that last.",
+      quote:"She served it in a bowl with rosquillas and ojaldras, like soup. I was five years old and I've never stopped thinking about that cup.",
       quoteAttr:"— Café Con Pan",
-      body1:"Café Con Pan is a multi-arm brand rooted in Central American heritage — specifically Honduran culture — and built around three interconnected pillars: technology services, coffee and food, and community programming.",
-      body2:"The tech arm leads because it's ready. Years of hands-on experience at Apple and in carrier services, now channeled through an independent practice built with the right credentials: LLC, EIN, reseller exemption, Jamf and Mosyle certifications in progress, and ACN on the horizon.",
-      body3:"The cafe and events arms are developing in parallel — not as afterthoughts, but as the beating heart of what this brand is ultimately becoming. A place. A gathering point. Something that tastes and feels like home.",
+      body1:"I remember being very little, visiting my family in Honduras. Every morning without fail, my grandmother would make coffee. Not in a mug — in a bowl. She'd add rosquillas and ojaldras and let them soak until they were soft enough to eat with a spoon, like soup. I was instantly hooked. I still am.",
+      body2:"She took me out to the fields too. Hot, hard work — the kind that most people never see behind the products they consume every day. My dad has been sending money home to Honduras for as long as I can remember, building on that land. Now that my grandmother has passed, that land carries even more weight. I want to honor it by putting it to real use.",
+      body3:"That bowl of coffee is where the name came from. And it's where the whole idea started — coffee as a bridge. To family, to community, to work, to the conversations that change things. I realized I could build something around that idea. Tech services to help small businesses thrive. A real café experience rooted in that Honduran morning. Events and culture that bring people together. And eventually, the ability to invest in the businesses we believe in. One cup and one connection at a time.",
       stats:[{num:"3",label:"Brand Pillars"},{num:"2",label:"Certs In Progress"},{num:"🇭🇳",label:"Honduras Roots"}],
     },
     contact:{
@@ -195,11 +195,11 @@ const STRINGS = {
     eventsTeaser:{ eyebrow:"Pilar Tres", title:"Comunidad &", accent:"Eventos", body:"Programas culturales, encuentros comunitarios y eventos que celebran las raíces centroamericanas. Música, comida, historias y personas que vale la pena conocer. Algo por lo que vale la pena aparecer.", quote:"La comunidad no es una característica. Es el punto central.", placeholder:"Recibe notificación cuando se anuncien eventos" },
     about:{
       eyebrow:"La Historia", title:"Raíces,", titleSpan:"Comunidad,", titleEnd:"Propósito",
-      quote:"Tres cosas que mi cultura siempre hizo bien: hacer un gran café, cuidarse mutuamente y construir cosas que duran.",
+      quote:"Lo servía en un tazón con rosquillas y ojaldras, como sopa. Tenía cinco años y nunca he dejado de pensar en esa taza.",
       quoteAttr:"— Café Con Pan",
-      body1:"Café Con Pan es una marca multidimensional arraigada en la herencia centroamericana — específicamente en la cultura hondureña — y construida alrededor de tres pilares interconectados: servicios tecnológicos, café y comida, y programas comunitarios.",
-      body2:"El brazo tecnológico lidera porque está listo. Años de experiencia práctica en Apple y en servicios de carrier, ahora canalizados a través de una práctica independiente con las credenciales correctas: LLC, EIN, exención de revendedor, certificaciones Jamf y Mosyle en progreso, y ACN en el horizonte.",
-      body3:"El café y los eventos se están desarrollando en paralelo — no como ideas secundarias, sino como el corazón palpitante de lo que esta marca está destinada a convertirse. Un lugar. Un punto de encuentro. Algo que sabe y se siente como el hogar.",
+      body1:"Recuerdo siendo muy pequeño, visitando a mi familia en Honduras. Cada mañana sin falta, mi abuela preparaba café. No en una taza — en un tazón. Le añadía rosquillas y ojaldras y las dejaba remojar hasta que estaban suaves para comerlas con cuchara, como sopa. Quedé completamente enamorado de ese ritual. Y lo sigo estando.",
+      body2:"También me llevaba a los campos. Trabajo duro, bajo el sol — el tipo de trabajo que la mayoría de las personas nunca ven detrás de los productos que consumen cada día. Mi papá ha estado enviando dinero a Honduras por toda su vida, cultivando esas tierras. Ahora que mi abuela partió, esa tierra tiene aún más peso. Quiero honrarla poniéndola a buen uso.",
+      body3:"Ese tazón de café es de donde viene el nombre. Y es donde nació toda la idea — el café como puente. A la familia, a la comunidad, al trabajo, a las conversaciones que cambian las cosas. Me di cuenta de que podía construir algo alrededor de esa idea. Servicios tech para ayudar a pequeños negocios a crecer. Una experiencia de café auténtica con raíces en esa mañana hondureña. Eventos y cultura que unen a la gente. Y eventualmente, la capacidad de invertir en los negocios en los que creemos. Una taza y una conexión a la vez.",
       stats:[{num:"3",label:"Pilares de Marca"},{num:"2",label:"Certs en Progreso"},{num:"🇭🇳",label:"Raíces Hondureñas"}],
     },
     contact:{
