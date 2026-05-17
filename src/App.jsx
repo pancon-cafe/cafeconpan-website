@@ -77,7 +77,7 @@ const SteamSVG = () => (
 
 const STRINGS = {
   en: {
-    nav: { items:["Home","Tech Services","Coffee & Food","Events","About","Contact"], cta:"Get a Quote", langBtn:"ES" },
+    nav: { items:["Home","Tech Services","Coffee & Food","Events","Our Story","Contact"], cta:"Get a Quote", langBtn:"ES" },
     hero: { stamp:"☕ Honduras-Rooted · Est. 2025", subtitle:"Tech · Coffee · Culture · Community", pillars:["Tech Services","Coffee & Food","Events"], cta:"Get Tech Services →" },
     story: { eyebrow:"Our Story", title:"More Than a", titleSpan:"Cup of Coffee", body:"At Café Con Pan, we believe coffee is more than a drink — it's a connection. Rooted in our Honduran heritage, we started with a simple idea: to share authentic coffee and bread with our community. That same spirit drives everything we do — from helping small businesses launch and grow through technology, to building a space where culture and community come together. One cup and one connection at a time." },
     pillars: {
@@ -128,8 +128,7 @@ const STRINGS = {
       quote:"She served it in a bowl with rosquillas and ojaldras, like cereal. I was five years old and I've never stopped thinking about that cup.",
       quoteAttr:"— Café Con Pan",
       body1:"I remember being very little, visiting my family in Honduras. Every morning without fail, my grandmother would make coffee. Not in a mug — in a bowl. She'd add rosquillas and ojaldras and let them soak until they were soft enough to eat with a spoon, like cereal. I was instantly hooked. I still am.",
-      body2:"She took me out to the fields too. Hot, hard work — the kind that most people never see behind the products they consume every day. My dad has been sending money home to Honduras for as long as I can remember, building on that land. Now that my grandmother has passed, that land carries even more weight. I want to honor it by putting it to real use.",
-      body3:"That bowl of coffee is where the name came from. And it's where the whole idea started — coffee as a bridge. To family, to community, to work, to the conversations that change things. I realized I could build something around that idea. Tech services to help small businesses thrive. A real café experience rooted in that Honduran morning. Events and culture that bring people together. And eventually, the ability to invest in the businesses we believe in. One cup and one connection at a time.",
+      body2:"That bowl of coffee is where the name came from. And it's where the whole idea started — coffee as a bridge. To family, to community, to work, to the conversations that change things. I realized I could build something around that idea. Tech services to help small businesses thrive. A real café experience rooted in that Honduran morning. Events and culture that bring people together. And eventually, the ability to invest in the businesses we believe in. One cup and one connection at a time.",
       stats:[{num:"3",label:"Brand Pillars"},{num:"2",label:"Certs In Progress"},{num:"🇭🇳",label:"Honduras Roots"}],
     },
     contact:{
@@ -147,7 +146,7 @@ const STRINGS = {
     footer:{ tagline:"Tech · Coffee · Culture", copy:"© 2026 Cafe Con Pan LLC · pancon.cafe" },
   },
   es: {
-    nav: { items:["Inicio","Servicios Tech","Café & Pan","Eventos","Nosotros","Contacto"], cta:"Cotización", langBtn:"EN" },
+    nav: { items:["Inicio","Servicios Tech","Café & Pan","Eventos","Nuestra Historia","Contacto"], cta:"Cotización", langBtn:"EN" },
     hero: { stamp:"☕ Raíces Hondureñas · Est. 2025", subtitle:"Tech · Café · Cultura · Comunidad", pillars:["Servicios Tech","Café & Pan","Eventos"], cta:"Ver Servicios Tech →" },
     story: { eyebrow:"Nuestra Historia", title:"Más Que una", titleSpan:"Taza de Café", body:"En Café Con Pan, creemos que el café es más que una bebida — es una conexión. Con raíces en nuestra herencia hondureña, comenzamos con una idea simple: compartir café y pan auténtico con nuestra comunidad. Ese mismo espíritu impulsa todo lo que hacemos — desde ayudar a pequeños negocios a crecer mediante la tecnología, hasta construir un espacio donde la cultura y la comunidad se unen. Una taza y una conexión a la vez." },
     pillars: {
@@ -198,8 +197,7 @@ const STRINGS = {
       quote:"Lo servía en un tazón con rosquillas y ojaldras, como cereal. Tenía cinco años y nunca he dejado de pensar en esa taza.",
       quoteAttr:"— Café Con Pan",
       body1:"Recuerdo siendo muy pequeño, visitando a mi familia en Honduras. Cada mañana sin falta, mi abuela preparaba café. No en una taza — en un tazón. Le añadía rosquillas y ojaldras y las dejaba remojar hasta que estaban suaves para comerlas con cuchara, como cereal. Quedé completamente enamorado de ese ritual. Y lo sigo estando.",
-      body2:"También me llevaba a los campos. Trabajo duro, bajo el sol — el tipo de trabajo que la mayoría de las personas nunca ven detrás de los productos que consumen cada día. Mi papá ha estado enviando dinero a Honduras por toda su vida, cultivando esas tierras. Ahora que mi abuela partió, esa tierra tiene aún más peso. Quiero honrarla poniéndola a buen uso.",
-      body3:"Ese tazón de café es de donde viene el nombre. Y es donde nació toda la idea — el café como puente. A la familia, a la comunidad, al trabajo, a las conversaciones que cambian las cosas. Me di cuenta de que podía construir algo alrededor de esa idea. Servicios tech para ayudar a pequeños negocios a crecer. Una experiencia de café auténtica con raíces en esa mañana hondureña. Eventos y cultura que unen a la gente. Y eventualmente, la capacidad de invertir en los negocios en los que creemos. Una taza y una conexión a la vez.",
+      body2:"Ese tazón de café es de donde viene el nombre. Y es donde nació toda la idea — el café como puente. A la familia, a la comunidad, al trabajo, a las conversaciones que cambian las cosas. Me di cuenta de que podía construir algo alrededor de esa idea. Servicios tech para ayudar a pequeños negocios a crecer. Una experiencia de café auténtica con raíces en esa mañana hondureña. Eventos y cultura que unen a la gente. Y eventualmente, la capacidad de invertir en los negocios en los que creemos. Una taza y una conexión a la vez.",
       stats:[{num:"3",label:"Pilares de Marca"},{num:"2",label:"Certs en Progreso"},{num:"🇭🇳",label:"Raíces Hondureñas"}],
     },
     contact:{
@@ -460,11 +458,11 @@ const css = `
   }
 `;
 
-const navKeys = ["Home","Tech Services","Coffee & Food","Events","About","Contact"];
+const navKeys = ["Home","Tech Services","Coffee & Food","Events","Our Story","Contact"];
 
 const PAGE_HASH = {
   "Home":"home","Tech Services":"tech-services","Coffee & Food":"coffee-food",
-  "Events":"events","About":"about","Contact":"contact",
+  "Events":"events","Our Story":"our-story","Contact":"contact",
 };
 const HASH_PAGE = Object.fromEntries(Object.entries(PAGE_HASH).map(([k,v])=>[v,k]));
 const getPageFromHash = () => HASH_PAGE[window.location.hash.replace("#","")] || "Home";
@@ -670,7 +668,6 @@ function AboutPage({ t }) {
             <div className="about-body">
               <p>{t.about.body1}</p>
               <p>{t.about.body2}</p>
-              <p>{t.about.body3}</p>
             </div>
             <div className="about-stats">
               {t.about.stats.map(s => (
@@ -823,7 +820,7 @@ export default function CafeConPan() {
       case "Tech Services": return <TechPage go={go} t={t} />;
       case "Coffee & Food": return <TeaserPage {...t.coffeeTeaser} />;
       case "Events": return <TeaserPage {...t.eventsTeaser} />;
-      case "About": return <AboutPage t={t} />;
+      case "Our Story": return <AboutPage t={t} />;
       case "Contact": return <ContactPage t={t} />;
       default: return <HomePage go={go} t={t} />;
     }
