@@ -118,7 +118,7 @@ const STRINGS = {
       eyebrow:"Pillar One — Available Now", title:"Tech Services for", titleSpan:"Small Business",
       sub:"Apple-focused MDM and device management, IT consulting, and carrier services — through one trusted, independent partner.",
       packages:[
-        { icon:"🚀", name:"Open for Business", tag:"Launch Package", desc:"Complete business launch: LLC/EIN guidance, banking, domain + email, website, payment setup, Apple device procurement, MDM enrollment, and full Brands setup.", price:"$2,500 – $5,000+" },
+        { icon:"🚀", name:"Open for Business", tag:"Launch Package", desc:"Complete business launch: LLC/EIN guidance, banking, domain + email, website, payment setup, Apple device procurement, MDM enrollment, and full Brands setup. Guidance only — we help you navigate the process, not act as your attorney or accountant.", price:"$2,500 – $5,000+" },
         { icon:"🍎", name:"Apple Presence", tag:"Visibility Package", desc:"For existing businesses ready to show up in Apple's ecosystem: Apple Maps, Branded Mail, Tap to Pay branding, Brand Profile, and Maps Ads readiness.", price:"$500 – $1,500" },
         { icon:"🔁", name:"Apple Operations", tag:"Managed Services", desc:"Ongoing device management, helpdesk, user onboarding/offboarding, software updates, app licensing, and security policy maintenance.", price:"$35 – $50 / device / month" },
         { icon:"📡", name:"Connectivity Consulting", tag:"Carrier & ISP", desc:"Carrier plan audit, negotiation, number porting, new service activation, and ISP setup. 100% carrier-agnostic — we work for you, not the carrier.", price:"$150 – $300 / hr or flat fee" },
@@ -159,12 +159,23 @@ const STRINGS = {
       success:"Message sent! We'll be in touch soon. ☕",
       error:"Something went wrong. Please try again or email us directly at hello@pancon.cafe.",
     },
-    footer:{ tagline:"Tech · Coffee · Culture", copy:"© 2026 Cafe Con Pan LLC · pancon.cafe" },
+    disclaimer:"We provide guidance and implementation support — not legal, tax, or financial advice. For those needs, we recommend working with a licensed professional.",
+    footer:{ tagline:"Tech · Coffee · Culture", copy:"© 2026 Cafe Con Pan LLC · pancon.cafe", disclaimer:"We provide guidance and implementation support — not legal, tax, or financial advice. For those needs, we recommend working with a licensed professional." },
   },
   es: {
     nav: { items:["Inicio","Servicios Tech","Café & Pan","Eventos","Nuestra Historia","Contacto"], cta:"Cotización", langBtn:"EN" },
-    hero: { stamp:"☕ Raíces Hondureñas · Est. 2025", subtitle:"Tech · Café · Cultura · Comunidad", pillars:["Servicios Tech","Café & Pan","Eventos"], cta:"Ver Servicios Tech →" },
+    hero: { stamp:"☕ Raíces Hondureñas · Est. 2025", subtitle:"Tech · Café · Cultura · Comunidad", pillars:["Servicios Tech","Café & Pan","Eventos"], cta:"Ver Servicios Tech →", culturalSignal:"Hablamos tu idioma — literal y culturalmente." },
     story: { eyebrow:"Nuestra Historia", title:"Más Que una", titleSpan:"Taza de Café", body:"En Café Con Pan, creemos que el café es más que una bebida — es una conexión. Con raíces en nuestra herencia hondureña, comenzamos con una idea simple: compartir café y pan auténtico con nuestra comunidad. Ese mismo espíritu impulsa todo lo que hacemos — desde ayudar a pequeños negocios a crecer mediante la tecnología, hasta construir un espacio donde la cultura y la comunidad se unen. Una taza y una conexión a la vez." },
+    paraTi: {
+      eyebrow:"Para Ti",
+      title:"Construido para",
+      titleSpan:"Tu Realidad",
+      body1:"Sabemos lo que es ser extraordinario en tu oficio — y al mismo tiempo tener que navegar un sistema de negocios que nadie te explicó, en un idioma que no es el tuyo. Eso no es una debilidad. Es simplemente una barrera que nosotros podemos quitar.",
+      body2:"Jason habla español. Conoce la cultura. Y ha trabajado con negocios como el tuyo desde adentro de Apple. Estás en buenas manos.",
+      stat1num:"100%", stat1label:"Bilingüe",
+      stat2num:"🇭🇳", stat2label:"Raíces Hondureñas",
+      stat3num:"Apple", stat3label:"Desde Adentro",
+    },
     painPoints: {
       eyebrow:"La Verdad",
       title:"¿Te Suena",
@@ -177,6 +188,8 @@ const STRINGS = {
         { title:"No sabes si estás pagando de más con tu carrier.", desc:"La mayoría de los negocios pequeños sí están pagando de más — cientos de dólares al mes — en planes que tenían sentido hace dos años y nadie ha revisado desde entonces." },
         { title:"Tu negocio no aparece en Apple Maps.", desc:"Tus clientes tienen iPhones. Buscan negocios como el tuyo todos los días. Si no apareces — o apareces mal — eso es dinero real pasando de largo." },
         { title:"Cuando algo falla, todo se detiene.", desc:"Nadie a quien llamar. Ningún sistema para resolverlo rápido. Solo tú, esperando en el teléfono, tratando de averiguarlo — mientras el trabajo real se acumula." },
+        { title:"Nadie te explicó cómo funciona el sistema.", desc:"El EIN, el LLC, la cuenta bancaria de negocio, el historial de crédito comercial — en Honduras, en México, en El Salvador, nadie te enseñó esto. Aquí tampoco. Pero nosotros sí sabemos." },
+        { title:"Todo está en inglés y a veces el inglés técnico es otro idioma más.", desc:"Los contratos del carrier, los términos del software, los formularios del gobierno — una cosa es hablar inglés y otra es entender el lenguaje legal y técnico que usan para hacer negocios aquí." },
       ],
       bridge:"Para eso estamos aquí. No con sistemas complicados ni contratos corporativos — solo la configuración correcta, hecha una vez, hecha bien.",
       cta:"Hablemos →",
@@ -203,7 +216,7 @@ const STRINGS = {
       eyebrow:"Pilar Uno — Disponible Ahora", title:"Servicios Tech para", titleSpan:"Pequeños Negocios",
       sub:"Gestión de dispositivos Apple y MDM, consultoría IT y servicios de carrier — a través de un socio independiente de confianza.",
       packages:[
-        { icon:"🚀", name:"Abrir el Negocio", tag:"Paquete de Lanzamiento", desc:"Lanzamiento completo del negocio: orientación para LLC/EIN, banca, dominio + correo, sitio web, configuración de pagos, adquisición de dispositivos Apple, inscripción MDM y configuración completa de Brands.", price:"$2,500 – $5,000+" },
+        { icon:"🚀", name:"Abrir el Negocio", tag:"Paquete de Lanzamiento", desc:"Lanzamiento completo del negocio: orientación para LLC/EIN, banca, dominio + correo, sitio web, configuración de pagos, adquisición de dispositivos Apple, inscripción MDM y configuración completa de Brands. Solo orientación — te ayudamos a navegar el proceso, sin actuar como tu abogado o contador.", price:"$2,500 – $5,000+" },
         { icon:"🍎", name:"Presencia Apple", tag:"Paquete de Visibilidad", desc:"Para negocios existentes listos para aparecer en el ecosistema de Apple: Apple Maps, correo con marca, branding Tap to Pay, Perfil de Marca y preparación para Maps Ads.", price:"$500 – $1,500" },
         { icon:"🔁", name:"Operaciones Apple", tag:"Servicios Gestionados", desc:"Gestión continua de dispositivos, helpdesk, incorporación y desvinculación de usuarios, actualizaciones de software, licencias de apps y mantenimiento de políticas de seguridad.", price:"$35 – $50 / dispositivo / mes" },
         { icon:"📡", name:"Consultoría de Conectividad", tag:"Carrier e ISP", desc:"Auditoría de plan de carrier, negociación, portabilidad de número, activación de nuevo servicio y configuración de ISP. 100% independiente del carrier — trabajamos para ti, no para el carrier.", price:"$150 – $300 / hr o tarifa fija" },
@@ -244,7 +257,8 @@ const STRINGS = {
       success:"¡Mensaje enviado! Estaremos en contacto pronto. ☕",
       error:"Algo salió mal. Inténtalo de nuevo o escríbenos directamente a hello@pancon.cafe.",
     },
-    footer:{ tagline:"Tech · Café · Cultura", copy:"© 2026 Cafe Con Pan LLC · pancon.cafe" },
+    disclaimer:"Ofrecemos orientación y apoyo operativo — no asesoría legal, fiscal ni financiera. Para esas necesidades, recomendamos trabajar con un profesional licenciado.",
+    footer:{ tagline:"Tech · Café · Cultura", copy:"© 2026 Cafe Con Pan LLC · pancon.cafe", disclaimer:"Ofrecemos orientación y apoyo operativo — no asesoría legal, fiscal ni financiera. Para esas necesidades, recomendamos trabajar con un profesional licenciado." },
   },
 };
 
@@ -499,6 +513,43 @@ const PAGE_HASH = {
 const HASH_PAGE = Object.fromEntries(Object.entries(PAGE_HASH).map(([k,v])=>[v,k]));
 const getPageFromHash = () => HASH_PAGE[window.location.hash.replace("#","")] || "Home";
 
+function ParaTiSection({ t }) {
+  return (
+    <>
+      <TextileBorder />
+      <section className="section" style={{background:C.espresso}}>
+        <div className="section-header">
+          <div className="section-eyebrow" style={{color:C.teal}}>{t.paraTi.eyebrow}</div>
+          <h2 className="section-title section-title-light">
+            {t.paraTi.title} <span>{t.paraTi.titleSpan}</span>
+          </h2>
+        </div>
+        <div style={{maxWidth:640,margin:"0 auto",textAlign:"center"}}>
+          <p style={{fontSize:16,lineHeight:1.9,color:"rgba(245,237,214,0.85)",fontWeight:600,marginBottom:24}}>
+            {t.paraTi.body1}
+          </p>
+          <p style={{fontFamily:"'Pacifico',cursive",fontSize:20,color:C.blush,lineHeight:1.6,marginBottom:40}}>
+            "{t.paraTi.body2}"
+          </p>
+          <div style={{display:"flex",gap:32,justifyContent:"center",flexWrap:"wrap"}}>
+            {[
+              {num:t.paraTi.stat1num, label:t.paraTi.stat1label},
+              {num:t.paraTi.stat2num, label:t.paraTi.stat2label},
+              {num:t.paraTi.stat3num, label:t.paraTi.stat3label},
+            ].map(s => (
+              <div key={s.label} style={{textAlign:"center"}}>
+                <div style={{fontFamily:"'Lilita One',cursive",fontSize:36,color:C.red,lineHeight:1}}>{s.num}</div>
+                <div style={{fontSize:11,letterSpacing:"0.12em",textTransform:"uppercase",color:C.beige,opacity:0.7,marginTop:4,fontWeight:700}}>{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <TextileBorder flip />
+    </>
+  );
+}
+
 function PainPointsSection({ go, t }) {
   return (
     <section className="section section-alt">
@@ -528,7 +579,7 @@ function PainPointsSection({ go, t }) {
   );
 }
 
-function HomePage({ go, t }) {
+function HomePage({ go, t, lang }) {
   return (
     <>
       <section className="hero">
@@ -543,6 +594,7 @@ function HomePage({ go, t }) {
             <span className="line-teal"> Pan</span>
           </h1>
           <p className="hero-subtitle">{t.hero.subtitle}</p>
+          {lang === "es" && <p style={{fontSize:14,color:C.espresso,fontWeight:700,letterSpacing:"0.06em",marginBottom:40,opacity:0.85}}>{t.hero.culturalSignal}</p>}
           <div className="hero-pillars">
             <button className="hero-pillar" onClick={() => go("Tech Services")}>
               <span className="hero-pillar-icon">⌨️</span> {t.hero.pillars[0]}
@@ -604,6 +656,8 @@ function HomePage({ go, t }) {
       </section>
 
       <TextileBorder flip />
+
+      {lang === "es" && <ParaTiSection t={t} />}
 
       <PainPointsSection go={go} t={t} />
 
@@ -881,13 +935,13 @@ export default function CafeConPan() {
 
   const renderPage = () => {
     switch(page) {
-      case "Home": return <HomePage go={go} t={t} />;
+      case "Home": return <HomePage go={go} t={t} lang={lang} />;
       case "Tech Services": return <TechPage go={go} t={t} />;
       case "Coffee & Food": return <TeaserPage {...t.coffeeTeaser} />;
       case "Events": return <TeaserPage {...t.eventsTeaser} />;
       case "Our Story": return <AboutPage t={t} />;
       case "Contact": return <ContactPage t={t} />;
-      default: return <HomePage go={go} t={t} />;
+      default: return <HomePage go={go} t={t} lang={lang} />;
     }
   };
 
@@ -918,6 +972,7 @@ export default function CafeConPan() {
       <footer>
         <div className="footer-logo">Café Con <span>Pan</span></div>
         <div className="footer-tagline">{t.footer.tagline}</div>
+        <div style={{fontSize:11,color:`rgba(245,237,214,0.35)`,fontWeight:600,textAlign:"center",maxWidth:480,lineHeight:1.6}}>{t.footer.disclaimer}</div>
         <div className="footer-copy">{t.footer.copy}</div>
       </footer>
     </>
