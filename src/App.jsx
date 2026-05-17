@@ -786,6 +786,7 @@ export default function CafeConPan() {
 
   useEffect(() => {
     const handler = e => {
+      if (e.key.length !== 1) return;
       typedRef.current = (typedRef.current + e.key).slice(-4).toUpperCase();
       if (typedRef.current === "CAFE") setGameActive(true);
     };
