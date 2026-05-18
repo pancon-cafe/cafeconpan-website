@@ -235,6 +235,7 @@ const STRINGS = {
     softCta:{ eyebrow:"Not Sure Where to Start?", body:"No pitch, no pressure. Just a conversation about where your business is and what might actually help.", btn:"Let's Just Talk →", emailEyebrow:"Not Ready Yet?", emailBody:"Follow the journey and we'll reach out when the time is right." },
     disclaimer:"We provide guidance and implementation support — not legal, tax, or financial advice. For those needs, we recommend working with a licensed professional.",
     footer:{ tagline:"Tech · Coffee · Culture", copy:"© 2026 Cafe Con Pan LLC · pancon.cafe", disclaimer:"We provide guidance and implementation support — not legal, tax, or financial advice. For those needs, we recommend working with a licensed professional." },
+    pay:{ eyebrow:"Pay Your Invoice", title:"Quick &", titleSpan:"Secure", body:"Enter your invoice number and amount on the next page. Payment is processed securely through Helcim.", cta:"Pay Now →", questions:"Questions? Email" },
   },
   es: {
     nav: { items:["Inicio","Servicios Tech","Comunidad","Nuestra Historia","Contacto"], cta:"Cotización", langBtn:"EN" },
@@ -341,7 +342,7 @@ const STRINGS = {
       whatBody:"La Mesa es el círculo de confianza de Café Con Pan — personas en las que creemos, que se mueven en los mismos círculos que nosotros, y que creen en lo que estamos construyendo. No es solo un programa de referidos. Es una alianza. Cuando nos mandas a alguien, no solo estás haciendo una presentación. Estás dando tu palabra por ellos, y nosotros damos la nuestra por ti.",
       howTitle:"Cómo Funciona",
       howBody:"Cuando alguien en tu mundo necesita ayuda con tecnología, una configuración adecuada para su negocio, o simplemente no sabe por dónde empezar — nos lo mandas. Nosotros los atendemos bien. Tú también eres atendido. Los detalles se comparten personalmente cuando ya estás adentro.",
-      tiresTitle:"Tu Lugar en la Mesa",
+      tiersTitle:"Tu Lugar en la Mesa",
       tiers:[
         { name:"Regular", icon:"☕", desc:"1–2 referidos cerrados. Ganas el 5% de su primera factura cuando el pago se confirme." },
         { name:"Barista", icon:"⌨️", desc:"3–5 referidos cerrados. Ganas el 8% de cada primera factura. Eres de confianza en esta mesa." },
@@ -407,6 +408,7 @@ const STRINGS = {
     softCta:{ eyebrow:"¿No Sabes Por Dónde Empezar?", body:"Sin presión, sin discurso. Solo una conversación sobre dónde está tu negocio y qué podría ayudar.", btn:"Hablemos →", emailEyebrow:"¿Todavía No Estás Listo?", emailBody:"Síguenos y te contactaremos cuando sea el momento." },
     disclaimer:"Ofrecemos orientación y apoyo operativo — no asesoría legal, fiscal ni financiera. Para esas necesidades, recomendamos trabajar con un profesional licenciado.",
     footer:{ tagline:"Tech · Café · Cultura", copy:"© 2026 Cafe Con Pan LLC · pancon.cafe", disclaimer:"Ofrecemos orientación y apoyo operativo — no asesoría legal, fiscal ni financiera. Para esas necesidades, recomendamos trabajar con un profesional licenciado." },
+    pay:{ eyebrow:"Paga tu Factura", title:"Rápido y", titleSpan:"Seguro", body:"Ingresa el número de factura y el monto en la siguiente página. El pago se procesa de forma segura a través de Helcim.", cta:"Pagar Ahora →", questions:"¿Preguntas? Escríbenos a" },
   },
 };
 
@@ -1172,17 +1174,18 @@ function CommunityPage({ t, go }) {
 const HELCIM_PAY_URL = "https://cafe-con-pan.myhelcim.com/hosted/?token=eaa2f540fe608242bc582b";
 
 function PayPage({ t }) {
+  const p = t.pay;
   return (
     <>
       <TextileBorder />
       <section className="section" style={{background:C.parchment,minHeight:"60vh",display:"flex",alignItems:"center",justifyContent:"center"}}>
         <div style={{maxWidth:560,margin:"0 auto",textAlign:"center",padding:"0 24px"}}>
-          <div className="section-eyebrow" style={{marginBottom:16}}>Pay Your Invoice</div>
+          <div className="section-eyebrow" style={{marginBottom:16}}>{p.eyebrow}</div>
           <h1 style={{fontFamily:"'Lilita One',cursive",fontSize:"clamp(32px,6vw,52px)",color:C.espresso,lineHeight:1.1,margin:"0 0 20px"}}>
-            Quick &amp; <span style={{color:C.red}}>Secure</span>
+            {p.title} <span style={{color:C.red}}>{p.titleSpan}</span>
           </h1>
           <p style={{fontSize:16,lineHeight:1.8,color:"#555",fontWeight:600,maxWidth:420,margin:"0 auto 40px"}}>
-            Enter your invoice number and amount on the next page. Payment is processed securely through Helcim.
+            {p.body}
           </p>
           <a
             href={HELCIM_PAY_URL}
@@ -1196,10 +1199,10 @@ function PayPage({ t }) {
               boxShadow:`4px 4px 0 ${C.espresso}`,
             }}
           >
-            Pay Now →
+            {p.cta}
           </a>
           <p style={{marginTop:32,fontSize:12,color:"#999",letterSpacing:"0.08em",textTransform:"uppercase"}}>
-            Questions? Email <a href="mailto:hello@pancon.cafe" style={{color:C.teal,textDecoration:"none",fontWeight:700}}>hello@pancon.cafe</a>
+            {p.questions} <a href="mailto:hello@pancon.cafe" style={{color:C.teal,textDecoration:"none",fontWeight:700}}>hello@pancon.cafe</a>
           </p>
         </div>
       </section>
@@ -1306,7 +1309,7 @@ function LaMesaPage({ t }) {
       {/* Tiers */}
       <section className="section section-dark">
         <div className="section-header">
-          <div className="section-eyebrow" style={{color:C.teal}}>{m.tiresTitle || m.tiersTitle}</div>
+          <div className="section-eyebrow" style={{color:C.teal}}>{m.tiersTitle}</div>
         </div>
         <div className="grid-3" style={{maxWidth:860,margin:"0 auto"}}>
           {m.tiers.map((tier, i) => (
