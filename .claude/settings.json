@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "read -r json; fp=$(echo \"$json\" | jq -r '.tool_input.file_path'); if echo \"$fp\" | grep -qiE '\\.(png|jpg|jpeg|gif|svg|webp|ico|bmp|tiff|avif)$'; then echo 'Blocked: reading image files is disabled to prevent API processing errors.'; exit 2; fi",
+            "statusMessage": "Checking file type..."
+          }
+        ]
+      }
+    ]
+  }
+}
