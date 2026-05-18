@@ -214,10 +214,16 @@ const STRINGS = {
       linkedin:"https://linkedin.com/company/cafeconpan",
       twitter:"https://twitter.com/icafeconpan",
       tiktok:"https://tiktok.com/@icafeconpan",
+      youtube:"",
+      facebook:"",
+      discord:"",
       instagramLabel:"Instagram",
       linkedinLabel:"LinkedIn",
       twitterLabel:"Twitter",
       tiktokLabel:"TikTok",
+      youtubeLabel:"YouTube",
+      facebookLabel:"Facebook",
+      discordLabel:"Discord",
       followLabel:"Follow the Journey",
     },
     contact:{
@@ -387,10 +393,16 @@ const STRINGS = {
       linkedin:"https://linkedin.com/company/cafeconpan",
       twitter:"https://twitter.com/icafeconpan",
       tiktok:"https://tiktok.com/@icafeconpan",
+      youtube:"",
+      facebook:"",
+      discord:"",
       instagramLabel:"Instagram",
       linkedinLabel:"LinkedIn",
       twitterLabel:"Twitter",
       tiktokLabel:"TikTok",
+      youtubeLabel:"YouTube",
+      facebookLabel:"Facebook",
+      discordLabel:"Discord",
       followLabel:"Síguenos",
     },
     contact:{
@@ -1056,7 +1068,7 @@ function ContactPage({ t }) {
               <a href={t.socials.instagram} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}}
                 onMouseEnter={e=>e.currentTarget.style.opacity=1}
                 onMouseLeave={e=>e.currentTarget.style.opacity=0.5}
-              >@ {t.socials.instagramLabel}</a>
+              >{t.socials.instagramLabel}</a>
               <a href={t.socials.linkedin} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}}
                 onMouseEnter={e=>e.currentTarget.style.opacity=1}
                 onMouseLeave={e=>e.currentTarget.style.opacity=0.5}
@@ -1069,6 +1081,9 @@ function ContactPage({ t }) {
                 onMouseEnter={e=>e.currentTarget.style.opacity=1}
                 onMouseLeave={e=>e.currentTarget.style.opacity=0.5}
               >{t.socials.tiktokLabel}</a>
+              {t.socials.youtube&&<a href={t.socials.youtube} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.5}>{t.socials.youtubeLabel}</a>}
+              {t.socials.facebook&&<a href={t.socials.facebook} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.5}>{t.socials.facebookLabel}</a>}
+              {t.socials.discord&&<a href={t.socials.discord} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.5}>{t.socials.discordLabel}</a>}
             </div>
           </div>
         </div>
@@ -1541,7 +1556,7 @@ export default function CafeConPan() {
             <a href={t.socials.instagram} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.cream,opacity:0.6,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}}
               onMouseEnter={e=>e.currentTarget.style.opacity=1}
               onMouseLeave={e=>e.currentTarget.style.opacity=0.6}
-            >@ {t.socials.instagramLabel}</a>
+            >{t.socials.instagramLabel}</a>
             <a href={t.socials.linkedin} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.cream,opacity:0.6,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}}
               onMouseEnter={e=>e.currentTarget.style.opacity=1}
               onMouseLeave={e=>e.currentTarget.style.opacity=0.6}
@@ -1554,6 +1569,9 @@ export default function CafeConPan() {
               onMouseEnter={e=>e.currentTarget.style.opacity=1}
               onMouseLeave={e=>e.currentTarget.style.opacity=0.6}
             >{t.socials.tiktokLabel}</a>
+            {t.socials.youtube&&<a href={t.socials.youtube} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.cream,opacity:0.6,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.6}>{t.socials.youtubeLabel}</a>}
+            {t.socials.facebook&&<a href={t.socials.facebook} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.cream,opacity:0.6,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.6}>{t.socials.facebookLabel}</a>}
+            {t.socials.discord&&<a href={t.socials.discord} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.cream,opacity:0.6,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.6}>{t.socials.discordLabel}</a>}
           </div>
         </div>
         <div style={{fontSize:11,color:`rgba(245,237,214,0.35)`,fontWeight:600,textAlign:"center",maxWidth:480,lineHeight:1.6}}>{t.footer.disclaimer}</div>
