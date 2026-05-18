@@ -665,7 +665,7 @@ const navKeys = ["Home","Tech Services","Community","Our Story","Contact"];
 
 const PAGE_HASH = {
   "Home":"home","Tech Services":"tech-services","Community":"community",
-  "Our Story":"our-story","Contact":"contact","La Mesa":"la-mesa",
+  "Our Story":"our-story","Contact":"contact","La Mesa":"la-mesa","Pay":"pay",
 };
 const HASH_PAGE = Object.fromEntries(Object.entries(PAGE_HASH).map(([k,v])=>[v,k]));
 const getPageFromHash = () => HASH_PAGE[window.location.hash.replace("#","")] || "Home";
@@ -1169,6 +1169,45 @@ function CommunityPage({ t, go }) {
   );
 }
 
+const HELCIM_PAY_URL = "https://cafe-con-pan.myhelcim.com/hosted/?token=eaa2f540fe608242bc582b";
+
+function PayPage({ t }) {
+  return (
+    <>
+      <TextileBorder />
+      <section className="section" style={{background:C.parchment,minHeight:"60vh",display:"flex",alignItems:"center",justifyContent:"center"}}>
+        <div style={{maxWidth:560,margin:"0 auto",textAlign:"center",padding:"0 24px"}}>
+          <div className="section-eyebrow" style={{marginBottom:16}}>Pay Your Invoice</div>
+          <h1 style={{fontFamily:"'Lilita One',cursive",fontSize:"clamp(32px,6vw,52px)",color:C.espresso,lineHeight:1.1,margin:"0 0 20px"}}>
+            Quick &amp; <span style={{color:C.red}}>Secure</span>
+          </h1>
+          <p style={{fontSize:16,lineHeight:1.8,color:"#555",fontWeight:600,maxWidth:420,margin:"0 auto 40px"}}>
+            Enter your invoice number and amount on the next page. Payment is processed securely through Helcim.
+          </p>
+          <a
+            href={HELCIM_PAY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display:"inline-block",background:C.red,color:C.cream,
+              textDecoration:"none",fontFamily:"'Nunito',sans-serif",
+              fontWeight:700,fontSize:13,letterSpacing:"0.16em",textTransform:"uppercase",
+              padding:"18px 48px",border:`2px solid ${C.espresso}`,
+              boxShadow:`4px 4px 0 ${C.espresso}`,
+            }}
+          >
+            Pay Now →
+          </a>
+          <p style={{marginTop:32,fontSize:12,color:"#999",letterSpacing:"0.08em",textTransform:"uppercase"}}>
+            Questions? Email <a href="mailto:hello@pancon.cafe" style={{color:C.teal,textDecoration:"none",fontWeight:700}}>hello@pancon.cafe</a>
+          </p>
+        </div>
+      </section>
+      <TextileBorder flip />
+    </>
+  );
+}
+
 function LaMesaPage({ t }) {
   const [form, setForm] = useState({name:"",email:"",role:"",message:""});
   const [status, setStatus] = useState("idle");
@@ -1461,6 +1500,7 @@ export default function CafeConPan() {
       case "Our Story": return <AboutPage t={t} />;
       case "Contact": return <ContactPage t={t} />;
       case "La Mesa": return <LaMesaPage t={t} />;
+      case "Pay": return <PayPage t={t} />;
       default: return <HomePage go={go} t={t} lang={lang} />;
     }
   };
