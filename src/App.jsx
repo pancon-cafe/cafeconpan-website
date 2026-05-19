@@ -160,6 +160,15 @@ const STRINGS = {
       eventsQuote:"Community isn't a feature. It's the whole point.",
       eventsPlaceholder:"Get notified when events are announced",
       eventsEmailBtn:"Notify Me",
+      wallpapersEyebrow:"Free Download",
+      wallpapersTitle:"Carry the",
+      wallpapersTitleSpan:"Brand",
+      wallpapersBody:"Rep Café Con Pan on your lock screen. Free wallpapers for iPhone, iPad, and Mac — tap to download.",
+      wallpapersIphone:"iPhone",
+      wallpapersIpad:"iPad",
+      wallpapersMac:"Mac",
+      wallpapersCta:"Download →",
+      wallpapersFooterLink:"Free Wallpapers",
     },
     laMesa:{
       badge:"By Invitation Only",
@@ -339,6 +348,15 @@ const STRINGS = {
       eventsQuote:"La comunidad no es una característica. Es el punto central.",
       eventsPlaceholder:"Tu correo — te notificamos",
       eventsEmailBtn:"Avísame",
+      wallpapersEyebrow:"Descarga Gratis",
+      wallpapersTitle:"Lleva la",
+      wallpapersTitleSpan:"Marca",
+      wallpapersBody:"Representa a Café Con Pan en tu pantalla de bloqueo. Fondos de pantalla gratis para iPhone, iPad y Mac — toca para descargar.",
+      wallpapersIphone:"iPhone",
+      wallpapersIpad:"iPad",
+      wallpapersMac:"Mac",
+      wallpapersCta:"Descargar →",
+      wallpapersFooterLink:"Fondos Gratis",
     },
     laMesa:{
       badge:"Solo por Invitación",
@@ -1165,6 +1183,40 @@ function CommunityPage({ t, go }) {
 
       <TextileBorder flip />
 
+      <section className="section section-dark" style={{textAlign:"center"}}>
+        <div className="section-eyebrow" style={{marginBottom:16}}>{t.community.wallpapersEyebrow}</div>
+        <h2 className="teaser-title" style={{color:C.cream,marginBottom:12}}>{t.community.wallpapersTitle} <span style={{color:C.blush}}>{t.community.wallpapersTitleSpan}</span></h2>
+        <p style={{fontSize:15,color:`rgba(245,237,214,0.7)`,maxWidth:420,margin:"0 auto 36px",lineHeight:1.8}}>{t.community.wallpapersBody}</p>
+        <div style={{display:"flex",gap:16,justifyContent:"center",flexWrap:"wrap"}}>
+          <a href="https://drive.google.com/uc?export=download&id=1FnhFPmoQSERIx_4RzD0VOQAo96XYcbw3" target="_blank" rel="noopener noreferrer"
+            style={{display:"flex",flexDirection:"column",alignItems:"center",gap:12,background:`rgba(245,237,214,0.06)`,border:`2px solid rgba(245,237,214,0.15)`,padding:"28px 40px",textDecoration:"none",transition:"border-color 0.2s"}}
+            onMouseEnter={e=>e.currentTarget.style.borderColor=`rgba(245,237,214,0.4)`}
+            onMouseLeave={e=>e.currentTarget.style.borderColor=`rgba(245,237,214,0.15)`}>
+            <span style={{fontSize:32}}>📱</span>
+            <span style={{fontSize:13,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",color:C.cream}}>{t.community.wallpapersIphone}</span>
+            <span style={{fontSize:11,letterSpacing:"0.14em",textTransform:"uppercase",color:C.teal,fontWeight:700}}>{t.community.wallpapersCta}</span>
+          </a>
+          <a href="https://drive.google.com/uc?export=download&id=1mgUgO9x8kS-CVos91ENBRcTZO64a-So-" target="_blank" rel="noopener noreferrer"
+            style={{display:"flex",flexDirection:"column",alignItems:"center",gap:12,background:`rgba(245,237,214,0.06)`,border:`2px solid rgba(245,237,214,0.15)`,padding:"28px 40px",textDecoration:"none",transition:"border-color 0.2s"}}
+            onMouseEnter={e=>e.currentTarget.style.borderColor=`rgba(245,237,214,0.4)`}
+            onMouseLeave={e=>e.currentTarget.style.borderColor=`rgba(245,237,214,0.15)`}>
+            <span style={{fontSize:32}}>⬛</span>
+            <span style={{fontSize:13,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",color:C.cream}}>{t.community.wallpapersIpad}</span>
+            <span style={{fontSize:11,letterSpacing:"0.14em",textTransform:"uppercase",color:C.teal,fontWeight:700}}>{t.community.wallpapersCta}</span>
+          </a>
+          <a href="https://drive.google.com/uc?export=download&id=1vbkZQj5MEO0NtwSu7e0LAEGcUyBM37XE" target="_blank" rel="noopener noreferrer"
+            style={{display:"flex",flexDirection:"column",alignItems:"center",gap:12,background:`rgba(245,237,214,0.06)`,border:`2px solid rgba(245,237,214,0.15)`,padding:"28px 40px",textDecoration:"none",transition:"border-color 0.2s"}}
+            onMouseEnter={e=>e.currentTarget.style.borderColor=`rgba(245,237,214,0.4)`}
+            onMouseLeave={e=>e.currentTarget.style.borderColor=`rgba(245,237,214,0.15)`}>
+            <span style={{fontSize:32}}>💻</span>
+            <span style={{fontSize:13,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",color:C.cream}}>{t.community.wallpapersMac}</span>
+            <span style={{fontSize:11,letterSpacing:"0.14em",textTransform:"uppercase",color:C.teal,fontWeight:700}}>{t.community.wallpapersCta}</span>
+          </a>
+        </div>
+      </section>
+
+      <TextileBorder />
+
       <section className="section" style={{background:C.parchment,textAlign:"center"}}>
         <div className="section-eyebrow" style={{marginBottom:16}}>{t.community.combinedEmailEyebrow}</div>
         <div style={{maxWidth:420,margin:"0 auto 36px"}}>
@@ -1574,7 +1626,7 @@ export default function CafeConPan() {
             {t.socials.discord&&<a href={t.socials.discord} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.cream,opacity:0.6,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.6}>{t.socials.discordLabel}</a>}
           </div>
         </div>
-        <div style={{fontSize:11,color:`rgba(245,237,214,0.35)`,fontWeight:600,textAlign:"center",maxWidth:480,lineHeight:1.6}}>{t.footer.disclaimer}</div>
+<div style={{fontSize:11,color:`rgba(245,237,214,0.35)`,fontWeight:600,textAlign:"center",maxWidth:480,lineHeight:1.6}}>{t.footer.disclaimer}</div>
         <div className="footer-copy">{t.footer.copy}</div>
       </footer>
     </>
