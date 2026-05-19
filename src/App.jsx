@@ -195,6 +195,7 @@ const STRINGS = {
       submit:"I'm In →", submitting:"Sending...",
       success:"Welcome to La Mesa. We'll be in touch soon. ☕",
       error:"Something went wrong. Email us directly at hello@pancon.cafe.",
+      scrollToRef:"Send a Referral →",
       refTitle:"Send Someone Our Way",
       refSub:"Already a La Mesa partner? Submit a referral here and we'll take it from there.",
       refYourName:"Your Name", refYourNamePlaceholder:"Your full name",
@@ -383,6 +384,7 @@ const STRINGS = {
       submit:"Estoy Adentro →", submitting:"Enviando...",
       success:"Bienvenido a La Mesa. Estaremos en contacto pronto. ☕",
       error:"Algo salió mal. Escríbenos directamente a hello@pancon.cafe.",
+      scrollToRef:"Enviar un Referido →",
       refTitle:"Mándanos a Alguien",
       refSub:"¿Ya eres socio de La Mesa? Envía un referido aquí y nosotros nos encargamos del resto.",
       refYourName:"Tu Nombre", refYourNamePlaceholder:"Tu nombre completo",
@@ -698,6 +700,7 @@ const navKeys = ["Home","Tech Services","Community","Our Story","Contact"];
 const PAGE_HASH = {
   "Home":"home","Tech Services":"tech-services","Community":"community",
   "Our Story":"our-story","Contact":"contact","La Mesa":"la-mesa","Pay":"pay",
+  "La Mesa Referral":"la-mesa-referral",
 };
 const HASH_PAGE = Object.fromEntries(Object.entries(PAGE_HASH).map(([k,v])=>[v,k]));
 const getPageFromHash = () => HASH_PAGE[window.location.hash.replace("#","")] || "Home";
@@ -1278,33 +1281,10 @@ function PayPage({ t }) {
   );
 }
 
-function LaMesaPage({ t }) {
+function LaMesaPage({ t, go }) {
   const [form, setForm] = useState({name:"",email:"",role:"",message:""});
   const [status, setStatus] = useState("idle");
   const handle = e => setForm({...form, [e.target.name]: e.target.value});
-
-  const [ref, setRef] = useState({yourName:"",theirName:"",theirEmail:"",theirPhone:"",theirBiz:"",theirWeb:"",need:t.laMesa.refOptions[0],notes:""});
-  const [refStatus, setRefStatus] = useState("idle");
-  const handleRef = e => setRef({...ref, [e.target.name]: e.target.value});
-
-  const submitRef = async e => {
-    e.preventDefault();
-    setRefStatus("submitting");
-    try {
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({
-          access_key:"bb35de9c-0515-4e74-9f2f-202d6fd033b8",
-          subject:`La Mesa Referral — ${ref.theirName} via ${ref.yourName}`,
-          name:ref.yourName,
-          message:`Referred by: ${ref.yourName}\nTheir name: ${ref.theirName}\nEmail: ${ref.theirEmail}\nPhone: ${ref.theirPhone}\nBusiness: ${ref.theirBiz || "Not provided"}\nWebsite: ${ref.theirWeb || "Not provided"}\nNeeds: ${ref.need}\n\n${ref.notes || "No additional notes."}`,
-        }),
-      });
-      const data = await res.json();
-      setRefStatus(data.success ? "success" : "error");
-    } catch { setRefStatus("error"); }
-  };
 
   const submit = async e => {
     e.preventDefault();
@@ -1352,6 +1332,11 @@ function LaMesaPage({ t }) {
             fontFamily:"'Nunito',sans-serif",fontSize:17,color:`rgba(245,237,214,0.7)`,
             fontWeight:600,maxWidth:560,margin:"0 auto",lineHeight:1.8,
           }}>{m.sub}</p>
+          <button onClick={() => go("La Mesa Referral")}
+            style={{marginTop:32,background:"none",border:`2px solid ${C.teal}`,color:C.teal,cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:12,letterSpacing:"0.16em",textTransform:"uppercase",padding:"12px 32px",transition:"background 0.2s,color 0.2s"}}
+            onMouseEnter={e=>{e.currentTarget.style.background=C.teal;e.currentTarget.style.color=C.espresso;}}
+            onMouseLeave={e=>{e.currentTarget.style.background="none";e.currentTarget.style.color=C.teal;}}
+          >{m.scrollToRef}</button>
         </div>
       </section>
 
@@ -1412,18 +1397,108 @@ function LaMesaPage({ t }) {
 
       <TextileBorder />
 
-      {/* Referral form */}
-      <section className="section" style={{background:C.parchment}}>
+      {/* Join form */}
+      <section className="section section-dark">
         <div style={{maxWidth:560,margin:"0 auto"}}>
           <div style={{textAlign:"center",marginBottom:40}}>
-            <div className="section-eyebrow" style={{marginBottom:10}}>{m.refTitle}</div>
-            <p style={{fontSize:14,color:"#666",fontWeight:600,lineHeight:1.8}}>{m.refSub}</p>
+            <h2 style={{fontFamily:"'Lilita One',cursive",fontSize:32,color:C.cream,marginBottom:10}}>{m.formTitle}</h2>
+            <p style={{fontSize:14,color:`rgba(245,237,214,0.55)`,fontWeight:600,letterSpacing:"0.04em"}}>{m.formSub}</p>
           </div>
-          {refStatus === "success" ? (
+          {status === "success" ? (
             <div style={{
               textAlign:"center",padding:"24px",border:`2px solid ${C.teal}`,
-              color:C.espresso,fontFamily:"'Pacifico',cursive",fontSize:18,lineHeight:1.6,
-            }}>{m.refSuccess}</div>
+              color:C.cream,fontFamily:"'Pacifico',cursive",fontSize:20,lineHeight:1.6,
+            }}>{m.success}</div>
+          ) : (
+            <form onSubmit={submit}>
+              <div className="form-field">
+                <label className="form-label" style={{color:C.beige}}>{m.nameLabel}</label>
+                <input className="form-input" name="name" placeholder={m.namePlaceholder} value={form.name} onChange={handle} required style={{background:"rgba(255,255,255,0.06)",color:C.cream,borderColor:`${C.beige}55`}} />
+              </div>
+              <div className="form-field">
+                <label className="form-label" style={{color:C.beige}}>{m.emailLabel}</label>
+                <input className="form-input" name="email" type="email" placeholder={m.emailPlaceholder} value={form.email} onChange={handle} required style={{background:"rgba(255,255,255,0.06)",color:C.cream,borderColor:`${C.beige}55`}} />
+              </div>
+              <div className="form-field">
+                <label className="form-label" style={{color:C.beige}}>{m.roleLabel}</label>
+                <input className="form-input" name="role" placeholder={m.rolePlaceholder} value={form.role} onChange={handle} required style={{background:"rgba(255,255,255,0.06)",color:C.cream,borderColor:`${C.beige}55`}} />
+              </div>
+              <div className="form-field">
+                <label className="form-label" style={{color:C.beige}}>{m.messageLabel}</label>
+                <textarea className="form-textarea" name="message" placeholder={m.messagePlaceholder} value={form.message} onChange={handle} style={{background:"rgba(255,255,255,0.06)",color:C.cream,borderColor:`${C.beige}55`,minHeight:90}} />
+              </div>
+              {status === "error" && (
+                <div style={{background:"#B8503E22",border:`2px solid ${C.red}`,padding:"14px 18px",marginBottom:16,color:C.cream,fontWeight:700,fontSize:14}}>
+                  {m.error}
+                </div>
+              )}
+              <button className="submit-btn" type="submit" disabled={status === "submitting"}
+                style={{background:C.red,borderColor:C.blush,boxShadow:`4px 4px 0 ${C.beige}44`}}>
+                {status === "submitting" ? m.submitting : m.submit}
+              </button>
+            </form>
+          )}
+        </div>
+      </section>
+
+      <TextileBorder flip />
+    </>
+  );
+}
+
+function LaMesaReferralPage({ t, go }) {
+  const m = t.laMesa;
+  const [ref, setRef] = useState({yourName:"",theirName:"",theirEmail:"",theirPhone:"",theirBiz:"",theirWeb:"",need:m.refOptions[0],notes:""});
+  const [refStatus, setRefStatus] = useState("idle");
+  const handleRef = e => setRef({...ref, [e.target.name]: e.target.value});
+
+  const submitRef = async e => {
+    e.preventDefault();
+    setRefStatus("submitting");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          access_key:"bb35de9c-0515-4e74-9f2f-202d6fd033b8",
+          subject:`La Mesa Referral — ${ref.theirName} via ${ref.yourName}`,
+          name:ref.yourName,
+          message:`Referred by: ${ref.yourName}\nTheir name: ${ref.theirName}\nEmail: ${ref.theirEmail}\nPhone: ${ref.theirPhone}\nBusiness: ${ref.theirBiz || "Not provided"}\nWebsite: ${ref.theirWeb || "Not provided"}\nNeeds: ${ref.need}\n\n${ref.notes || "No additional notes."}`,
+        }),
+      });
+      const data = await res.json();
+      setRefStatus(data.success ? "success" : "error");
+    } catch { setRefStatus("error"); }
+  };
+
+  return (
+    <>
+      <section style={{background:C.espresso,paddingTop:100,paddingBottom:56,paddingLeft:40,paddingRight:40,textAlign:"center",position:"relative",overflow:"hidden"}}>
+        <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",opacity:0.06,pointerEvents:"none"}}>
+          <Sunburst size={600} color={C.gold} opacity={0.8} />
+        </div>
+        <div style={{position:"relative",zIndex:2}}>
+          <div style={{display:"inline-block",border:`2px solid ${C.teal}`,padding:"5px 20px",marginBottom:24,fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",fontWeight:700,color:C.teal}}>
+            {m.badge}
+          </div>
+          <h1 style={{fontFamily:"'Pacifico',cursive",fontSize:"clamp(36px,7vw,64px)",color:C.cream,lineHeight:1,marginBottom:16}}>{m.refTitle}</h1>
+          <p style={{fontFamily:"'Nunito',sans-serif",fontSize:16,color:`rgba(245,237,214,0.7)`,fontWeight:600,maxWidth:480,margin:"0 auto 28px",lineHeight:1.8}}>{m.refSub}</p>
+          <button onClick={() => go("La Mesa")} style={{background:"none",border:"none",cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontSize:12,fontWeight:700,color:`rgba(245,237,214,0.45)`,letterSpacing:"0.12em",textTransform:"uppercase",textDecoration:"underline",transition:"color 0.2s"}}
+            onMouseEnter={e=>e.currentTarget.style.color=`rgba(245,237,214,0.8)`}
+            onMouseLeave={e=>e.currentTarget.style.color=`rgba(245,237,214,0.45)`}>
+            ← Back to La Mesa
+          </button>
+        </div>
+      </section>
+
+      <TextileBorder flip />
+
+      <section className="section" style={{background:C.parchment}}>
+        <div style={{maxWidth:560,margin:"0 auto"}}>
+          {refStatus === "success" ? (
+            <div style={{textAlign:"center",padding:"40px 24px",border:`2px solid ${C.teal}`,color:C.espresso,fontFamily:"'Pacifico',cursive",fontSize:20,lineHeight:1.6}}>
+              {m.refSuccess}
+            </div>
           ) : (
             <form onSubmit={submitRef}>
               <div className="form-field">
@@ -1474,52 +1549,6 @@ function LaMesaPage({ t }) {
       </section>
 
       <TextileBorder flip />
-
-      {/* Join form */}
-      <section className="section section-dark">
-        <div style={{maxWidth:560,margin:"0 auto"}}>
-          <div style={{textAlign:"center",marginBottom:40}}>
-            <h2 style={{fontFamily:"'Lilita One',cursive",fontSize:32,color:C.cream,marginBottom:10}}>{m.formTitle}</h2>
-            <p style={{fontSize:14,color:`rgba(245,237,214,0.55)`,fontWeight:600,letterSpacing:"0.04em"}}>{m.formSub}</p>
-          </div>
-          {status === "success" ? (
-            <div style={{
-              textAlign:"center",padding:"24px",border:`2px solid ${C.teal}`,
-              color:C.cream,fontFamily:"'Pacifico',cursive",fontSize:20,lineHeight:1.6,
-            }}>{m.success}</div>
-          ) : (
-            <form onSubmit={submit}>
-              <div className="form-field">
-                <label className="form-label" style={{color:C.beige}}>{m.nameLabel}</label>
-                <input className="form-input" name="name" placeholder={m.namePlaceholder} value={form.name} onChange={handle} required style={{background:"rgba(255,255,255,0.06)",color:C.cream,borderColor:`${C.beige}55`}} />
-              </div>
-              <div className="form-field">
-                <label className="form-label" style={{color:C.beige}}>{m.emailLabel}</label>
-                <input className="form-input" name="email" type="email" placeholder={m.emailPlaceholder} value={form.email} onChange={handle} required style={{background:"rgba(255,255,255,0.06)",color:C.cream,borderColor:`${C.beige}55`}} />
-              </div>
-              <div className="form-field">
-                <label className="form-label" style={{color:C.beige}}>{m.roleLabel}</label>
-                <input className="form-input" name="role" placeholder={m.rolePlaceholder} value={form.role} onChange={handle} required style={{background:"rgba(255,255,255,0.06)",color:C.cream,borderColor:`${C.beige}55`}} />
-              </div>
-              <div className="form-field">
-                <label className="form-label" style={{color:C.beige}}>{m.messageLabel}</label>
-                <textarea className="form-textarea" name="message" placeholder={m.messagePlaceholder} value={form.message} onChange={handle} style={{background:"rgba(255,255,255,0.06)",color:C.cream,borderColor:`${C.beige}55`,minHeight:90}} />
-              </div>
-              {status === "error" && (
-                <div style={{background:"#B8503E22",border:`2px solid ${C.red}`,padding:"14px 18px",marginBottom:16,color:C.cream,fontWeight:700,fontSize:14}}>
-                  {m.error}
-                </div>
-              )}
-              <button className="submit-btn" type="submit" disabled={status === "submitting"}
-                style={{background:C.red,borderColor:C.blush,boxShadow:`4px 4px 0 ${C.beige}44`}}>
-                {status === "submitting" ? m.submitting : m.submit}
-              </button>
-            </form>
-          )}
-        </div>
-      </section>
-
-      <TextileBorder flip />
     </>
   );
 }
@@ -1529,6 +1558,7 @@ export default function CafeConPan() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [lang, setLang] = useState(getBrowserLang);
   const [gameActive, setGameActive] = useState(false);
+  const [secretNavActive, setSecretNavActive] = useState(false);
   const typedRef = useRef("");
 
   const t = STRINGS[lang];
@@ -1548,8 +1578,9 @@ export default function CafeConPan() {
   useEffect(() => {
     const onKey = e => {
       if (e.key.length !== 1) return;
-      typedRef.current = (typedRef.current + e.key).slice(-4).toUpperCase();
-      if (typedRef.current === "CAFE") setGameActive(true);
+      typedRef.current = (typedRef.current + e.key).slice(-11).toUpperCase();
+      if (typedRef.current.endsWith("CAFE")) setGameActive(true);
+      if (typedRef.current.endsWith("1242202JFRM")) setSecretNavActive(true);
     };
     const onInput = e => {
       if (e.target.value && e.target.value.toLowerCase().includes("cafe")) setGameActive(true);
@@ -1569,7 +1600,8 @@ export default function CafeConPan() {
       case "Community": return <CommunityPage t={t} go={go} />;
       case "Our Story": return <AboutPage t={t} />;
       case "Contact": return <ContactPage t={t} />;
-      case "La Mesa": return <LaMesaPage t={t} />;
+      case "La Mesa": return <LaMesaPage t={t} go={go} />;
+      case "La Mesa Referral": return <LaMesaReferralPage t={t} go={go} />;
       case "Pay": return <PayPage t={t} />;
       default: return <HomePage go={go} t={t} lang={lang} />;
     }
@@ -1578,6 +1610,24 @@ export default function CafeConPan() {
   return (
     <>
       {gameActive && <CafeGame onClose={() => setGameActive(false)} />}
+      {secretNavActive && (
+        <div onClick={() => setSecretNavActive(false)} style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.7)",zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center"}}>
+          <div onClick={e => e.stopPropagation()} style={{background:C.espresso,border:`2px solid ${C.gold}`,boxShadow:`6px 6px 0 ${C.gold}44`,padding:"40px 48px",minWidth:280,textAlign:"center"}}>
+            <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:24}}>Admin Access</div>
+            <div style={{display:"flex",flexDirection:"column",gap:12}}>
+              {[["Pay","Pay"],["La Mesa Referral","La Mesa Referral"],["La Mesa","La Mesa"]].map(([label,page]) => (
+                <button key={page} onClick={() => { go(page); setSecretNavActive(false); }}
+                  style={{background:"none",border:`2px solid ${C.beige}33`,color:C.cream,cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,letterSpacing:"0.1em",textTransform:"uppercase",padding:"12px 24px",transition:"border-color 0.2s"}}
+                  onMouseEnter={e=>e.currentTarget.style.borderColor=C.gold}
+                  onMouseLeave={e=>e.currentTarget.style.borderColor=`${C.beige}33`}>
+                  {label}
+                </button>
+              ))}
+            </div>
+            <button onClick={() => setSecretNavActive(false)} style={{marginTop:24,background:"none",border:"none",cursor:"pointer",fontSize:11,color:`rgba(245,237,214,0.3)`,letterSpacing:"0.1em",textTransform:"uppercase",fontWeight:700}}>Close</button>
+          </div>
+        </div>
+      )}
       <style>{fonts + css}</style>
       <div className="grain" />
       <nav>
