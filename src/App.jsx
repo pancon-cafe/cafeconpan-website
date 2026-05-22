@@ -252,6 +252,7 @@ const STRINGS = {
     disclaimer:"We provide guidance and implementation support — not legal, tax, or financial advice. For those needs, we recommend working with a licensed professional.",
     footer:{ tagline:"Tech · Coffee · Culture", copy:"© 2026 Cafe Con Pan LLC · pancon.cafe", disclaimer:"We provide guidance and implementation support — not legal, tax, or financial advice. For those needs, we recommend working with a licensed professional." },
     pay:{ eyebrow:"Pay Your Invoice", title:"Quick &", titleSpan:"Secure", body:"Enter your invoice number and amount on the next page. Payment is processed securely through Helcim.", cta:"Pay Now →", questions:"Questions? Email" },
+    privacy:{ footerLink:"Privacy Policy" },
   },
   es: {
     nav: { items:["Inicio","Servicios Tech","Comunidad","Nuestra Historia","Contacto"], cta:"Cotización", langBtn:"EN" },
@@ -441,6 +442,7 @@ const STRINGS = {
     disclaimer:"Ofrecemos orientación y apoyo operativo — no asesoría legal, fiscal ni financiera. Para esas necesidades, recomendamos trabajar con un profesional licenciado.",
     footer:{ tagline:"Tech · Café · Cultura", copy:"© 2026 Cafe Con Pan LLC · pancon.cafe", disclaimer:"Ofrecemos orientación y apoyo operativo — no asesoría legal, fiscal ni financiera. Para esas necesidades, recomendamos trabajar con un profesional licenciado." },
     pay:{ eyebrow:"Paga tu Factura", title:"Rápido y", titleSpan:"Seguro", body:"Ingresa el número de factura y el monto en la siguiente página. El pago se procesa de forma segura a través de Helcim.", cta:"Pagar Ahora →", questions:"¿Preguntas? Escríbenos a" },
+    privacy:{ footerLink:"Política de Privacidad" },
   },
 };
 
@@ -701,6 +703,7 @@ const PAGE_HASH = {
   "Home":"home","Tech Services":"tech-services","Community":"community",
   "Our Story":"our-story","Contact":"contact","La Mesa":"la-mesa","Pay":"pay",
   "La Mesa Referral":"la-mesa-referral",
+  "Privacy Policy":"privacy-policy",
 };
 const HASH_PAGE = Object.fromEntries(Object.entries(PAGE_HASH).map(([k,v])=>[v,k]));
 const getPageFromHash = () => HASH_PAGE[window.location.hash.replace("#","")] || "Home";
@@ -1553,6 +1556,174 @@ function LaMesaReferralPage({ t, go }) {
   );
 }
 
+function PrivacyPolicyPage({ go }) {
+  const sLabel = {fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:10};
+  const sTitle = {fontFamily:"'Lilita One',cursive",fontSize:"clamp(20px,3vw,28px)",color:C.espresso,marginBottom:16,lineHeight:1.2};
+  const body = {fontSize:15,lineHeight:1.9,color:"#4a3728",fontWeight:600,marginBottom:16};
+  const hr = {borderTop:`2px solid ${C.espresso}`,opacity:0.12,marginBottom:52};
+
+  return (
+    <>
+      <section style={{background:C.espresso,paddingTop:100,paddingBottom:56,paddingLeft:40,paddingRight:40,textAlign:"center",position:"relative",overflow:"hidden"}}>
+        <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",opacity:0.06,pointerEvents:"none"}}>
+          <Sunburst size={600} color={C.gold} opacity={0.8} />
+        </div>
+        <div style={{position:"relative",zIndex:2}}>
+          <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:16}}>Legal</div>
+          <h1 style={{fontFamily:"'Lilita One',cursive",fontSize:"clamp(40px,7vw,72px)",color:C.cream,lineHeight:1.1,marginBottom:20}}>
+            Privacy <span style={{color:C.blush}}>Policy</span>
+          </h1>
+          <p style={{fontSize:12,color:`rgba(245,237,214,0.4)`,letterSpacing:"0.14em",textTransform:"uppercase",fontWeight:700}}>
+            Effective Date: May 21, 2026 &nbsp;·&nbsp; Last Updated: May 21, 2026
+          </p>
+        </div>
+      </section>
+
+      <TextileBorder flip />
+
+      <section className="section" style={{background:C.parchment}}>
+        <div style={{maxWidth:740,margin:"0 auto"}}>
+
+          <p style={{...body,fontSize:16,marginBottom:56}}>
+            Café Con Pan LLC ("we," "us," or "our") is committed to being transparent about how we handle your information. This Privacy Policy applies to our website at <strong>pancon.cafe</strong> and the services we offer through it — including identity verification via Apple Wallet, invoice payment processing through Helcim, and our La Mesa partner referral network.
+          </p>
+
+          {/* Identity Verification */}
+          <div style={{marginBottom:52}}>
+            <div style={sLabel}>Apple Wallet</div>
+            <h2 style={sTitle}>Identity Verification via Verify with Wallet on the Web</h2>
+            <p style={body}>Café Con Pan uses Apple's <strong>Verify with Wallet on the Web</strong> feature to confirm the identity of individuals seeking access to the La Mesa partner network. This verification is used solely to establish that a person is who they claim to be before granting access to the La Mesa referral program.</p>
+            <p style={body}><strong>What we collect:</strong> Through this verification, we receive only the <strong>name</strong> as it appears on your government-issued ID or Apple Digital ID stored in Apple Wallet. We do not receive or store your ID number, date of birth, photo, address, or any other information from your identity document.</p>
+            <p style={body}><strong>How we use it:</strong> Your verified name is used only to confirm your identity for the purpose of La Mesa partner access. It is not used for marketing, advertising, or any purpose beyond identity confirmation.</p>
+            <p style={body}><strong>Data retention:</strong> Verified identity data is not stored beyond the active verification session unless it is necessary to associate the verification with your La Mesa referral record. In that case, only your verified name is retained as part of your partner record, and it is held only as long as your partnership remains active.</p>
+            <p style={body}>We do not sell, share, or disclose verification data to any third party. Apple's handling of your Wallet credentials is governed by Apple's own Privacy Policy.</p>
+          </div>
+
+          <div style={hr} />
+
+          {/* Payment Processing */}
+          <div style={{marginBottom:52}}>
+            <div style={sLabel}>Payments</div>
+            <h2 style={sTitle}>Invoice Payment Processing</h2>
+            <p style={body}>Invoice payments on Café Con Pan are processed through <strong>Helcim</strong>, a third-party payment processor. When you click "Pay Now" at pancon.cafe/#pay, you are directed to a Helcim-hosted payment page.</p>
+            <p style={body}>We do not collect, store, or have access to your payment card information, bank account details, or billing address. All payment data is handled directly and securely by Helcim. Helcim's privacy practices are governed by their own Privacy Policy.</p>
+          </div>
+
+          <div style={hr} />
+
+          {/* Email */}
+          <div style={{marginBottom:52}}>
+            <div style={sLabel}>Communications</div>
+            <h2 style={sTitle}>Email & Business Communications</h2>
+            <p style={body}>Our business email addresses — <strong>hello@pancon.cafe</strong> and <strong>jason@pancon.cafe</strong> — are managed through <strong>Google Workspace</strong>. When you email us or we communicate with you, that correspondence is handled through Google's platform and subject to Google's Privacy Policy.</p>
+            <p style={body}>We use your email address to respond to your inquiries, deliver project communications, send invoices, and — if you opt in — keep you updated on Café Con Pan news and launches. We do not send unsolicited marketing emails. You can request removal from our list at any time by emailing <a href="mailto:hello@pancon.cafe" style={{color:C.teal,textDecoration:"none",fontWeight:700}}>hello@pancon.cafe</a>.</p>
+          </div>
+
+          <div style={hr} />
+
+          {/* Forms */}
+          <div style={{marginBottom:52}}>
+            <div style={sLabel}>Contact & Sign-Ups</div>
+            <h2 style={sTitle}>Forms & Email Sign-Ups</h2>
+            <p style={body}>Contact forms and email sign-up forms on this site are processed through <strong>Web3Forms</strong>, a third-party form submission service. When you submit a form, your information — name, email, and any message you include — is transmitted securely to Web3Forms and forwarded to us.</p>
+            <p style={body}>We use the information you submit to respond to your inquiry, follow up on service requests, or add you to our mailing list if you opted in. We do not sell or share this information with advertisers or unaffiliated third parties.</p>
+          </div>
+
+          <div style={hr} />
+
+          {/* Cookies */}
+          <div style={{marginBottom:52}}>
+            <div style={sLabel}>Website</div>
+            <h2 style={sTitle}>Cookies & Analytics</h2>
+            <p style={body}>Café Con Pan does not use tracking cookies, advertising cookies, or third-party analytics platforms such as Google Analytics. We do not build behavioral profiles of our visitors and we do not serve targeted ads.</p>
+            <p style={body}>Your browser may store locally cached data to support normal website functionality, but we do not use this data to track or identify you. You can clear your browser cache at any time through your browser settings.</p>
+          </div>
+
+          <div style={hr} />
+
+          {/* Data Sharing */}
+          <div style={{marginBottom:52}}>
+            <div style={sLabel}>Third Parties</div>
+            <h2 style={sTitle}>How We Share Information</h2>
+            <p style={body}>We do not sell your personal information. We do not share your information with advertisers, data brokers, or marketing platforms. The only third parties that handle your data as part of our services are:</p>
+            <div style={{border:`2px solid ${C.espresso}22`,padding:"24px 28px",background:C.cream,marginBottom:16}}>
+              {[
+                {name:"Apple",role:"Verify with Wallet on the Web identity verification"},
+                {name:"Helcim",role:"Invoice payment processing"},
+                {name:"Google Workspace",role:"Business email (hello@pancon.cafe · jason@pancon.cafe)"},
+                {name:"Web3Forms",role:"Contact form and email sign-up processing"},
+              ].map((p,i,arr) => (
+                <div key={p.name} style={{display:"flex",gap:16,alignItems:"flex-start",paddingBottom:i<arr.length-1?16:0,marginBottom:i<arr.length-1?16:0,borderBottom:i<arr.length-1?`1px solid ${C.espresso}15`:"none"}}>
+                  <div style={{fontWeight:700,color:C.espresso,fontSize:14,minWidth:140}}>{p.name}</div>
+                  <div style={{fontSize:14,color:"#555",fontWeight:600,lineHeight:1.6}}>{p.role}</div>
+                </div>
+              ))}
+            </div>
+            <p style={body}>Each of these providers operates under their own privacy policies and data security standards. We may disclose information if required by law or in response to a valid legal process.</p>
+          </div>
+
+          <div style={hr} />
+
+          {/* Your Rights */}
+          <div style={{marginBottom:52}}>
+            <div style={sLabel}>Your Rights</div>
+            <h2 style={sTitle}>Accessing & Deleting Your Information</h2>
+            <p style={body}>You have the right to request access to the personal information we hold about you, and to request that we correct or delete it. To make a request, email us at <a href="mailto:hello@pancon.cafe" style={{color:C.teal,textDecoration:"none",fontWeight:700}}>hello@pancon.cafe</a> with the subject line "Privacy Request."</p>
+            <p style={body}>We will respond to verified requests within 30 days. Some information may be retained as required by law or for legitimate business purposes, such as invoice records.</p>
+          </div>
+
+          <div style={hr} />
+
+          {/* Children */}
+          <div style={{marginBottom:52}}>
+            <div style={sLabel}>Age</div>
+            <h2 style={sTitle}>Children's Privacy</h2>
+            <p style={body}>Our services are not directed at individuals under the age of 18. We do not knowingly collect personal information from children. If you believe we have inadvertently collected information from a child, please contact us at <a href="mailto:hello@pancon.cafe" style={{color:C.teal,textDecoration:"none",fontWeight:700}}>hello@pancon.cafe</a> and we will promptly delete it.</p>
+          </div>
+
+          <div style={hr} />
+
+          {/* Governing Law */}
+          <div style={{marginBottom:52}}>
+            <div style={sLabel}>Legal</div>
+            <h2 style={sTitle}>Governing Law</h2>
+            <p style={body}>This Privacy Policy is governed by the laws of the <strong>Commonwealth of Virginia, United States</strong>. Any disputes arising under this policy shall be subject to the jurisdiction of the courts of the Commonwealth of Virginia.</p>
+          </div>
+
+          <div style={hr} />
+
+          {/* Changes */}
+          <div style={{marginBottom:52}}>
+            <div style={sLabel}>Updates</div>
+            <h2 style={sTitle}>Changes to This Policy</h2>
+            <p style={body}>We may update this Privacy Policy from time to time. When we do, we will revise the "Last Updated" date at the top of this page. Continued use of our website after any changes constitutes your acceptance of the updated policy. If changes are significant, we may also notify you by email if we have your contact information.</p>
+          </div>
+
+          <div style={hr} />
+
+          {/* Contact */}
+          <div style={{marginBottom:0}}>
+            <div style={sLabel}>Questions?</div>
+            <h2 style={sTitle}>Contact Us</h2>
+            <p style={{...body,marginBottom:24}}>If you have questions about this Privacy Policy or how we handle your information, we're here.</p>
+            <div style={{border:`3px solid ${C.espresso}`,padding:"32px 36px",background:C.cream,boxShadow:`4px 4px 0 ${C.espresso}`,maxWidth:480}}>
+              <div style={{fontFamily:"'Lilita One',cursive",fontSize:20,color:C.espresso,marginBottom:16}}>Café Con Pan LLC</div>
+              <div style={{fontSize:14,lineHeight:2,color:"#4a3728",fontWeight:600}}>
+                <div>Email: <a href="mailto:hello@pancon.cafe" style={{color:C.teal,textDecoration:"none",fontWeight:700}}>hello@pancon.cafe</a></div>
+                <div>Website: <a href="https://pancon.cafe" style={{color:C.teal,textDecoration:"none",fontWeight:700}}>pancon.cafe</a></div>
+                <div>Jurisdiction: Commonwealth of Virginia, United States</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <TextileBorder />
+    </>
+  );
+}
+
 export default function CafeConPan() {
   const [page, setPage] = useState(getPageFromHash);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -1603,6 +1774,7 @@ export default function CafeConPan() {
       case "La Mesa": return <LaMesaPage t={t} go={go} />;
       case "La Mesa Referral": return <LaMesaReferralPage t={t} go={go} />;
       case "Pay": return <PayPage t={t} />;
+      case "Privacy Policy": return <PrivacyPolicyPage go={go} />;
       default: return <HomePage go={go} t={t} lang={lang} />;
     }
   };
@@ -1677,7 +1849,13 @@ export default function CafeConPan() {
           </div>
         </div>
 <div style={{fontSize:11,color:`rgba(245,237,214,0.35)`,fontWeight:600,textAlign:"center",maxWidth:480,lineHeight:1.6}}>{t.footer.disclaimer}</div>
-        <div className="footer-copy">{t.footer.copy}</div>
+        <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:6}}>
+          <div className="footer-copy">{t.footer.copy}</div>
+          <button onClick={() => go("Privacy Policy")} style={{background:"none",border:"none",cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontSize:10,color:`rgba(245,237,214,0.2)`,fontWeight:600,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"underline",transition:"color 0.2s",padding:0}}
+            onMouseEnter={e=>e.currentTarget.style.color=`rgba(245,237,214,0.55)`}
+            onMouseLeave={e=>e.currentTarget.style.color=`rgba(245,237,214,0.2)`}
+          >{t.privacy.footerLink}</button>
+        </div>
       </footer>
     </>
   );
