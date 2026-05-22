@@ -1503,50 +1503,90 @@ function LaMesaReferralPage({ t, go }) {
               {m.refSuccess}
             </div>
           ) : (
-            <form onSubmit={submitRef}>
-              <div className="form-field">
-                <label className="form-label">{m.refYourName}</label>
-                <input className="form-input" name="yourName" placeholder={m.refYourNamePlaceholder} value={ref.yourName} onChange={handleRef} required />
-              </div>
-              <div className="form-field">
-                <label className="form-label">{m.refTheirName}</label>
-                <input className="form-input" name="theirName" placeholder={m.refTheirNamePlaceholder} value={ref.theirName} onChange={handleRef} required />
-              </div>
-              <div className="form-field">
-                <label className="form-label">{m.refTheirEmail}</label>
-                <input className="form-input" type="email" name="theirEmail" placeholder={m.refTheirEmailPlaceholder} value={ref.theirEmail} onChange={handleRef} required />
-              </div>
-              <div className="form-field">
-                <label className="form-label">{m.refTheirPhone}</label>
-                <input className="form-input" type="tel" name="theirPhone" placeholder={m.refTheirPhonePlaceholder} value={ref.theirPhone} onChange={handleRef} required />
-              </div>
-              <div className="form-field">
-                <label className="form-label">{m.refTheirBiz}</label>
-                <input className="form-input" name="theirBiz" placeholder={m.refTheirBizPlaceholder} value={ref.theirBiz} onChange={handleRef} required />
-              </div>
-              <div className="form-field">
-                <label className="form-label">{m.refTheirWeb}</label>
-                <input className="form-input" name="theirWeb" placeholder={m.refTheirWebPlaceholder} value={ref.theirWeb} onChange={handleRef} />
-              </div>
-              <div className="form-field">
-                <label className="form-label">{m.refNeed}</label>
-                <select className="form-select" name="need" value={ref.need} onChange={handleRef}>
-                  {m.refOptions.map(o => <option key={o}>{o}</option>)}
-                </select>
-              </div>
-              <div className="form-field">
-                <label className="form-label">{m.refNotes}</label>
-                <textarea className="form-textarea" name="notes" placeholder={m.refNotesPlaceholder} value={ref.notes} onChange={handleRef} style={{minHeight:80}} />
-              </div>
-              {refStatus === "error" && (
-                <div style={{background:"#B8503E22",border:`2px solid ${C.red}`,padding:"14px 18px",marginBottom:16,color:C.espresso,fontWeight:700,fontSize:14}}>
-                  {m.refError}
+            <>
+              {/* Step 1 — Verify Identity */}
+              <div style={{border:`2px solid ${C.teal}`,padding:"32px 36px",marginBottom:8,background:C.cream,boxShadow:`3px 3px 0 rgba(90,158,150,0.18)`}}>
+                <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:18}}>
+                  <div style={{background:C.teal,color:C.cream,fontSize:9,fontWeight:800,letterSpacing:"0.18em",textTransform:"uppercase",padding:"4px 10px",flexShrink:0}}>Step 1</div>
+                  <div style={{fontSize:10,letterSpacing:"0.18em",textTransform:"uppercase",color:C.teal,fontWeight:700}}>Identity Verification</div>
                 </div>
-              )}
-              <button className="submit-btn" type="submit" disabled={refStatus === "submitting"}>
-                {refStatus === "submitting" ? m.refSubmitting : m.refSubmit}
-              </button>
-            </form>
+                <p style={{fontSize:15,lineHeight:1.8,color:"#4a3728",fontWeight:600,marginBottom:24}}>
+                  Before submitting a referral, please confirm your identity.
+                </p>
+                <button type="button"
+                  style={{display:"inline-flex",alignItems:"center",justifyContent:"center",gap:10,width:"100%",background:C.espresso,color:C.cream,border:`2px solid ${C.espresso}`,fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,letterSpacing:"0.08em",padding:"15px 28px",cursor:"pointer",boxShadow:`3px 3px 0 ${C.espresso}33`,transition:"opacity 0.2s"}}
+                  onMouseEnter={e=>e.currentTarget.style.opacity="0.82"}
+                  onMouseLeave={e=>e.currentTarget.style.opacity="1"}
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{flexShrink:0}}>
+                    <rect x="2" y="5" width="20" height="15" rx="2" stroke="#F5EDD6" strokeWidth="1.8"/>
+                    <path d="M2 10h20" stroke="#F5EDD6" strokeWidth="1.8"/>
+                    <rect x="14" y="13.5" width="5" height="3" rx="0.8" fill="#F5EDD6" opacity="0.9"/>
+                  </svg>
+                  Verify Identity with Apple Wallet
+                </button>
+                <p style={{fontSize:12,color:"#999",lineHeight:1.7,marginTop:16,fontWeight:600,margin:"16px 0 0"}}>
+                  Don't have an ID in Apple Wallet? Email{" "}
+                  <a href="mailto:hello@pancon.cafe" style={{color:C.teal,textDecoration:"none",fontWeight:700}}>hello@pancon.cafe</a>
+                  {" "}to verify manually before submitting.
+                </p>
+              </div>
+
+              {/* Step 2 divider */}
+              <div style={{display:"flex",alignItems:"center",gap:12,margin:"28px 0"}}>
+                <div style={{flex:1,height:1,background:C.espresso,opacity:0.1}} />
+                <div style={{display:"flex",alignItems:"center",gap:8}}>
+                  <div style={{background:C.espresso,color:C.cream,fontSize:9,fontWeight:800,letterSpacing:"0.18em",textTransform:"uppercase",padding:"4px 10px"}}>Step 2</div>
+                  <div style={{fontSize:10,letterSpacing:"0.18em",textTransform:"uppercase",color:C.espresso,fontWeight:700,opacity:0.45}}>Submit Your Referral</div>
+                </div>
+                <div style={{flex:1,height:1,background:C.espresso,opacity:0.1}} />
+              </div>
+
+              <form onSubmit={submitRef}>
+                <div className="form-field">
+                  <label className="form-label">{m.refYourName}</label>
+                  <input className="form-input" name="yourName" placeholder={m.refYourNamePlaceholder} value={ref.yourName} onChange={handleRef} required />
+                </div>
+                <div className="form-field">
+                  <label className="form-label">{m.refTheirName}</label>
+                  <input className="form-input" name="theirName" placeholder={m.refTheirNamePlaceholder} value={ref.theirName} onChange={handleRef} required />
+                </div>
+                <div className="form-field">
+                  <label className="form-label">{m.refTheirEmail}</label>
+                  <input className="form-input" type="email" name="theirEmail" placeholder={m.refTheirEmailPlaceholder} value={ref.theirEmail} onChange={handleRef} required />
+                </div>
+                <div className="form-field">
+                  <label className="form-label">{m.refTheirPhone}</label>
+                  <input className="form-input" type="tel" name="theirPhone" placeholder={m.refTheirPhonePlaceholder} value={ref.theirPhone} onChange={handleRef} required />
+                </div>
+                <div className="form-field">
+                  <label className="form-label">{m.refTheirBiz}</label>
+                  <input className="form-input" name="theirBiz" placeholder={m.refTheirBizPlaceholder} value={ref.theirBiz} onChange={handleRef} required />
+                </div>
+                <div className="form-field">
+                  <label className="form-label">{m.refTheirWeb}</label>
+                  <input className="form-input" name="theirWeb" placeholder={m.refTheirWebPlaceholder} value={ref.theirWeb} onChange={handleRef} />
+                </div>
+                <div className="form-field">
+                  <label className="form-label">{m.refNeed}</label>
+                  <select className="form-select" name="need" value={ref.need} onChange={handleRef}>
+                    {m.refOptions.map(o => <option key={o}>{o}</option>)}
+                  </select>
+                </div>
+                <div className="form-field">
+                  <label className="form-label">{m.refNotes}</label>
+                  <textarea className="form-textarea" name="notes" placeholder={m.refNotesPlaceholder} value={ref.notes} onChange={handleRef} style={{minHeight:80}} />
+                </div>
+                {refStatus === "error" && (
+                  <div style={{background:"#B8503E22",border:`2px solid ${C.red}`,padding:"14px 18px",marginBottom:16,color:C.espresso,fontWeight:700,fontSize:14}}>
+                    {m.refError}
+                  </div>
+                )}
+                <button className="submit-btn" type="submit" disabled={refStatus === "submitting"}>
+                  {refStatus === "submitting" ? m.refSubmitting : m.refSubmit}
+                </button>
+              </form>
+            </>
           )}
         </div>
       </section>
