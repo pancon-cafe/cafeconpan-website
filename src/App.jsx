@@ -823,6 +823,12 @@ function PainPointsSection({ go, t }) {
       <div style={{textAlign:"center",maxWidth:640,margin:"56px auto 0"}}>
         <p style={{fontFamily:"'Pacifico',cursive",fontSize:20,color:C.espresso,lineHeight:1.6,marginBottom:32}}>"{t.painPoints.bridge}"</p>
         <button className="hero-cta" onClick={() => go("Contact")}>{t.painPoints.cta}</button>
+        <p style={{marginTop:16,fontSize:13,color:C.espresso,fontWeight:600,opacity:0.6}}>
+          Not sure which service fits?{" "}
+          <button onClick={() => go("Find My Plan")} style={{background:"none",border:"none",cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,color:C.teal,textDecoration:"underline",padding:0}}>
+            Find your package →
+          </button>
+        </p>
       </div>
     </section>
   );
@@ -1774,8 +1780,9 @@ function FindMyPlanPage({ go, t }) {
   const [step, setStep] = useState(1);
   const [q1, setQ1] = useState(null);
   const [q2, setQ2] = useState(null);
+  const [q3, setQ3] = useState([]);
 
-  const TOTAL = 2;
+  const TOTAL = 3;
 
   const q1Options = [
     { id:"starting", icon:"🌱", label:"Just getting started", desc:"Building my business from the ground up" },
@@ -1783,14 +1790,22 @@ function FindMyPlanPage({ go, t }) {
   ];
 
   const q2Options = [
-    { id:"launch",   icon:"🚀", label:"Launch everything from scratch",  desc:"Devices, website, banking, payments, and more" },
-    { id:"visible",  icon:"📍", label:"Get visible on Apple devices",    desc:"Apple Maps, Tap to Pay, Brand Profile" },
-    { id:"devices",  icon:"🔁", label:"Manage my Apple devices",         desc:"Ongoing IT, security, and device management" },
+    { id:"launch",   icon:"🚀", label:"Launch everything from scratch",   desc:"Devices, website, banking, payments, and more" },
+    { id:"visible",  icon:"📍", label:"Get visible on Apple devices",     desc:"Apple Maps, Tap to Pay, Brand Profile" },
+    { id:"devices",  icon:"🔁", label:"Manage my Apple devices",          desc:"Ongoing IT, security, and device management" },
     { id:"bills",    icon:"📡", label:"Lower my phone or internet costs", desc:"Carrier audit, negotiation, ISP setup" },
     { id:"support",  icon:"🤝", label:"Have a trusted tech contact",      desc:"One number to call when technology fails" },
   ];
 
+  const q3Options = [
+    { id:"ongoingSupport", icon:"🤝", label:"Ongoing tech support",         desc:"A reliable contact after setup is done" },
+    { id:"carrierCosts",   icon:"📡", label:"Better carrier rates",         desc:"Audit and negotiate my phone/internet bills" },
+    { id:"deviceMgmt",     icon:"🔁", label:"Day-to-day device management", desc:"Keeping Apple devices updated and secure" },
+  ];
+
   const RESULT_IDX = { launch:0, visible:1, devices:2, bills:3, support:4 };
+  const Q3_PKG_IDX  = { ongoingSupport:4, carrierCosts:3, deviceMgmt:2 };
+
   const STARTING_NOTE = {
     visible:"Since you're just launching, consider pairing this with Open for Business to handle the full setup first.",
     devices:"Just getting started? Open for Business handles full setup — including device procurement — before ongoing management makes sense.",
@@ -1798,8 +1813,13 @@ function FindMyPlanPage({ go, t }) {
 
   const pkg = q2 ? t.tech.packages[RESULT_IDX[q2]] : null;
   const note = q2 && q1 === "starting" ? (STARTING_NOTE[q2] || null) : null;
+  const companions = q2
+    ? q3.filter(id => Q3_PKG_IDX[id] !== RESULT_IDX[q2]).map(id => t.tech.packages[Q3_PKG_IDX[id]])
+    : [];
 
-  const activeQ = step === 1 ? q1 : q2;
+  const toggleQ3 = (id) => setQ3(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
+
+  const activeQ = step === 1 ? q1 : step === 2 ? q2 : true;
 
   const optCard = (selected) => ({
     display:"flex", alignItems:"center", gap:16,
@@ -1810,8 +1830,14 @@ function FindMyPlanPage({ go, t }) {
     boxShadow: selected ? `3px 3px 0 rgba(90,158,150,0.25)` : "none",
   });
 
-  const back = () => { setStep(s => s - 1); setQ2(null); };
+  const back = () => { setStep(s => s - 1); if (step === 3) setQ3([]); else setQ2(null); };
   const next = () => step < TOTAL ? setStep(s => s + 1) : setStep(TOTAL + 1);
+
+  const stepLabel = step === 1
+    ? "Where are you in your business journey?"
+    : step === 2
+    ? "What do you need most right now?"
+    : "What else would be helpful?";
 
   return (
     <>
@@ -1823,7 +1849,7 @@ function FindMyPlanPage({ go, t }) {
             <h1 className="section-title" style={{marginBottom:8}}>
               Find the right <span style={{color:C.red}}>fit</span> for you
             </h1>
-            <p style={{fontSize:15,color:"#555",fontWeight:600,lineHeight:1.7}}>Two quick questions — we'll point you to the right starting place.</p>
+            <p style={{fontSize:15,color:"#555",fontWeight:600,lineHeight:1.7}}>Three quick questions — we'll point you to the right starting place.</p>
           </div>
 
           <div style={{background:C.parchment,border:`3px solid ${C.espresso}`,boxShadow:`5px 5px 0 ${C.espresso}`,padding:"40px 40px 36px"}}>
@@ -1841,22 +1867,34 @@ function FindMyPlanPage({ go, t }) {
                   <div style={{fontSize:11,fontWeight:700,letterSpacing:"0.12em",color:C.espresso,opacity:0.4,flexShrink:0,textTransform:"uppercase"}}>{step} of {TOTAL}</div>
                 </div>
 
-                <h2 style={{fontFamily:"'Lilita One',cursive",fontSize:24,color:C.espresso,marginBottom:28,lineHeight:1.3}}>
-                  {step === 1 ? "Where are you in your business journey?" : "What do you need most right now?"}
+                <h2 style={{fontFamily:"'Lilita One',cursive",fontSize:24,color:C.espresso,marginBottom:step===3?8:28,lineHeight:1.3}}>
+                  {stepLabel}
                 </h2>
 
-                {(step === 1 ? q1Options : q2Options).map(opt => (
-                  <div key={opt.id}
-                    onClick={() => step === 1 ? setQ1(opt.id) : setQ2(opt.id)}
-                    style={optCard(step === 1 ? q1 === opt.id : q2 === opt.id)}
-                  >
-                    <span style={{fontSize:24,flexShrink:0}}>{opt.icon}</span>
-                    <div>
-                      <div style={{fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:15,color:C.espresso,marginBottom:2}}>{opt.label}</div>
-                      <div style={{fontSize:13,color:"#777",fontWeight:600}}>{opt.desc}</div>
+                {step === 3 && (
+                  <p style={{fontSize:13,color:"#777",fontWeight:600,marginBottom:24}}>Select all that apply.</p>
+                )}
+
+                {(step === 1 ? q1Options : step === 2 ? q2Options : q3Options).map(opt => {
+                  const selected = step === 1 ? q1 === opt.id : step === 2 ? q2 === opt.id : q3.includes(opt.id);
+                  return (
+                    <div key={opt.id}
+                      onClick={() => step === 1 ? setQ1(opt.id) : step === 2 ? setQ2(opt.id) : toggleQ3(opt.id)}
+                      style={optCard(selected)}
+                    >
+                      <span style={{fontSize:24,flexShrink:0}}>{opt.icon}</span>
+                      <div style={{flex:1}}>
+                        <div style={{fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:15,color:C.espresso,marginBottom:2}}>{opt.label}</div>
+                        <div style={{fontSize:13,color:"#777",fontWeight:600}}>{opt.desc}</div>
+                      </div>
+                      {step === 3 && (
+                        <div style={{width:18,height:18,border:`2px solid ${q3.includes(opt.id) ? C.teal : "#C0B0A0"}`,background:q3.includes(opt.id) ? C.teal : "transparent",flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.15s"}}>
+                          {q3.includes(opt.id) && <span style={{color:C.cream,fontSize:11,fontWeight:900,lineHeight:1}}>✓</span>}
+                        </div>
+                      )}
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
 
                 <button
                   disabled={!activeQ}
@@ -1892,6 +1930,21 @@ function FindMyPlanPage({ go, t }) {
                   </div>
                 )}
 
+                {companions.length > 0 && (
+                  <div style={{marginBottom:24,paddingTop:20,borderTop:`1px solid ${C.espresso}22`}}>
+                    <div style={{fontSize:10,letterSpacing:"0.18em",textTransform:"uppercase",color:C.espresso,fontWeight:700,opacity:0.5,marginBottom:14}}>You Might Also Consider</div>
+                    {companions.map(c => (
+                      <div key={c.name} style={{display:"flex",alignItems:"center",gap:12,padding:"12px 16px",border:`1px solid ${C.beige}`,background:C.cream,marginBottom:8}}>
+                        <span style={{fontSize:22}}>{c.icon}</span>
+                        <div>
+                          <div style={{fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:14,color:C.espresso}}>{c.name}</div>
+                          <div style={{fontSize:12,color:C.teal,fontWeight:700,marginTop:2}}>{c.price}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
                 <button className="hero-cta" onClick={() => go("Contact")} style={{width:"100%",textAlign:"center",marginBottom:12,display:"block"}}>
                   Request a Consultation →
                 </button>
@@ -1899,7 +1952,7 @@ function FindMyPlanPage({ go, t }) {
                   See All Packages
                 </button>
                 <div style={{textAlign:"center"}}>
-                  <button onClick={() => { setStep(1); setQ1(null); setQ2(null); }}
+                  <button onClick={() => { setStep(1); setQ1(null); setQ2(null); setQ3([]); }}
                     style={{background:"none",border:"none",cursor:"pointer",fontSize:12,color:C.espresso,opacity:0.45,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"underline"}}>
                     Start over
                   </button>
