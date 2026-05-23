@@ -788,6 +788,8 @@ const css = `
   .brew-bar{animation:brewFill 2s cubic-bezier(0.4,0,0.6,1) forwards}
   .brew-dots{animation:brewPulse 0.8s ease-in-out infinite}
 
+  @keyframes socialFlash{0%,100%{opacity:0.6;color:#F5EDD6}40%{opacity:1;color:#F2B0AC}}
+
   @media(max-width:768px){
     nav{padding:0 20px}
     .nav-links{display:none}
@@ -1166,7 +1168,7 @@ function AboutPage({ t }) {
   );
 }
 
-function ContactPage({ t, go }) {
+function ContactPage({ t, go, scrollToSocials }) {
   const [form, setForm] = useState({name:"",email:"",inquiry:t.contact.options[0],message:""});
   const [status, setStatus] = useState("idle");
   const handle = e => setForm({...form, [e.target.name]: e.target.value});
@@ -1217,7 +1219,7 @@ function ContactPage({ t, go }) {
           <div style={{marginTop:16}}>
             <SteamSVG />
           </div>
-          <button onClick={() => document.getElementById("footer-socials")?.scrollIntoView({behavior:"smooth"})}
+          <button onClick={scrollToSocials}
             style={{marginTop:24,background:"none",border:"none",cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontSize:13,color:C.espresso,fontWeight:700,opacity:0.5,letterSpacing:"0.03em",padding:0,textDecoration:"underline",textDecorationColor:`${C.espresso}44`,transition:"opacity 0.2s"}}
             onMouseEnter={e=>e.currentTarget.style.opacity=0.85}
             onMouseLeave={e=>e.currentTarget.style.opacity=0.5}
@@ -2388,10 +2390,16 @@ export default function CafeConPan() {
   const [lang, setLang] = useState(getBrowserLang);
   const [gameActive, setGameActive] = useState(false);
   const [secretNavActive, setSecretNavActive] = useState(false);
+  const [highlightSocials, setHighlightSocials] = useState(false);
   const typedRef = useRef("");
 
   const t = STRINGS[lang];
   const sLinkFt = {fontSize:12,color:C.cream,opacity:0.6,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"};
+  const scrollToSocials = () => {
+    document.getElementById("footer-socials")?.scrollIntoView({behavior:"smooth"});
+    setHighlightSocials(true);
+    setTimeout(() => setHighlightSocials(false), 1400);
+  };
   const go = (p) => {
     setPage(p); setMenuOpen(false); window.scrollTo(0,0);
     window.location.hash = PAGE_HASH[p];
@@ -2429,7 +2437,7 @@ export default function CafeConPan() {
       case "Tech Services": return <TechPage go={go} t={t} />;
       case "Community": return <CommunityPage t={t} go={go} />;
       case "Our Story": return <AboutPage t={t} />;
-      case "Contact": return <ContactPage t={t} go={go} />;
+      case "Contact": return <ContactPage t={t} go={go} scrollToSocials={scrollToSocials} />;
       case "La Mesa": return <LaMesaPage t={t} go={go} />;
       case "La Mesa Referral": return <LaMesaReferralPage t={t} go={go} />;
       case "Pay": return <PayPage t={t} />;
@@ -2488,14 +2496,22 @@ export default function CafeConPan() {
         <div className="footer-tagline">{t.footer.tagline}</div>
         <div id="footer-socials" style={{display:"flex",flexDirection:"column",alignItems:"center",gap:8}}>
           <div style={{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:4}}>{t.socials.followLabel}</div>
-          <div style={{display:"flex",gap:16}}>
-            <a href={t.socials.instagram} target="_blank" rel="noopener noreferrer" style={sLinkFt} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.6}>{t.socials.instagramLabel}</a>
-            <a href={t.socials.linkedin} target="_blank" rel="noopener noreferrer" style={sLinkFt} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.6}>{t.socials.linkedinLabel}</a>
-            <a href={t.socials.twitter} target="_blank" rel="noopener noreferrer" style={sLinkFt} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.6}>{t.socials.twitterLabel}</a>
-            <a href={t.socials.tiktok} target="_blank" rel="noopener noreferrer" style={sLinkFt} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.6}>{t.socials.tiktokLabel}</a>
-            {t.socials.youtube&&<a href={t.socials.youtube} target="_blank" rel="noopener noreferrer" style={sLinkFt} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.6}>{t.socials.youtubeLabel}</a>}
-            {t.socials.facebook&&<a href={t.socials.facebook} target="_blank" rel="noopener noreferrer" style={sLinkFt} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.6}>{t.socials.facebookLabel}</a>}
-            {t.socials.discord&&<a href={t.socials.discord} target="_blank" rel="noopener noreferrer" style={sLinkFt} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.6}>{t.socials.discordLabel}</a>}
+          <div style={{display:"flex",gap:16,flexWrap:"wrap",justifyContent:"center"}}>
+            {[
+              {href:t.socials.instagram, label:t.socials.instagramLabel},
+              {href:t.socials.linkedin,  label:t.socials.linkedinLabel},
+              {href:t.socials.twitter,   label:t.socials.twitterLabel},
+              {href:t.socials.tiktok,    label:t.socials.tiktokLabel},
+              ...(t.socials.youtube  ? [{href:t.socials.youtube,  label:t.socials.youtubeLabel}]  : []),
+              ...(t.socials.facebook ? [{href:t.socials.facebook, label:t.socials.facebookLabel}] : []),
+              ...(t.socials.discord  ? [{href:t.socials.discord,  label:t.socials.discordLabel}]  : []),
+            ].map(({href,label},i) => (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer"
+                style={{...sLinkFt, animation:highlightSocials?`socialFlash 0.55s ease ${i*130}ms both`:undefined}}
+                onMouseEnter={e=>e.currentTarget.style.opacity=1}
+                onMouseLeave={e=>e.currentTarget.style.opacity=0.6}
+              >{label}</a>
+            ))}
           </div>
         </div>
 <div style={{fontSize:11,color:`rgba(245,237,214,0.35)`,fontWeight:600,textAlign:"center",maxWidth:480,lineHeight:1.6}}>{t.footer.disclaimer}</div>
