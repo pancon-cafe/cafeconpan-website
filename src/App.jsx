@@ -783,6 +783,11 @@ const css = `
   .form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   @media(max-width:600px){.form-grid-2{grid-template-columns:1fr}}
 
+  @keyframes brewFill{from{width:0}to{width:100%}}
+  @keyframes brewPulse{0%,100%{opacity:0.25}50%{opacity:1}}
+  .brew-bar{animation:brewFill 2s cubic-bezier(0.4,0,0.6,1) forwards}
+  .brew-dots{animation:brewPulse 0.8s ease-in-out infinite}
+
   @media(max-width:768px){
     nav{padding:0 20px}
     .nav-links{display:none}
@@ -2192,6 +2197,7 @@ function TheGrindPage({ go }) {
   const blank = {bizName:"",personName:"",website:"",industry:"",whatTheyDo:"",teamSize:"",devices:[],painPoints:"",timeline:"",timelineDate:"",services:[],extra:""};
   const [form, setForm] = useState(blank);
   const [output, setOutput] = useState("");
+  const [brewing, setBrewing] = useState(false);
   const [copied, setCopied] = useState(false);
   const [tooltip, setTooltip] = useState(null);
   const tipTimer = useRef(null);
@@ -2233,9 +2239,9 @@ IMPORTANT: If Jason's service assumptions seem off or incomplete based on the cl
 Be specific, be creative, and make Jason look brilliant on his first call.`;
   };
 
-  const submit = e => { e.preventDefault(); setOutput(buildPrompt()); };
+  const submit = e => { e.preventDefault(); setBrewing(true); setTimeout(() => { setOutput(buildPrompt()); setBrewing(false); }, 2100); };
   const copy   = () => { navigator.clipboard.writeText(output); setCopied(true); setTimeout(()=>setCopied(false),2000); };
-  const reset  = () => { setForm(blank); setOutput(""); setCopied(false); };
+  const reset  = () => { setForm(blank); setOutput(""); setCopied(false); setBrewing(false); };
 
   const fld  = {display:"block",width:"100%",padding:"12px 14px",fontFamily:"'Nunito',sans-serif",fontSize:16,fontWeight:600,color:C.espresso,background:C.cream,border:`2px solid ${C.espresso}22`,borderRadius:0,outline:"none",boxSizing:"border-box",marginTop:6};
   const lbl  = {fontSize:11,letterSpacing:"0.14em",textTransform:"uppercase",fontWeight:700,color:C.espresso,opacity:0.6};
@@ -2256,7 +2262,22 @@ Be specific, be creative, and make Jason look brilliant on his first call.`;
 
       <section className="section" style={{background:C.parchment}}>
         <div style={{maxWidth:640,margin:"0 auto"}}>
-          {!output ? (
+          {brewing ? (
+            <div style={{textAlign:"center",padding:"64px 24px"}}>
+              <div style={{display:"inline-block",transform:"scale(2)",transformOrigin:"center top",marginBottom:56}}>
+                <SteamSVG />
+              </div>
+              <div style={{fontFamily:"'Lilita One',cursive",fontSize:26,color:C.espresso}}>
+                Brewing<span className="brew-dots">...</span>
+              </div>
+              <div style={{width:200,height:5,background:`${C.espresso}15`,margin:"20px auto 0",overflow:"hidden"}}>
+                <div className="brew-bar" style={{height:"100%",background:C.espresso}} />
+              </div>
+              <p style={{marginTop:14,fontSize:11,color:C.espresso,opacity:0.3,fontWeight:700,letterSpacing:"0.14em",textTransform:"uppercase"}}>
+                Grinding the beans...
+              </p>
+            </div>
+          ) : !output ? (
             <form onSubmit={submit}>
               <div style={{display:"flex",flexDirection:"column",gap:28}}>
 
