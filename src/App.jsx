@@ -1676,7 +1676,7 @@ function LaMesaReferralPage({ t, go }) {
   );
 }
 
-function PrivacyPolicyPage({ go }) {
+function PrivacyPolicyPage({ go, lang }) {
   const sLabel = {fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:10};
   const sTitle = {fontFamily:"'Lilita One',cursive",fontSize:"clamp(20px,3vw,28px)",color:C.espresso,marginBottom:16,lineHeight:1.2};
   const body = {fontSize:15,lineHeight:1.9,color:"#4a3728",fontWeight:600,marginBottom:16};
@@ -1700,6 +1700,15 @@ function PrivacyPolicyPage({ go }) {
       </section>
 
       <TextileBorder flip />
+
+      {lang === "es" && (
+        <div style={{background:C.blush,padding:"16px 24px",textAlign:"center"}}>
+          <p style={{fontSize:14,color:C.espresso,fontWeight:700,margin:0,lineHeight:1.6}}>
+            Esta política solo está disponible en inglés. Para preguntas, escríbenos a{" "}
+            <a href="mailto:hello@pancon.cafe" style={{color:C.espresso,textDecoration:"underline"}}>hello@pancon.cafe</a>.
+          </p>
+        </div>
+      )}
 
       <section className="section" style={{background:C.parchment}}>
         <div style={{maxWidth:740,margin:"0 auto"}}>
@@ -2074,7 +2083,7 @@ export default function CafeConPan() {
       case "La Mesa": return <LaMesaPage t={t} go={go} />;
       case "La Mesa Referral": return <LaMesaReferralPage t={t} go={go} />;
       case "Pay": return <PayPage t={t} />;
-      case "Privacy Policy": return <PrivacyPolicyPage go={go} />;
+      case "Privacy Policy": return <PrivacyPolicyPage go={go} lang={lang} />;
       case "Find My Plan": return <FindMyPlanPage go={go} t={t} />;
       default: return <HomePage go={go} t={t} lang={lang} />;
     }
