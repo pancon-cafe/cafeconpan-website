@@ -234,7 +234,7 @@ const STRINGS = {
       youtubeLabel:"YouTube",
       facebookLabel:"Facebook",
       discordLabel:"Discord",
-      followLabel:"Follow the Journey", contactNote:"Follow us — find all our links in the footer below ↓",
+      followLabel:"Follow the Journey", contactNote:"Follow us in the footer ↓",
     },
     contact:{
       eyebrow:"Get in Touch", title:"Let's", titleSpan:"Talk",
@@ -480,7 +480,7 @@ const STRINGS = {
       youtubeLabel:"YouTube",
       facebookLabel:"Facebook",
       discordLabel:"Discord",
-      followLabel:"Síguenos", contactNote:"Síguenos — encuentra todos nuestros enlaces en el pie de página ↓",
+      followLabel:"Síguenos", contactNote:"Síguenos en el pie de página ↓",
     },
     contact:{
       eyebrow:"Ponte en Contacto", title:"", titleSpan:"Hablemos",
@@ -1217,7 +1217,11 @@ function ContactPage({ t, go }) {
           <div style={{marginTop:16}}>
             <SteamSVG />
           </div>
-          <p style={{marginTop:24,fontSize:13,color:C.espresso,fontWeight:600,opacity:0.55,letterSpacing:"0.03em"}}>{t.socials.contactNote}</p>
+          <button onClick={() => document.getElementById("footer-socials")?.scrollIntoView({behavior:"smooth"})}
+            style={{marginTop:24,background:"none",border:"none",cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontSize:13,color:C.espresso,fontWeight:700,opacity:0.5,letterSpacing:"0.03em",padding:0,textDecoration:"underline",textDecorationColor:`${C.espresso}44`,transition:"opacity 0.2s"}}
+            onMouseEnter={e=>e.currentTarget.style.opacity=0.85}
+            onMouseLeave={e=>e.currentTarget.style.opacity=0.5}
+          >{t.socials.contactNote}</button>
         </div>
         <form onSubmit={submit}>
           <div className="form-field">
@@ -2482,7 +2486,7 @@ export default function CafeConPan() {
       <footer>
         <div className="footer-logo">Café Con <span>Pan</span></div>
         <div className="footer-tagline">{t.footer.tagline}</div>
-        <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:8}}>
+        <div id="footer-socials" style={{display:"flex",flexDirection:"column",alignItems:"center",gap:8}}>
           <div style={{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:4}}>{t.socials.followLabel}</div>
           <div style={{display:"flex",gap:16}}>
             <a href={t.socials.instagram} target="_blank" rel="noopener noreferrer" style={sLinkFt} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.6}>{t.socials.instagramLabel}</a>
