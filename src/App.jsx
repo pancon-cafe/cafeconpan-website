@@ -704,6 +704,7 @@ const PAGE_HASH = {
   "Our Story":"our-story","Contact":"contact","La Mesa":"la-mesa","Pay":"pay",
   "La Mesa Referral":"la-mesa-referral",
   "Privacy Policy":"privacy-policy",
+  "Find My Plan":"find-my-plan",
 };
 const HASH_PAGE = Object.fromEntries(Object.entries(PAGE_HASH).map(([k,v])=>[v,k]));
 const getPageFromHash = () => HASH_PAGE[window.location.hash.replace("#","")] || "Home";
@@ -968,6 +969,11 @@ function TechPage({ go, t }) {
               <span className="service-card-price">{p.price}</span>
             </div>
           ))}
+        </div>
+        <div style={{textAlign:"center",marginTop:56,padding:"40px 32px",background:C.parchment,border:`3px solid ${C.espresso}`,boxShadow:`4px 4px 0 ${C.espresso}`,maxWidth:520,marginLeft:"auto",marginRight:"auto"}}>
+          <div style={{fontSize:10,letterSpacing:"0.18em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:12}}>Not Sure Where to Start?</div>
+          <p style={{fontSize:15,color:"#555",fontWeight:600,lineHeight:1.7,marginBottom:24,maxWidth:380,margin:"0 auto 24px"}}>Answer two quick questions and we'll point you to the right package.</p>
+          <button className="hero-cta" onClick={() => go("Find My Plan")}>Find My Package →</button>
         </div>
       </section>
 
@@ -1764,6 +1770,151 @@ function PrivacyPolicyPage({ go }) {
   );
 }
 
+function FindMyPlanPage({ go, t }) {
+  const [step, setStep] = useState(1);
+  const [q1, setQ1] = useState(null);
+  const [q2, setQ2] = useState(null);
+
+  const TOTAL = 2;
+
+  const q1Options = [
+    { id:"starting", icon:"🌱", label:"Just getting started", desc:"Building my business from the ground up" },
+    { id:"running",  icon:"🏢", label:"Already in business",  desc:"I have an established or operating business" },
+  ];
+
+  const q2Options = [
+    { id:"launch",   icon:"🚀", label:"Launch everything from scratch",  desc:"Devices, website, banking, payments, and more" },
+    { id:"visible",  icon:"📍", label:"Get visible on Apple devices",    desc:"Apple Maps, Tap to Pay, Brand Profile" },
+    { id:"devices",  icon:"🔁", label:"Manage my Apple devices",         desc:"Ongoing IT, security, and device management" },
+    { id:"bills",    icon:"📡", label:"Lower my phone or internet costs", desc:"Carrier audit, negotiation, ISP setup" },
+    { id:"support",  icon:"🤝", label:"Have a trusted tech contact",      desc:"One number to call when technology fails" },
+  ];
+
+  const RESULT_IDX = { launch:0, visible:1, devices:2, bills:3, support:4 };
+  const STARTING_NOTE = {
+    visible:"Since you're just launching, consider pairing this with Open for Business to handle the full setup first.",
+    devices:"Just getting started? Open for Business handles full setup — including device procurement — before ongoing management makes sense.",
+  };
+
+  const pkg = q2 ? t.tech.packages[RESULT_IDX[q2]] : null;
+  const note = q2 && q1 === "starting" ? (STARTING_NOTE[q2] || null) : null;
+
+  const activeQ = step === 1 ? q1 : q2;
+
+  const optCard = (selected) => ({
+    display:"flex", alignItems:"center", gap:16,
+    padding:"18px 20px",
+    border:`2px solid ${selected ? C.teal : "#D4C5B0"}`,
+    background: selected ? "rgba(90,158,150,0.08)" : C.cream,
+    cursor:"pointer", transition:"all 0.15s", marginBottom:10,
+    boxShadow: selected ? `3px 3px 0 rgba(90,158,150,0.25)` : "none",
+  });
+
+  const back = () => { setStep(s => s - 1); setQ2(null); };
+  const next = () => step < TOTAL ? setStep(s => s + 1) : setStep(TOTAL + 1);
+
+  return (
+    <>
+      <section className="section" style={{paddingTop:100,paddingBottom:80}}>
+        <div style={{maxWidth:560,margin:"0 auto"}}>
+
+          <div style={{textAlign:"center",marginBottom:48}}>
+            <div className="section-eyebrow" style={{color:C.teal}}>Package Finder</div>
+            <h1 className="section-title" style={{marginBottom:8}}>
+              Find the right <span style={{color:C.red}}>fit</span> for you
+            </h1>
+            <p style={{fontSize:15,color:"#555",fontWeight:600,lineHeight:1.7}}>Two quick questions — we'll point you to the right starting place.</p>
+          </div>
+
+          <div style={{background:C.parchment,border:`3px solid ${C.espresso}`,boxShadow:`5px 5px 0 ${C.espresso}`,padding:"40px 40px 36px"}}>
+
+            {step <= TOTAL ? (
+              <>
+                {/* Progress bar */}
+                <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:32}}>
+                  {step > 1 && (
+                    <button onClick={back} style={{background:"none",border:"none",cursor:"pointer",padding:0,color:C.espresso,fontSize:22,lineHeight:1,flexShrink:0,marginRight:2}}>‹</button>
+                  )}
+                  <div style={{flex:1,height:4,background:"#D4C5B0",borderRadius:2,overflow:"hidden"}}>
+                    <div style={{width:`${(step/TOTAL)*100}%`,height:"100%",background:C.teal,transition:"width 0.3s"}} />
+                  </div>
+                  <div style={{fontSize:11,fontWeight:700,letterSpacing:"0.12em",color:C.espresso,opacity:0.4,flexShrink:0,textTransform:"uppercase"}}>{step} of {TOTAL}</div>
+                </div>
+
+                <h2 style={{fontFamily:"'Lilita One',cursive",fontSize:24,color:C.espresso,marginBottom:28,lineHeight:1.3}}>
+                  {step === 1 ? "Where are you in your business journey?" : "What do you need most right now?"}
+                </h2>
+
+                {(step === 1 ? q1Options : q2Options).map(opt => (
+                  <div key={opt.id}
+                    onClick={() => step === 1 ? setQ1(opt.id) : setQ2(opt.id)}
+                    style={optCard(step === 1 ? q1 === opt.id : q2 === opt.id)}
+                  >
+                    <span style={{fontSize:24,flexShrink:0}}>{opt.icon}</span>
+                    <div>
+                      <div style={{fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:15,color:C.espresso,marginBottom:2}}>{opt.label}</div>
+                      <div style={{fontSize:13,color:"#777",fontWeight:600}}>{opt.desc}</div>
+                    </div>
+                  </div>
+                ))}
+
+                <button
+                  disabled={!activeQ}
+                  onClick={next}
+                  style={{
+                    width:"100%",marginTop:24,padding:"16px",
+                    background: activeQ ? C.espresso : "#C5B9AA",
+                    color:C.cream,border:"none",
+                    fontFamily:"'Nunito',sans-serif",fontWeight:700,
+                    fontSize:14,letterSpacing:"0.1em",textTransform:"uppercase",
+                    cursor: activeQ ? "pointer" : "not-allowed",
+                    transition:"background 0.2s",
+                  }}
+                >
+                  {step === TOTAL ? "See My Recommendation →" : "Continue →"}
+                </button>
+              </>
+            ) : (
+              <>
+                {/* Result */}
+                <div style={{textAlign:"center",marginBottom:28}}>
+                  <div style={{fontSize:10,letterSpacing:"0.2em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:10}}>Your Match</div>
+                  <div style={{fontSize:40,marginBottom:8}}>{pkg.icon}</div>
+                  <div style={{fontFamily:"'Lilita One',cursive",fontSize:26,color:C.espresso,marginBottom:6}}>{pkg.name}</div>
+                  <div style={{display:"inline-block",background:C.teal,color:C.cream,fontSize:10,fontWeight:700,letterSpacing:"0.15em",textTransform:"uppercase",padding:"4px 12px",marginBottom:20}}>{pkg.tag}</div>
+                  <p style={{fontSize:15,lineHeight:1.8,color:"#4a3728",fontWeight:600,marginBottom:20}}>{pkg.desc}</p>
+                  <div style={{fontFamily:"'Lilita One',cursive",fontSize:20,color:C.teal}}>{pkg.price}</div>
+                </div>
+
+                {note && (
+                  <div style={{border:`2px solid ${C.beige}`,background:"rgba(200,146,42,0.07)",padding:"14px 18px",marginBottom:24,fontSize:13,color:"#4a3728",fontWeight:600,lineHeight:1.7}}>
+                    💡 {note}
+                  </div>
+                )}
+
+                <button className="hero-cta" onClick={() => go("Contact")} style={{width:"100%",textAlign:"center",marginBottom:12,display:"block"}}>
+                  Request a Consultation →
+                </button>
+                <button onClick={() => go("Tech Services")} style={{width:"100%",background:"none",border:`2px solid ${C.espresso}`,color:C.espresso,fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,letterSpacing:"0.08em",textTransform:"uppercase",padding:"14px",cursor:"pointer",marginBottom:20}}>
+                  See All Packages
+                </button>
+                <div style={{textAlign:"center"}}>
+                  <button onClick={() => { setStep(1); setQ1(null); setQ2(null); }}
+                    style={{background:"none",border:"none",cursor:"pointer",fontSize:12,color:C.espresso,opacity:0.45,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"underline"}}>
+                    Start over
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+
+        </div>
+      </section>
+      <TextileBorder />
+    </>
+  );
+}
+
 export default function CafeConPan() {
   const [page, setPage] = useState(getPageFromHash);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -1815,6 +1966,7 @@ export default function CafeConPan() {
       case "La Mesa Referral": return <LaMesaReferralPage t={t} go={go} />;
       case "Pay": return <PayPage t={t} />;
       case "Privacy Policy": return <PrivacyPolicyPage go={go} />;
+      case "Find My Plan": return <FindMyPlanPage go={go} t={t} />;
       default: return <HomePage go={go} t={t} lang={lang} />;
     }
   };
