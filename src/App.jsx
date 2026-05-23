@@ -239,7 +239,7 @@ const STRINGS = {
     contact:{
       eyebrow:"Get in Touch", title:"Let's", titleSpan:"Talk",
       sub:"Ready to talk tech services, or just want to follow the Café Con Pan journey?",
-      info:[{label:"Email",val:"hello@pancon.cafe"},{label:"Website",val:"pancon.cafe"},{label:"Business",val:"Cafe Con Pan LLC"},{label:"Services",val:"Tech · Coffee · Culture"},{label:"Instagram",val:"@icafeconpan"},{label:"LinkedIn",val:"Cafe Con Pan LLC"}],
+      info:[{label:"Email",val:"hello@pancon.cafe"},{label:"Website",val:"pancon.cafe"},{label:"Business",val:"Cafe Con Pan LLC"},{label:"Services",val:"Tech · Coffee · Culture"}],
       nameLabel:"Your Name", namePlaceholder:"Full name",
       emailLabel:"Email Address", emailPlaceholder:"you@company.com",
       inquiryLabel:"Inquiry Type", messageLabel:"Message", messagePlaceholder:"Tell us about your business and what you need...",
@@ -429,7 +429,7 @@ const STRINGS = {
     contact:{
       eyebrow:"Ponte en Contacto", title:"", titleSpan:"Hablemos",
       sub:"¿Listo para hablar de servicios tech o simplemente quieres seguir el viaje de Café Con Pan?",
-      info:[{label:"Correo",val:"hello@pancon.cafe"},{label:"Sitio Web",val:"pancon.cafe"},{label:"Negocio",val:"Cafe Con Pan LLC"},{label:"Servicios",val:"Tech · Café · Cultura"},{label:"Instagram",val:"@icafeconpan"},{label:"LinkedIn",val:"Cafe Con Pan LLC"}],
+      info:[{label:"Correo",val:"hello@pancon.cafe"},{label:"Sitio Web",val:"pancon.cafe"},{label:"Negocio",val:"Cafe Con Pan LLC"},{label:"Servicios",val:"Tech · Café · Cultura"}],
       nameLabel:"Tu Nombre", namePlaceholder:"Nombre completo",
       emailLabel:"Correo Electrónico", emailPlaceholder:"tu@empresa.com",
       inquiryLabel:"Tipo de Consulta", messageLabel:"Mensaje", messagePlaceholder:"Cuéntanos sobre tu negocio y lo que necesitas...",
@@ -1097,6 +1097,18 @@ function ContactPage({ t }) {
           ))}
           <div style={{marginTop:16}}>
             <SteamSVG />
+          </div>
+          <div style={{display:"flex",flexDirection:"column",gap:8,marginTop:24}}>
+            <div style={{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:4}}>{t.socials.followLabel}</div>
+            <div style={{display:"flex",gap:16,flexWrap:"wrap"}}>
+              <a href={t.socials.instagram} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.5}>{t.socials.instagramLabel}</a>
+              <a href={t.socials.linkedin} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.5}>{t.socials.linkedinLabel}</a>
+              <a href={t.socials.twitter} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.5}>{t.socials.twitterLabel}</a>
+              <a href={t.socials.tiktok} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.5}>{t.socials.tiktokLabel}</a>
+              {t.socials.youtube&&<a href={t.socials.youtube} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.5}>{t.socials.youtubeLabel}</a>}
+              {t.socials.facebook&&<a href={t.socials.facebook} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.5}>{t.socials.facebookLabel}</a>}
+              {t.socials.discord&&<a href={t.socials.discord} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.5}>{t.socials.discordLabel}</a>}
+            </div>
           </div>
         </div>
         <form onSubmit={submit}>
