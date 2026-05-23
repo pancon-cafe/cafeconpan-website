@@ -2398,7 +2398,7 @@ export default function CafeConPan() {
   const scrollToSocials = () => {
     document.getElementById("footer-socials")?.scrollIntoView({behavior:"smooth"});
     setHighlightSocials(true);
-    setTimeout(() => setHighlightSocials(false), 1900);
+    setTimeout(() => setHighlightSocials(false), 2400);
   };
   const go = (p) => {
     setPage(p); setMenuOpen(false); window.scrollTo(0,0);
@@ -2507,7 +2507,7 @@ export default function CafeConPan() {
               ...(t.socials.discord  ? [{href:t.socials.discord,  label:t.socials.discordLabel}]  : []),
             ].map(({href,label},i) => (
               <a key={label} href={href} target="_blank" rel="noopener noreferrer"
-                style={{...sLinkFt, animation:highlightSocials?`socialFlash 0.75s ease ${i*200}ms both`:undefined}}
+                style={{...sLinkFt, animation:highlightSocials?`socialFlash 0.75s ease ${i*400}ms both`:undefined}}
                 onMouseEnter={e=>e.currentTarget.style.opacity=1}
                 onMouseLeave={e=>e.currentTarget.style.opacity=0.6}
               >{label}</a>
