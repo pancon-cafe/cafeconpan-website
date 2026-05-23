@@ -606,7 +606,7 @@ const css = `
 
   .hero{min-height:100vh;background:${C.cream};display:flex;
     align-items:center;justify-content:center;
-    padding:80px 40px 0;position:relative;overflow:hidden;text-align:center}
+    padding:80px 40px 140px;position:relative;overflow:hidden;text-align:center}
   .hero-sunburst{position:absolute;top:50%;left:50%;
     transform:translate(-50%,-50%);z-index:0}
   .hero-content{position:relative;z-index:2;max-width:800px}
@@ -800,7 +800,7 @@ const css = `
     .nav-cta-btn{width:100%;text-align:center;margin-top:12px;padding:14px 20px}
     .lang-btn{margin-top:8px;width:100%;text-align:center}
     .nav-hamburger{display:flex}
-    .hero{padding:100px 24px 48px;min-height:auto}
+    .hero{padding:100px 24px 140px;min-height:100vh}
     .hero-pillars{flex-direction:column;align-items:stretch}
     .hero-pillar{justify-content:center}
     .section{padding:56px 24px}
