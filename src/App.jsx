@@ -990,7 +990,7 @@ function HomePage({ go, t, lang }) {
           </div>
           <div className="hero-domain">pancon.cafe</div>
         </div>
-        <button onClick={() => { const el = document.getElementById("story"); if (el) window.scrollTo({top: el.offsetTop - 64, behavior:"smooth"}); }} style={{position:"absolute",bottom:32,left:"50%",transform:"translateX(-50%)",background:"none",border:"none",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:4,padding:0,width:"auto"}}>
+        <button onClick={() => { const el = document.getElementById("story"); if (el) window.scrollTo({top: el.offsetTop - 64, behavior:"smooth"}); }} style={{position:"absolute",bottom:32,left:"50%",transform:"translateX(-50%)",background:"none",border:"none",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:4,padding:0,width:"auto",zIndex:3}}>
           <div style={{fontSize:9,letterSpacing:"0.2em",textTransform:"uppercase",fontWeight:700,color:C.espresso,opacity:0.4}}>SCROLL</div>
           <div className="scroll-indicator" style={{fontSize:20,color:C.espresso,opacity:0.4,lineHeight:1}}>↓</div>
         </button>
