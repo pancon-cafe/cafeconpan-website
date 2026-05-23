@@ -782,6 +782,7 @@ const PAGE_HASH = {
   "La Mesa Referral":"la-mesa-referral",
   "Privacy Policy":"privacy-policy",
   "Find My Plan":"find-my-plan",
+  "The Grind":"the-grind",
 };
 const HASH_PAGE = Object.fromEntries(Object.entries(PAGE_HASH).map(([k,v])=>[v,k]));
 const getPageFromHash = () => HASH_PAGE[window.location.hash.replace("#","")] || "Home";
@@ -2019,6 +2020,187 @@ function FindMyPlanPage({ go, t }) {
   );
 }
 
+function TheGrindPage({ go }) {
+  const PACKAGES = ["Open for Business","Apple Presence","Apple Operations","Connectivity Consulting","Tech Concierge"];
+  const PKG_DESC = {
+    "Open for Business":       "Full launch setup — devices, business email, banking, payments, and website.",
+    "Apple Presence":          "Apple Maps listing, Tap to Pay setup, and brand profile on Apple platforms.",
+    "Apple Operations":        "Ongoing device management, MDM, security, and IT support.",
+    "Connectivity Consulting": "Carrier audit and negotiation to lower phone and internet costs.",
+    "Tech Concierge":          "On-call tech support — one number to call when technology fails.",
+  };
+  const DEVICES   = ["iPhone","iPad","Mac","Windows PC","Android","Unknown/Mixed"];
+  const SIZES     = ["Solo","2–5","6–15","15+"];
+  const TIMELINES = ["ASAP","1 Month","3 Months","6 Months","Flexible"];
+
+  const blank = {bizName:"",personName:"",website:"",industry:"",whatTheyDo:"",teamSize:"",devices:[],painPoints:"",timeline:"",timelineDate:"",services:[],extra:""};
+  const [form, setForm] = useState(blank);
+  const [output, setOutput] = useState("");
+  const [copied, setCopied] = useState(false);
+  const [tooltip, setTooltip] = useState(null);
+  const tipTimer = useRef(null);
+
+  const toggle   = (field, val) => setForm(f => ({...f, [field]: f[field].includes(val) ? f[field].filter(x=>x!==val) : [...f[field],val]}));
+  const showTip  = i => { tipTimer.current = setTimeout(() => setTooltip(i), 500); };
+  const hideTip  = () => { clearTimeout(tipTimer.current); setTooltip(null); };
+
+  const buildPrompt = () => {
+    const {bizName,personName,website,industry,whatTheyDo,teamSize,devices,painPoints,timeline,timelineDate,services,extra} = form;
+    return `You are helping Jason, founder of Cafe Con Pan LLC — an Apple-focused tech consultancy for small businesses in the U.S. He is preparing for a discovery call with a potential client. Give him two things:
+
+1. PRACTICAL RECOMMENDATIONS: Specific, actionable ways to apply Apple technology and Cafe Con Pan's services to improve this client's workflow, operations, and visibility. Reference specific Apple products, apps, features, or programs by name (Apple Business Manager, Tap to Pay, Apple Maps, MDM, Shortcuts, etc.).
+
+2. CREATIVE IDEAS: Dream up 3–5 unique, unexpected ways technology — especially Apple's ecosystem — could transform how this specific type of business operates. Think beyond the obvious. Push into territory they wouldn't think to ask about.
+
+CLIENT DETAILS:
+- Legal Business Name: ${bizName}
+- Contact Name: ${personName||"Not provided"}
+- Website: ${website||"Not provided"}
+- Industry: ${industry}
+- What they do: ${whatTheyDo}
+- Team size: ${teamSize||"Not specified"}
+- Current devices: ${devices.length?devices.join(", "):"Unknown"}
+- Pain points: ${painPoints||"Not provided"}
+- Timeline: ${timelineDate ? `By ${new Date(timelineDate+"T00:00:00").toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"})}` : timeline||"Not specified"}
+- Services Jason thinks apply: ${services.length?services.join(", "):"None selected"}
+- Additional context: ${extra||"None"}
+
+CAFE CON PAN SERVICES (for reference):
+- Open for Business: Full business launch setup — devices, email, banking, payments, website
+- Apple Presence: Apple Maps listing, Tap to Pay, brand profile on Apple devices
+- Apple Operations: Ongoing MDM, device security, and IT management
+- Connectivity Consulting: Carrier audit, phone/internet cost negotiation
+- Tech Concierge: Ongoing on-call tech support
+
+IMPORTANT: If Jason's service assumptions seem off or incomplete based on the client details, say so and explain why. Recommend what actually fits — don't just confirm his selections.
+
+Be specific, be creative, and make Jason look brilliant on his first call.`;
+  };
+
+  const submit = e => { e.preventDefault(); setOutput(buildPrompt()); };
+  const copy   = () => { navigator.clipboard.writeText(output); setCopied(true); setTimeout(()=>setCopied(false),2000); };
+  const reset  = () => { setForm(blank); setOutput(""); setCopied(false); };
+
+  const fld  = {display:"block",width:"100%",padding:"12px 14px",fontFamily:"'Nunito',sans-serif",fontSize:14,fontWeight:600,color:C.espresso,background:C.cream,border:`2px solid ${C.espresso}22`,borderRadius:0,outline:"none",boxSizing:"border-box",marginTop:6};
+  const lbl  = {fontSize:11,letterSpacing:"0.14em",textTransform:"uppercase",fontWeight:700,color:C.espresso,opacity:0.6};
+  const chip = active => ({display:"inline-block",padding:"6px 14px",border:`2px solid ${active?C.teal:C.espresso}`,background:active?C.teal:"transparent",color:active?C.cream:C.espresso,fontFamily:"'Nunito',sans-serif",fontSize:12,fontWeight:700,cursor:"pointer",letterSpacing:"0.08em",textTransform:"uppercase",transition:"all 0.15s"});
+
+  return (
+    <>
+      <section style={{background:C.espresso,paddingTop:100,paddingBottom:56,paddingLeft:40,paddingRight:40,textAlign:"center",position:"relative",overflow:"hidden"}}>
+        <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",opacity:0.06,pointerEvents:"none"}}><Sunburst size={600} color={C.gold} opacity={0.8} /></div>
+        <div style={{position:"relative",zIndex:2}}>
+          <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:16}}>Admin · Prompt Builder</div>
+          <h1 style={{fontFamily:"'Lilita One',cursive",fontSize:"clamp(40px,7vw,72px)",color:C.cream,lineHeight:1.1,marginBottom:16}}>The <span style={{color:C.gold}}>Grind</span></h1>
+          <p style={{fontSize:15,color:`rgba(245,237,214,0.6)`,fontWeight:600,maxWidth:480,margin:"0 auto"}}>Fill in what you know about a potential client. Get a ready-to-paste Claude prompt with service ideas and creative tech angles.</p>
+        </div>
+      </section>
+
+      <TextileBorder flip />
+
+      <section className="section" style={{background:C.parchment}}>
+        <div style={{maxWidth:640,margin:"0 auto"}}>
+          {!output ? (
+            <form onSubmit={submit}>
+              <div style={{display:"flex",flexDirection:"column",gap:28}}>
+
+                <div>
+                  <span style={lbl}><a href="https://opencorporates.com" target="_blank" rel="noopener noreferrer" style={{color:C.espresso,opacity:0.6,textDecoration:"underline",fontWeight:700,letterSpacing:"0.14em",fontSize:11,textTransform:"uppercase"}}>Legal Business Name</a> *</span>
+                  <input style={fld} required value={form.bizName} onChange={e=>setForm(f=>({...f,bizName:e.target.value}))} placeholder="e.g. Maria's Salon LLC  /  John Smith (sole prop)" />
+                </div>
+
+                <div>
+                  <span style={lbl}>Contact Name</span>
+                  <input style={fld} value={form.personName} onChange={e=>setForm(f=>({...f,personName:e.target.value}))} placeholder="e.g. Maria Gonzalez" />
+                </div>
+
+                <div>
+                  <span style={lbl}>Website <span style={{opacity:0.4}}>(optional)</span></span>
+                  <input style={fld} value={form.website} onChange={e=>setForm(f=>({...f,website:e.target.value}))} placeholder="e.g. mariassalon.com" />
+                  <p style={{fontSize:11,color:C.espresso,opacity:0.4,fontWeight:600,marginTop:6,lineHeight:1.5}}>Tip: paste the URL into Claude.ai and ask it to browse the site for deeper context.</p>
+                </div>
+
+                <div>
+                  <span style={lbl}>Industry *</span>
+                  <input style={fld} required value={form.industry} onChange={e=>setForm(f=>({...f,industry:e.target.value}))} placeholder="e.g. Restaurant, Law Office, Barbershop..." />
+                </div>
+
+                <div>
+                  <span style={lbl}>What they do *</span>
+                  <textarea style={{...fld,minHeight:80,resize:"vertical"}} required value={form.whatTheyDo} onChange={e=>setForm(f=>({...f,whatTheyDo:e.target.value}))} placeholder="Briefly describe their business and day-to-day operations..." />
+                </div>
+
+                <div>
+                  <span style={lbl}>Pain points</span>
+                  <textarea style={{...fld,minHeight:80,resize:"vertical"}} value={form.painPoints} onChange={e=>setForm(f=>({...f,painPoints:e.target.value}))} placeholder="What problems are they facing? What made them reach out?" />
+                </div>
+
+                <div>
+                  <span style={lbl}>Team size</span>
+                  <div style={{marginTop:10,display:"flex",flexWrap:"wrap",gap:8}}>{SIZES.map(s=><button type="button" key={s} style={chip(form.teamSize===s)} onClick={()=>setForm(f=>({...f,teamSize:s}))}>{s}</button>)}</div>
+                </div>
+
+                <div>
+                  <span style={lbl}>Current devices</span>
+                  <div style={{marginTop:10,display:"flex",flexWrap:"wrap",gap:8}}>{DEVICES.map(d=><button type="button" key={d} style={chip(form.devices.includes(d))} onClick={()=>toggle("devices",d)}>{d}</button>)}</div>
+                </div>
+
+                <div>
+                  <span style={lbl}>Timeline</span>
+                  <div style={{marginTop:10,display:"flex",flexWrap:"wrap",gap:8,alignItems:"center"}}>
+                    {TIMELINES.map(tl=><button type="button" key={tl} style={chip(form.timeline===tl)} onClick={()=>setForm(f=>({...f,timeline:tl,timelineDate:""}))}>{tl}</button>)}
+                    <input type="date" value={form.timelineDate} onChange={e=>setForm(f=>({...f,timelineDate:e.target.value,timeline:""}))} style={{padding:"6px 10px",fontFamily:"'Nunito',sans-serif",fontSize:12,fontWeight:600,color:C.espresso,background:form.timelineDate?C.teal:"transparent",border:`2px solid ${form.timelineDate?C.teal:C.espresso}`,outline:"none",cursor:"pointer",colorScheme:"light"}} title="Pick a specific date" />
+                  </div>
+                </div>
+
+                <div>
+                  <span style={lbl}>Services I think apply <span style={{opacity:0.4,fontSize:10}}>(hover for details — Claude will challenge these)</span></span>
+                  <div style={{marginTop:10,display:"flex",flexWrap:"wrap",gap:8}}>
+                    {PACKAGES.map((p,i) => (
+                      <div key={p} style={{position:"relative"}}>
+                        <button
+                          type="button"
+                          style={chip(form.services.includes(p))}
+                          onClick={()=>toggle("services",p)}
+                          onMouseEnter={()=>showTip(i)}
+                          onMouseLeave={hideTip}
+                        >{p}</button>
+                        {tooltip === i && (
+                          <div style={{position:"absolute",bottom:"calc(100% + 8px)",left:"50%",transform:"translateX(-50%)",background:C.espresso,color:C.cream,fontSize:11,fontWeight:600,lineHeight:1.6,padding:"8px 12px",maxWidth:220,width:"max-content",zIndex:10,pointerEvents:"none",boxShadow:`2px 2px 0 ${C.gold}55`,textAlign:"center",textTransform:"none",letterSpacing:"0"}}>
+                            {PKG_DESC[p]}
+                            <div style={{position:"absolute",top:"100%",left:"50%",transform:"translateX(-50%)",width:0,height:0,borderLeft:"6px solid transparent",borderRight:"6px solid transparent",borderTop:`6px solid ${C.espresso}`}} />
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <span style={lbl}>Extra context</span>
+                  <textarea style={{...fld,minHeight:80,resize:"vertical"}} value={form.extra} onChange={e=>setForm(f=>({...f,extra:e.target.value}))} placeholder="Referral source, budget signals, specific goals..." />
+                </div>
+
+                <button type="submit" className="hero-cta" style={{alignSelf:"flex-start"}}>Brew the Prompt →</button>
+              </div>
+            </form>
+          ) : (
+            <div>
+              <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:16}}>Your Prompt is Ready</div>
+              <textarea readOnly value={output} style={{...fld,minHeight:420,resize:"vertical",fontSize:13,lineHeight:1.7,fontFamily:"monospace"}} />
+              <div style={{display:"flex",gap:12,marginTop:16,flexWrap:"wrap"}}>
+                <button className="hero-cta" onClick={copy}>{copied?"Copied! ✓":"Copy to Clipboard"}</button>
+                <button onClick={reset} style={{background:"none",border:`2px solid ${C.espresso}`,color:C.espresso,cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,letterSpacing:"0.1em",textTransform:"uppercase",padding:"12px 24px"}}>Start Over</button>
+              </div>
+              <p style={{marginTop:16,fontSize:12,color:C.espresso,opacity:0.4,fontWeight:600}}>Paste into Claude.ai to get your ideas.</p>
+            </div>
+          )}
+        </div>
+      </section>
+    </>
+  );
+}
+
 export default function CafeConPan() {
   const [page, setPage] = useState(getPageFromHash);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -2072,6 +2254,7 @@ export default function CafeConPan() {
       case "Pay": return <PayPage t={t} />;
       case "Privacy Policy": return <PrivacyPolicyPage go={go} lang={lang} />;
       case "Find My Plan": return <FindMyPlanPage go={go} t={t} />;
+      case "The Grind": return <TheGrindPage go={go} />;
       default: return <HomePage go={go} t={t} lang={lang} />;
     }
   };
@@ -2084,7 +2267,7 @@ export default function CafeConPan() {
           <div onClick={e => e.stopPropagation()} style={{background:C.espresso,border:`2px solid ${C.gold}`,boxShadow:`6px 6px 0 ${C.gold}44`,padding:"40px 48px",minWidth:280,textAlign:"center"}}>
             <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:24}}>Admin Access</div>
             <div style={{display:"flex",flexDirection:"column",gap:12}}>
-              {[["Pay","Pay"],["La Mesa Referral","La Mesa Referral"],["La Mesa","La Mesa"]].map(([label,page]) => (
+              {[["The Grind","The Grind"],["Pay","Pay"],["La Mesa Referral","La Mesa Referral"],["La Mesa","La Mesa"]].map(([label,page]) => (
                 <button key={page} onClick={() => { go(page); setSecretNavActive(false); }}
                   style={{background:"none",border:`2px solid ${C.beige}33`,color:C.cream,cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,letterSpacing:"0.1em",textTransform:"uppercase",padding:"12px 24px",transition:"border-color 0.2s"}}
                   onMouseEnter={e=>e.currentTarget.style.borderColor=C.gold}
