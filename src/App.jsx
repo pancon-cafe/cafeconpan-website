@@ -789,6 +789,8 @@ const css = `
   .brew-dots{animation:brewPulse 0.8s ease-in-out infinite}
 
   @keyframes socialFlash{0%,100%{opacity:0.6;color:#F5EDD6}40%{opacity:1;color:#F2B0AC}}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+  .scroll-indicator{animation:bounce 1.5s ease-in-out infinite}
 
   @media(max-width:768px){
     nav{padding:0 20px}
@@ -987,6 +989,10 @@ function HomePage({ go, t, lang }) {
             >{t.hero.ctaSecondary}</button>
           </div>
           <div className="hero-domain">pancon.cafe</div>
+          <button onClick={() => document.getElementById("pillars")?.scrollIntoView({behavior:"smooth"})} style={{marginTop:32,background:"none",border:"none",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:4,padding:0}}>
+            <div style={{fontSize:9,letterSpacing:"0.2em",textTransform:"uppercase",fontWeight:700,color:C.espresso,opacity:0.4}}>SCROLL</div>
+            <div className="scroll-indicator" style={{fontSize:20,color:C.espresso,opacity:0.4,lineHeight:1}}>↓</div>
+          </button>
         </div>
       </section>
 
@@ -1008,7 +1014,7 @@ function HomePage({ go, t, lang }) {
 
       <TextileBorder flip />
 
-      <section className="section section-dark">
+      <section id="pillars" className="section section-dark">
         <div className="section-header">
           <div className="section-eyebrow" style={{color:C.teal}}>{t.pillars.eyebrow}</div>
           <h2 className="section-title section-title-light">{t.pillars.title} <span>{t.pillars.titleSpan}</span></h2>
