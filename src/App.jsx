@@ -1098,30 +1098,6 @@ function ContactPage({ t }) {
           <div style={{marginTop:16}}>
             <SteamSVG />
           </div>
-          <div style={{display:"flex",flexDirection:"column",gap:8,marginTop:24}}>
-            <div style={{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:4}}>{t.socials.followLabel}</div>
-            <div style={{display:"flex",gap:16}}>
-              <a href={t.socials.instagram} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}}
-                onMouseEnter={e=>e.currentTarget.style.opacity=1}
-                onMouseLeave={e=>e.currentTarget.style.opacity=0.5}
-              >{t.socials.instagramLabel}</a>
-              <a href={t.socials.linkedin} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}}
-                onMouseEnter={e=>e.currentTarget.style.opacity=1}
-                onMouseLeave={e=>e.currentTarget.style.opacity=0.5}
-              >{t.socials.linkedinLabel}</a>
-              <a href={t.socials.twitter} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}}
-                onMouseEnter={e=>e.currentTarget.style.opacity=1}
-                onMouseLeave={e=>e.currentTarget.style.opacity=0.5}
-              >{t.socials.twitterLabel}</a>
-              <a href={t.socials.tiktok} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}}
-                onMouseEnter={e=>e.currentTarget.style.opacity=1}
-                onMouseLeave={e=>e.currentTarget.style.opacity=0.5}
-              >{t.socials.tiktokLabel}</a>
-              {t.socials.youtube&&<a href={t.socials.youtube} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.5}>{t.socials.youtubeLabel}</a>}
-              {t.socials.facebook&&<a href={t.socials.facebook} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.5}>{t.socials.facebookLabel}</a>}
-              {t.socials.discord&&<a href={t.socials.discord} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.5}>{t.socials.discordLabel}</a>}
-            </div>
-          </div>
         </div>
         <form onSubmit={submit}>
           <div className="form-field">
