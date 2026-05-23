@@ -996,9 +996,9 @@ function HomePage({ go, t, lang }) {
         </button>
       </section>
 
-      <TextileBorder />
+      <div id="story"><TextileBorder /></div>
 
-      <section id="story" className="section">
+      <section className="section">
         <div className="section-header">
           <div className="section-eyebrow">{t.story.eyebrow}</div>
           <h2 className="section-title">{t.story.title} <span>{t.story.titleSpan}</span></h2>
