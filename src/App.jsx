@@ -780,6 +780,9 @@ const css = `
   .nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
   .nav-hamburger span{display:block;width:22px;height:2px;background:${C.cream};border-radius:2px}
 
+  .form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:600px){.form-grid-2{grid-template-columns:1fr}}
+
   @media(max-width:768px){
     nav{padding:0 20px}
     .nav-links{display:none}
@@ -2083,13 +2086,13 @@ function DiscoveryPage({ go, t }) {
     } catch { setStatus("error"); }
   };
 
-  const fld = {display:"block",width:"100%",padding:"12px 14px",fontFamily:"'Nunito',sans-serif",fontSize:14,fontWeight:600,color:C.espresso,background:C.cream,border:`2px solid ${C.espresso}22`,borderRadius:0,outline:"none",boxSizing:"border-box",marginTop:6};
+  const fld = {display:"block",width:"100%",padding:"12px 14px",fontFamily:"'Nunito',sans-serif",fontSize:16,fontWeight:600,color:C.espresso,background:C.cream,border:`2px solid ${C.espresso}22`,borderRadius:0,outline:"none",boxSizing:"border-box",marginTop:6};
   const lbl = {fontSize:11,letterSpacing:"0.14em",textTransform:"uppercase",fontWeight:700,color:C.espresso,opacity:0.6,display:"block",marginBottom:2};
   const chip = active => ({display:"inline-block",padding:"6px 14px",border:`2px solid ${active?C.teal:C.espresso}`,background:active?C.teal:"transparent",color:active?C.cream:C.espresso,fontFamily:"'Nunito',sans-serif",fontSize:12,fontWeight:700,cursor:"pointer",letterSpacing:"0.08em",textTransform:"uppercase",transition:"all 0.15s"});
 
   return (
     <>
-      <section style={{background:C.espresso,paddingTop:100,paddingBottom:56,paddingLeft:40,paddingRight:40,textAlign:"center",position:"relative",overflow:"hidden"}}>
+      <section style={{background:C.espresso,paddingTop:100,paddingBottom:56,paddingLeft:"clamp(24px,5vw,40px)",paddingRight:"clamp(24px,5vw,40px)",textAlign:"center",position:"relative",overflow:"hidden"}}>
         <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",opacity:0.06,pointerEvents:"none"}}><Sunburst size={600} color={C.gold} opacity={0.8} /></div>
         <div style={{position:"relative",zIndex:2}}>
           <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:16}}>{d.eyebrow}</div>
@@ -2113,7 +2116,7 @@ function DiscoveryPage({ go, t }) {
             <form onSubmit={submit}>
               <div style={{display:"flex",flexDirection:"column",gap:24}}>
 
-                <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16}}>
+                <div className="form-grid-2">
                   <div>
                     <label style={lbl}>{d.nameLabel} *</label>
                     <input style={fld} required value={form.name} onChange={e=>setForm(f=>({...f,name:e.target.value}))} placeholder={d.namePlaceholder} />
@@ -2124,14 +2127,14 @@ function DiscoveryPage({ go, t }) {
                   </div>
                 </div>
 
-                <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16}}>
+                <div className="form-grid-2">
                   <div>
                     <label style={lbl}>{d.emailLabel} *</label>
                     <input style={fld} required type="email" value={form.email} onChange={e=>setForm(f=>({...f,email:e.target.value}))} placeholder={d.emailPlaceholder} />
                   </div>
                   <div>
                     <label style={lbl}>{d.bestTimeLabel}</label>
-                    <div style={{marginTop:10,display:"flex",gap:8}}>{d.bestTimeOptions.map(t=><button type="button" key={t} style={chip(form.bestTime===t)} onClick={()=>setForm(f=>({...f,bestTime:t}))}>{t}</button>)}</div>
+                    <div style={{marginTop:10,display:"flex",flexWrap:"wrap",gap:8}}>{d.bestTimeOptions.map(t=><button type="button" key={t} style={chip(form.bestTime===t)} onClick={()=>setForm(f=>({...f,bestTime:t}))}>{t}</button>)}</div>
                   </div>
                 </div>
 
@@ -2234,13 +2237,13 @@ Be specific, be creative, and make Jason look brilliant on his first call.`;
   const copy   = () => { navigator.clipboard.writeText(output); setCopied(true); setTimeout(()=>setCopied(false),2000); };
   const reset  = () => { setForm(blank); setOutput(""); setCopied(false); };
 
-  const fld  = {display:"block",width:"100%",padding:"12px 14px",fontFamily:"'Nunito',sans-serif",fontSize:14,fontWeight:600,color:C.espresso,background:C.cream,border:`2px solid ${C.espresso}22`,borderRadius:0,outline:"none",boxSizing:"border-box",marginTop:6};
+  const fld  = {display:"block",width:"100%",padding:"12px 14px",fontFamily:"'Nunito',sans-serif",fontSize:16,fontWeight:600,color:C.espresso,background:C.cream,border:`2px solid ${C.espresso}22`,borderRadius:0,outline:"none",boxSizing:"border-box",marginTop:6};
   const lbl  = {fontSize:11,letterSpacing:"0.14em",textTransform:"uppercase",fontWeight:700,color:C.espresso,opacity:0.6};
   const chip = active => ({display:"inline-block",padding:"6px 14px",border:`2px solid ${active?C.teal:C.espresso}`,background:active?C.teal:"transparent",color:active?C.cream:C.espresso,fontFamily:"'Nunito',sans-serif",fontSize:12,fontWeight:700,cursor:"pointer",letterSpacing:"0.08em",textTransform:"uppercase",transition:"all 0.15s"});
 
   return (
     <>
-      <section style={{background:C.espresso,paddingTop:100,paddingBottom:56,paddingLeft:40,paddingRight:40,textAlign:"center",position:"relative",overflow:"hidden"}}>
+      <section style={{background:C.espresso,paddingTop:100,paddingBottom:56,paddingLeft:"clamp(24px,5vw,40px)",paddingRight:"clamp(24px,5vw,40px)",textAlign:"center",position:"relative",overflow:"hidden"}}>
         <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",opacity:0.06,pointerEvents:"none"}}><Sunburst size={600} color={C.gold} opacity={0.8} /></div>
         <div style={{position:"relative",zIndex:2}}>
           <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:16}}>Admin · Prompt Builder</div>
