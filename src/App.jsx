@@ -78,7 +78,7 @@ const SteamSVG = () => (
 const STRINGS = {
   en: {
     nav: { items:["Home","Tech Services","Community","Our Story","Contact"], cta:"Get a Quote", langBtn:"ES" },
-    hero: { stamp:"☕ Honduras-Rooted · Est. 2025", subtitle:"Tech · Coffee · Culture · Community", signal:"Apple-focused tech for small businesses. Built by someone who's been on the inside — and speaks your language.", pillars:["Get Started →","Community"], cta:"Let's Talk About Your Business →", ctaSub:"Want to explore first? See our services →" },
+    hero: { stamp:"☕ Honduras-Rooted · Est. 2025", subtitle:"Tech · Coffee · Culture · Community", signal:"Apple-focused tech for small businesses. Built by someone who's been on the inside — and speaks your language.", cta:"Find My Fit →", ctaSecondary:"See Our Services →" },
     story: { eyebrow:"Our Story", title:"More Than a", titleSpan:"Cup of Coffee", body:"At Café Con Pan, we believe coffee is more than a drink — it's a connection. Rooted in our Honduran heritage, we started with a simple idea: to share authentic coffee and bread with our community. That same spirit drives everything we do — from helping small businesses launch and grow through technology, to building a space where culture and community come together. One cup and one connection at a time." },
     painPoints: {
       eyebrow:"Real Talk",
@@ -312,7 +312,7 @@ const STRINGS = {
   },
   es: {
     nav: { items:["Inicio","Servicios Tech","Comunidad","Nuestra Historia","Contacto"], cta:"Cotización", langBtn:"EN" },
-    hero: { stamp:"☕ Raíces Hondureñas · Est. 2025", subtitle:"Tech · Café · Cultura · Comunidad", signal:"Tech para pequeños negocios, enfocado en Apple. Construido por alguien que conoce el sistema por dentro — y que habla tu idioma. Literal y culturalmente.", pillars:["Empezar →","Comunidad"], cta:"Hablemos de Tu Negocio →", ctaSub:"¿Quieres explorar primero? Ver nuestros servicios →" },
+    hero: { stamp:"☕ Raíces Hondureñas · Est. 2025", subtitle:"Tech · Café · Cultura · Comunidad", signal:"Tech para pequeños negocios, enfocado en Apple. Construido por alguien que conoce el sistema por dentro — y que habla tu idioma. Literal y culturalmente.", cta:"Encontrar Mi Plan →", ctaSecondary:"Ver Nuestros Servicios →" },
     story: { eyebrow:"Nuestra Historia", title:"Más Que una", titleSpan:"Taza de Café", body:"En Café Con Pan, creemos que el café es más que una bebida — es una conexión. Con raíces en nuestra herencia hondureña, comenzamos con una idea simple: compartir café y pan auténtico con nuestra comunidad. Ese mismo espíritu impulsa todo lo que hacemos — desde ayudar a pequeños negocios a crecer mediante la tecnología, hasta construir un espacio donde la cultura y la comunidad se unen. Una taza y una conexión a la vez." },
     paraTi: {
       eyebrow:"Para Ti",
@@ -971,20 +971,20 @@ function HomePage({ go, t, lang }) {
           </h1>
           <p className="hero-subtitle">{t.hero.subtitle}</p>
           <p style={{fontSize:15,color:C.espresso,fontWeight:600,letterSpacing:"0.03em",margin:"8px auto 24px",lineHeight:1.7,opacity:0.75,maxWidth:520}}>{t.hero.signal}</p>
-          <div className="hero-pillars" style={{marginTop:24}}>
-            <button className="hero-pillar" onClick={() => go("Discovery")}>
-              <span className="hero-pillar-icon">⌨️</span> {t.hero.pillars[0]}
-            </button>
-            <button className="hero-pillar" onClick={() => go("Community")}>
-              <span className="hero-pillar-icon">☕</span> {t.hero.pillars[1]}
-            </button>
-          </div>
-          <button className="hero-cta" onClick={() => go("Discovery")}>{t.hero.cta}</button>
-          <div style={{marginTop:16}}>
-            <button onClick={() => go("Tech Services")} style={{background:"none",border:"none",cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontSize:13,color:C.espresso,fontWeight:700,opacity:0.45,letterSpacing:"0.03em",padding:0,textDecoration:"underline",textDecorationColor:`${C.espresso}33`,transition:"opacity 0.2s"}}
-              onMouseEnter={e=>e.currentTarget.style.opacity=0.75}
-              onMouseLeave={e=>e.currentTarget.style.opacity=0.45}
-            >{t.hero.ctaSub}</button>
+          <div style={{display:"flex",gap:16,justifyContent:"center",flexWrap:"wrap",marginTop:32,marginBottom:20}}>
+            <button className="hero-cta" onClick={() => go("Find My Plan")}>{t.hero.cta}</button>
+            <button onClick={() => go("Tech Services")} style={{
+              background:"transparent",color:C.espresso,
+              border:`3px solid ${C.espresso}`,
+              fontFamily:"'Nunito',sans-serif",fontSize:14,fontWeight:800,
+              letterSpacing:"0.1em",textTransform:"uppercase",
+              padding:"16px 40px",cursor:"pointer",
+              boxShadow:`4px 4px 0 ${C.espresso}`,
+              transition:"transform 0.1s,box-shadow 0.1s"
+            }}
+              onMouseEnter={e=>{e.currentTarget.style.transform="translate(2px,2px)";e.currentTarget.style.boxShadow=`2px 2px 0 ${C.espresso}`;}}
+              onMouseLeave={e=>{e.currentTarget.style.transform="";e.currentTarget.style.boxShadow=`4px 4px 0 ${C.espresso}`;}}
+            >{t.hero.ctaSecondary}</button>
           </div>
           <div className="hero-domain">pancon.cafe</div>
         </div>
