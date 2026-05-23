@@ -99,9 +99,9 @@ const STRINGS = {
     pillars: {
       eyebrow:"Three Pillars, One Brand", title:"What We're", titleSpan:"Building",
       cards:[
-        { n:"01", icon:"⌨️", title:"Tech Services", desc:"Apple-focused device management, IT consulting, and carrier services. Available now.", cta:"Explore →", page:"Tech Services" },
-        { n:"02", icon:"☕", title:"Coffee & Community", desc:"A Honduran-rooted café experience and cultural programming. Coming together.", cta:"See What's Coming →", page:"Community" },
-        { n:"03", icon:"🌱", title:"The Bigger Vision", desc:"Family land in Honduras. A café with a boardroom. An investment arm. The full picture.", cta:"Read Our Story →", page:"Our Story" },
+        { n:"01", icon:"⌨️", title:"Tech Services", badge:"Available Now", desc:"Apple-focused device management, IT consulting, and carrier services. One trusted partner from day one to fully operational. Available now.", cta:"Explore →", page:"Tech Services" },
+        { n:"02", icon:"☕", title:"Coffee & Community", badge:"Coming Soon", desc:"A Honduran-rooted café experience built around Central American single-origin coffee, pan dulce, and a physical space with a boardroom where clients meet and deals get done. Coming soon.", cta:"See What's Coming →", page:"Community" },
+        { n:"03", icon:"🌱", title:"The Bigger Vision", badge:"The Full Picture", desc:"Family land in Honduras. A café with a boardroom. An investment arm that grows alongside the clients we believe in. This is the full picture.", cta:"Read Our Story →", page:"Our Story" },
       ],
     },
     biggerPicture: {
@@ -345,9 +345,9 @@ const STRINGS = {
     pillars: {
       eyebrow:"Tres Pilares, Una Marca", title:"Lo Que Estamos", titleSpan:"Construyendo",
       cards:[
-        { n:"01", icon:"⌨️", title:"Servicios Tech", desc:"Gestión de dispositivos Apple, consultoría IT y servicios de carrier. Disponible ahora.", cta:"Explorar →", page:"Tech Services" },
-        { n:"02", icon:"☕", title:"Café & Comunidad", desc:"Una experiencia de café con raíces hondureñas y programas culturales. Tomando forma.", cta:"Ver lo que Viene →", page:"Community" },
-        { n:"03", icon:"🌱", title:"La Visión Completa", desc:"Tierras familiares en Honduras. Un café con sala de juntas. Un brazo de inversión. El panorama completo.", cta:"Nuestra Historia →", page:"Our Story" },
+        { n:"01", icon:"⌨️", title:"Servicios Tech", badge:"Disponible Ahora", desc:"Gestión de dispositivos Apple, consultoría IT y servicios de carrier. Un solo socio de confianza desde el primer día hasta estar completamente operativo. Disponible ahora.", cta:"Explorar →", page:"Tech Services" },
+        { n:"02", icon:"☕", title:"Café & Comunidad", badge:"Próximamente", desc:"Una experiencia de café con raíces hondureñas centrada en café de origen único centroamericano, pan dulce y un espacio físico con sala de juntas donde los clientes se reúnen y se cierran tratos. Próximamente.", cta:"Ver lo que Viene →", page:"Community" },
+        { n:"03", icon:"🌱", title:"La Visión Completa", badge:"El Panorama Completo", desc:"Tierras familiares en Honduras. Un café con sala de juntas. Un brazo de inversión que crece junto a los clientes en los que creemos. Este es el panorama completo.", cta:"Nuestra Historia →", page:"Our Story" },
       ],
     },
     biggerPicture: {
@@ -1002,30 +1002,29 @@ function HomePage({ go, t, lang }) {
 
       <TextileBorder flip />
 
-      <section className="section section-alt">
+      <section className="section section-dark">
         <div className="section-header">
-          <div className="section-eyebrow">{t.pillars.eyebrow}</div>
-          <h2 className="section-title">{t.pillars.title} <span>{t.pillars.titleSpan}</span></h2>
+          <div className="section-eyebrow" style={{color:C.teal}}>{t.pillars.eyebrow}</div>
+          <h2 className="section-title section-title-light">{t.pillars.title} <span>{t.pillars.titleSpan}</span></h2>
         </div>
         <div className="grid-3">
           {t.pillars.cards.map(p => (
             <div key={p.n} onClick={() => go(p.page)} style={{
-              background:C.cream, border:`3px solid ${C.espresso}`,
-              padding:"36px 28px",
-              boxShadow:`5px 5px 0 ${p.n==="01"?C.teal:p.n==="02"?C.red:C.gold}`,
-              cursor:"pointer", transition:"transform 0.15s,box-shadow 0.15s"
+              background:"rgba(255,255,255,0.05)", border:`2px solid ${C.beige}33`,
+              padding:32,
+              cursor:"pointer", transition:"opacity 0.15s"
             }}
-            onMouseEnter={e => { const col=p.n==="01"?C.teal:p.n==="02"?C.red:C.gold; e.currentTarget.style.transform="translate(-2px,-2px)"; e.currentTarget.style.boxShadow=`7px 7px 0 ${col}`; }}
-            onMouseLeave={e => { const col=p.n==="01"?C.teal:p.n==="02"?C.red:C.gold; e.currentTarget.style.transform=""; e.currentTarget.style.boxShadow=`5px 5px 0 ${col}`; }}>
-              <div style={{fontFamily:"'Lilita One',cursive",fontSize:64,opacity:0.08,color:C.espresso,lineHeight:1}}>{p.n}</div>
+            onMouseEnter={e => e.currentTarget.style.opacity=0.85}
+            onMouseLeave={e => e.currentTarget.style.opacity=1}>
               <div style={{fontSize:36,marginBottom:12}}>{p.icon}</div>
-              <div style={{fontFamily:"'Lilita One',cursive",fontSize:22,color:C.espresso,marginBottom:10}}>{p.title}</div>
-              <p style={{fontSize:14,lineHeight:1.8,color:"#555",fontWeight:600,marginBottom:16}}>{p.desc}</p>
+              <div style={{fontFamily:"'Lilita One',cursive",fontSize:22,color:C.cream,marginBottom:8}}>{p.title}</div>
+              <span style={{display:"inline-block",background:p.n==="01"?C.teal:p.n==="02"?C.red:C.gold,color:C.cream,fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",padding:"4px 10px",marginBottom:12}}>{p.badge}</span>
+              <p style={{fontSize:14,lineHeight:1.8,color:"rgba(245,237,214,0.65)",fontWeight:600,marginBottom:16}}>{p.desc}</p>
               <span style={{
                 display:"inline-block",
                 background:"transparent",
-                color:C.espresso,
-                border:`2px solid ${C.espresso}`,
+                color:C.cream,
+                border:`2px solid ${C.beige}55`,
                 fontSize:11,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",
                 padding:"5px 12px"
               }}>{p.cta}</span>
@@ -1035,26 +1034,6 @@ function HomePage({ go, t, lang }) {
       </section>
 
       <TextileBorder flip />
-
-      <section className="section section-dark">
-        <div className="section-header">
-          <div className="section-eyebrow" style={{color:C.teal}}>{t.biggerPicture.eyebrow}</div>
-          <h2 className="section-title section-title-light">{t.biggerPicture.title} <span>{t.biggerPicture.titleSpan}</span></h2>
-          <p className="section-sub section-sub-light">{t.biggerPicture.sub}</p>
-        </div>
-        <div className="grid-3">
-          {t.biggerPicture.cards.map(c => (
-            <div key={c.title} style={{background:"rgba(255,255,255,0.05)",border:`2px solid ${C.beige}33`,padding:32}}>
-              <div style={{fontSize:36,marginBottom:12}}>{c.icon}</div>
-              <div style={{fontFamily:"'Lilita One',cursive",fontSize:20,color:C.cream,marginBottom:8}}>{c.title}</div>
-              <span style={{display:"inline-block",background:C.teal,color:C.cream,fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",padding:"4px 10px",marginBottom:12}}>{c.badge}</span>
-              <p style={{fontSize:14,lineHeight:1.8,color:"rgba(245,237,214,0.65)",fontWeight:600}}>{c.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <TextileBorder />
 
       <section className="section" style={{background:C.parchment}}>
         <div className="soft-cta-row">
