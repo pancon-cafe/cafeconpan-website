@@ -88,7 +88,7 @@ const STRINGS = {
       cards:[
         { title:"Your business email is a @gmail.com, @yahoo.com, or @outlook.com.", desc:"Nothing wrong with those — except when one of them is the email on your business card. Clients notice. It signals you're not quite official yet, even when you absolutely are." },
         { title:"Your personal phone is your business phone.", desc:"Same number for family, clients, vendors, and late-night emergencies. No separation. No boundary. No way to ever really clock out." },
-        { title:"Someone bought iPhones at Best Buy and set them up with personal Apple IDs.", desc:"It worked — until someone quit. Now those devices have company contacts, emails, and apps tied to a personal account you can't access or control." },
+        { title:"Someone bought iPads at Best Buy and set them up with personal Apple IDs.", desc:"It worked — until someone quit. Now those devices have company contacts, emails, and apps tied to a personal account you can't access or control." },
         { title:"You don't know if you're overpaying your carrier.", desc:"Most small businesses are — by hundreds of dollars a month — on plans that made sense two years ago and haven't been looked at since." },
         { title:"Your business doesn't show up on Apple Maps.", desc:"Your customers are on iPhones. They search for businesses like yours every day. If you're not showing up — or showing up wrong — that's real revenue walking past your door." },
         { title:"When something breaks, everything stops.", desc:"No IT person to call. No system for fixing it fast. Just you, on hold, trying to figure it out — while your actual work piles up." },
@@ -316,7 +316,7 @@ const STRINGS = {
       cards:[
         { title:"El correo de tu negocio es un @gmail.com, @yahoo.com, o @outlook.com.", desc:"No hay nada malo con esos — excepto cuando uno de ellos es el correo en tu tarjeta de presentación. Los clientes lo notan. Da la impresión de que aún no estás del todo establecido, aunque llevas años trabajando duro." },
         { title:"Tu teléfono personal es tu teléfono de negocio.", desc:"El mismo número para la familia, los clientes, los proveedores y las emergencias de la noche. Sin separación. Sin límites. Sin manera de verdad desconectarte." },
-        { title:"Alguien compró los iPhones en una tienda y los configuró con un Apple ID personal.", desc:"Funcionó — hasta que alguien se fue. Ahora esos dispositivos tienen contactos, correos y aplicaciones del negocio vinculados a una cuenta personal a la que no tienes acceso." },
+        { title:"Alguien compró los iPads en una tienda y los configuró con un Apple ID personal.", desc:"Funcionó — hasta que alguien se fue. Ahora esos dispositivos tienen contactos, correos y aplicaciones del negocio vinculados a una cuenta personal a la que no tienes acceso." },
         { title:"No sabes si estás pagando de más con tu carrier.", desc:"La mayoría de los negocios pequeños sí están pagando de más — cientos de dólares al mes — en planes que tenían sentido hace dos años y nadie ha revisado desde entonces." },
         { title:"Tu negocio no aparece en Apple Maps.", desc:"Tus clientes tienen iPhones. Buscan negocios como el tuyo todos los días. Si no apareces — o apareces mal — eso es dinero real pasando de largo." },
         { title:"Cuando algo falla, todo se detiene.", desc:"Nadie a quien llamar. Ningún sistema para resolverlo rápido. Solo tú, esperando en el teléfono, tratando de averiguarlo — mientras el trabajo real se acumula." },
