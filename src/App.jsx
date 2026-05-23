@@ -295,7 +295,7 @@ const STRINGS = {
   },
   es: {
     nav: { items:["Inicio","Servicios Tech","Comunidad","Nuestra Historia","Contacto"], cta:"Cotización", langBtn:"EN" },
-    hero: { stamp:"☕ Raíces Hondureñas · Est. 2025", subtitle:"Tech · Café · Cultura · Comunidad", signal:"Tech para pequeños negocios, enfocado en Apple. Construido por alguien que conoce el sistema por dentro — y que habla tu idioma. Literal y culturalmente.", pillars:["Servicios Tech","Comunidad"], cta:"Ver Servicios Tech →", culturalSignal:"Hablamos tu idioma — literal y culturalmente." },
+    hero: { stamp:"☕ Raíces Hondureñas · Est. 2025", subtitle:"Tech · Café · Cultura · Comunidad", signal:"Tech para pequeños negocios, enfocado en Apple. Construido por alguien que conoce el sistema por dentro — y que habla tu idioma. Literal y culturalmente.", pillars:["Servicios Tech","Comunidad"], cta:"Ver Servicios Tech →" },
     story: { eyebrow:"Nuestra Historia", title:"Más Que una", titleSpan:"Taza de Café", body:"En Café Con Pan, creemos que el café es más que una bebida — es una conexión. Con raíces en nuestra herencia hondureña, comenzamos con una idea simple: compartir café y pan auténtico con nuestra comunidad. Ese mismo espíritu impulsa todo lo que hacemos — desde ayudar a pequeños negocios a crecer mediante la tecnología, hasta construir un espacio donde la cultura y la comunidad se unen. Una taza y una conexión a la vez." },
     paraTi: {
       eyebrow:"Para Ti",
@@ -729,9 +729,6 @@ const css = `
     color:${C.teal};font-weight:700}
   .footer-copy{font-size:12px;color:rgba(245,237,214,0.4);font-weight:600}
 
-  .divider-row{display:flex;align-items:center;gap:16px;margin:32px 0}
-  .divider-line{flex:1;height:2px;background:${C.espresso};opacity:0.15}
-  .divider-icon{font-size:20px;opacity:0.4}
 
   .soft-cta-row{display:flex;gap:48px;align-items:flex-start;justify-content:center;max-width:860px;margin:0 auto}
   .soft-cta-panel{flex:1 1 0;min-width:0;text-align:center}
