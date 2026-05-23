@@ -234,7 +234,7 @@ const STRINGS = {
       youtubeLabel:"YouTube",
       facebookLabel:"Facebook",
       discordLabel:"Discord",
-      followLabel:"Follow the Journey",
+      followLabel:"Follow the Journey", contactNote:"Follow us — find all our links in the footer below ↓",
     },
     contact:{
       eyebrow:"Get in Touch", title:"Let's", titleSpan:"Talk",
@@ -463,7 +463,7 @@ const STRINGS = {
       youtubeLabel:"YouTube",
       facebookLabel:"Facebook",
       discordLabel:"Discord",
-      followLabel:"Síguenos",
+      followLabel:"Síguenos", contactNote:"Síguenos — encuentra todos nuestros enlaces en el pie de página ↓",
     },
     contact:{
       eyebrow:"Ponte en Contacto", title:"", titleSpan:"Hablemos",
@@ -1124,7 +1124,6 @@ function AboutPage({ t }) {
 function ContactPage({ t }) {
   const [form, setForm] = useState({name:"",email:"",inquiry:t.contact.options[0],message:""});
   const [status, setStatus] = useState("idle");
-
   const handle = e => setForm({...form, [e.target.name]: e.target.value});
 
   const submit = async e => {
@@ -1159,7 +1158,7 @@ function ContactPage({ t }) {
     <section className="section" style={{paddingTop:100}}>
       <div className="section-header">
         <div className="section-eyebrow">{t.contact.eyebrow}</div>
-        <h2 className="section-title">{t.contact.title}{t.contact.title ? " " : ""}<span>{t.contact.titleSpan}</span></h2>
+        <h2 className="section-title">{t.contact.title && `${t.contact.title} `}<span>{t.contact.titleSpan}</span></h2>
         <p className="section-sub">{t.contact.sub}</p>
       </div>
       <div className="contact-grid">
@@ -1173,18 +1172,7 @@ function ContactPage({ t }) {
           <div style={{marginTop:16}}>
             <SteamSVG />
           </div>
-          <div style={{display:"flex",flexDirection:"column",gap:8,marginTop:24}}>
-            <div style={{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:4}}>{t.socials.followLabel}</div>
-            <div style={{display:"flex",gap:16,flexWrap:"wrap"}}>
-              <a href={t.socials.instagram} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.5}>{t.socials.instagramLabel}</a>
-              <a href={t.socials.linkedin} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.5}>{t.socials.linkedinLabel}</a>
-              <a href={t.socials.twitter} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.5}>{t.socials.twitterLabel}</a>
-              <a href={t.socials.tiktok} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.5}>{t.socials.tiktokLabel}</a>
-              {t.socials.youtube&&<a href={t.socials.youtube} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.5}>{t.socials.youtubeLabel}</a>}
-              {t.socials.facebook&&<a href={t.socials.facebook} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.5}>{t.socials.facebookLabel}</a>}
-              {t.socials.discord&&<a href={t.socials.discord} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.espresso,opacity:0.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.5}>{t.socials.discordLabel}</a>}
-            </div>
-          </div>
+          <p style={{marginTop:24,fontSize:13,color:C.espresso,fontWeight:600,opacity:0.55,letterSpacing:"0.03em"}}>{t.socials.contactNote}</p>
         </div>
         <form onSubmit={submit}>
           <div className="form-field">
@@ -2037,6 +2025,7 @@ export default function CafeConPan() {
   const typedRef = useRef("");
 
   const t = STRINGS[lang];
+  const sLinkFt = {fontSize:12,color:C.cream,opacity:0.6,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"};
   const go = (p) => {
     setPage(p); setMenuOpen(false); window.scrollTo(0,0);
     window.location.hash = PAGE_HASH[p];
@@ -2132,25 +2121,13 @@ export default function CafeConPan() {
         <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:8}}>
           <div style={{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:4}}>{t.socials.followLabel}</div>
           <div style={{display:"flex",gap:16}}>
-            <a href={t.socials.instagram} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.cream,opacity:0.6,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}}
-              onMouseEnter={e=>e.currentTarget.style.opacity=1}
-              onMouseLeave={e=>e.currentTarget.style.opacity=0.6}
-            >{t.socials.instagramLabel}</a>
-            <a href={t.socials.linkedin} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.cream,opacity:0.6,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}}
-              onMouseEnter={e=>e.currentTarget.style.opacity=1}
-              onMouseLeave={e=>e.currentTarget.style.opacity=0.6}
-            >{t.socials.linkedinLabel}</a>
-            <a href={t.socials.twitter} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.cream,opacity:0.6,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}}
-              onMouseEnter={e=>e.currentTarget.style.opacity=1}
-              onMouseLeave={e=>e.currentTarget.style.opacity=0.6}
-            >{t.socials.twitterLabel}</a>
-            <a href={t.socials.tiktok} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.cream,opacity:0.6,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}}
-              onMouseEnter={e=>e.currentTarget.style.opacity=1}
-              onMouseLeave={e=>e.currentTarget.style.opacity=0.6}
-            >{t.socials.tiktokLabel}</a>
-            {t.socials.youtube&&<a href={t.socials.youtube} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.cream,opacity:0.6,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.6}>{t.socials.youtubeLabel}</a>}
-            {t.socials.facebook&&<a href={t.socials.facebook} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.cream,opacity:0.6,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.6}>{t.socials.facebookLabel}</a>}
-            {t.socials.discord&&<a href={t.socials.discord} target="_blank" rel="noopener noreferrer" style={{fontSize:12,color:C.cream,opacity:0.6,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"}} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.6}>{t.socials.discordLabel}</a>}
+            <a href={t.socials.instagram} target="_blank" rel="noopener noreferrer" style={sLinkFt} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.6}>{t.socials.instagramLabel}</a>
+            <a href={t.socials.linkedin} target="_blank" rel="noopener noreferrer" style={sLinkFt} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.6}>{t.socials.linkedinLabel}</a>
+            <a href={t.socials.twitter} target="_blank" rel="noopener noreferrer" style={sLinkFt} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.6}>{t.socials.twitterLabel}</a>
+            <a href={t.socials.tiktok} target="_blank" rel="noopener noreferrer" style={sLinkFt} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.6}>{t.socials.tiktokLabel}</a>
+            {t.socials.youtube&&<a href={t.socials.youtube} target="_blank" rel="noopener noreferrer" style={sLinkFt} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.6}>{t.socials.youtubeLabel}</a>}
+            {t.socials.facebook&&<a href={t.socials.facebook} target="_blank" rel="noopener noreferrer" style={sLinkFt} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.6}>{t.socials.facebookLabel}</a>}
+            {t.socials.discord&&<a href={t.socials.discord} target="_blank" rel="noopener noreferrer" style={sLinkFt} onMouseEnter={e=>e.currentTarget.style.opacity=1} onMouseLeave={e=>e.currentTarget.style.opacity=0.6}>{t.socials.discordLabel}</a>}
           </div>
         </div>
 <div style={{fontSize:11,color:`rgba(245,237,214,0.35)`,fontWeight:600,textAlign:"center",maxWidth:480,lineHeight:1.6}}>{t.footer.disclaimer}</div>
