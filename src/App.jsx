@@ -288,6 +288,7 @@ const STRINGS = {
       seeResult:"See My Recommendation →",
       stepOf:"of",
       techBody:"Answer three quick questions and we'll point you to the right package.",
+      packagesNote:"Every business is different. These ranges reflect most engagements — your actual scope gets confirmed on our first call.",
       techCta:"Find My Package →",
       painPrompt:"Not sure which service fits?",
       painLink:"Find your package →",
@@ -517,6 +518,7 @@ const STRINGS = {
       seeResult:"Ver Mi Recomendación →",
       stepOf:"de",
       techBody:"Responde tres preguntas rápidas y te indicaremos el paquete adecuado.",
+      packagesNote:"Cada negocio es diferente. Estos rangos reflejan la mayoría de los proyectos — tu alcance real se confirma en nuestra primera llamada.",
       techCta:"Encuentra Tu Paquete →",
       painPrompt:"¿No sabes qué servicio te conviene?",
       painLink:"Encuentra tu paquete →",
@@ -1051,7 +1053,8 @@ function TechPage({ go, t }) {
             </div>
           ))}
         </div>
-        <div style={{textAlign:"center",marginTop:56,padding:"40px 32px",background:C.parchment,border:`3px solid ${C.espresso}`,boxShadow:`4px 4px 0 ${C.espresso}`,maxWidth:520,marginLeft:"auto",marginRight:"auto"}}>
+        <p style={{textAlign:"center",fontSize:12,color:C.espresso,opacity:0.45,fontWeight:600,letterSpacing:"0.03em",marginTop:32,marginBottom:0,lineHeight:1.7,maxWidth:520,marginLeft:"auto",marginRight:"auto"}}>{t.finder.packagesNote}</p>
+        <div style={{textAlign:"center",marginTop:32,padding:"40px 32px",background:C.parchment,border:`3px solid ${C.espresso}`,boxShadow:`4px 4px 0 ${C.espresso}`,maxWidth:520,marginLeft:"auto",marginRight:"auto"}}>
           <div style={{fontSize:10,letterSpacing:"0.18em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:12}}>{t.softCta.eyebrow}</div>
           <p style={{fontSize:15,color:"#555",fontWeight:600,lineHeight:1.7,marginBottom:24,maxWidth:380,margin:"0 auto 24px"}}>{t.finder.techBody}</p>
           <button className="hero-cta" onClick={() => go("Find My Plan")}>{t.finder.techCta}</button>
