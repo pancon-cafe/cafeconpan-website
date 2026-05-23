@@ -253,6 +253,46 @@ const STRINGS = {
     footer:{ tagline:"Tech · Coffee · Culture", copy:"© 2026 Cafe Con Pan LLC · pancon.cafe", disclaimer:"We provide guidance and implementation support — not legal, tax, or financial advice. For those needs, we recommend working with a licensed professional." },
     pay:{ eyebrow:"Pay Your Invoice", title:"Quick &", titleSpan:"Secure", body:"Enter your invoice number and amount on the next page. Payment is processed securely through Helcim.", cta:"Pay Now →", questions:"Questions? Email" },
     privacy:{ footerLink:"Privacy Policy" },
+    finder:{
+      eyebrow:"Package Finder",
+      title:"Find the right", titleSpan:"fit", titleEnd:"for you",
+      sub:"Three quick questions — we'll point you to the right starting place.",
+      q1:"Where are you in your business journey?",
+      q2:"What do you need most right now?",
+      q3:"What else would be helpful?",
+      q3Sub:"Select all that apply.",
+      q1Options:[
+        { label:"Just getting started", desc:"Building my business from the ground up" },
+        { label:"Already in business",  desc:"I have an established or operating business" },
+      ],
+      q2Options:[
+        { label:"Launch everything from scratch",   desc:"Devices, website, banking, payments, and more" },
+        { label:"Get visible on Apple devices",     desc:"Apple Maps, Tap to Pay, Brand Profile" },
+        { label:"Manage my Apple devices",          desc:"Ongoing IT, security, and device management" },
+        { label:"Lower my phone or internet costs", desc:"Carrier audit, negotiation, ISP setup" },
+        { label:"Have a trusted tech contact",      desc:"One number to call when technology fails" },
+      ],
+      q3Options:[
+        { label:"Ongoing tech support",         desc:"A reliable contact after setup is done" },
+        { label:"Better carrier rates",         desc:"Audit and negotiate my phone/internet bills" },
+        { label:"Day-to-day device management", desc:"Keeping Apple devices updated and secure" },
+      ],
+      startingNotes:{
+        visible:"Since you're just launching, consider pairing this with Open for Business to handle the full setup first.",
+        devices:"Just getting started? Open for Business handles full setup — including device procurement — before ongoing management makes sense.",
+      },
+      match:"Your Match",
+      alsoConsider:"You Might Also Consider",
+      seeAll:"See All Packages",
+      startOver:"Start over",
+      continue:"Continue →",
+      seeResult:"See My Recommendation →",
+      stepOf:"of",
+      techBody:"Answer three quick questions and we'll point you to the right package.",
+      techCta:"Find My Package →",
+      painPrompt:"Not sure which service fits?",
+      painLink:"Find your package →",
+    },
   },
   es: {
     nav: { items:["Inicio","Servicios Tech","Comunidad","Nuestra Historia","Contacto"], cta:"Cotización", langBtn:"EN" },
@@ -443,6 +483,46 @@ const STRINGS = {
     footer:{ tagline:"Tech · Café · Cultura", copy:"© 2026 Cafe Con Pan LLC · pancon.cafe", disclaimer:"Ofrecemos orientación y apoyo operativo — no asesoría legal, fiscal ni financiera. Para esas necesidades, recomendamos trabajar con un profesional licenciado." },
     pay:{ eyebrow:"Paga tu Factura", title:"Rápido y", titleSpan:"Seguro", body:"Ingresa el número de factura y el monto en la siguiente página. El pago se procesa de forma segura a través de Helcim.", cta:"Pagar Ahora →", questions:"¿Preguntas? Escríbenos a" },
     privacy:{ footerLink:"Política de Privacidad" },
+    finder:{
+      eyebrow:"Buscador de Paquetes",
+      title:"Encuentra el", titleSpan:"paquete", titleEnd:"adecuado para ti",
+      sub:"Tres preguntas rápidas — te indicaremos el mejor punto de partida.",
+      q1:"¿En qué punto estás con tu negocio?",
+      q2:"¿Qué necesitas más ahora mismo?",
+      q3:"¿Qué más te sería útil?",
+      q3Sub:"Selecciona todo lo que aplique.",
+      q1Options:[
+        { label:"Apenas empezando", desc:"Construyendo mi negocio desde cero" },
+        { label:"Ya tengo negocio", desc:"Tengo un negocio establecido en operación" },
+      ],
+      q2Options:[
+        { label:"Lanzar todo desde cero",                   desc:"Dispositivos, sitio web, banca, pagos y más" },
+        { label:"Aparecer en dispositivos Apple",            desc:"Apple Maps, Tap to Pay, Perfil de Marca" },
+        { label:"Gestionar mis dispositivos Apple",          desc:"IT continuo, seguridad y gestión de dispositivos" },
+        { label:"Reducir mis costos de teléfono o internet", desc:"Auditoría de carrier, negociación, ISP" },
+        { label:"Tener un contacto tech de confianza",       desc:"Un número al que llamar cuando la tecnología falla" },
+      ],
+      q3Options:[
+        { label:"Soporte tech continuo",          desc:"Un contacto confiable después de la configuración" },
+        { label:"Mejores tarifas de carrier",     desc:"Auditar y negociar mis facturas de teléfono e internet" },
+        { label:"Gestión diaria de dispositivos", desc:"Mantener los dispositivos Apple al día y seguros" },
+      ],
+      startingNotes:{
+        visible:"Como estás comenzando, considera combinar esto con Abrir el Negocio para manejar la configuración completa primero.",
+        devices:"¿Apenas empezando? Abrir el Negocio maneja la configuración completa — incluyendo dispositivos — antes de que la gestión continua tenga sentido.",
+      },
+      match:"Tu Coincidencia",
+      alsoConsider:"También Podrías Considerar",
+      seeAll:"Ver Todos los Paquetes",
+      startOver:"Empezar de nuevo",
+      continue:"Continuar →",
+      seeResult:"Ver Mi Recomendación →",
+      stepOf:"de",
+      techBody:"Responde tres preguntas rápidas y te indicaremos el paquete adecuado.",
+      techCta:"Encuentra Tu Paquete →",
+      painPrompt:"¿No sabes qué servicio te conviene?",
+      painLink:"Encuentra tu paquete →",
+    },
   },
 };
 
@@ -824,9 +904,9 @@ function PainPointsSection({ go, t }) {
         <p style={{fontFamily:"'Pacifico',cursive",fontSize:20,color:C.espresso,lineHeight:1.6,marginBottom:32}}>"{t.painPoints.bridge}"</p>
         <button className="hero-cta" onClick={() => go("Contact")}>{t.painPoints.cta}</button>
         <p style={{marginTop:16,fontSize:13,color:C.espresso,fontWeight:600,opacity:0.6}}>
-          Not sure which service fits?{" "}
+          {t.finder.painPrompt}{" "}
           <button onClick={() => go("Find My Plan")} style={{background:"none",border:"none",cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,color:C.teal,textDecoration:"underline",padding:0}}>
-            Find your package →
+            {t.finder.painLink}
           </button>
         </p>
       </div>
@@ -977,9 +1057,9 @@ function TechPage({ go, t }) {
           ))}
         </div>
         <div style={{textAlign:"center",marginTop:56,padding:"40px 32px",background:C.parchment,border:`3px solid ${C.espresso}`,boxShadow:`4px 4px 0 ${C.espresso}`,maxWidth:520,marginLeft:"auto",marginRight:"auto"}}>
-          <div style={{fontSize:10,letterSpacing:"0.18em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:12}}>Not Sure Where to Start?</div>
-          <p style={{fontSize:15,color:"#555",fontWeight:600,lineHeight:1.7,marginBottom:24,maxWidth:380,margin:"0 auto 24px"}}>Answer two quick questions and we'll point you to the right package.</p>
-          <button className="hero-cta" onClick={() => go("Find My Plan")}>Find My Package →</button>
+          <div style={{fontSize:10,letterSpacing:"0.18em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:12}}>{t.softCta.eyebrow}</div>
+          <p style={{fontSize:15,color:"#555",fontWeight:600,lineHeight:1.7,marginBottom:24,maxWidth:380,margin:"0 auto 24px"}}>{t.finder.techBody}</p>
+          <button className="hero-cta" onClick={() => go("Find My Plan")}>{t.finder.techCta}</button>
         </div>
       </section>
 
@@ -1772,31 +1852,23 @@ function FindMyPlanPage({ go, t }) {
 
   const TOTAL = 3;
 
-  const q1Options = [
-    { id:"starting", icon:"🌱", label:"Just getting started", desc:"Building my business from the ground up" },
-    { id:"running",  icon:"🏢", label:"Already in business",  desc:"I have an established or operating business" },
-  ];
+  const Q1_IDS   = ["starting","running"];
+  const Q1_ICONS = ["🌱","🏢"];
+  const Q2_IDS   = ["launch","visible","devices","bills","support"];
+  const Q2_ICONS = ["🚀","📍","🔁","📡","🤝"];
+  const Q3_IDS   = ["ongoingSupport","carrierCosts","deviceMgmt"];
+  const Q3_ICONS = ["🤝","📡","🔁"];
 
-  const q2Options = [
-    { id:"launch",   icon:"🚀", label:"Launch everything from scratch",   desc:"Devices, website, banking, payments, and more" },
-    { id:"visible",  icon:"📍", label:"Get visible on Apple devices",     desc:"Apple Maps, Tap to Pay, Brand Profile" },
-    { id:"devices",  icon:"🔁", label:"Manage my Apple devices",          desc:"Ongoing IT, security, and device management" },
-    { id:"bills",    icon:"📡", label:"Lower my phone or internet costs", desc:"Carrier audit, negotiation, ISP setup" },
-    { id:"support",  icon:"🤝", label:"Have a trusted tech contact",      desc:"One number to call when technology fails" },
-  ];
-
-  const q3Options = [
-    { id:"ongoingSupport", icon:"🤝", label:"Ongoing tech support",         desc:"A reliable contact after setup is done" },
-    { id:"carrierCosts",   icon:"📡", label:"Better carrier rates",         desc:"Audit and negotiate my phone/internet bills" },
-    { id:"deviceMgmt",     icon:"🔁", label:"Day-to-day device management", desc:"Keeping Apple devices updated and secure" },
-  ];
+  const q1Options = t.finder.q1Options.map((o,i) => ({ id:Q1_IDS[i], icon:Q1_ICONS[i], ...o }));
+  const q2Options = t.finder.q2Options.map((o,i) => ({ id:Q2_IDS[i], icon:Q2_ICONS[i], ...o }));
+  const q3Options = t.finder.q3Options.map((o,i) => ({ id:Q3_IDS[i], icon:Q3_ICONS[i], ...o }));
 
   const RESULT_IDX = { launch:0, visible:1, devices:2, bills:3, support:4 };
   const Q3_PKG_IDX  = { ongoingSupport:4, carrierCosts:3, deviceMgmt:2 };
 
   const STARTING_NOTE = {
-    visible:"Since you're just launching, consider pairing this with Open for Business to handle the full setup first.",
-    devices:"Just getting started? Open for Business handles full setup — including device procurement — before ongoing management makes sense.",
+    visible: t.finder.startingNotes.visible,
+    devices: t.finder.startingNotes.devices,
   };
 
   const pkg = q2 ? t.tech.packages[RESULT_IDX[q2]] : null;
@@ -1821,11 +1893,7 @@ function FindMyPlanPage({ go, t }) {
   const back = () => { setStep(s => s - 1); if (step === 3) setQ3([]); else setQ2(null); };
   const next = () => step < TOTAL ? setStep(s => s + 1) : setStep(TOTAL + 1);
 
-  const stepLabel = step === 1
-    ? "Where are you in your business journey?"
-    : step === 2
-    ? "What do you need most right now?"
-    : "What else would be helpful?";
+  const stepLabel = step === 1 ? t.finder.q1 : step === 2 ? t.finder.q2 : t.finder.q3;
 
   return (
     <>
@@ -1833,11 +1901,11 @@ function FindMyPlanPage({ go, t }) {
         <div style={{maxWidth:560,margin:"0 auto"}}>
 
           <div style={{textAlign:"center",marginBottom:48}}>
-            <div className="section-eyebrow" style={{color:C.teal}}>Package Finder</div>
+            <div className="section-eyebrow" style={{color:C.teal}}>{t.finder.eyebrow}</div>
             <h1 className="section-title" style={{marginBottom:8}}>
-              Find the right <span style={{color:C.red}}>fit</span> for you
+              {t.finder.title} <span style={{color:C.red}}>{t.finder.titleSpan}</span> {t.finder.titleEnd}
             </h1>
-            <p style={{fontSize:15,color:"#555",fontWeight:600,lineHeight:1.7}}>Three quick questions — we'll point you to the right starting place.</p>
+            <p style={{fontSize:15,color:"#555",fontWeight:600,lineHeight:1.7}}>{t.finder.sub}</p>
           </div>
 
           <div style={{background:C.parchment,border:`3px solid ${C.espresso}`,boxShadow:`5px 5px 0 ${C.espresso}`,padding:"40px 40px 36px"}}>
@@ -1852,7 +1920,7 @@ function FindMyPlanPage({ go, t }) {
                   <div style={{flex:1,height:4,background:"#D4C5B0",borderRadius:2,overflow:"hidden"}}>
                     <div style={{width:`${(step/TOTAL)*100}%`,height:"100%",background:C.teal,transition:"width 0.3s"}} />
                   </div>
-                  <div style={{fontSize:11,fontWeight:700,letterSpacing:"0.12em",color:C.espresso,opacity:0.4,flexShrink:0,textTransform:"uppercase"}}>{step} of {TOTAL}</div>
+                  <div style={{fontSize:11,fontWeight:700,letterSpacing:"0.12em",color:C.espresso,opacity:0.4,flexShrink:0,textTransform:"uppercase"}}>{step} {t.finder.stepOf} {TOTAL}</div>
                 </div>
 
                 <h2 style={{fontFamily:"'Lilita One',cursive",fontSize:24,color:C.espresso,marginBottom:step===3?8:28,lineHeight:1.3}}>
@@ -1860,7 +1928,7 @@ function FindMyPlanPage({ go, t }) {
                 </h2>
 
                 {step === 3 && (
-                  <p style={{fontSize:13,color:"#777",fontWeight:600,marginBottom:24}}>Select all that apply.</p>
+                  <p style={{fontSize:13,color:"#777",fontWeight:600,marginBottom:24}}>{t.finder.q3Sub}</p>
                 )}
 
                 {(step === 1 ? q1Options : step === 2 ? q2Options : q3Options).map(opt => {
@@ -1897,14 +1965,14 @@ function FindMyPlanPage({ go, t }) {
                     transition:"background 0.2s",
                   }}
                 >
-                  {step === TOTAL ? "See My Recommendation →" : "Continue →"}
+                  {step === TOTAL ? t.finder.seeResult : t.finder.continue}
                 </button>
               </>
             ) : (
               <>
                 {/* Result */}
                 <div style={{textAlign:"center",marginBottom:28}}>
-                  <div style={{fontSize:10,letterSpacing:"0.2em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:10}}>Your Match</div>
+                  <div style={{fontSize:10,letterSpacing:"0.2em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:10}}>{t.finder.match}</div>
                   <div style={{fontSize:40,marginBottom:8}}>{pkg.icon}</div>
                   <div style={{fontFamily:"'Lilita One',cursive",fontSize:26,color:C.espresso,marginBottom:6}}>{pkg.name}</div>
                   <div style={{display:"inline-block",background:C.teal,color:C.cream,fontSize:10,fontWeight:700,letterSpacing:"0.15em",textTransform:"uppercase",padding:"4px 12px",marginBottom:20}}>{pkg.tag}</div>
@@ -1920,7 +1988,7 @@ function FindMyPlanPage({ go, t }) {
 
                 {companions.length > 0 && (
                   <div style={{marginBottom:24,paddingTop:20,borderTop:`1px solid ${C.espresso}22`}}>
-                    <div style={{fontSize:10,letterSpacing:"0.18em",textTransform:"uppercase",color:C.espresso,fontWeight:700,opacity:0.5,marginBottom:14}}>You Might Also Consider</div>
+                    <div style={{fontSize:10,letterSpacing:"0.18em",textTransform:"uppercase",color:C.espresso,fontWeight:700,opacity:0.5,marginBottom:14}}>{t.finder.alsoConsider}</div>
                     {companions.map(c => (
                       <div key={c.name} style={{display:"flex",alignItems:"center",gap:12,padding:"12px 16px",border:`1px solid ${C.beige}`,background:C.cream,marginBottom:8}}>
                         <span style={{fontSize:22}}>{c.icon}</span>
@@ -1934,15 +2002,15 @@ function FindMyPlanPage({ go, t }) {
                 )}
 
                 <button className="hero-cta" onClick={() => go("Contact")} style={{width:"100%",textAlign:"center",marginBottom:12,display:"block"}}>
-                  Request a Consultation →
+                  {t.tech.creds.cta}
                 </button>
                 <button onClick={() => go("Tech Services")} style={{width:"100%",background:"none",border:`2px solid ${C.espresso}`,color:C.espresso,fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,letterSpacing:"0.08em",textTransform:"uppercase",padding:"14px",cursor:"pointer",marginBottom:20}}>
-                  See All Packages
+                  {t.finder.seeAll}
                 </button>
                 <div style={{textAlign:"center"}}>
                   <button onClick={() => { setStep(1); setQ1(null); setQ2(null); setQ3([]); }}
                     style={{background:"none",border:"none",cursor:"pointer",fontSize:12,color:C.espresso,opacity:0.45,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"underline"}}>
-                    Start over
+                    {t.finder.startOver}
                   </button>
                 </div>
               </>
