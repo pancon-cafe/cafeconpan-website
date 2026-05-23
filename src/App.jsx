@@ -989,11 +989,11 @@ function HomePage({ go, t, lang }) {
             >{t.hero.ctaSecondary}</button>
           </div>
           <div className="hero-domain">pancon.cafe</div>
-          <button onClick={() => document.getElementById("pillars")?.scrollIntoView({behavior:"smooth"})} style={{marginTop:32,background:"none",border:"none",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:4,padding:0}}>
-            <div style={{fontSize:9,letterSpacing:"0.2em",textTransform:"uppercase",fontWeight:700,color:C.espresso,opacity:0.4}}>SCROLL</div>
-            <div className="scroll-indicator" style={{fontSize:20,color:C.espresso,opacity:0.4,lineHeight:1}}>↓</div>
-          </button>
         </div>
+        <button onClick={() => document.getElementById("pillars")?.scrollIntoView({behavior:"smooth"})} style={{position:"absolute",bottom:32,left:"50%",transform:"translateX(-50%)",background:"none",border:"none",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:4,padding:0,width:"auto"}}>
+          <div style={{fontSize:9,letterSpacing:"0.2em",textTransform:"uppercase",fontWeight:700,color:C.espresso,opacity:0.4}}>SCROLL</div>
+          <div className="scroll-indicator" style={{fontSize:20,color:C.espresso,opacity:0.4,lineHeight:1}}>↓</div>
+        </button>
       </section>
 
       <TextileBorder />
