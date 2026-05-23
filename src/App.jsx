@@ -238,7 +238,7 @@ const STRINGS = {
     },
     contact:{
       eyebrow:"Get in Touch", title:"Let's", titleSpan:"Talk",
-      sub:"Ready to talk tech services, or just want to follow the Café Con Pan journey?",
+      sub:"General questions, existing clients, or anything that doesn't fit a form — this is the right place.",
       info:[{label:"Email",val:"hello@pancon.cafe"},{label:"Website",val:"pancon.cafe"},{label:"Business",val:"Cafe Con Pan LLC"},{label:"Services",val:"Tech · Coffee · Culture"}],
       nameLabel:"Your Name", namePlaceholder:"Full name",
       emailLabel:"Email Address", emailPlaceholder:"you@company.com",
@@ -252,6 +252,22 @@ const STRINGS = {
     footer:{ tagline:"Tech · Coffee · Culture", copy:"© 2026 Cafe Con Pan LLC · pancon.cafe", disclaimer:"We provide guidance and implementation support — not legal, tax, or financial advice. For those needs, we recommend working with a licensed professional." },
     pay:{ eyebrow:"Pay Your Invoice", title:"Quick &", titleSpan:"Secure", body:"Enter your invoice number and amount on the next page. Payment is processed securely through Helcim.", cta:"Pay Now →", questions:"Questions? Email" },
     privacy:{ footerLink:"Privacy Policy" },
+    discovery:{
+      eyebrow:"Pre-Call Questionnaire", title:"Before", titleSpan:"We Talk",
+      sub:"Five quick questions so we can make the most of our first conversation. Takes about 3 minutes.",
+      nameLabel:"Your name", namePlaceholder:"First and last name",
+      emailLabel:"Your email", emailPlaceholder:"you@yourbusiness.com",
+      phoneLabel:"Phone number", phonePlaceholder:"Best number to reach you",
+      bestTimeLabel:"Best time to reach you",
+      bestTimeOptions:["Morning","Afternoon","Evening"],
+      q1Label:"Business name & what you do", q1Placeholder:"Tell us your business name and describe what you do day-to-day.",
+      q2Label:"Devices your team currently uses",
+      q3Label:"Biggest tech frustration", q3Placeholder:"What's the most frustrating technology problem in your business right now?",
+      q4Label:"What you wish your business could do", q4Placeholder:"What would you love your business to be able to do that it can't today?",
+      q5Label:"Timeline or deadline", q5Placeholder:"Any specific date or urgency we should know about? (optional)",
+      submit:"Submit →", sending:"Sending…",
+      successTitle:"You're all set.", successBody:"We'll review your answers before we connect. Expect to hear from us shortly.",
+    },
     finder:{
       eyebrow:"Package Finder",
       title:"Find the right", titleSpan:"fit", titleEnd:"for you",
@@ -468,7 +484,7 @@ const STRINGS = {
     },
     contact:{
       eyebrow:"Ponte en Contacto", title:"", titleSpan:"Hablemos",
-      sub:"¿Listo para hablar de servicios tech o simplemente quieres seguir el viaje de Café Con Pan?",
+      sub:"Preguntas generales, clientes actuales, o cualquier cosa que no encaje en un formulario — este es el lugar indicado.",
       info:[{label:"Correo",val:"hello@pancon.cafe"},{label:"Sitio Web",val:"pancon.cafe"},{label:"Negocio",val:"Cafe Con Pan LLC"},{label:"Servicios",val:"Tech · Café · Cultura"}],
       nameLabel:"Tu Nombre", namePlaceholder:"Nombre completo",
       emailLabel:"Correo Electrónico", emailPlaceholder:"tu@empresa.com",
@@ -482,6 +498,22 @@ const STRINGS = {
     footer:{ tagline:"Tech · Café · Cultura", copy:"© 2026 Cafe Con Pan LLC · pancon.cafe", disclaimer:"Ofrecemos orientación y apoyo operativo — no asesoría legal, fiscal ni financiera. Para esas necesidades, recomendamos trabajar con un profesional licenciado." },
     pay:{ eyebrow:"Paga tu Factura", title:"Rápido y", titleSpan:"Seguro", body:"Ingresa el número de factura y el monto en la siguiente página. El pago se procesa de forma segura a través de Helcim.", cta:"Pagar Ahora →", questions:"¿Preguntas? Escríbenos a" },
     privacy:{ footerLink:"Política de Privacidad" },
+    discovery:{
+      eyebrow:"Cuestionario Pre-Llamada", title:"Antes de", titleSpan:"Hablar",
+      sub:"Cinco preguntas rápidas para aprovechar al máximo nuestra primera conversación. Toma unos 3 minutos.",
+      nameLabel:"Tu nombre", namePlaceholder:"Nombre y apellido",
+      emailLabel:"Tu correo", emailPlaceholder:"tu@tunegocio.com",
+      phoneLabel:"Número de teléfono", phonePlaceholder:"El mejor número para contactarte",
+      bestTimeLabel:"Mejor hora para contactarte",
+      bestTimeOptions:["Mañana","Tarde","Noche"],
+      q1Label:"Nombre del negocio y qué haces", q1Placeholder:"Cuéntanos el nombre de tu negocio y describe lo que haces día a día.",
+      q2Label:"Dispositivos que usa tu equipo",
+      q3Label:"Tu mayor frustración tecnológica", q3Placeholder:"¿Cuál es el problema tecnológico más frustrante en tu negocio ahora mismo?",
+      q4Label:"Lo que desearías que tu negocio pudiera hacer", q4Placeholder:"¿Qué te gustaría que tu negocio pudiera hacer hoy que todavía no puede?",
+      q5Label:"Plazo o fecha límite", q5Placeholder:"¿Alguna fecha específica o urgencia que debamos saber? (opcional)",
+      submit:"Enviar →", sending:"Enviando…",
+      successTitle:"¡Listo.", successBody:"Revisaremos tus respuestas antes de conectarnos. Estaremos en contacto pronto.",
+    },
     finder:{
       eyebrow:"Buscador de Paquetes",
       title:"Encuentra el", titleSpan:"paquete", titleEnd:"adecuado para ti",
@@ -783,6 +815,7 @@ const PAGE_HASH = {
   "Privacy Policy":"privacy-policy",
   "Find My Plan":"find-my-plan",
   "The Grind":"the-grind",
+  "Discovery":"discovery",
 };
 const HASH_PAGE = Object.fromEntries(Object.entries(PAGE_HASH).map(([k,v])=>[v,k]));
 const getPageFromHash = () => HASH_PAGE[window.location.hash.replace("#","")] || "Home";
@@ -900,7 +933,7 @@ function PainPointsSection({ go, t }) {
       </div>
       <div style={{textAlign:"center",maxWidth:640,margin:"56px auto 0"}}>
         <p style={{fontFamily:"'Pacifico',cursive",fontSize:20,color:C.espresso,lineHeight:1.6,marginBottom:32}}>"{t.painPoints.bridge}"</p>
-        <button className="hero-cta" onClick={() => go("Contact")}>{t.painPoints.cta}</button>
+        <button className="hero-cta" onClick={() => go("Discovery")}>{t.painPoints.cta}</button>
         <p style={{marginTop:16,fontSize:13,color:C.espresso,fontWeight:600,opacity:0.6}}>
           {t.finder.painPrompt}{" "}
           <button onClick={() => go("Find My Plan")} style={{background:"none",border:"none",cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,color:C.teal,textDecoration:"underline",padding:0}}>
@@ -1079,7 +1112,7 @@ function TechPage({ go, t }) {
           ))}
         </div>
         <div style={{textAlign:"center",marginTop:48}}>
-          <button className="hero-cta" onClick={() => go("Contact")}>{t.tech.creds.cta}</button>
+          <button className="hero-cta" onClick={() => go("Discovery")}>{t.tech.creds.cta}</button>
         </div>
       </section>
 
@@ -1125,7 +1158,7 @@ function AboutPage({ t }) {
   );
 }
 
-function ContactPage({ t }) {
+function ContactPage({ t, go }) {
   const [form, setForm] = useState({name:"",email:"",inquiry:t.contact.options[0],message:""});
   const [status, setStatus] = useState("idle");
   const handle = e => setForm({...form, [e.target.name]: e.target.value});
@@ -2020,6 +2053,126 @@ function FindMyPlanPage({ go, t }) {
   );
 }
 
+function DiscoveryPage({ go, t }) {
+  const d = t.discovery;
+  const DEVICES = ["iPhone","iPad","Mac","Windows PC","Android","Unknown/Mixed"];
+  const blank = {name:"",email:"",phone:"",bestTime:"",bizDesc:"",devices:[],frustration:"",wishList:"",timeline:""};
+  const [form, setForm] = useState(blank);
+  const [status, setStatus] = useState("idle");
+
+  const toggle = val => setForm(f => ({...f, devices: f.devices.includes(val) ? f.devices.filter(x=>x!==val) : [...f.devices,val]}));
+
+  const submit = async e => {
+    e.preventDefault();
+    setStatus("submitting");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          access_key:"bb35de9c-0515-4e74-9f2f-202d6fd033b8",
+          subject:"Pre-Call Questionnaire — " + (form.name||"New Submission"),
+          name:form.name,
+          email:form.email,
+          replyto:form.email,
+          message:`PHONE: ${form.phone||"Not provided"}\nBEST TIME: ${form.bestTime||"Not specified"}\n\nBUSINESS: ${form.bizDesc}\n\nDEVICES: ${form.devices.join(", ")||"Not specified"}\n\nFRUSTRATION: ${form.frustration}\n\nWISH LIST: ${form.wishList}\n\nTIMELINE: ${form.timeline||"Not specified"}`,
+        }),
+      });
+      const data = await res.json();
+      setStatus(data.success ? "success" : "error");
+    } catch { setStatus("error"); }
+  };
+
+  const fld = {display:"block",width:"100%",padding:"12px 14px",fontFamily:"'Nunito',sans-serif",fontSize:14,fontWeight:600,color:C.espresso,background:C.cream,border:`2px solid ${C.espresso}22`,borderRadius:0,outline:"none",boxSizing:"border-box",marginTop:6};
+  const lbl = {fontSize:11,letterSpacing:"0.14em",textTransform:"uppercase",fontWeight:700,color:C.espresso,opacity:0.6,display:"block",marginBottom:2};
+  const chip = active => ({display:"inline-block",padding:"6px 14px",border:`2px solid ${active?C.teal:C.espresso}`,background:active?C.teal:"transparent",color:active?C.cream:C.espresso,fontFamily:"'Nunito',sans-serif",fontSize:12,fontWeight:700,cursor:"pointer",letterSpacing:"0.08em",textTransform:"uppercase",transition:"all 0.15s"});
+
+  return (
+    <>
+      <section style={{background:C.espresso,paddingTop:100,paddingBottom:56,paddingLeft:40,paddingRight:40,textAlign:"center",position:"relative",overflow:"hidden"}}>
+        <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",opacity:0.06,pointerEvents:"none"}}><Sunburst size={600} color={C.gold} opacity={0.8} /></div>
+        <div style={{position:"relative",zIndex:2}}>
+          <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:16}}>{d.eyebrow}</div>
+          <h1 style={{fontFamily:"'Lilita One',cursive",fontSize:"clamp(40px,7vw,72px)",color:C.cream,lineHeight:1.1,marginBottom:16}}>{d.title} <span style={{color:C.gold}}>{d.titleSpan}</span></h1>
+          <p style={{fontSize:15,color:`rgba(245,237,214,0.6)`,fontWeight:600,maxWidth:480,margin:"0 auto"}}>{d.sub}</p>
+        </div>
+      </section>
+
+      <TextileBorder flip />
+
+      <section className="section" style={{background:C.parchment}}>
+        <div style={{maxWidth:600,margin:"0 auto"}}>
+          {status === "success" ? (
+            <div style={{textAlign:"center",padding:"48px 24px"}}>
+              <div style={{fontSize:40,marginBottom:16}}>☕</div>
+              <h2 style={{fontFamily:"'Lilita One',cursive",fontSize:32,color:C.espresso,marginBottom:12}}>{d.successTitle}</h2>
+              <p style={{fontSize:15,color:"#555",fontWeight:600,lineHeight:1.7,maxWidth:400,margin:"0 auto 32px"}}>{d.successBody}</p>
+              <button className="hero-cta" onClick={() => go("Home")}>Back to Home</button>
+            </div>
+          ) : (
+            <form onSubmit={submit}>
+              <div style={{display:"flex",flexDirection:"column",gap:24}}>
+
+                <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16}}>
+                  <div>
+                    <label style={lbl}>{d.nameLabel} *</label>
+                    <input style={fld} required value={form.name} onChange={e=>setForm(f=>({...f,name:e.target.value}))} placeholder={d.namePlaceholder} />
+                  </div>
+                  <div>
+                    <label style={lbl}>{d.phoneLabel}</label>
+                    <input style={fld} type="tel" value={form.phone} onChange={e=>setForm(f=>({...f,phone:e.target.value}))} placeholder={d.phonePlaceholder} />
+                  </div>
+                </div>
+
+                <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16}}>
+                  <div>
+                    <label style={lbl}>{d.emailLabel} *</label>
+                    <input style={fld} required type="email" value={form.email} onChange={e=>setForm(f=>({...f,email:e.target.value}))} placeholder={d.emailPlaceholder} />
+                  </div>
+                  <div>
+                    <label style={lbl}>{d.bestTimeLabel}</label>
+                    <div style={{marginTop:10,display:"flex",gap:8}}>{d.bestTimeOptions.map(t=><button type="button" key={t} style={chip(form.bestTime===t)} onClick={()=>setForm(f=>({...f,bestTime:t}))}>{t}</button>)}</div>
+                  </div>
+                </div>
+
+                <div>
+                  <label style={lbl}>{d.q1Label} *</label>
+                  <textarea style={{...fld,minHeight:90,resize:"vertical"}} required value={form.bizDesc} onChange={e=>setForm(f=>({...f,bizDesc:e.target.value}))} placeholder={d.q1Placeholder} />
+                </div>
+
+                <div>
+                  <label style={lbl}>{d.q2Label}</label>
+                  <div style={{marginTop:10,display:"flex",flexWrap:"wrap",gap:8}}>{DEVICES.map(dev=><button type="button" key={dev} style={chip(form.devices.includes(dev))} onClick={()=>toggle(dev)}>{dev}</button>)}</div>
+                </div>
+
+                <div>
+                  <label style={lbl}>{d.q3Label} *</label>
+                  <textarea style={{...fld,minHeight:90,resize:"vertical"}} required value={form.frustration} onChange={e=>setForm(f=>({...f,frustration:e.target.value}))} placeholder={d.q3Placeholder} />
+                </div>
+
+                <div>
+                  <label style={lbl}>{d.q4Label} *</label>
+                  <textarea style={{...fld,minHeight:90,resize:"vertical"}} required value={form.wishList} onChange={e=>setForm(f=>({...f,wishList:e.target.value}))} placeholder={d.q4Placeholder} />
+                </div>
+
+                <div>
+                  <label style={lbl}>{d.q5Label}</label>
+                  <input style={fld} value={form.timeline} onChange={e=>setForm(f=>({...f,timeline:e.target.value}))} placeholder={d.q5Placeholder} />
+                </div>
+
+                <button type="submit" className="hero-cta" style={{alignSelf:"flex-start"}} disabled={status==="submitting"}>
+                  {status==="submitting" ? d.sending : d.submit}
+                </button>
+                {status==="error" && <p style={{fontSize:13,color:C.red,fontWeight:700}}>Something went wrong — please try again or email hello@pancon.cafe.</p>}
+              </div>
+            </form>
+          )}
+        </div>
+      </section>
+    </>
+  );
+}
+
 function TheGrindPage({ go }) {
   const PACKAGES = ["Open for Business","Apple Presence","Apple Operations","Connectivity Consulting","Tech Concierge"];
   const PKG_DESC = {
@@ -2248,13 +2401,14 @@ export default function CafeConPan() {
       case "Tech Services": return <TechPage go={go} t={t} />;
       case "Community": return <CommunityPage t={t} go={go} />;
       case "Our Story": return <AboutPage t={t} />;
-      case "Contact": return <ContactPage t={t} />;
+      case "Contact": return <ContactPage t={t} go={go} />;
       case "La Mesa": return <LaMesaPage t={t} go={go} />;
       case "La Mesa Referral": return <LaMesaReferralPage t={t} go={go} />;
       case "Pay": return <PayPage t={t} />;
       case "Privacy Policy": return <PrivacyPolicyPage go={go} lang={lang} />;
       case "Find My Plan": return <FindMyPlanPage go={go} t={t} />;
       case "The Grind": return <TheGrindPage go={go} />;
+      case "Discovery": return <DiscoveryPage go={go} t={t} />;
       default: return <HomePage go={go} t={t} lang={lang} />;
     }
   };
@@ -2292,7 +2446,7 @@ export default function CafeConPan() {
               {t.nav.items[i]}
             </button>
           ))}
-          <button className="nav-cta-btn" onClick={() => go("Contact")}>{t.nav.cta}</button>
+          <button className="nav-cta-btn" onClick={() => go("Discovery")}>{t.nav.cta}</button>
           <button className="lang-btn" onClick={() => setLang(lang === "en" ? "es" : "en")}>{t.nav.langBtn}</button>
         </div>
         <button className="nav-hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
