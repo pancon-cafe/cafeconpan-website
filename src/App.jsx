@@ -217,7 +217,6 @@ const STRINGS = {
         "Café Con Pan started in a bowl of coffee in Honduras. It's becoming something you can build your business on.",
         "One cup and one connection at a time.",
       ],
-      pullQuote:"Coffee is how Central Americans say good morning, welcome home, and I'm glad you're here.",
       storyCta:"Let's Build Something Together →",
     },
     socials:{
@@ -464,7 +463,6 @@ const STRINGS = {
         "Café Con Pan comenzó en un tazón de café en Honduras. Se está convirtiendo en algo sobre lo que puedes construir tu negocio.",
         "Una taza y una conexión a la vez.",
       ],
-      pullQuote:"El café es la forma en que los centroamericanos dicen buenos días, bienvenido a casa, y me alegra que estés aquí.",
       storyCta:"Construyamos Algo Juntos →",
     },
     socials:{
