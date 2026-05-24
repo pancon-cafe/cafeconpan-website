@@ -234,7 +234,7 @@ const STRINGS = {
       youtubeLabel:"YouTube",
       facebookLabel:"Facebook",
       discordLabel:"Discord",
-      followLabel:"Follow the Journey", contactNote:"Follow us in the footer ↓",
+      followLabel:"Follow the Journey", contactNote:"Follow us ↓",
     },
     contact:{
       eyebrow:"Get in Touch", title:"Let's", titleSpan:"Talk",
@@ -481,7 +481,7 @@ const STRINGS = {
       youtubeLabel:"YouTube",
       facebookLabel:"Facebook",
       discordLabel:"Discord",
-      followLabel:"Síguenos", contactNote:"Síguenos en el pie de página ↓",
+      followLabel:"Síguenos", contactNote:"Síguenos ↓",
     },
     contact:{
       eyebrow:"Ponte en Contacto", title:"", titleSpan:"Hablemos",
@@ -1210,7 +1210,7 @@ function ContactPage({ t, go, scrollToSocials, setGameActive }) {
           ))}
           <div className="contact-info-item" onClick={scrollToSocials} style={{cursor:"pointer"}}>
             <div className="contact-info-label">{t.socials.followLabel}</div>
-            <div className="contact-info-val">{t.socials.contactNote}</div>
+            <div className="contact-info-val" style={{textDecoration:"underline",textUnderlineOffset:3}}>{t.socials.contactNote}</div>
           </div>
           <div style={{marginTop:32,cursor:"pointer",display:"block",opacity:0.85,transition:"opacity 0.2s"}}
             onClick={() => setGameActive(true)}
