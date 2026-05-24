@@ -775,6 +775,7 @@ const css = `
 
   .form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   @media(max-width:600px){.form-grid-2{grid-template-columns:1fr}}
+  .disc-chip:hover{background:${C.parchment};border-color:${C.teal};color:${C.espresso}}
 
   @keyframes brewFill{from{width:0}to{width:100%}}
   @keyframes brewPulse{0%,100%{opacity:0.25}50%{opacity:1}}
@@ -2149,12 +2150,12 @@ function DiscoveryPage({ go, t }) {
                     <label style={lbl}>{d.bestTimeLabel}</label>
                     <div style={{marginTop:10,display:"flex",flexWrap:"wrap",gap:8}}>
                       {d.bestTimeOptions.map(opt=>(
-                        <button type="button" key={opt} style={chip(form.bestTime===opt && !form.bestDateTime)} onClick={()=>setForm(f=>({...f,bestTime:opt,bestDateTime:""}))}>{opt}</button>
+                        <button type="button" key={opt} className="disc-chip" style={chip(form.bestTime===opt && !form.bestDateTime)} onClick={()=>setForm(f=>({...f,bestTime:opt,bestDateTime:""}))}>{opt}</button>
                       ))}
-                      <button type="button" style={chip(!!form.bestDateTime)} onClick={()=>dtRef.current?.showPicker()}>
+                      <button type="button" className="disc-chip" style={chip(!!form.bestDateTime)} onClick={()=>dtRef.current?.showPicker()}>
                         {form.bestDateTime ? formatDT(form.bestDateTime) : d.bestTimePlaceholder}
                       </button>
-                      <input ref={dtRef} type="datetime-local" style={{position:"absolute",opacity:0,pointerEvents:"none",width:0,height:0}} value={form.bestDateTime} onChange={e=>setForm(f=>({...f,bestDateTime:e.target.value,bestTime:""}))} />
+                      <input ref={dtRef} type="datetime-local" step={1800} style={{position:"absolute",opacity:0,pointerEvents:"none",width:0,height:0}} value={form.bestDateTime} onChange={e=>setForm(f=>({...f,bestDateTime:e.target.value,bestTime:""}))} />
                     </div>
                   </div>
                 </div>
