@@ -78,7 +78,7 @@ const SteamSVG = () => (
 const STRINGS = {
   en: {
     nav: { items:["Home","Tech Services","Community","Our Story","Contact"], cta:"Get a Quote", langBtn:"ES" },
-    hero: { stamp:"☕ Honduras-Rooted · Est. 2025", subtitle:"Tech · Coffee · Culture · Community", signal:"Apple-focused tech for small businesses. Built by someone who's been on the inside — and speaks your language.", cta:"Find My Fit →", ctaSecondary:"See Our Services →" },
+    hero: { stamp:"☕ Honduras American Roots · Est. 2025", subtitle:"Tech · Coffee · Culture · Community", signal:"Apple-focused tech for small businesses. Built by someone who's been on the inside — and speaks your language.", cta:"Find My Fit →", ctaSecondary:"See Our Services →" },
     story: { eyebrow:"Our Story", title:"More Than a", titleSpan:"Cup of Coffee", body:"At Café Con Pan, we believe coffee is more than a drink — it's a connection. Rooted in our Honduran heritage, we started with a simple idea: to share authentic coffee and bread with our community. That same spirit drives everything we do — from helping small businesses launch and grow through technology, to building a space where culture and community come together. One cup and one connection at a time." },
     painPoints: {
       eyebrow:"Real Talk",
@@ -303,7 +303,7 @@ const STRINGS = {
   },
   es: {
     nav: { items:["Inicio","Servicios Tech","Comunidad","Nuestra Historia","Contacto"], cta:"Cotización", langBtn:"EN" },
-    hero: { stamp:"☕ Raíces Hondureñas · Est. 2025", subtitle:"Tech · Café · Cultura · Comunidad", signal:"Tech para pequeños negocios, enfocado en Apple. Construido por alguien que conoce el sistema por dentro — y que habla tu idioma. Literal y culturalmente.", cta:"Encontrar Mi Plan →", ctaSecondary:"Ver Nuestros Servicios →" },
+    hero: { stamp:"☕ Raíces Hondureño-Americanas · Est. 2025", subtitle:"Tech · Café · Cultura · Comunidad", signal:"Tech para pequeños negocios, enfocado en Apple. Construido por alguien que conoce el sistema por dentro — y que habla tu idioma. Literal y culturalmente.", cta:"Encontrar Mi Plan →", ctaSecondary:"Ver Nuestros Servicios →" },
     story: { eyebrow:"Nuestra Historia", title:"Más Que una", titleSpan:"Taza de Café", body:"En Café Con Pan, creemos que el café es más que una bebida — es una conexión. Con raíces en nuestra herencia hondureña, comenzamos con una idea simple: compartir café y pan auténtico con nuestra comunidad. Ese mismo espíritu impulsa todo lo que hacemos — desde ayudar a pequeños negocios a crecer mediante la tecnología, hasta construir un espacio donde la cultura y la comunidad se unen. Una taza y una conexión a la vez." },
     paraTi: {
       eyebrow:"Para Ti",
