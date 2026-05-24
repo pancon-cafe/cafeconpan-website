@@ -261,7 +261,7 @@ const STRINGS = {
       phoneLabel:"Phone number", phonePlaceholder:"Best number to reach you",
       bestTimeLabel:"Best time to reach you",
       bestTimeOptions:["Morning","Afternoon","Evening"],
-      bestTimePlaceholder:"Or enter a specific time (e.g. Tuesdays at 2pm)",
+      bestTimePlaceholder:"Pick a date & time",
       q1Label:"Business name & what you do", q1Placeholder:"Tell us your business name and describe what you do day-to-day.",
       q2Label:"Devices your team currently uses",
       q3Label:"Biggest tech frustration", q3Placeholder:"What's the most frustrating technology problem in your business right now?",
@@ -510,7 +510,7 @@ const STRINGS = {
       phoneLabel:"Número de teléfono", phonePlaceholder:"El mejor número para contactarte",
       bestTimeLabel:"Mejor hora para contactarte",
       bestTimeOptions:["Mañana","Tarde","Noche"],
-      bestTimePlaceholder:"O escribe un horario específico (ej. martes a las 2pm)",
+      bestTimePlaceholder:"Elegir fecha y hora",
       q1Label:"Nombre del negocio y qué haces", q1Placeholder:"Cuéntanos el nombre de tu negocio y describe lo que haces día a día.",
       q2Label:"Dispositivos que usa tu equipo",
       q3Label:"Tu mayor frustración tecnológica", q3Placeholder:"¿Cuál es el problema tecnológico más frustrante en tu negocio ahora mismo?",
@@ -2066,9 +2066,16 @@ function FindMyPlanPage({ go, t }) {
 function DiscoveryPage({ go, t }) {
   const d = t.discovery;
   const DEVICES = ["iPhone","iPad","Mac","Windows PC","Android","Unknown/Mixed"];
-  const blank = {name:"",email:"",phone:"",bestTime:"",bizDesc:"",devices:[],frustration:"",wishList:"",timeline:""};
+  const blank = {name:"",email:"",phone:"",bestTime:"",bestDateTime:"",bizDesc:"",devices:[],frustration:"",wishList:"",timeline:""};
   const [form, setForm] = useState(blank);
   const [status, setStatus] = useState("idle");
+  const dtRef = useRef(null);
+
+  const formatDT = iso => {
+    if (!iso) return "";
+    const d = new Date(iso);
+    return d.toLocaleString("en-US",{weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"});
+  };
 
   const toggle = val => setForm(f => ({...f, devices: f.devices.includes(val) ? f.devices.filter(x=>x!==val) : [...f.devices,val]}));
 
@@ -2085,7 +2092,7 @@ function DiscoveryPage({ go, t }) {
           name:form.name,
           email:form.email,
           replyto:form.email,
-          message:`PHONE: ${form.phone||"Not provided"}\nBEST TIME: ${form.bestTime||"Not specified"}\n\nBUSINESS: ${form.bizDesc}\n\nDEVICES: ${form.devices.join(", ")||"Not specified"}\n\nFRUSTRATION: ${form.frustration}\n\nWISH LIST: ${form.wishList}\n\nTIMELINE: ${form.timeline||"Not specified"}`,
+          message:`PHONE: ${form.phone||"Not provided"}\nBEST TIME: ${form.bestDateTime ? formatDT(form.bestDateTime) : form.bestTime||"Not specified"}\n\nBUSINESS: ${form.bizDesc}\n\nDEVICES: ${form.devices.join(", ")||"Not specified"}\n\nFRUSTRATION: ${form.frustration}\n\nWISH LIST: ${form.wishList}\n\nTIMELINE: ${form.timeline||"Not specified"}`,
         }),
       });
       const data = await res.json();
@@ -2140,8 +2147,15 @@ function DiscoveryPage({ go, t }) {
                   </div>
                   <div>
                     <label style={lbl}>{d.bestTimeLabel}</label>
-                    <div style={{marginTop:10,display:"flex",flexWrap:"wrap",gap:8}}>{d.bestTimeOptions.map(t=><button type="button" key={t} style={chip(form.bestTime===t)} onClick={()=>setForm(f=>({...f,bestTime:t}))}>{t}</button>)}</div>
-                    <input style={{...fld,marginTop:8}} value={d.bestTimeOptions.includes(form.bestTime) ? "" : form.bestTime} onChange={e=>setForm(f=>({...f,bestTime:e.target.value}))} placeholder={d.bestTimePlaceholder} />
+                    <div style={{marginTop:10,display:"flex",flexWrap:"wrap",gap:8}}>
+                      {d.bestTimeOptions.map(opt=>(
+                        <button type="button" key={opt} style={chip(form.bestTime===opt && !form.bestDateTime)} onClick={()=>setForm(f=>({...f,bestTime:opt,bestDateTime:""}))}>{opt}</button>
+                      ))}
+                      <button type="button" style={chip(!!form.bestDateTime)} onClick={()=>dtRef.current?.showPicker()}>
+                        {form.bestDateTime ? formatDT(form.bestDateTime) : d.bestTimePlaceholder}
+                      </button>
+                      <input ref={dtRef} type="datetime-local" style={{position:"absolute",opacity:0,pointerEvents:"none",width:0,height:0}} value={form.bestDateTime} onChange={e=>setForm(f=>({...f,bestDateTime:e.target.value,bestTime:""}))} />
+                    </div>
                   </div>
                 </div>
 
