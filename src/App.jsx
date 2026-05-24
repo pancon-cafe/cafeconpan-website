@@ -551,8 +551,10 @@ const css = `
 
   @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
   @keyframes pop{from{opacity:0;transform:scale(0.92)}to{opacity:1;transform:scale(1)}}
+  @keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
   .fade-up{animation:fadeUp 0.6s ease forwards}
   .pop{animation:pop 0.5s ease forwards}
+  .page{animation:pageIn 0.25s ease forwards}
 
   .grain{position:fixed;inset:0;pointer-events:none;z-index:200;
     background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
@@ -2459,7 +2461,7 @@ export default function CafeConPan() {
           <span /><span /><span />
         </button>
       </nav>
-      <main style={{paddingTop:0}}>{renderPage()}</main>
+      <main key={page} className="page" style={{paddingTop:0}}>{renderPage()}</main>
       <TextileBorder />
       <footer>
         <div className="footer-logo">Café Con <span>Pan</span></div>
