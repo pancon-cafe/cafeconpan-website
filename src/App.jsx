@@ -106,7 +106,7 @@ const STRINGS = {
     },
     biggerPicture: { emailPlaceholder:"Stay in the loop — drop your email", emailBtn:"I'm In" },
     tech: {
-      eyebrow:"Pillar One — Available Now", title:"Tech Services for", titleSpan:"Small Business",
+      eyebrow:"Pillar One — Available Now", title:"Your Business Runs on Apple.", titleSpan:"Let's Make Sure It Actually Works.",
       sub:"Apple-focused MDM and device management, IT consulting, and carrier services — through one trusted, independent partner.",
       packages:[
         { icon:"🚀", name:"Open for Business", tag:"Launch Package", desc:"Complete business launch: LLC/EIN guidance, banking, domain + email, website, payment setup, Apple device procurement, MDM enrollment, and full Brands setup. Guidance only — we help you navigate the process, not act as your attorney or accountant.", price:"$2,500 – $5,000+" },
@@ -343,7 +343,7 @@ const STRINGS = {
     },
     biggerPicture: { emailPlaceholder:"Tu correo — mantente al día", emailBtn:"¡Apúntame!" },
     tech: {
-      eyebrow:"Pilar Uno — Disponible Ahora", title:"Servicios Tech para", titleSpan:"Pequeños Negocios",
+      eyebrow:"Pilar Uno — Disponible Ahora", title:"Tu Negocio Funciona con Apple.", titleSpan:"Hagamos Que Realmente Funcione.",
       sub:"Gestión de dispositivos Apple y MDM, consultoría IT y servicios de carrier — a través de un socio independiente de confianza.",
       packages:[
         { icon:"🚀", name:"Abrir el Negocio", tag:"Paquete de Lanzamiento", desc:"Lanzamiento completo del negocio: orientación para LLC/EIN, banca, dominio + correo, sitio web, configuración de pagos, adquisición de dispositivos Apple, inscripción MDM y configuración completa de Brands. Solo orientación — te ayudamos a navegar el proceso, sin actuar como tu abogado o contador.", price:"$2,500 – $5,000+" },
