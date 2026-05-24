@@ -2429,7 +2429,7 @@ export default function CafeConPan() {
           <div onClick={e => e.stopPropagation()} style={{background:C.espresso,border:`2px solid ${C.gold}`,boxShadow:`6px 6px 0 ${C.gold}44`,padding:"40px 48px",minWidth:280,textAlign:"center"}}>
             <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:24}}>Admin Access</div>
             <div style={{display:"flex",flexDirection:"column",gap:12}}>
-              {[["The Grind","The Grind"],["Pay","Pay"],["La Mesa Referral","La Mesa Referral"],["La Mesa","La Mesa"]].map(([label,page]) => (
+              {[["The Grind","The Grind"],["La Mesa","La Mesa"],["La Mesa Referral","La Mesa Referral"],["Pay","Pay"]].map(([label,page]) => (
                 <button key={page} onClick={() => { go(page); setSecretNavActive(false); }}
                   style={{background:"none",border:`2px solid ${C.beige}33`,color:C.cream,cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,letterSpacing:"0.1em",textTransform:"uppercase",padding:"12px 24px",transition:"border-color 0.2s"}}
                   onMouseEnter={e=>e.currentTarget.style.borderColor=C.gold}
