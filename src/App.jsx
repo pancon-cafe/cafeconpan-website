@@ -2069,7 +2069,6 @@ function DiscoveryPage({ go, t }) {
   const blank = {name:"",email:"",phone:"",bestTime:"",bestDateTime:"",bizDesc:"",devices:[],frustration:"",wishList:"",timeline:""};
   const [form, setForm] = useState(blank);
   const [status, setStatus] = useState("idle");
-  const dtRef = useRef(null);
 
   const formatDT = iso => {
     if (!iso) return "";
@@ -2151,10 +2150,10 @@ function DiscoveryPage({ go, t }) {
                       {d.bestTimeOptions.map(opt=>(
                         <button type="button" key={opt} style={chip(form.bestTime===opt && !form.bestDateTime)} onClick={()=>setForm(f=>({...f,bestTime:f.bestTime===opt?"":opt,bestDateTime:""}))}>{opt}</button>
                       ))}
-                      <button type="button" style={chip(!!form.bestDateTime)} onClick={()=>dtRef.current?.showPicker()}>
+                      <label style={{...chip(!!form.bestDateTime),position:"relative",display:"inline-block"}}>
                         {form.bestDateTime ? formatDT(form.bestDateTime) : d.bestTimePlaceholder}
-                      </button>
-                      <input ref={dtRef} type="datetime-local" step={1800} style={{position:"fixed",top:"-9999px",left:"-9999px",opacity:0,pointerEvents:"none"}} value={form.bestDateTime} onChange={e=>setForm(f=>({...f,bestDateTime:e.target.value,bestTime:""}))} />
+                        <input type="datetime-local" step={1800} style={{position:"absolute",inset:0,opacity:0,cursor:"pointer",width:"100%",height:"100%",boxSizing:"border-box"}} value={form.bestDateTime} onChange={e=>setForm(f=>({...f,bestDateTime:e.target.value,bestTime:""}))} />
+                      </label>
                     </div>
                   </div>
                 </div>
