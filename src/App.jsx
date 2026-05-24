@@ -2155,7 +2155,7 @@ function DiscoveryPage({ go, t }) {
                       <button type="button" className="disc-chip" style={chip(!!form.bestDateTime)} onClick={()=>dtRef.current?.showPicker()}>
                         {form.bestDateTime ? formatDT(form.bestDateTime) : d.bestTimePlaceholder}
                       </button>
-                      <input ref={dtRef} type="datetime-local" step={1800} style={{position:"absolute",opacity:0,pointerEvents:"none",width:0,height:0}} value={form.bestDateTime} onChange={e=>setForm(f=>({...f,bestDateTime:e.target.value,bestTime:""}))} />
+                      <input ref={dtRef} type="datetime-local" step={1800} style={{position:"fixed",top:"-9999px",left:"-9999px",opacity:0,pointerEvents:"none"}} value={form.bestDateTime} onChange={e=>setForm(f=>({...f,bestDateTime:e.target.value,bestTime:""}))} />
                     </div>
                   </div>
                 </div>
