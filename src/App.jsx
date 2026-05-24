@@ -791,6 +791,8 @@ const css = `
   @keyframes socialFlash{0%,100%{opacity:0.6;color:#F5EDD6}40%{opacity:1;color:#F2B0AC}}
   @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
   .scroll-indicator{animation:bounce 1.5s ease-in-out infinite}
+  .scroll-btn{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:3;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;padding:0}
+  .scroll-btn-mobile{display:none;background:none;border:none;cursor:pointer;flex-direction:column;align-items:center;gap:4px;padding:0;margin-top:20px}
 
   @media(max-width:768px){
     nav{padding:0 20px}
@@ -800,7 +802,9 @@ const css = `
     .nav-cta-btn{width:100%;text-align:center;margin-top:12px;padding:14px 20px}
     .lang-btn{margin-top:8px;width:100%;text-align:center}
     .nav-hamburger{display:flex}
-    .hero{padding:100px 24px 140px;min-height:100vh}
+    .hero{padding:100px 24px 80px;min-height:100vh}
+    .scroll-btn{display:none}
+    .scroll-btn-mobile{display:flex}
     .hero-pillars{flex-direction:column;align-items:stretch}
     .hero-pillar{justify-content:center}
     .section{padding:56px 24px}
@@ -989,8 +993,12 @@ function HomePage({ go, t, lang }) {
             >{t.hero.ctaSecondary}</button>
           </div>
           <div className="hero-domain">pancon.cafe</div>
+          <button onClick={() => { const el = document.getElementById("story"); if (el) window.scrollTo({top: el.offsetTop - 64, behavior:"smooth"}); }} className="scroll-btn-mobile">
+            <div style={{fontSize:13,letterSpacing:"0.2em",textTransform:"uppercase",fontWeight:700,color:C.espresso,opacity:0.4}}>SCROLL</div>
+            <div className="scroll-indicator" style={{fontSize:20,color:C.espresso,opacity:0.4,lineHeight:1}}>↓</div>
+          </button>
         </div>
-        <button onClick={() => { const el = document.getElementById("story"); if (el) window.scrollTo({top: el.offsetTop - 64, behavior:"smooth"}); }} style={{position:"absolute",bottom:32,left:"50%",transform:"translateX(-50%)",zIndex:3,background:"none",border:"none",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:4,padding:0}}>
+        <button onClick={() => { const el = document.getElementById("story"); if (el) window.scrollTo({top: el.offsetTop - 64, behavior:"smooth"}); }} className="scroll-btn">
           <div style={{fontSize:13,letterSpacing:"0.2em",textTransform:"uppercase",fontWeight:700,color:C.espresso,opacity:0.4}}>SCROLL</div>
           <div className="scroll-indicator" style={{fontSize:20,color:C.espresso,opacity:0.4,lineHeight:1}}>↓</div>
         </button>
