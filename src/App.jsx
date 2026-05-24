@@ -1213,7 +1213,7 @@ function ContactPage({ t, go, scrollToSocials, setGameActive }) {
             onMouseEnter={e=>e.currentTarget.style.opacity=0.85}
             onMouseLeave={e=>e.currentTarget.style.opacity=0.5}
           >{t.socials.contactNote}</button>
-          <div style={{marginTop:32,cursor:"pointer",display:"inline-block",opacity:0.85,transition:"opacity 0.2s"}}
+          <div style={{marginTop:32,cursor:"pointer",display:"block",opacity:0.85,transition:"opacity 0.2s"}}
             onClick={() => setGameActive(true)}
             onMouseEnter={e=>e.currentTarget.style.opacity=1}
             onMouseLeave={e=>e.currentTarget.style.opacity=0.85}
