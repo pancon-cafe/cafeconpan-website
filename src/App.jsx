@@ -77,7 +77,7 @@ const SteamSVG = () => (
 
 const STRINGS = {
   en: {
-    nav: { items:["Home","Tech Services","Community","Our Story","Contact"], cta:"Get a Quote", langBtn:"ES" },
+    nav: { items:["Home","Tech Services","Our Story","Contact"], cta:"Get a Quote", langBtn:"ES" },
     hero: { stamp:"☕ Honduran American Roots · Est. 2025", subtitle:"Tech · Coffee · Culture · Community", origin:"The café was always where tech and community met. Ours started in Honduras, over coffee and pan dulce.", signal:"Apple-focused tech for small businesses. Built by someone who's been on the inside — and speaks your language.", cta:"Find My Fit →", ctaSecondary:"See Our Services →", scroll:"Scroll" },
     story: { eyebrow:"Our Story", title:"More Than a", titleSpan:"Cup of Coffee", body:"The name comes from Honduras. Every morning, abuela made coffee in a bowl — you'd soak your rosquillas and ojaldras in it like soup. That ritual was never just about coffee. It was about showing up for the people at your table. That's still what we do — just now with Apple devices and carrier contracts instead of pan dulce.", storyCta:"Read the full story →" },
     painPoints: {
@@ -302,7 +302,7 @@ const STRINGS = {
     },
   },
   es: {
-    nav: { items:["Inicio","Servicios Tech","Comunidad","Nuestra Historia","Contacto"], cta:"Cotización", langBtn:"EN" },
+    nav: { items:["Inicio","Servicios Tech","Nuestra Historia","Contacto"], cta:"Cotización", langBtn:"EN" },
     hero: { stamp:"☕ Raíces Hondureño-Americanas · Est. 2025", subtitle:"Tech · Café · Cultura · Comunidad", origin:"El café siempre fue donde la tecnología y la comunidad se encontraban. El nuestro comenzó en Honduras, entre café y pan dulce.", signal:"Tech para pequeños negocios, enfocado en Apple. Construido por alguien que conoce el sistema por dentro — y que habla tu idioma. Literal y culturalmente.", cta:"Encontrar Mi Plan →", ctaSecondary:"Ver Nuestros Servicios →", scroll:"Desliza" },
     story: { eyebrow:"Nuestra Historia", title:"Más Que una", titleSpan:"Taza de Café", body:"El nombre viene de Honduras. Cada mañana, la abuela preparaba el café en un tazón — remojabas las rosquillas y las ojaldras como si fuera sopa. Ese ritual nunca fue solo sobre el café. Era sobre estar presente para las personas en tu mesa. Eso es lo que seguimos haciendo — solo que ahora con dispositivos Apple y contratos de carrier en lugar de pan dulce.", storyCta:"Leer la historia completa →" },
     paraTi: {
@@ -795,7 +795,7 @@ const css = `
   }
 `;
 
-const navKeys = ["Home","Tech Services","Community","Our Story","Contact"];
+const navKeys = ["Home","Tech Services","Our Story","Contact"];
 
 const PAGE_HASH = {
   "Home":"home","Tech Services":"tech-services","Community":"community",
@@ -2434,7 +2434,7 @@ export default function CafeConPan() {
     switch(page) {
       case "Home": return <HomePage go={go} t={t} lang={lang} />;
       case "Tech Services": return <TechPage go={go} t={t} />;
-      case "Community": return <CommunityPage t={t} go={go} />;
+      case "Community": return null;
       case "Our Story": return <AboutPage t={t} />;
       case "Contact": return <ContactPage t={t} go={go} scrollToSocials={scrollToSocials} />;
       case "La Mesa": return <LaMesaPage t={t} go={go} />;
