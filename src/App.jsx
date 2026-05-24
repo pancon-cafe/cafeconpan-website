@@ -239,10 +239,11 @@ const STRINGS = {
     contact:{
       eyebrow:"Get in Touch", title:"Let's", titleSpan:"Talk",
       sub:"General questions, existing clients, or anything that doesn't fit a form — this is the right place.",
-      info:[{label:"Email",val:"hello@pancon.cafe"},{label:"Website",val:"pancon.cafe"},{label:"Business",val:"Cafe Con Pan LLC"},{label:"Services",val:"Tech · Coffee · Culture"}],
+      info:[{label:"Email",val:"hello@pancon.cafe"},{label:"Response Time",val:"Within 24 hours"},{label:"Business",val:"Cafe Con Pan LLC"},{label:"Services",val:"Tech · Coffee · Culture"}],
       nameLabel:"Your Name", namePlaceholder:"Full name",
       emailLabel:"Email Address", emailPlaceholder:"you@company.com",
       inquiryLabel:"Inquiry Type", messageLabel:"Message", messagePlaceholder:"Tell us about your business and what you need...",
+      inquiryPlaceholder:"Select an inquiry type...",
       options:["Tech Services — MDM & Device Management","Tech Services — Carrier Audit & Negotiation","Tech Services — IT Consulting","Partnership Inquiry","Coffee & Events — Stay in the Loop"],
       submit:"Send It →", submitting:"Sending...",
       success:"Message sent! We'll be in touch soon. ☕",
@@ -485,10 +486,11 @@ const STRINGS = {
     contact:{
       eyebrow:"Ponte en Contacto", title:"", titleSpan:"Hablemos",
       sub:"Preguntas generales, clientes actuales, o cualquier cosa que no encaje en un formulario — este es el lugar indicado.",
-      info:[{label:"Correo",val:"hello@pancon.cafe"},{label:"Sitio Web",val:"pancon.cafe"},{label:"Negocio",val:"Cafe Con Pan LLC"},{label:"Servicios",val:"Tech · Café · Cultura"}],
+      info:[{label:"Correo",val:"hello@pancon.cafe"},{label:"Tiempo de Respuesta",val:"Dentro de 24 horas"},{label:"Negocio",val:"Cafe Con Pan LLC"},{label:"Servicios",val:"Tech · Café · Cultura"}],
       nameLabel:"Tu Nombre", namePlaceholder:"Nombre completo",
       emailLabel:"Correo Electrónico", emailPlaceholder:"tu@empresa.com",
       inquiryLabel:"Tipo de Consulta", messageLabel:"Mensaje", messagePlaceholder:"Cuéntanos sobre tu negocio y lo que necesitas...",
+      inquiryPlaceholder:"Selecciona un tipo de consulta...",
       options:["Servicios Tech — Gestión MDM y Dispositivos","Servicios Tech — Auditoría y Negociación de Carrier","Servicios Tech — Consultoría IT","Consulta de Asociación","Café & Eventos — Mantente al Día"],
       submit:"Enviar →", submitting:"Enviando...",
       success:"¡Mensaje enviado! Estaremos en contacto pronto. ☕",
@@ -1158,8 +1160,8 @@ function AboutPage({ t, go }) {
   );
 }
 
-function ContactPage({ t, go, scrollToSocials }) {
-  const [form, setForm] = useState({name:"",email:"",inquiry:t.contact.options[0],message:""});
+function ContactPage({ t, go, scrollToSocials, setGameActive }) {
+  const [form, setForm] = useState({name:"",email:"",inquiry:"",message:""});
   const [status, setStatus] = useState("idle");
   const handle = e => setForm({...form, [e.target.name]: e.target.value});
 
@@ -1182,7 +1184,7 @@ function ContactPage({ t, go, scrollToSocials }) {
       const data = await res.json();
       if (data.success) {
         setStatus("success");
-        setForm({name:"",email:"",inquiry:t.contact.options[0],message:""});
+        setForm({name:"",email:"",inquiry:"",message:""});
       } else {
         setStatus("error");
       }
@@ -1206,14 +1208,19 @@ function ContactPage({ t, go, scrollToSocials }) {
               <div className="contact-info-val">{i.val}</div>
             </div>
           ))}
-          <div style={{marginTop:16}}>
-            <SteamSVG />
-          </div>
           <button onClick={scrollToSocials}
             style={{marginTop:24,background:"none",border:"none",cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontSize:13,color:C.espresso,fontWeight:700,opacity:0.5,letterSpacing:"0.03em",padding:0,textDecoration:"underline",textDecorationColor:`${C.espresso}44`,transition:"opacity 0.2s"}}
             onMouseEnter={e=>e.currentTarget.style.opacity=0.85}
             onMouseLeave={e=>e.currentTarget.style.opacity=0.5}
           >{t.socials.contactNote}</button>
+          <div style={{marginTop:32,cursor:"pointer",display:"inline-block",opacity:0.85,transition:"opacity 0.2s"}}
+            onClick={() => setGameActive(true)}
+            onMouseEnter={e=>e.currentTarget.style.opacity=1}
+            onMouseLeave={e=>e.currentTarget.style.opacity=0.85}
+            title="☕"
+          >
+            <SteamSVG />
+          </div>
         </div>
         <form onSubmit={submit}>
           <div className="form-field">
@@ -1226,7 +1233,8 @@ function ContactPage({ t, go, scrollToSocials }) {
           </div>
           <div className="form-field">
             <label className="form-label">{t.contact.inquiryLabel}</label>
-            <select className="form-select" name="inquiry" value={form.inquiry} onChange={handle}>
+            <select className="form-select" name="inquiry" value={form.inquiry} onChange={handle} required>
+              <option value="" disabled>{t.contact.inquiryPlaceholder}</option>
               {t.contact.options.map(o => <option key={o}>{o}</option>)}
             </select>
           </div>
@@ -2448,7 +2456,7 @@ export default function CafeConPan() {
       case "Tech Services": return <TechPage go={go} t={t} />;
       case "Community": return null;
       case "Our Story": return <AboutPage t={t} go={go} />;
-      case "Contact": return <ContactPage t={t} go={go} scrollToSocials={scrollToSocials} />;
+      case "Contact": return <ContactPage t={t} go={go} scrollToSocials={scrollToSocials} setGameActive={setGameActive} />;
       case "La Mesa": return <LaMesaPage t={t} go={go} />;
       case "La Mesa Referral": return <LaMesaReferralPage t={t} go={go} />;
       case "Pay": return <PayPage t={t} />;
