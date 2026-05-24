@@ -204,7 +204,7 @@ const STRINGS = {
     },
     about:{
       eyebrow:"The Story", title:"Roots,", titleSpan:"Community,", titleEnd:"Purpose",
-      quote:"She served it in a bowl with rosquillas and ojaldras, like soup. I was five years old and I've never stopped thinking about that cup.",
+      quote:"Every morning without fail, she made coffee in a bowl. Rosquillas and ojaldras soaked in like soup. I was five years old. I've never stopped thinking about that cup.",
       quoteAttr:"— Jason, Founder",
       paragraphs:[
         "My grandmother was not a small woman in the world. People knew her name across Honduras — her family name, her children, her grandchildren. She was funny, sharp, generous beyond measure, and tough exactly when she needed to be. She spent her life quietly acquiring land, piece by piece, making sure her sons and daughters would be okay long after she was gone. She knew something most people spend their whole lives figuring out — that the most important thing you can leave someone isn't money. It's roots.",
@@ -451,7 +451,7 @@ const STRINGS = {
     },
     about:{
       eyebrow:"La Historia", title:"Raíces,", titleSpan:"Comunidad,", titleEnd:"Propósito",
-      quote:"Lo servía en un tazón con rosquillas y ojaldras, como sopa. Tenía cinco años y nunca he dejado de pensar en esa taza.",
+      quote:"Cada mañana sin falta, preparaba café en un tazón. Las rosquillas y ojaldras se remojaban como sopa. Tenía cinco años. Nunca he dejado de pensar en esa taza.",
       quoteAttr:"— Jason, Founder",
       paragraphs:[
         "Mi abuela no era una mujer pequeña en el mundo. La gente conocía su nombre en toda Honduras — su apellido, sus hijos, sus nietos. Era graciosa, aguda, generosa sin medida, y firme exactamente cuando hacía falta. Pasó su vida adquiriendo tierras silenciosamente, pedazo a pedazo, asegurándose de que sus hijos e hijas estarían bien mucho después de que ella se fuera. Sabía algo que la mayoría de las personas pasa toda la vida tratando de entender — que lo más importante que puedes dejarle a alguien no es dinero. Son raíces.",
