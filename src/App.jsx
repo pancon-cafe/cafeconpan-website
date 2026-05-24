@@ -79,7 +79,7 @@ const STRINGS = {
   en: {
     nav: { items:["Home","Tech Services","Community","Our Story","Contact"], cta:"Get a Quote", langBtn:"ES" },
     hero: { stamp:"☕ Honduran American Roots · Est. 2025", subtitle:"Tech · Coffee · Culture · Community", signal:"Apple-focused tech for small businesses. Built by someone who's been on the inside — and speaks your language.", cta:"Find My Fit →", ctaSecondary:"See Our Services →" },
-    story: { eyebrow:"Our Story", title:"More Than a", titleSpan:"Cup of Coffee", body:"At Café Con Pan, we believe coffee is more than a drink — it's a connection. Rooted in our Honduran heritage, we started with a simple idea: to share authentic coffee and bread with our community. That same spirit drives everything we do — from helping small businesses launch and grow through technology, to building a space where culture and community come together. One cup and one connection at a time." },
+    story: { eyebrow:"Our Story", title:"More Than a", titleSpan:"Cup of Coffee", body:"The name comes from Honduras. Every morning, abuela made coffee in a bowl — you'd soak your rosquillas and ojaldras in it like soup. That ritual was never just about coffee. It was about showing up for the people at your table. That's still what we do — just now with Apple devices and carrier contracts instead of pan dulce.", storyCta:"Read the full story →" },
     painPoints: {
       eyebrow:"Real Talk",
       title:"Does This Sound",
@@ -304,7 +304,7 @@ const STRINGS = {
   es: {
     nav: { items:["Inicio","Servicios Tech","Comunidad","Nuestra Historia","Contacto"], cta:"Cotización", langBtn:"EN" },
     hero: { stamp:"☕ Raíces Hondureño-Americanas · Est. 2025", subtitle:"Tech · Café · Cultura · Comunidad", signal:"Tech para pequeños negocios, enfocado en Apple. Construido por alguien que conoce el sistema por dentro — y que habla tu idioma. Literal y culturalmente.", cta:"Encontrar Mi Plan →", ctaSecondary:"Ver Nuestros Servicios →" },
-    story: { eyebrow:"Nuestra Historia", title:"Más Que una", titleSpan:"Taza de Café", body:"En Café Con Pan, creemos que el café es más que una bebida — es una conexión. Con raíces en nuestra herencia hondureña, comenzamos con una idea simple: compartir café y pan auténtico con nuestra comunidad. Ese mismo espíritu impulsa todo lo que hacemos — desde ayudar a pequeños negocios a crecer mediante la tecnología, hasta construir un espacio donde la cultura y la comunidad se unen. Una taza y una conexión a la vez." },
+    story: { eyebrow:"Nuestra Historia", title:"Más Que una", titleSpan:"Taza de Café", body:"El nombre viene de Honduras. Cada mañana, la abuela preparaba el café en un tazón — remojabas las rosquillas y las ojaldras como si fuera sopa. Ese ritual nunca fue solo sobre el café. Era sobre estar presente para las personas en tu mesa. Eso es lo que seguimos haciendo — solo que ahora con dispositivos Apple y contratos de carrier en lugar de pan dulce.", storyCta:"Leer la historia completa →" },
     paraTi: {
       eyebrow:"Para Ti",
       title:"Construido para",
@@ -991,6 +991,11 @@ function HomePage({ go, t, lang }) {
           <h2 className="section-title">{t.story.title} <span>{t.story.titleSpan}</span></h2>
         </div>
         <p className="section-sub" style={{maxWidth:640,margin:"0 auto",textAlign:"center"}}>{t.story.body}</p>
+        <div style={{textAlign:"center",marginTop:20}}>
+          <button onClick={() => go("Our Story")} style={{background:"none",border:"none",cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,color:C.teal,textDecoration:"underline",padding:0}}>
+            {t.story.storyCta}
+          </button>
+        </div>
       </section>
 
       <TextileBorder flip />
