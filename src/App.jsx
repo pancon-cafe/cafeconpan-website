@@ -104,16 +104,7 @@ const STRINGS = {
         { n:"03", icon:"🌱", title:"The Bigger Vision", badge:"The Full Picture", desc:"Family land in Honduras. A café with a boardroom. An investment arm that grows alongside the clients we believe in. This is the full picture.", cta:"Read Our Story →", page:"Our Story" },
       ],
     },
-    biggerPicture: {
-      eyebrow:"The Bigger Picture", title:"What's Next for", titleSpan:"Café Con Pan",
-      sub:"The tech arm leads because it's ready. But this brand was always meant to be more — and these are the chapters still being written.",
-      cards:[
-        { icon:"☕", title:"Central American Single-Origin Coffee", badge:"In Planning", desc:"Coffee sourced from family land across Central America — starting with Honduras, Guatemala, and El Salvador, with more countries to come. From seed to cup, rooted in where we come from." },
-        { icon:"🫓", title:"The Café & Boardroom", badge:"In Development", desc:"A physical café with a reserved boardroom — where clients can meet, deals get done, and the community gathers over something warm." },
-        { icon:"💼", title:"Investing in People", badge:"On the Horizon", desc:"For the businesses and people we believe in — a future arm dedicated to going beyond services and into shared growth with the clients we align with." },
-      ],
-      emailPlaceholder:"Stay in the loop — drop your email", emailBtn:"I'm In",
-    },
+    biggerPicture: { emailPlaceholder:"Stay in the loop — drop your email", emailBtn:"I'm In" },
     tech: {
       eyebrow:"Pillar One — Available Now", title:"Tech Services for", titleSpan:"Small Business",
       sub:"Apple-focused MDM and device management, IT consulting, and carrier services — through one trusted, independent partner.",
@@ -350,16 +341,7 @@ const STRINGS = {
         { n:"03", icon:"🌱", title:"La Visión Completa", badge:"El Panorama Completo", desc:"Tierras familiares en Honduras. Un café con sala de juntas. Un brazo de inversión que crece junto a los clientes en los que creemos. Este es el panorama completo.", cta:"Nuestra Historia →", page:"Our Story" },
       ],
     },
-    biggerPicture: {
-      eyebrow:"El Panorama General", title:"Lo Que Sigue para", titleSpan:"Café Con Pan",
-      sub:"El brazo tecnológico lidera porque está listo. Pero esta marca siempre fue pensada para ser más — y estos son los capítulos que aún se están escribiendo.",
-      cards:[
-        { icon:"☕", title:"Café Centroamericano de Origen Único", badge:"En Planificación", desc:"Café cultivado en tierras familiares en Centroamérica — empezando con Honduras, Guatemala y El Salvador, con más países por venir. De la semilla a la taza, con raíces en de donde venimos." },
-        { icon:"🫓", title:"El Café & La Sala de Juntas", badge:"En Desarrollo", desc:"Un café físico con una sala de juntas reservable — donde los clientes se reúnen, se cierran tratos y la comunidad se junta alrededor de algo caliente." },
-        { icon:"💼", title:"Invirtiendo en Personas", badge:"En el Horizonte", desc:"Para los negocios y las personas en las que creemos — un brazo futuro dedicado a ir más allá de los servicios hacia un crecimiento compartido con los clientes con quienes nos alineamos." },
-      ],
-      emailPlaceholder:"Tu correo — mantente al día", emailBtn:"¡Apúntame!",
-    },
+    biggerPicture: { emailPlaceholder:"Tu correo — mantente al día", emailBtn:"¡Apúntame!" },
     tech: {
       eyebrow:"Pilar Uno — Disponible Ahora", title:"Servicios Tech para", titleSpan:"Pequeños Negocios",
       sub:"Gestión de dispositivos Apple y MDM, consultoría IT y servicios de carrier — a través de un socio independiente de confianza.",
@@ -590,7 +572,7 @@ const css = `
     letter-spacing:0.1em;text-transform:uppercase;color:${C.cream};
     opacity:0.7;padding:6px 10px;transition:opacity 0.2s,color 0.2s}
   .nav-btn:hover,.nav-btn.active{opacity:1;color:${C.blush}}
-  .nav-cta-btn{background:${C.red};color:${C.cream};border:none;cursor:pointer;
+  .nav-cta-btn{background:${C.red};color:${C.cream};cursor:pointer;
     font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;
     letter-spacing:0.1em;text-transform:uppercase;
     padding:10px 20px;
@@ -625,15 +607,6 @@ const css = `
   .hero-subtitle{font-size:16px;color:${C.espresso};opacity:0.75;
     font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
     margin-bottom:16px}
-  .hero-pillars{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
-  .hero-pillar{background:${C.espresso};color:${C.cream};
-    padding:12px 24px;
-    border:3px solid ${C.espresso};
-    font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
-    cursor:pointer;transition:background 0.2s,color 0.2s;
-    display:flex;align-items:center;gap:8px}
-  .hero-pillar:hover{background:${C.cream};color:${C.espresso}}
-  .hero-pillar-icon{font-size:18px}
   .hero-cta{background:${C.red};color:${C.cream};
     border:3px solid ${C.espresso};
     font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;
@@ -805,8 +778,6 @@ const css = `
     .hero{padding:100px 24px 80px;min-height:100vh}
     .scroll-btn{display:none}
     .scroll-btn-mobile{display:flex}
-    .hero-pillars{flex-direction:column;align-items:stretch}
-    .hero-pillar{justify-content:center}
     .section{padding:56px 24px}
     .services-grid{grid-template-columns:1fr}
     .about-grid{grid-template-columns:1fr;gap:36px}
@@ -2513,7 +2484,7 @@ export default function CafeConPan() {
             ))}
           </div>
         </div>
-<div style={{fontSize:11,color:`rgba(245,237,214,0.35)`,fontWeight:600,textAlign:"center",maxWidth:480,lineHeight:1.6}}>{t.footer.disclaimer}</div>
+        <div style={{fontSize:11,color:`rgba(245,237,214,0.35)`,fontWeight:600,textAlign:"center",maxWidth:480,lineHeight:1.6}}>{t.footer.disclaimer}</div>
         <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:6}}>
           <div className="footer-copy">{t.footer.copy}</div>
           <button onClick={() => go("Privacy Policy")} style={{background:"none",border:"none",cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontSize:10,color:`rgba(245,237,214,0.2)`,fontWeight:600,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"underline",transition:"color 0.2s",padding:0}}
