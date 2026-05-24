@@ -78,7 +78,7 @@ const SteamSVG = () => (
 const STRINGS = {
   en: {
     nav: { items:["Home","Tech Services","Community","Our Story","Contact"], cta:"Get a Quote", langBtn:"ES" },
-    hero: { stamp:"☕ Honduran American Roots · Est. 2025", subtitle:"Tech · Coffee · Culture · Community", signal:"Apple-focused tech for small businesses. Built by someone who's been on the inside — and speaks your language.", cta:"Find My Fit →", ctaSecondary:"See Our Services →" },
+    hero: { stamp:"☕ Honduran American Roots · Est. 2025", subtitle:"Tech · Coffee · Culture · Community", signal:"Apple-focused tech for small businesses. Built by someone who's been on the inside — and speaks your language.", cta:"Find My Fit →", ctaSecondary:"See Our Services →", scroll:"Scroll" },
     story: { eyebrow:"Our Story", title:"More Than a", titleSpan:"Cup of Coffee", body:"The name comes from Honduras. Every morning, abuela made coffee in a bowl — you'd soak your rosquillas and ojaldras in it like soup. That ritual was never just about coffee. It was about showing up for the people at your table. That's still what we do — just now with Apple devices and carrier contracts instead of pan dulce.", storyCta:"Read the full story →" },
     painPoints: {
       eyebrow:"Real Talk",
@@ -303,7 +303,7 @@ const STRINGS = {
   },
   es: {
     nav: { items:["Inicio","Servicios Tech","Comunidad","Nuestra Historia","Contacto"], cta:"Cotización", langBtn:"EN" },
-    hero: { stamp:"☕ Raíces Hondureño-Americanas · Est. 2025", subtitle:"Tech · Café · Cultura · Comunidad", signal:"Tech para pequeños negocios, enfocado en Apple. Construido por alguien que conoce el sistema por dentro — y que habla tu idioma. Literal y culturalmente.", cta:"Encontrar Mi Plan →", ctaSecondary:"Ver Nuestros Servicios →" },
+    hero: { stamp:"☕ Raíces Hondureño-Americanas · Est. 2025", subtitle:"Tech · Café · Cultura · Comunidad", signal:"Tech para pequeños negocios, enfocado en Apple. Construido por alguien que conoce el sistema por dentro — y que habla tu idioma. Literal y culturalmente.", cta:"Encontrar Mi Plan →", ctaSecondary:"Ver Nuestros Servicios →", scroll:"Desliza" },
     story: { eyebrow:"Nuestra Historia", title:"Más Que una", titleSpan:"Taza de Café", body:"El nombre viene de Honduras. Cada mañana, la abuela preparaba el café en un tazón — remojabas las rosquillas y las ojaldras como si fuera sopa. Ese ritual nunca fue solo sobre el café. Era sobre estar presente para las personas en tu mesa. Eso es lo que seguimos haciendo — solo que ahora con dispositivos Apple y contratos de carrier en lugar de pan dulce.", storyCta:"Leer la historia completa →" },
     paraTi: {
       eyebrow:"Para Ti",
@@ -967,12 +967,12 @@ function HomePage({ go, t, lang }) {
           </div>
           <div className="hero-domain">pancon.cafe</div>
           <button onClick={() => { const el = document.getElementById("story"); if (el) window.scrollTo({top: el.offsetTop - 64, behavior:"smooth"}); }} className="scroll-btn-mobile">
-            <div style={{fontSize:13,letterSpacing:"0.2em",textTransform:"uppercase",fontWeight:700,color:C.espresso,opacity:0.4}}>SCROLL</div>
+            <div style={{fontSize:13,letterSpacing:"0.2em",textTransform:"uppercase",fontWeight:700,color:C.espresso,opacity:0.4}}>{t.hero.scroll}</div>
             <div className="scroll-indicator" style={{fontSize:20,color:C.espresso,opacity:0.4,lineHeight:1}}>↓</div>
           </button>
         </div>
         <button onClick={() => { const el = document.getElementById("story"); if (el) window.scrollTo({top: el.offsetTop - 64, behavior:"smooth"}); }} className="scroll-btn">
-          <div style={{fontSize:13,letterSpacing:"0.2em",textTransform:"uppercase",fontWeight:700,color:C.espresso,opacity:0.4}}>SCROLL</div>
+          <div style={{fontSize:13,letterSpacing:"0.2em",textTransform:"uppercase",fontWeight:700,color:C.espresso,opacity:0.4}}>{t.hero.scroll}</div>
           <div className="scroll-indicator" style={{fontSize:20,color:C.espresso,opacity:0.4,lineHeight:1}}>↓</div>
         </button>
       </section>
