@@ -640,8 +640,8 @@ const css = `
     border:3px solid ${C.espresso};
     padding:36px;
     box-shadow:5px 5px 0 ${C.espresso};
-    transition:transform 0.15s,box-shadow 0.15s;cursor:default}
-  .service-card:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 ${C.espresso}}
+    transition:transform 0.15s,box-shadow 0.15s,background 0.15s,border-color 0.15s;cursor:default}
+  .service-card:hover{transform:translate(-2px,-2px);background:${C.parchment};border-color:${C.teal};box-shadow:7px 7px 0 ${C.teal}}
   .service-card-icon{font-size:36px;margin-bottom:16px;display:block}
   .service-card-name{font-family:'Lilita One',cursive;font-size:22px;
     color:${C.espresso};margin-bottom:10px}
