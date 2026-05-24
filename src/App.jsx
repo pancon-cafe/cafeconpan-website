@@ -792,7 +792,7 @@ const css = `
   @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
   .scroll-indicator{animation:bounce 1.5s ease-in-out infinite}
   .scroll-btn{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:3;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;padding:0}
-  .scroll-btn-mobile{display:none;background:none;border:none;cursor:pointer;flex-direction:column;align-items:center;gap:4px;padding:0;margin-top:20px}
+  .scroll-btn-mobile{display:none;background:none;border:none;cursor:pointer;flex-direction:column;align-items:center;gap:4px;padding:0;margin:20px auto 0}
 
   @media(max-width:768px){
     nav{padding:0 20px}
