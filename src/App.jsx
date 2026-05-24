@@ -257,7 +257,7 @@ const STRINGS = {
       eyebrow:"Pre-Call Questionnaire", title:"Before", titleSpan:"We Talk",
       sub:"Five quick questions so we can make the most of our first conversation. Takes about 3 minutes.",
       nameLabel:"Your name", namePlaceholder:"First and last name",
-      emailLabel:"Your email", emailPlaceholder:"you@yourbusiness.com",
+      emailLabel:"Your email", emailPlaceholder:"Your email address",
       phoneLabel:"Phone number", phonePlaceholder:"Best number to reach you",
       bestTimeLabel:"Best time to reach you",
       bestTimeOptions:["Morning","Afternoon","Evening"],
@@ -266,8 +266,9 @@ const STRINGS = {
       q3Label:"Biggest tech frustration", q3Placeholder:"What's the most frustrating technology problem in your business right now?",
       q4Label:"What you wish your business could do", q4Placeholder:"What would you love your business to be able to do that it can't today?",
       q5Label:"Timeline or deadline", q5Placeholder:"Any specific date or urgency we should know about? (optional)",
-      submit:"Submit →", sending:"Sending…",
-      successTitle:"You're all set.", successBody:"We'll review your answers before we connect. Expect to hear from us shortly.",
+      submit:"Send It Over →", sending:"Sending…",
+      trustNote:"No pitch, no pressure. We'll reach out within 24 hours to schedule a quick conversation.",
+      successTitle:"You're in. ☕", successBody:"We got your info and we'll be in touch within 24 hours. In the meantime, feel free to look around.",
     },
     finder:{
       eyebrow:"Package Finder",
@@ -504,7 +505,7 @@ const STRINGS = {
       eyebrow:"Cuestionario Pre-Llamada", title:"Antes de", titleSpan:"Hablar",
       sub:"Cinco preguntas rápidas para aprovechar al máximo nuestra primera conversación. Toma unos 3 minutos.",
       nameLabel:"Tu nombre", namePlaceholder:"Nombre y apellido",
-      emailLabel:"Tu correo", emailPlaceholder:"tu@tunegocio.com",
+      emailLabel:"Tu correo", emailPlaceholder:"Tu correo electrónico",
       phoneLabel:"Número de teléfono", phonePlaceholder:"El mejor número para contactarte",
       bestTimeLabel:"Mejor hora para contactarte",
       bestTimeOptions:["Mañana","Tarde","Noche"],
@@ -514,7 +515,8 @@ const STRINGS = {
       q4Label:"Lo que desearías que tu negocio pudiera hacer", q4Placeholder:"¿Qué te gustaría que tu negocio pudiera hacer hoy que todavía no puede?",
       q5Label:"Plazo o fecha límite", q5Placeholder:"¿Alguna fecha específica o urgencia que debamos saber? (opcional)",
       submit:"Enviar →", sending:"Enviando…",
-      successTitle:"¡Listo.", successBody:"Revisaremos tus respuestas antes de conectarnos. Estaremos en contacto pronto.",
+      trustNote:"Sin presión. Nos comunicamos en menos de 24 horas para coordinar una conversación rápida.",
+      successTitle:"Ya estás dentro. ☕", successBody:"Recibimos tu información y nos comunicaremos en menos de 24 horas. Mientras tanto, siéntete libre de explorar.",
     },
     finder:{
       eyebrow:"Buscador de Paquetes",
@@ -2110,10 +2112,9 @@ function DiscoveryPage({ go, t }) {
         <div style={{maxWidth:600,margin:"0 auto"}}>
           {status === "success" ? (
             <div style={{textAlign:"center",padding:"48px 24px"}}>
-              <div style={{fontSize:40,marginBottom:16}}>☕</div>
-              <h2 style={{fontFamily:"'Lilita One',cursive",fontSize:32,color:C.espresso,marginBottom:12}}>{d.successTitle}</h2>
+              <h2 style={{fontFamily:"'Lilita One',cursive",fontSize:48,color:C.espresso,marginBottom:16}}>{d.successTitle}</h2>
               <p style={{fontSize:15,color:"#555",fontWeight:600,lineHeight:1.7,maxWidth:400,margin:"0 auto 32px"}}>{d.successBody}</p>
-              <button className="hero-cta" onClick={() => go("Home")}>Back to Home</button>
+              <button onClick={() => go("Home")} style={{background:"none",border:"none",color:C.teal,fontFamily:"'Nunito',sans-serif",fontSize:15,fontWeight:700,cursor:"pointer",textDecoration:"underline",textUnderlineOffset:3}}>Back to Home →</button>
             </div>
           ) : (
             <form onSubmit={submit}>
@@ -2166,9 +2167,12 @@ function DiscoveryPage({ go, t }) {
                   <input style={fld} value={form.timeline} onChange={e=>setForm(f=>({...f,timeline:e.target.value}))} placeholder={d.q5Placeholder} />
                 </div>
 
-                <button type="submit" className="hero-cta" style={{alignSelf:"flex-start"}} disabled={status==="submitting"}>
-                  {status==="submitting" ? d.sending : d.submit}
-                </button>
+                <div>
+                  <p style={{fontSize:13,fontStyle:"italic",textAlign:"center",color:`rgba(61,43,31,0.6)`,marginBottom:16}}>{d.trustNote}</p>
+                  <button type="submit" className="hero-cta" style={{alignSelf:"flex-start"}} disabled={status==="submitting"}>
+                    {status==="submitting" ? d.sending : d.submit}
+                  </button>
+                </div>
                 {status==="error" && <p style={{fontSize:13,color:C.red,fontWeight:700}}>Something went wrong — please try again or email hello@pancon.cafe.</p>}
               </div>
             </form>
