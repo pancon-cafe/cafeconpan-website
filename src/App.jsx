@@ -2149,7 +2149,7 @@ function DiscoveryPage({ go, t }) {
                     <label style={lbl}>{d.bestTimeLabel}</label>
                     <div style={{marginTop:10,display:"flex",flexWrap:"wrap",gap:8}}>
                       {d.bestTimeOptions.map(opt=>(
-                        <button type="button" key={opt} style={chip(form.bestTime===opt && !form.bestDateTime)} onClick={()=>setForm(f=>({...f,bestTime:opt,bestDateTime:""}))}>{opt}</button>
+                        <button type="button" key={opt} style={chip(form.bestTime===opt && !form.bestDateTime)} onClick={()=>setForm(f=>({...f,bestTime:f.bestTime===opt?"":opt,bestDateTime:""}))}>{opt}</button>
                       ))}
                       <button type="button" style={chip(!!form.bestDateTime)} onClick={()=>dtRef.current?.showPicker()}>
                         {form.bestDateTime ? formatDT(form.bestDateTime) : d.bestTimePlaceholder}
