@@ -206,9 +206,18 @@ const STRINGS = {
       eyebrow:"The Story", title:"Roots,", titleSpan:"Community,", titleEnd:"Purpose",
       quote:"She served it in a bowl with rosquillas and ojaldras, like soup. I was five years old and I've never stopped thinking about that cup.",
       quoteAttr:"— Jason, Founder",
-      body1:"I remember being very little, visiting my family in Honduras. Every morning without fail, my grandmother would make coffee. Not in a mug — in a bowl. She'd add rosquillas and ojaldras and let them soak until they were soft enough to eat with a spoon, like soup. I was instantly hooked. I still am.",
-      body2:"That bowl of coffee is where the name came from. And it's where the whole idea started — coffee as a bridge. To family, to community, to work, to the conversations that change things. I realized I could build something around that idea. Tech services to help small businesses thrive. A real café experience rooted in that Honduran morning. Events and culture that bring people together. And eventually, the ability to invest in the businesses we believe in. One cup and one connection at a time.",
-      stats:[{num:"3",label:"Brand Pillars"},{num:"2",label:"Certs In Progress"},{num:"🇭🇳",label:"Honduras Roots"}],
+      paragraphs:[
+        "My grandmother was not a small woman in the world. People knew her name across Honduras — her family name, her children, her grandchildren. She was funny, sharp, generous beyond measure, and tough exactly when she needed to be. She spent her life quietly acquiring land, piece by piece, making sure her sons and daughters would be okay long after she was gone. She knew something most people spend their whole lives figuring out — that the most important thing you can leave someone isn't money. It's roots.",
+        "My dad has owned land in Honduras since he was a teenager. That land is one of his last living connections to her. It's one of mine too. One day, coffee will grow on that land — not just as a crop, but as a continuation. Something for our generation, and the ones after it, to point to and say: this is where we come from.",
+        "The summer I spent working in my uncle's plantain fields in Honduras is one I'll never forget. I was the oldest, so naturally I was put to work while my siblings were on vacation. No industrial equipment — just cows, horses, handmade wooden tools, and the kind of heat that makes you understand in your body what labor actually means. It took all day. My back hurt. And I wasn't upset for a single moment of it. Working alongside my cousins, I felt proud. Humbled. I understood for the first time what it meant to have been born in the United States — not as something to take for granted, but as something to honor.",
+        "Growing up between two worlds teaches you things that can't be put on a resume. It makes you grow up faster. It hands you responsibility before you think you're ready for it. It shows you that the way people build relationships and do business in Honduras is not the same as on the East Coast, and the East Coast is not the same as Hawaii — and that knowing the difference is a skill most people never develop.",
+        "It also shows you what it feels like to be treated differently. Middle school. High school. The slow realization that other people see something in you that you never saw in yourself as a kid. That experience is uncomfortable. It's also one of the most clarifying things that can happen to a person. It's part of why people find it easy to get close to me. And it's part of why I built something that speaks directly to the people who have navigated that same road — who are exceptional at what they do, but have had to figure out the infrastructure of American business without a map.",
+        "I want to retire my parents. That's the honest truth of it. They have worked every single day to keep a roof over our heads and food on the table. Their health isn't always going to hold. I want them to spend the rest of their lives proud, present, and free — with their grandchildren, with each other, without worrying. If I could do it tomorrow I would.",
+        "And beyond that — I'm betting on myself. On the roots in my DNA, the work ethic that was built in those fields, the relationships forged between two cultures, and the simple belief that the café has always been where community and opportunity meet.",
+        "Café Con Pan started in a bowl of coffee in Honduras. It's becoming something you can build your business on.",
+        "One cup and one connection at a time.",
+      ],
+      storyCta:"Let's Build Something Together →",
     },
     socials:{
       instagram:"https://instagram.com/icafeconpan",
@@ -443,9 +452,18 @@ const STRINGS = {
       eyebrow:"La Historia", title:"Raíces,", titleSpan:"Comunidad,", titleEnd:"Propósito",
       quote:"Lo servía en un tazón con rosquillas y ojaldras, como sopa. Tenía cinco años y nunca he dejado de pensar en esa taza.",
       quoteAttr:"— Jason, Founder",
-      body1:"Recuerdo siendo muy pequeño, visitando a mi familia en Honduras. Cada mañana sin falta, mi abuela preparaba café. No en una taza — en un tazón. Le añadía rosquillas y ojaldras y las dejaba remojar hasta que estaban suaves para comerlas con cuchara, como sopa. Quedé completamente enamorado de ese ritual. Y lo sigo estando.",
-      body2:"Ese tazón de café es de donde viene el nombre. Y es donde nació toda la idea — el café como puente. A la familia, a la comunidad, al trabajo, a las conversaciones que cambian las cosas. Me di cuenta de que podía construir algo alrededor de esa idea. Servicios tech para ayudar a pequeños negocios a crecer. Una experiencia de café auténtica con raíces en esa mañana hondureña. Eventos y cultura que unen a la gente. Y eventualmente, la capacidad de invertir en los negocios en los que creemos. Una taza y una conexión a la vez.",
-      stats:[{num:"3",label:"Pilares de Marca"},{num:"2",label:"Certs en Progreso"},{num:"🇭🇳",label:"Raíces Hondureñas"}],
+      paragraphs:[
+        "Mi abuela no era una mujer pequeña en el mundo. La gente conocía su nombre en toda Honduras — su apellido, sus hijos, sus nietos. Era graciosa, aguda, generosa sin medida, y firme exactamente cuando hacía falta. Pasó su vida adquiriendo tierras silenciosamente, pedazo a pedazo, asegurándose de que sus hijos e hijas estarían bien mucho después de que ella se fuera. Sabía algo que la mayoría de las personas pasa toda la vida tratando de entender — que lo más importante que puedes dejarle a alguien no es dinero. Son raíces.",
+        "Mi papá ha tenido tierras en Honduras desde que era adolescente. Esa tierra es una de sus últimas conexiones vivas con ella. Y también una de las mías. Algún día, café crecerá en esa tierra — no solo como cultivo, sino como continuación. Algo a lo que nuestra generación, y las que vengan después, puedan señalar y decir: aquí es de donde venimos.",
+        "El verano que pasé trabajando en los platanales de mi tío en Honduras es uno que nunca olvidaré. Yo era el mayor, así que naturalmente me pusieron a trabajar mientras mis hermanos estaban de vacaciones. Sin maquinaria industrial — solo vacas, caballos, herramientas de madera hechas a mano, y el tipo de calor que te hace entender en el cuerpo lo que realmente significa el trabajo. Tomó todo el día. Me dolía la espalda. Y no estuve molesto ni un solo momento. Trabajando junto a mis primos, me sentí orgulloso. Humilde. Entendí por primera vez lo que significaba haber nacido en los Estados Unidos — no como algo que dar por sentado, sino como algo que honrar.",
+        "Crecer entre dos mundos te enseña cosas que no se pueden poner en un currículum. Te hace madurar más rápido. Te pone responsabilidades en los hombros antes de que creas estar listo. Te muestra que la forma en que las personas construyen relaciones y hacen negocios en Honduras no es la misma que en la Costa Este, y la Costa Este no es lo mismo que Hawái — y que conocer esa diferencia es una habilidad que la mayoría de las personas nunca desarrolla.",
+        "También te muestra lo que se siente ser tratado diferente. La secundaria. La preparatoria. La lenta comprensión de que otras personas ven algo en ti que tú nunca viste en ti mismo de niño. Esa experiencia es incómoda. También es una de las cosas más clarificadoras que le pueden pasar a una persona. Es parte de por qué la gente encuentra fácil acercarse a mí. Y es parte de por qué construí algo que habla directamente a las personas que han recorrido ese mismo camino — que son excepcionales en lo que hacen, pero que tuvieron que descifrar la infraestructura del negocio americano sin un mapa.",
+        "Quiero jubilar a mis padres. Esa es la verdad honesta de todo esto. Han trabajado todos y cada uno de los días para poner un techo sobre nuestras cabezas y comida en la mesa. Su salud no siempre va a aguantar. Quiero que pasen el resto de sus vidas orgullosos, presentes y libres — con sus nietos, el uno con el otro, sin preocupaciones. Si pudiera hacerlo mañana, lo haría.",
+        "Y más allá de eso — estoy apostando por mí mismo. Por las raíces en mi ADN, la ética de trabajo forjada en esos campos, las relaciones construidas entre dos culturas, y la simple creencia de que el café siempre ha sido donde la comunidad y la oportunidad se encuentran.",
+        "Café Con Pan comenzó en un tazón de café en Honduras. Se está convirtiendo en algo sobre lo que puedes construir tu negocio.",
+        "Una taza y una conexión a la vez.",
+      ],
+      storyCta:"Construyamos Algo Juntos →",
     },
     socials:{
       instagram:"https://instagram.com/icafeconpan",
@@ -659,8 +677,8 @@ const css = `
   .cred-badge-val{font-family:'Lilita One',cursive;font-size:17px;color:${C.cream}}
 
   .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;
-    align-items:center;max-width:1000px;margin:0 auto}
-  .about-visual{position:relative}
+    align-items:start;max-width:1000px;margin:0 auto}
+  .about-visual{position:sticky;top:100px;align-self:start}
   .about-frame{background:${C.espresso};
     border:4px solid ${C.espresso};
     padding:48px 40px;
@@ -1109,7 +1127,7 @@ function TechPage({ go, t }) {
   );
 }
 
-function AboutPage({ t }) {
+function AboutPage({ t, go }) {
   return (
     <>
       <section className="section" style={{paddingTop:100}}>
@@ -1127,16 +1145,10 @@ function AboutPage({ t }) {
           </div>
           <div>
             <div className="about-body">
-              <p>{t.about.body1}</p>
-              <p>{t.about.body2}</p>
+              {t.about.paragraphs.map((p, i) => <p key={i}>{p}</p>)}
             </div>
-            <div className="about-stats">
-              {t.about.stats.map(s => (
-                <div key={s.label}>
-                  <div className="about-stat-num">{s.num}</div>
-                  <div className="about-stat-label">{s.label}</div>
-                </div>
-              ))}
+            <div style={{marginTop:32}}>
+              <button className="hero-cta" onClick={() => go("Discovery")}>{t.about.storyCta}</button>
             </div>
           </div>
         </div>
@@ -2435,7 +2447,7 @@ export default function CafeConPan() {
       case "Home": return <HomePage go={go} t={t} lang={lang} />;
       case "Tech Services": return <TechPage go={go} t={t} />;
       case "Community": return null;
-      case "Our Story": return <AboutPage t={t} />;
+      case "Our Story": return <AboutPage t={t} go={go} />;
       case "Contact": return <ContactPage t={t} go={go} scrollToSocials={scrollToSocials} />;
       case "La Mesa": return <LaMesaPage t={t} go={go} />;
       case "La Mesa Referral": return <LaMesaReferralPage t={t} go={go} />;
