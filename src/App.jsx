@@ -261,6 +261,7 @@ const STRINGS = {
       phoneLabel:"Phone number", phonePlaceholder:"Best number to reach you",
       bestTimeLabel:"Best time to reach you",
       bestTimeOptions:["Morning","Afternoon","Evening"],
+      bestTimePlaceholder:"Or enter a specific time (e.g. Tuesdays at 2pm)",
       q1Label:"Business name & what you do", q1Placeholder:"Tell us your business name and describe what you do day-to-day.",
       q2Label:"Devices your team currently uses",
       q3Label:"Biggest tech frustration", q3Placeholder:"What's the most frustrating technology problem in your business right now?",
@@ -509,6 +510,7 @@ const STRINGS = {
       phoneLabel:"Número de teléfono", phonePlaceholder:"El mejor número para contactarte",
       bestTimeLabel:"Mejor hora para contactarte",
       bestTimeOptions:["Mañana","Tarde","Noche"],
+      bestTimePlaceholder:"O escribe un horario específico (ej. martes a las 2pm)",
       q1Label:"Nombre del negocio y qué haces", q1Placeholder:"Cuéntanos el nombre de tu negocio y describe lo que haces día a día.",
       q2Label:"Dispositivos que usa tu equipo",
       q3Label:"Tu mayor frustración tecnológica", q3Placeholder:"¿Cuál es el problema tecnológico más frustrante en tu negocio ahora mismo?",
@@ -2139,6 +2141,7 @@ function DiscoveryPage({ go, t }) {
                   <div>
                     <label style={lbl}>{d.bestTimeLabel}</label>
                     <div style={{marginTop:10,display:"flex",flexWrap:"wrap",gap:8}}>{d.bestTimeOptions.map(t=><button type="button" key={t} style={chip(form.bestTime===t)} onClick={()=>setForm(f=>({...f,bestTime:t}))}>{t}</button>)}</div>
+                    <input style={{...fld,marginTop:8}} value={d.bestTimeOptions.includes(form.bestTime) ? "" : form.bestTime} onChange={e=>setForm(f=>({...f,bestTime:e.target.value}))} placeholder={d.bestTimePlaceholder} />
                   </div>
                 </div>
 
