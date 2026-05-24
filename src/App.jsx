@@ -100,7 +100,7 @@ const STRINGS = {
       eyebrow:"Three Pillars, One Brand", title:"What We're", titleSpan:"Building",
       cards:[
         { n:"01", icon:"⌨️", title:"Tech Services", badge:"Available Now", desc:"Apple-focused device management, IT consulting, and carrier services. One trusted partner from day one to fully operational. Available now.", cta:"Explore →", page:"Tech Services" },
-        { n:"02", icon:"☕", title:"Coffee & Community", badge:"Coming Soon", desc:"A Honduran-rooted café experience built around Central American single-origin coffee, pan dulce, and a physical space with a boardroom where clients meet and deals get done. Coming soon.", cta:"See What's Coming →", page:"Community" },
+        { n:"02", icon:"☕", title:"Coffee & Community", badge:"Coming Soon", desc:"A Honduran-rooted café experience built around Central American single-origin coffee, pan dulce, and a physical space with a boardroom where clients meet and deals get done. Coming soon.", cta:"See What's Coming →", page:"Contact" },
         { n:"03", icon:"🌱", title:"The Bigger Vision", badge:"The Full Picture", desc:"Family land in Honduras. A café with a boardroom. An investment arm that grows alongside the clients we believe in. This is the full picture.", cta:"Read Our Story →", page:"Our Story" },
       ],
     },
@@ -347,7 +347,7 @@ const STRINGS = {
       eyebrow:"Tres Pilares, Una Marca", title:"Lo Que Estamos", titleSpan:"Construyendo",
       cards:[
         { n:"01", icon:"⌨️", title:"Servicios Tech", badge:"Disponible Ahora", desc:"Gestión de dispositivos Apple, consultoría IT y servicios de carrier. Un solo socio de confianza desde el primer día hasta estar completamente operativo. Disponible ahora.", cta:"Explorar →", page:"Tech Services" },
-        { n:"02", icon:"☕", title:"Café & Comunidad", badge:"Próximamente", desc:"Una experiencia de café con raíces hondureñas centrada en café de origen único centroamericano, pan dulce y un espacio físico con sala de juntas donde los clientes se reúnen y se cierran tratos. Próximamente.", cta:"Ver lo que Viene →", page:"Community" },
+        { n:"02", icon:"☕", title:"Café & Comunidad", badge:"Próximamente", desc:"Una experiencia de café con raíces hondureñas centrada en café de origen único centroamericano, pan dulce y un espacio físico con sala de juntas donde los clientes se reúnen y se cierran tratos. Próximamente.", cta:"Ver lo que Viene →", page:"Contact" },
         { n:"03", icon:"🌱", title:"La Visión Completa", badge:"El Panorama Completo", desc:"Tierras familiares en Honduras. Un café con sala de juntas. Un brazo de inversión que crece junto a los clientes en los que creemos. Este es el panorama completo.", cta:"Nuestra Historia →", page:"Our Story" },
       ],
     },
@@ -366,11 +366,11 @@ const STRINGS = {
         eyebrow:"Credenciales y Estructura", title:"Construido para", titleSpan:"Respaldarlo",
         sub:"Certificaciones, estructura legal y programas de socios en marcha antes de salir al mercado — porque la credibilidad se construye antes del primer cliente, no después.",
         badges:[
-          {label:"Certificaciones MDM",val:"Jamf · Mosyle"},
-          {label:"Asociación Apple",val:"ACN — Pendiente"},
+          {label:"Certificaciones MDM",val:"Jamf · Mosyle · Hands-On"},
+          {label:"Asociación Apple",val:"ACN — Aplicado"},
           {label:"Enfoque Carrier",val:"100% Independiente"},
-          {label:"Estructura Legal",val:"LLC · EIN"},
-          {label:"Estado Fiscal",val:"Exención Revendedor"},
+          {label:"Estado del Negocio",val:"LLC · EIN"},
+          {label:"Adquisición",val:"Exención Revendedor"},
         ],
         cta:"Solicitar una Consulta →",
       },
@@ -691,13 +691,7 @@ const css = `
     color:${C.teal};font-weight:700}
   .about-body p{font-size:15px;line-height:1.9;color:#4a3728;
     margin-bottom:20px;font-weight:600}
-  .about-stats{display:flex;gap:32px;margin-top:32px;flex-wrap:wrap}
-  .about-stat-num{font-family:'Lilita One',cursive;font-size:52px;
-    color:${C.red};line-height:1}
-  .about-stat-label{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;
-    color:#999;margin-top:4px;font-weight:700}
-
-  .teaser-inner{max-width:640px;margin:0 auto;text-align:center}
+.teaser-inner{max-width:640px;margin:0 auto;text-align:center}
   .coming-tag{display:inline-block;background:${C.teal};color:${C.cream};
     font-size:11px;letter-spacing:0.18em;text-transform:uppercase;
     padding:7px 20px;font-weight:700;margin-bottom:28px;
@@ -807,7 +801,6 @@ const css = `
     .grid-3,.grid-2{grid-template-columns:1fr}
     .grid-2>*:last-child:nth-child(odd){max-width:100%;grid-column:auto}
     .creds-row{gap:12px}
-    .about-stats{gap:24px}
     footer{flex-direction:column;text-align:center;padding:40px 24px;gap:16px}
     .email-row{flex-direction:column}
     .email-input,.email-btn{width:100%;box-sizing:border-box}
@@ -1160,7 +1153,7 @@ function AboutPage({ t, go }) {
   );
 }
 
-function ContactPage({ t, go, scrollToSocials, setGameActive }) {
+function ContactPage({ t, scrollToSocials, setGameActive }) {
   const [form, setForm] = useState({name:"",email:"",inquiry:"",message:""});
   const [status, setStatus] = useState("idle");
   const handle = e => setForm({...form, [e.target.name]: e.target.value});
@@ -2457,7 +2450,7 @@ export default function CafeConPan() {
       case "Tech Services": return <TechPage go={go} t={t} />;
       case "Community": return null;
       case "Our Story": return <AboutPage t={t} go={go} />;
-      case "Contact": return <ContactPage t={t} go={go} scrollToSocials={scrollToSocials} setGameActive={setGameActive} />;
+      case "Contact": return <ContactPage t={t} scrollToSocials={scrollToSocials} setGameActive={setGameActive} />;
       case "La Mesa": return <LaMesaPage t={t} go={go} />;
       case "La Mesa Referral": return <LaMesaReferralPage t={t} go={go} />;
       case "Pay": return <PayPage t={t} />;
