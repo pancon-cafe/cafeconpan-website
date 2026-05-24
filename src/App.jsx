@@ -2452,18 +2452,10 @@ export default function CafeConPan() {
     const onKey = e => {
       if (e.key.length !== 1) return;
       typedRef.current = (typedRef.current + e.key).slice(-11).toUpperCase();
-      if (typedRef.current.endsWith("CAFE")) setGameActive(true);
       if (typedRef.current.endsWith("1242202JFRM")) setSecretNavActive(true);
     };
-    const onInput = e => {
-      if (e.target.value && e.target.value.toLowerCase().includes("cafe")) setGameActive(true);
-    };
     window.addEventListener("keydown", onKey);
-    document.addEventListener("input", onInput);
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.removeEventListener("input", onInput);
-    };
+    return () => window.removeEventListener("keydown", onKey);
   }, []);
 
   const renderPage = () => {
