@@ -234,12 +234,12 @@ const STRINGS = {
       youtubeLabel:"YouTube",
       facebookLabel:"Facebook",
       discordLabel:"Discord",
-      followLabel:"Socials", contactNote:"Follow us ↓",
+      followLabel:"Socials", contactNote:"Follow Us ↓",
     },
     contact:{
       eyebrow:"Get in Touch", title:"Let's", titleSpan:"Talk",
       sub:"General questions, existing clients, or anything that doesn't fit a form — this is the right place.",
-      info:[{label:"Email",val:"hello@pancon.cafe"},{label:"Response Time",val:"Within 24 hours"},{label:"Business",val:"Cafe Con Pan LLC"},{label:"Services",val:"Tech · Coffee · Culture"}],
+      info:[{label:"Email",val:"hello@pancon.cafe"},{label:"Response Time",val:"Within 24 Hours"},{label:"Business",val:"Cafe Con Pan LLC"},{label:"Services",val:"Tech · Coffee · Culture"}],
       nameLabel:"Your Name", namePlaceholder:"Full name",
       emailLabel:"Email Address", emailPlaceholder:"you@company.com",
       inquiryLabel:"Inquiry Type", messageLabel:"Message", messagePlaceholder:"Tell us about your business and what you need...",
@@ -486,7 +486,7 @@ const STRINGS = {
     contact:{
       eyebrow:"Ponte en Contacto", title:"", titleSpan:"Hablemos",
       sub:"Preguntas generales, clientes actuales, o cualquier cosa que no encaje en un formulario — este es el lugar indicado.",
-      info:[{label:"Correo",val:"hello@pancon.cafe"},{label:"Tiempo de Respuesta",val:"Dentro de 24 horas"},{label:"Negocio",val:"Cafe Con Pan LLC"},{label:"Servicios",val:"Tech · Café · Cultura"}],
+      info:[{label:"Correo",val:"hello@pancon.cafe"},{label:"Tiempo de Respuesta",val:"Dentro de 24 Horas"},{label:"Negocio",val:"Cafe Con Pan LLC"},{label:"Servicios",val:"Tech · Café · Cultura"}],
       nameLabel:"Tu Nombre", namePlaceholder:"Nombre completo",
       emailLabel:"Correo Electrónico", emailPlaceholder:"tu@empresa.com",
       inquiryLabel:"Tipo de Consulta", messageLabel:"Mensaje", messagePlaceholder:"Cuéntanos sobre tu negocio y lo que necesitas...",
