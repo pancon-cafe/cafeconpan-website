@@ -949,6 +949,7 @@ function HomePage({ go, t, lang }) {
             <span className="line-teal"> Pan</span>
           </h1>
           <p className="hero-subtitle">{t.hero.subtitle}</p>
+          <p style={{fontSize:15,color:C.espresso,opacity:0.7,fontStyle:"italic",fontFamily:"'Nunito',sans-serif",margin:"12px auto",lineHeight:1.7,maxWidth:520}}>The café was always where tech and community met. Ours started in Honduras, over coffee and pan dulce.</p>
           <p style={{fontSize:15,color:C.espresso,fontWeight:600,letterSpacing:"0.03em",margin:"8px auto 24px",lineHeight:1.7,opacity:0.75,maxWidth:520}}>{t.hero.signal}</p>
           <div style={{display:"flex",gap:16,justifyContent:"center",flexWrap:"wrap",marginTop:32,marginBottom:20}}>
             <button className="hero-cta" onClick={() => go("Find My Plan")}>{t.hero.cta}</button>
