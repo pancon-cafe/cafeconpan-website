@@ -119,7 +119,7 @@ const STRINGS = {
         eyebrow:"Credentials & Structure", title:"Built to", titleSpan:"Back It Up",
         sub:"Certifications, legal structure, and partner programs in place before going to market — because credibility is built before the first client, not after.",
         badges:[
-          {label:"MDM Certifications",val:"Jamf · Mosyle"},
+          {label:"MDM Certifications",val:"Jamf · Mosyle · Hands-On"},
           {label:"Apple Partnership",val:"ACN — Pending"},
           {label:"Carrier Approach",val:"100% Agnostic"},
           {label:"Legal Structure",val:"LLC · EIN"},
