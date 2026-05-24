@@ -2382,6 +2382,7 @@ export default function CafeConPan() {
     setTimeout(() => setHighlightSocials(false), 2400);
   };
   const go = (p) => {
+    if (p === "Home" && page === "Home") { window.location.reload(); return; }
     scrollPositions.current[page] = window.scrollY;
     isProgrammaticNav.current = true;
     setPage(p); setMenuOpen(false);
