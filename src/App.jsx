@@ -775,7 +775,7 @@ const css = `
 
   .form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   @media(max-width:600px){.form-grid-2{grid-template-columns:1fr}}
-  .disc-chip:hover{background:${C.parchment};border-color:${C.teal};color:${C.espresso}}
+  .disc-chip:hover{background:${C.parchment} !important;border-color:${C.teal} !important;color:${C.espresso} !important}
 
   @keyframes brewFill{from{width:0}to{width:100%}}
   @keyframes brewPulse{0%,100%{opacity:0.25}50%{opacity:1}}
