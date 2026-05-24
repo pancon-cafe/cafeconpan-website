@@ -979,6 +979,12 @@ function HomePage({ go, t, lang }) {
 
       <div id="story"><TextileBorder /></div>
 
+      <PainPointsSection go={go} t={t} />
+
+      <TextileBorder flip />
+
+      {lang === "es" && <ParaTiSection t={t} />}
+
       <section className="section">
         <div className="section-header">
           <div className="section-eyebrow">{t.story.eyebrow}</div>
@@ -986,12 +992,6 @@ function HomePage({ go, t, lang }) {
         </div>
         <p className="section-sub" style={{maxWidth:640,margin:"0 auto",textAlign:"center"}}>{t.story.body}</p>
       </section>
-
-      <TextileBorder flip />
-
-      {lang === "es" && <ParaTiSection t={t} />}
-
-      <PainPointsSection go={go} t={t} />
 
       <TextileBorder flip />
 
