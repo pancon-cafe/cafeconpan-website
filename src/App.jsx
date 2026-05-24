@@ -2364,6 +2364,10 @@ export default function CafeConPan() {
   const [secretNavActive, setSecretNavActive] = useState(false);
   const [highlightSocials, setHighlightSocials] = useState(false);
   const typedRef = useRef("");
+  const scrollPositions = useRef({});
+  const isBackNav = useRef(false);
+  const isProgrammaticNav = useRef(false);
+  const pageRef = useRef(page);
 
   const t = STRINGS[lang];
   const sLinkFt = {fontSize:12,color:C.cream,opacity:0.6,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"};
@@ -2373,14 +2377,30 @@ export default function CafeConPan() {
     setTimeout(() => setHighlightSocials(false), 2400);
   };
   const go = (p) => {
-    setPage(p); setMenuOpen(false); window.scrollTo(0,0);
+    scrollPositions.current[page] = window.scrollY;
+    isProgrammaticNav.current = true;
+    setPage(p); setMenuOpen(false);
     window.location.hash = PAGE_HASH[p];
   };
 
-  useEffect(() => { window.scrollTo(0,0); }, [page]);
+  useEffect(() => {
+    pageRef.current = page;
+    if (isBackNav.current) {
+      const y = scrollPositions.current[page] ?? 0;
+      requestAnimationFrame(() => window.scrollTo(0, y));
+      isBackNav.current = false;
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [page]);
 
   useEffect(() => {
-    const onHash = () => { const p = getPageFromHash(); setPage(p); window.scrollTo(0,0); };
+    const onHash = () => {
+      if (isProgrammaticNav.current) { isProgrammaticNav.current = false; return; }
+      scrollPositions.current[pageRef.current] = window.scrollY;
+      isBackNav.current = true;
+      setPage(getPageFromHash());
+    };
     window.addEventListener("hashchange", onHash);
     return () => window.removeEventListener("hashchange", onHash);
   }, []);
