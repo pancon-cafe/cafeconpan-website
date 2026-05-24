@@ -1208,11 +1208,10 @@ function ContactPage({ t, go, scrollToSocials, setGameActive }) {
               <div className="contact-info-val">{i.val}</div>
             </div>
           ))}
-          <button onClick={scrollToSocials}
-            style={{marginTop:24,background:"none",border:"none",cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontSize:13,color:C.espresso,fontWeight:700,opacity:0.5,letterSpacing:"0.03em",padding:0,textDecoration:"underline",textDecorationColor:`${C.espresso}44`,transition:"opacity 0.2s"}}
-            onMouseEnter={e=>e.currentTarget.style.opacity=0.85}
-            onMouseLeave={e=>e.currentTarget.style.opacity=0.5}
-          >{t.socials.contactNote}</button>
+          <div className="contact-info-item" onClick={scrollToSocials} style={{cursor:"pointer"}}>
+            <div className="contact-info-label">{t.socials.followLabel}</div>
+            <div className="contact-info-val">{t.socials.contactNote}</div>
+          </div>
           <div style={{marginTop:32,cursor:"pointer",display:"block",opacity:0.85,transition:"opacity 0.2s"}}
             onClick={() => setGameActive(true)}
             onMouseEnter={e=>e.currentTarget.style.opacity=1}
