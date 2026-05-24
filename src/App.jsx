@@ -234,7 +234,7 @@ const STRINGS = {
       youtubeLabel:"YouTube",
       facebookLabel:"Facebook",
       discordLabel:"Discord",
-      followLabel:"Follow the Journey", contactNote:"Follow us ↓",
+      followLabel:"Socials", contactNote:"Follow us ↓",
     },
     contact:{
       eyebrow:"Get in Touch", title:"Let's", titleSpan:"Talk",
@@ -1212,13 +1212,15 @@ function ContactPage({ t, go, scrollToSocials, setGameActive }) {
             <div className="contact-info-label">{t.socials.followLabel}</div>
             <div className="contact-info-val" style={{textDecoration:"underline",textUnderlineOffset:3}}>{t.socials.contactNote}</div>
           </div>
-          <div style={{marginTop:32,cursor:"pointer",display:"block",opacity:0.85,transition:"opacity 0.2s"}}
-            onClick={() => setGameActive(true)}
-            onMouseEnter={e=>e.currentTarget.style.opacity=1}
-            onMouseLeave={e=>e.currentTarget.style.opacity=0.85}
-            title="☕"
-          >
-            <SteamSVG />
+          <div style={{marginTop:32}}>
+            <div style={{cursor:"pointer",display:"inline-block",opacity:0.85,transition:"opacity 0.2s"}}
+              onClick={() => setGameActive(true)}
+              onMouseEnter={e=>e.currentTarget.style.opacity=1}
+              onMouseLeave={e=>e.currentTarget.style.opacity=0.85}
+              title="☕"
+            >
+              <SteamSVG />
+            </div>
           </div>
         </div>
         <form onSubmit={submit}>
