@@ -1149,7 +1149,6 @@ function AboutPage({ t, go }) {
             <div className="about-body">
               {t.about.paragraphs.map((p, i) => <p key={i}>{p}</p>)}
             </div>
-            <p style={{fontStyle:"italic",fontSize:19,textAlign:"center",color:C.espresso,lineHeight:1.7,margin:"36px 0"}}>"{t.about.pullQuote}"</p>
             <div style={{marginTop:32}}>
               <button className="hero-cta" onClick={() => go("Discovery")}>{t.about.storyCta}</button>
             </div>
