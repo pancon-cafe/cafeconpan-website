@@ -110,6 +110,8 @@ function drawObstacle(ctx, x, type) {
   ctx.beginPath(); ctx.ellipse(x, GY, 24, 5, 0, 0, Math.PI*2);
   ctx.fillStyle = "rgba(61,43,31,0.18)"; ctx.fill();
   // emoji
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = K.espresso;
   ctx.font = "52px serif";
   ctx.textAlign = "center";
   ctx.textBaseline = "bottom";
