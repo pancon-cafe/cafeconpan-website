@@ -120,7 +120,7 @@ const STRINGS = {
         sub:"Certifications, legal structure, and partner programs in place before going to market — because credibility is built before the first client, not after.",
         badges:[
           {label:"MDM Certifications",val:"Jamf · Mosyle · Hands-On"},
-          {label:"Apple Partnership",val:"ACN — Pending"},
+          {label:"Apple Partnership",val:"ACN — Applied"},
           {label:"Carrier Approach",val:"100% Agnostic"},
           {label:"Legal Structure",val:"LLC · EIN"},
           {label:"Tax Status",val:"Reseller Exempt"},
