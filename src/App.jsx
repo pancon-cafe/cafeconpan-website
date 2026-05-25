@@ -2293,6 +2293,30 @@ const RESOURCE_CATEGORIES = [
       btnLabel: "Contact Me →",
       internal: "Discovery",
     },
+    {
+      name: "Verizon",
+      desc: "My personal mobile and internet provider. Strong coverage, reliable service, and a plan worth auditing if you haven't looked at it recently. Carrier setup and plan optimization is included in my Connectivity Consulting service.",
+      badge: "I use this",
+      badgeColor: "#5A9E96",
+      btnLabel: "Let's Talk →",
+      internal: "Discovery",
+    },
+    {
+      name: "AT&T",
+      desc: "My personal mobile carrier. Great coverage in the DMV and solid business plan options. Carrier setup and plan optimization is included in my Connectivity Consulting service.",
+      badge: "I use this",
+      badgeColor: "#5A9E96",
+      btnLabel: "Let's Talk →",
+      internal: "Discovery",
+    },
+    {
+      name: "T-Mobile",
+      desc: "Competitive business plans with strong value at scale. A solid option depending on your coverage needs and team size. Carrier setup and plan optimization is included in my Connectivity Consulting service.",
+      badge: "Trusted Partner",
+      badgeColor: C.beige,
+      btnLabel: "Let's Talk →",
+      internal: "Discovery",
+    },
   ]},
 ];
 
