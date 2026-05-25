@@ -250,7 +250,7 @@ const STRINGS = {
       error:"Something went wrong. Please try again or email us directly at hello@pancon.cafe.",
     },
     softCta:{ eyebrow:"Not Sure Where to Start?", body:"No pitch, no pressure. Just a conversation about where your business is and what might actually help.", btn:"Let's Just Talk →", emailEyebrow:"Not Ready Yet?", emailBody:"Follow the journey and we'll reach out when the time is right." },
-    footer:{ tagline:"Tech · Coffee · Culture", copy:"© 2026 Cafe Con Pan LLC · pancon.cafe", disclaimer:"We provide guidance and implementation support — not legal, tax, or financial advice. For those needs, we recommend working with a licensed professional." },
+    footer:{ tagline:"Tech · Coffee · Culture", copy:"© 2026 Cafe Con Pan LLC", disclaimer:"We provide guidance and implementation support — not legal, tax, or financial advice. For those needs, we recommend working with a licensed professional." },
     pay:{ eyebrow:"Pay Your Invoice", title:"Quick &", titleSpan:"Secure", body:"Enter your invoice number and amount on the next page. Payment is processed securely through Helcim.", cta:"Pay Now →", questions:"Questions? Email" },
     privacy:{ footerLink:"Privacy Policy" },
     discovery:{
@@ -500,7 +500,7 @@ const STRINGS = {
       error:"Algo salió mal. Inténtalo de nuevo o escríbenos directamente a hello@pancon.cafe.",
     },
     softCta:{ eyebrow:"¿No Sabes Por Dónde Empezar?", body:"Sin presión, sin discurso. Solo una conversación sobre dónde está tu negocio y qué podría ayudar.", btn:"Hablemos →", emailEyebrow:"¿Todavía No Estás Listo?", emailBody:"Síguenos y te contactaremos cuando sea el momento." },
-    footer:{ tagline:"Tech · Café · Cultura", copy:"© 2026 Cafe Con Pan LLC · pancon.cafe", disclaimer:"Ofrecemos orientación y apoyo operativo — no asesoría legal, fiscal ni financiera. Para esas necesidades, recomendamos trabajar con un profesional licenciado." },
+    footer:{ tagline:"Tech · Café · Cultura", copy:"© 2026 Cafe Con Pan LLC", disclaimer:"Ofrecemos orientación y apoyo operativo — no asesoría legal, fiscal ni financiera. Para esas necesidades, recomendamos trabajar con un profesional licenciado." },
     pay:{ eyebrow:"Paga tu Factura", title:"Rápido y", titleSpan:"Seguro", body:"Ingresa el número de factura y el monto en la siguiente página. El pago se procesa de forma segura a través de Helcim.", cta:"Pagar Ahora →", questions:"¿Preguntas? Escríbenos a" },
     privacy:{ footerLink:"Política de Privacidad" },
     discovery:{
@@ -823,6 +823,7 @@ const PAGE_HASH = {
   "Find My Plan":"find-my-plan",
   "The Grind":"the-grind",
   "Discovery":"discovery",
+  "Resources":"resources",
 };
 const HASH_PAGE = Object.fromEntries(Object.entries(PAGE_HASH).map(([k,v])=>[v,k]));
 const getPageFromHash = () => HASH_PAGE[window.location.hash.replace("#","")] || "Home";
@@ -2222,6 +2223,97 @@ function DiscoveryPage({ go, t }) {
   );
 }
 
+const RESOURCE_CATEGORIES = [
+  {
+    label: "Productivity & Communication",
+    cards: [
+      {
+        name: "Google Workspace",
+        desc: "Business email, Drive, Docs, Meet — the full suite. What I use to run Café Con Pan day to day.",
+        badge: "I use this",
+        badgeColor: "#5A9E96",
+        url: "GOOGLE_WORKSPACE_REFERRAL_LINK",
+      },
+    ],
+  },
+  { label: "Business Infrastructure", cards: [] },
+  { label: "Devices & Tech", cards: [] },
+  { label: "Carriers & Connectivity", cards: [] },
+];
+
+function ResourcesPage() {
+  const cardStyle = {
+    background: C.cream,
+    border: `3px solid ${C.espresso}`,
+    boxShadow: `4px 4px 0 ${C.espresso}`,
+    padding: "28px 32px",
+    display: "flex",
+    flexDirection: "column",
+    gap: 12,
+  };
+
+  return (
+    <>
+      <section id="resources" className="section">
+        <div className="section-header">
+          <div className="section-eyebrow">Tools &amp; Resources</div>
+          <h2 className="section-title">Things I <span>Actually Use</span></h2>
+          <p className="section-sub" style={{maxWidth:640,margin:"12px auto 0",textAlign:"center"}}>
+            Every tool on this page is something I've either used myself, recommend to clients, or trust enough to put my name behind. No fluff, no random affiliates.
+          </p>
+        </div>
+
+        <div style={{maxWidth:860,margin:"0 auto",display:"flex",flexDirection:"column",gap:56}}>
+          {RESOURCE_CATEGORIES.map(cat => (
+            <div key={cat.label}>
+              <div style={{fontSize:11,letterSpacing:"0.18em",textTransform:"uppercase",fontWeight:700,color:C.espresso,borderBottom:`2px solid ${C.espresso}`,paddingBottom:10,marginBottom:24,opacity:0.55}}>
+                {cat.label}
+              </div>
+              {cat.cards.length === 0 ? (
+                <div style={{fontSize:13,color:"#999",fontStyle:"italic",fontWeight:600}}>More coming soon.</div>
+              ) : (
+                <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:24}}>
+                  {cat.cards.map(card => (
+                    <div key={card.name} style={cardStyle}>
+                      <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",gap:8}}>
+                        <div style={{fontFamily:"'Lilita One',cursive",fontSize:20,color:C.espresso,lineHeight:1.2}}>{card.name}</div>
+                        {card.badge && (
+                          <span style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",color:"#fff",background:card.badgeColor,padding:"3px 8px",whiteSpace:"nowrap",flexShrink:0,marginTop:3}}>
+                            {card.badge}
+                          </span>
+                        )}
+                      </div>
+                      <p style={{fontSize:14,lineHeight:1.8,color:"#555",fontWeight:600,margin:0}}>{card.desc}</p>
+                      <a href={card.url} target="_blank" rel="noopener noreferrer" style={{
+                        display:"inline-block",marginTop:"auto",
+                        background:C.espresso,color:C.cream,
+                        fontFamily:"'Nunito',sans-serif",fontWeight:800,fontSize:12,
+                        letterSpacing:"0.1em",textTransform:"uppercase",
+                        padding:"10px 20px",textDecoration:"none",
+                        boxShadow:`3px 3px 0 ${C.gold}`,
+                        transition:"transform 0.1s,box-shadow 0.1s",
+                        alignSelf:"flex-start",
+                      }}
+                        onMouseEnter={e=>{e.currentTarget.style.transform="translate(2px,2px)";e.currentTarget.style.boxShadow=`1px 1px 0 ${C.gold}`;}}
+                        onMouseLeave={e=>{e.currentTarget.style.transform="";e.currentTarget.style.boxShadow=`3px 3px 0 ${C.gold}`;}}
+                      >Get Started →</a>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <p style={{textAlign:"center",fontSize:12,fontStyle:"italic",color:"rgba(61,43,31,0.45)",fontWeight:600,maxWidth:600,margin:"56px auto 0",lineHeight:1.7}}>
+          Some of these links are referral or affiliate links. If you sign up through them, I may earn a small credit or commission — at no extra cost to you. I only recommend things I'd tell a friend to use.
+        </p>
+      </section>
+      <TextileBorder flip />
+    </>
+  );
+}
+
 function TheGrindPage({ go }) {
   const PACKAGES = ["Open for Business","Apple Presence","Apple Operations","Connectivity Consulting","Tech Concierge"];
   const PKG_DESC = {
@@ -2485,6 +2577,7 @@ export default function CafeConPan() {
       case "Find My Plan": return <FindMyPlanPage go={go} t={t} />;
       case "The Grind": return <AdminGate><TheGrindPage go={go} /></AdminGate>;
       case "Discovery": return <DiscoveryPage go={go} t={t} />;
+      case "Resources": return <ResourcesPage />;
       default: return <HomePage go={go} t={t} lang={lang} />;
     }
   };
@@ -2569,10 +2662,16 @@ export default function CafeConPan() {
             }} style={{cursor:"default"}}>©</span>
             {t.footer.copy.replace(/^©/, "")}
           </div>
-          <button onClick={() => go("Privacy Policy")} style={{background:"none",border:"none",cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontSize:10,color:`rgba(245,237,214,0.2)`,fontWeight:600,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"underline",transition:"color 0.2s",padding:0}}
-            onMouseEnter={e=>e.currentTarget.style.color=`rgba(245,237,214,0.55)`}
-            onMouseLeave={e=>e.currentTarget.style.color=`rgba(245,237,214,0.2)`}
-          >{t.privacy.footerLink}</button>
+          <div style={{display:"flex",gap:16,justifyContent:"center",flexWrap:"wrap"}}>
+            <button onClick={() => go("Resources")} style={{background:"none",border:"none",cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontSize:10,color:C.teal,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"underline",transition:"color 0.2s",padding:0}}
+              onMouseEnter={e=>e.currentTarget.style.color=C.beige}
+              onMouseLeave={e=>e.currentTarget.style.color=C.teal}
+            >Resources</button>
+            <button onClick={() => go("Privacy Policy")} style={{background:"none",border:"none",cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontSize:10,color:`rgba(245,237,214,0.2)`,fontWeight:600,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"underline",transition:"color 0.2s",padding:0}}
+              onMouseEnter={e=>e.currentTarget.style.color=`rgba(245,237,214,0.55)`}
+              onMouseLeave={e=>e.currentTarget.style.color=`rgba(245,237,214,0.2)`}
+            >{t.privacy.footerLink}</button>
+          </div>
         </div>
       </footer>
     </>
