@@ -2251,6 +2251,13 @@ const RESOURCE_CATEGORIES = [
       badgeColor: "#5A9E96",
       url: "CLOUDFLARE_REFERRAL_LINK",
     },
+    {
+      name: "Namecheap",
+      desc: "Where I register domains. Simple, affordable, and straightforward — no dark patterns or surprise upsells at checkout.",
+      badge: "I use this",
+      badgeColor: "#5A9E96",
+      url: "NAMECHEAP_REFERRAL_LINK",
+    },
   ]},
   { label: "Devices & Tech", cards: [] },
   { label: "Carriers & Connectivity", cards: [] },
