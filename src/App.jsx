@@ -2258,6 +2258,13 @@ const RESOURCE_CATEGORIES = [
       badgeColor: "#5A9E96",
       url: "NAMECHEAP_REFERRAL_LINK",
     },
+    {
+      name: "Helcim",
+      desc: "The payment processor I recommend for small businesses. No monthly fees, transparent pricing, and they actually treat small businesses like real customers.",
+      badge: "I use this",
+      badgeColor: "#5A9E96",
+      url: "HELCIM_REFERRAL_LINK",
+    },
   ]},
   { label: "Devices & Tech", cards: [] },
   { label: "Carriers & Connectivity", cards: [] },
