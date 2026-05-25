@@ -270,7 +270,7 @@ const STRINGS = {
       calendlyLink:"Or skip ahead and pick a time directly →",
       submit:"Send It Over →", sending:"Sending…",
       trustNote:"No pitch, no pressure. We'll reach out within 24 hours to schedule a quick conversation.",
-      successTitle:"You're in. ☕", successBody:"We got your info and we'll be in touch within 24 hours. In the meantime, feel free to look around.",
+      successTitle:"You're in. ☕", successBody:"We got your info and we'll be in touch within 24 hours. In the meantime, feel free to look around.", backToHome:"Back to Home →",
     },
     finder:{
       eyebrow:"Package Finder",
@@ -520,7 +520,7 @@ const STRINGS = {
       calendlyLink:"O salta directo y elige un horario →",
       submit:"Enviar →", sending:"Enviando…",
       trustNote:"Sin presión. Nos comunicamos en menos de 24 horas para coordinar una conversación rápida.",
-      successTitle:"Ya estás dentro. ☕", successBody:"Recibimos tu información y nos comunicaremos en menos de 24 horas. Mientras tanto, siéntete libre de explorar.",
+      successTitle:"Ya estás dentro. ☕", successBody:"Recibimos tu información y nos comunicaremos en menos de 24 horas. Mientras tanto, siéntete libre de explorar.", backToHome:"Volver al Inicio →",
     },
     finder:{
       eyebrow:"Buscador de Paquetes",
@@ -661,7 +661,6 @@ const css = `
     margin-left:auto;margin-right:auto;line-height:1.8;font-weight:600}
   .section-sub-light{color:rgba(245,237,214,0.65)}
 
-  .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:900px;margin:0 auto}
   .service-card{background:${C.cream};
     border:3px solid ${C.espresso};
     padding:36px;
@@ -801,7 +800,6 @@ const css = `
     .scroll-btn{display:none}
     .scroll-btn-mobile{display:flex}
     .section{padding:56px 24px}
-    .services-grid{grid-template-columns:1fr}
     .about-grid{grid-template-columns:1fr;gap:36px}
     .about-visual{position:static}
     .contact-grid{grid-template-columns:1fr;gap:36px}
@@ -1709,7 +1707,7 @@ function LaMesaReferralPage({ t, go }) {
   );
 }
 
-function PrivacyPolicyPage({ go, lang }) {
+function PrivacyPolicyPage({ lang }) {
   const sLabel = {fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:10};
   const sTitle = {fontFamily:"'Lilita One',cursive",fontSize:"clamp(20px,3vw,28px)",color:C.espresso,marginBottom:16,lineHeight:1.2};
   const body = {fontSize:15,lineHeight:1.9,color:"#4a3728",fontWeight:600,marginBottom:16};
@@ -2119,7 +2117,7 @@ function DiscoveryPage({ go, t }) {
             <div style={{textAlign:"center",padding:"48px 24px"}}>
               <h2 style={{fontFamily:"'Lilita One',cursive",fontSize:48,color:C.espresso,marginBottom:16}}>{d.successTitle}</h2>
               <p style={{fontSize:15,color:"#555",fontWeight:600,lineHeight:1.7,maxWidth:400,margin:"0 auto 32px"}}>{d.successBody}</p>
-              <button onClick={() => go("Home")} style={{background:"none",border:"none",color:C.teal,fontFamily:"'Nunito',sans-serif",fontSize:15,fontWeight:700,cursor:"pointer",textDecoration:"underline",textUnderlineOffset:3}}>Back to Home →</button>
+              <button onClick={() => go("Home")} style={{background:"none",border:"none",color:C.teal,fontFamily:"'Nunito',sans-serif",fontSize:15,fontWeight:700,cursor:"pointer",textDecoration:"underline",textUnderlineOffset:3}}>{d.backToHome}</button>
             </div>
           ) : (
             <form onSubmit={submit}>
@@ -2460,7 +2458,7 @@ export default function CafeConPan() {
       case "La Mesa": return <LaMesaPage t={t} go={go} />;
       case "La Mesa Referral": return <LaMesaReferralPage t={t} go={go} />;
       case "Pay": return <PayPage t={t} />;
-      case "Privacy Policy": return <PrivacyPolicyPage go={go} lang={lang} />;
+      case "Privacy Policy": return <PrivacyPolicyPage lang={lang} />;
       case "Find My Plan": return <FindMyPlanPage go={go} t={t} />;
       case "The Grind": return <TheGrindPage go={go} />;
       case "Discovery": return <DiscoveryPage go={go} t={t} />;
