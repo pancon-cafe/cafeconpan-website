@@ -2311,7 +2311,7 @@ function ResourcesPage({ go }) {
                 <div style={{fontSize:13,color:"#999",fontStyle:"italic",fontWeight:600}}>More coming soon.</div>
               ) : (
                 <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:24}}>
-                  {cat.cards.map(card => (
+                  {[...cat.cards].sort((a,b) => a.name.localeCompare(b.name)).map(card => (
                     <div key={card.name} style={cardStyle}>
                       <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",gap:8}}>
                         <div style={{fontFamily:"'Lilita One',cursive",fontSize:20,color:C.espresso,lineHeight:1.2}}>{card.name}</div>
