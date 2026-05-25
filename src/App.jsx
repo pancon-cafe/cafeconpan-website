@@ -1395,6 +1395,38 @@ function PayPage({ t }) {
   );
 }
 
+const ADMIN_PW = "ccp1242202";
+
+function AdminGate({ children }) {
+  const [pw, setPw] = useState("");
+  const [unlocked, setUnlocked] = useState(false);
+  const [error, setError] = useState(false);
+
+  if (unlocked) return children;
+
+  const C2 = { espresso:"#3D2B1F", cream:"#F5EDD6", gold:"#C8922A", red:"#B8503E", beige:"#D4A97A" };
+  return (
+    <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",background:C2.espresso}}>
+      <div style={{background:"rgba(255,255,255,0.05)",border:`2px solid ${C2.gold}`,padding:"48px 40px",minWidth:300,textAlign:"center"}}>
+        <div style={{fontFamily:"'Pacifico',cursive",fontSize:22,color:C2.cream,marginBottom:4}}>Café Con <span style={{color:"#F2B0AC"}}>Pan</span></div>
+        <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C2.gold,fontWeight:700,marginBottom:28}}>Admin Access</div>
+        <form onSubmit={e => { e.preventDefault(); if (pw === ADMIN_PW) setUnlocked(true); else { setError(true); setPw(""); } }}>
+          <input
+            type="password"
+            value={pw}
+            onChange={e => { setPw(e.target.value); setError(false); }}
+            placeholder="Password"
+            autoFocus
+            style={{width:"100%",padding:"10px 14px",fontFamily:"'Nunito',sans-serif",fontSize:14,background:"rgba(255,255,255,0.08)",border:`1.5px solid ${error ? C2.red : C2.beige}44`,color:C2.cream,outline:"none",marginBottom:8,boxSizing:"border-box",letterSpacing:"0.1em"}}
+          />
+          {error && <div style={{fontSize:11,color:C2.red,marginBottom:8,letterSpacing:"0.08em"}}>Incorrect password</div>}
+          <button type="submit" style={{width:"100%",background:C2.gold,border:"none",color:C2.espresso,cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:12,letterSpacing:"0.14em",textTransform:"uppercase",padding:"10px 0",marginTop:4}}>Enter</button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
 function LaMesaPage({ t, go }) {
   const [form, setForm] = useState({name:"",email:"",role:"",message:""});
   const [status, setStatus] = useState("idle");
@@ -2394,8 +2426,10 @@ export default function CafeConPan() {
   const [lang, setLang] = useState(getBrowserLang);
   const [gameActive, setGameActive] = useState(false);
   const [secretNavActive, setSecretNavActive] = useState(false);
+  const [adminPwInput, setAdminPwInput] = useState("");
+  const [adminPwError, setAdminPwError] = useState(false);
+  const [adminNavUnlocked, setAdminNavUnlocked] = useState(false);
   const [highlightSocials, setHighlightSocials] = useState(false);
-  const typedRef = useRef("");
   const scrollPositions = useRef({});
   const isBackNav = useRef(false);
   const isProgrammaticNav = useRef(false);
@@ -2438,15 +2472,6 @@ export default function CafeConPan() {
     return () => window.removeEventListener("hashchange", onHash);
   }, []);
 
-  useEffect(() => {
-    const onKey = e => {
-      if (e.key.length !== 1) return;
-      typedRef.current = (typedRef.current + e.key).slice(-11).toUpperCase();
-      if (typedRef.current.endsWith("1242202JFRM")) setSecretNavActive(true);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
 
   const renderPage = () => {
     switch(page) {
@@ -2455,12 +2480,12 @@ export default function CafeConPan() {
       case "Community": return null;
       case "Our Story": return <AboutPage t={t} go={go} />;
       case "Contact": return <ContactPage t={t} scrollToSocials={scrollToSocials} setGameActive={setGameActive} />;
-      case "La Mesa": return <LaMesaPage t={t} go={go} />;
-      case "La Mesa Referral": return <LaMesaReferralPage t={t} go={go} />;
+      case "La Mesa": return <AdminGate><LaMesaPage t={t} go={go} /></AdminGate>;
+      case "La Mesa Referral": return <AdminGate><LaMesaReferralPage t={t} go={go} /></AdminGate>;
       case "Pay": return <PayPage t={t} />;
       case "Privacy Policy": return <PrivacyPolicyPage lang={lang} />;
       case "Find My Plan": return <FindMyPlanPage go={go} t={t} />;
-      case "The Grind": return <TheGrindPage go={go} />;
+      case "The Grind": return <AdminGate><TheGrindPage go={go} /></AdminGate>;
       case "Discovery": return <DiscoveryPage go={go} t={t} />;
       default: return <HomePage go={go} t={t} lang={lang} />;
     }
@@ -2471,19 +2496,34 @@ export default function CafeConPan() {
       {gameActive && <CafeGame onClose={() => setGameActive(false)} />}
       {secretNavActive && (
         <div onClick={() => setSecretNavActive(false)} style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.7)",zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center"}}>
-          <div onClick={e => e.stopPropagation()} style={{background:C.espresso,border:`2px solid ${C.gold}`,boxShadow:`6px 6px 0 ${C.gold}44`,padding:"40px 48px",minWidth:280,textAlign:"center"}}>
+          <div onClick={e => e.stopPropagation()} style={{background:C.espresso,border:`2px solid ${C.gold}`,boxShadow:`6px 6px 0 ${C.gold}44`,padding:"40px 48px",minWidth:300,textAlign:"center"}}>
             <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:24}}>Admin Access</div>
-            <div style={{display:"flex",flexDirection:"column",gap:12}}>
-              {[["The Grind","the-grind"],["La Mesa","la-mesa"],["La Mesa Referral","la-mesa-referral"],["Pay","pay"]].map(([label,hash]) => (
-                <button key={hash} onClick={() => { window.open(`${window.location.origin}/#${hash}`, "_blank"); setSecretNavActive(false); }}
-                  style={{background:"none",border:`2px solid ${C.beige}33`,color:C.cream,cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,letterSpacing:"0.1em",textTransform:"uppercase",padding:"12px 24px",transition:"border-color 0.2s"}}
-                  onMouseEnter={e=>e.currentTarget.style.borderColor=C.gold}
-                  onMouseLeave={e=>e.currentTarget.style.borderColor=`${C.beige}33`}>
-                  {label}
-                </button>
-              ))}
-            </div>
-            <button onClick={() => setSecretNavActive(false)} style={{marginTop:24,background:"none",border:"none",cursor:"pointer",fontSize:11,color:`rgba(245,237,214,0.3)`,letterSpacing:"0.1em",textTransform:"uppercase",fontWeight:700}}>Close</button>
+            {!adminNavUnlocked ? (
+              <form onSubmit={e => { e.preventDefault(); if (adminPwInput === "ccp1242202") { setAdminNavUnlocked(true); setAdminPwError(false); } else { setAdminPwError(true); setAdminPwInput(""); } }}>
+                <input
+                  type="password"
+                  value={adminPwInput}
+                  onChange={e => { setAdminPwInput(e.target.value); setAdminPwError(false); }}
+                  placeholder="Password"
+                  autoFocus
+                  style={{width:"100%",padding:"10px 14px",fontFamily:"'Nunito',sans-serif",fontSize:14,background:"rgba(255,255,255,0.08)",border:`1.5px solid ${adminPwError ? C.red : C.beige}44`,color:C.cream,outline:"none",marginBottom:8,boxSizing:"border-box",letterSpacing:"0.1em"}}
+                />
+                {adminPwError && <div style={{fontSize:11,color:C.red,marginBottom:8,letterSpacing:"0.08em"}}>Incorrect password</div>}
+                <button type="submit" style={{width:"100%",background:C.gold,border:"none",color:C.espresso,cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:12,letterSpacing:"0.14em",textTransform:"uppercase",padding:"10px 0",marginTop:4}}>Enter</button>
+              </form>
+            ) : (
+              <div style={{display:"flex",flexDirection:"column",gap:12}}>
+                {[["The Grind","the-grind"],["La Mesa","la-mesa"],["La Mesa Referral","la-mesa-referral"],["Pay","pay"]].map(([label,hash]) => (
+                  <button key={hash} onClick={() => { window.open(`${window.location.origin}/#${hash}`, "_blank"); setSecretNavActive(false); setAdminNavUnlocked(false); }}
+                    style={{background:"none",border:`2px solid ${C.beige}33`,color:C.cream,cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,letterSpacing:"0.1em",textTransform:"uppercase",padding:"12px 24px",transition:"border-color 0.2s"}}
+                    onMouseEnter={e=>e.currentTarget.style.borderColor=C.gold}
+                    onMouseLeave={e=>e.currentTarget.style.borderColor=`${C.beige}33`}>
+                    {label}
+                  </button>
+                ))}
+              </div>
+            )}
+            <button onClick={() => { setSecretNavActive(false); setAdminNavUnlocked(false); setAdminPwInput(""); setAdminPwError(false); }} style={{marginTop:24,background:"none",border:"none",cursor:"pointer",fontSize:11,color:`rgba(245,237,214,0.3)`,letterSpacing:"0.1em",textTransform:"uppercase",fontWeight:700}}>Close</button>
           </div>
         </div>
       )}
@@ -2533,7 +2573,10 @@ export default function CafeConPan() {
         </div>
         <div style={{fontSize:11,color:`rgba(245,237,214,0.35)`,fontWeight:600,textAlign:"center",maxWidth:480,lineHeight:1.6}}>{t.footer.disclaimer}</div>
         <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:6}}>
-          <div className="footer-copy">{t.footer.copy}</div>
+          <div className="footer-copy">
+            <span onClick={() => { setSecretNavActive(true); setAdminPwInput(""); setAdminPwError(false); setAdminNavUnlocked(false); }} style={{cursor:"default"}}>©</span>
+            {t.footer.copy.replace(/^©/, "")}
+          </div>
           <button onClick={() => go("Privacy Policy")} style={{background:"none",border:"none",cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontSize:10,color:`rgba(245,237,214,0.2)`,fontWeight:600,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"underline",transition:"color 0.2s",padding:0}}
             onMouseEnter={e=>e.currentTarget.style.color=`rgba(245,237,214,0.55)`}
             onMouseLeave={e=>e.currentTarget.style.color=`rgba(245,237,214,0.2)`}
