@@ -984,7 +984,6 @@ function HomePage({ go, t, lang }) {
               onMouseLeave={e=>{e.currentTarget.style.transform="";e.currentTarget.style.boxShadow=`4px 4px 0 ${C.espresso}`;}}
             >{t.hero.ctaSecondary}</button>
           </div>
-          <div className="hero-domain">pancon.cafe</div>
           <button onClick={() => { const el = document.getElementById("story"); if (el) window.scrollTo({top: el.offsetTop - 64, behavior:"smooth"}); }} className="scroll-btn-mobile">
             <div style={{fontSize:13,letterSpacing:"0.2em",textTransform:"uppercase",fontWeight:700,color:C.espresso,opacity:0.4}}>{t.hero.scroll}</div>
             <div className="scroll-indicator" style={{fontSize:20,color:C.espresso,opacity:0.4,lineHeight:1}}>↓</div>
