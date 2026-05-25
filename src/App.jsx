@@ -484,7 +484,7 @@ const STRINGS = {
       youtubeLabel:"YouTube",
       facebookLabel:"Facebook",
       discordLabel:"Discord",
-      followLabel:"Síguenos", contactNote:"Síguenos ↓",
+      followLabel:"Redes Sociales", contactNote:"Síguenos ↓",
     },
     contact:{
       eyebrow:"Ponte en Contacto", title:"", titleSpan:"Hablemos",
