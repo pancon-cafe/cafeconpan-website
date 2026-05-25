@@ -2234,6 +2234,13 @@ const RESOURCE_CATEGORIES = [
         badgeColor: "#5A9E96",
         url: "https://referworkspace.app.goo.gl/kjNC",
       },
+      {
+        name: "Calendly",
+        desc: "How I let clients book discovery calls without the back-and-forth. Set your availability once and let people book directly.",
+        badge: "I use this",
+        badgeColor: "#5A9E96",
+        url: "https://calendly.com/signup",
+      },
     ],
   },
   { label: "Business Infrastructure", cards: [] },
