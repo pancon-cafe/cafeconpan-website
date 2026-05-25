@@ -262,10 +262,12 @@ const STRINGS = {
       bestTimeLabel:"Best time to reach you",
       bestTimeOptions:["Morning","Afternoon","Evening"],
       q1Label:"Business name & what you do", q1Placeholder:"Tell us your business name and describe what you do day-to-day.",
+      devicesOptions:["iPhone","iPad","Mac","Windows PC","Android","Unknown/Mixed"],
       q2Label:"Devices your team currently uses",
       q3Label:"Biggest tech frustration", q3Placeholder:"What's the most frustrating technology problem in your business right now?",
       q4Label:"What you wish your business could do", q4Placeholder:"What would you love your business to be able to do that it can't today?",
       q5Label:"Timeline or deadline", q5Placeholder:"Any specific date or urgency we should know about? (optional)",
+      calendlyLink:"Or skip ahead and pick a time directly →",
       submit:"Send It Over →", sending:"Sending…",
       trustNote:"No pitch, no pressure. We'll reach out within 24 hours to schedule a quick conversation.",
       successTitle:"You're in. ☕", successBody:"We got your info and we'll be in touch within 24 hours. In the meantime, feel free to look around.",
@@ -510,10 +512,12 @@ const STRINGS = {
       bestTimeLabel:"Mejor hora para contactarte",
       bestTimeOptions:["Mañana","Tarde","Noche"],
       q1Label:"Nombre del negocio y qué haces", q1Placeholder:"Cuéntanos el nombre de tu negocio y describe lo que haces día a día.",
+      devicesOptions:["iPhone","iPad","Mac","Windows PC","Android","No sé/Mixto"],
       q2Label:"Dispositivos que usa tu equipo",
       q3Label:"Tu mayor frustración tecnológica", q3Placeholder:"¿Cuál es el problema tecnológico más frustrante en tu negocio ahora mismo?",
       q4Label:"Lo que desearías que tu negocio pudiera hacer", q4Placeholder:"¿Qué te gustaría que tu negocio pudiera hacer hoy que todavía no puede?",
       q5Label:"Plazo o fecha límite", q5Placeholder:"¿Alguna fecha específica o urgencia que debamos saber? (opcional)",
+      calendlyLink:"O salta directo y elige un horario →",
       submit:"Enviar →", sending:"Enviando…",
       trustNote:"Sin presión. Nos comunicamos en menos de 24 horas para coordinar una conversación rápida.",
       successTitle:"Ya estás dentro. ☕", successBody:"Recibimos tu información y nos comunicaremos en menos de 24 horas. Mientras tanto, siéntete libre de explorar.",
@@ -2064,7 +2068,7 @@ function FindMyPlanPage({ go, t }) {
 
 function DiscoveryPage({ go, t }) {
   const d = t.discovery;
-  const DEVICES = ["iPhone","iPad","Mac","Windows PC","Android","Unknown/Mixed"];
+  const DEVICES = d.devicesOptions;
   const blank = {name:"",email:"",phone:"",bestTime:"",bizDesc:"",devices:[],frustration:"",wishList:"",timeline:""};
   const [form, setForm] = useState(blank);
   const [status, setStatus] = useState("idle");
@@ -2144,7 +2148,7 @@ function DiscoveryPage({ go, t }) {
                         <button type="button" key={opt} style={chip(form.bestTime===opt)} onClick={()=>setForm(f=>({...f,bestTime:f.bestTime===opt?"":opt}))}>{opt}</button>
                       ))}
                     </div>
-                    <a href="https://calendly.com/jason-pancon/30min" target="_blank" rel="noreferrer" style={{display:"inline-block",marginTop:10,fontSize:13,color:C.teal,textDecoration:"underline",textUnderlineOffset:3,fontFamily:"'Nunito',sans-serif",fontWeight:700,cursor:"pointer"}}>Or skip ahead and pick a time directly →</a>
+                    <a href="https://calendly.com/jason-pancon/30min" target="_blank" rel="noreferrer" style={{display:"inline-block",marginTop:10,fontSize:13,color:C.teal,textDecoration:"underline",textUnderlineOffset:3,fontFamily:"'Nunito',sans-serif",fontWeight:700,cursor:"pointer"}}>{d.calendlyLink}</a>
                   </div>
                 </div>
 
