@@ -2275,6 +2275,13 @@ const RESOURCE_CATEGORIES = [
       btnLabel: "Learn More →",
       url: "https://business.apple.com",
     },
+    {
+      name: "Chase Business Checking",
+      desc: "Where Café Con Pan banks. Solid business checking with a large ATM network, easy online banking, and branch access when you need it. One of the first things I recommend setting up when launching a business.",
+      badge: "I use this",
+      badgeColor: "#5A9E96",
+      url: "CHASE_BUSINESS_REFERRAL_LINK",
+    },
   ]},
   { label: "Devices & Tech", cards: [
     {
