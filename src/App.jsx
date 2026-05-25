@@ -2243,7 +2243,15 @@ const RESOURCE_CATEGORIES = [
       },
     ],
   },
-  { label: "Business Infrastructure", cards: [] },
+  { label: "Business Infrastructure", cards: [
+    {
+      name: "Cloudflare",
+      desc: "Where pancon.cafe lives. Fast, secure, free tier that covers most small businesses. I use it for DNS, hosting, and SSL — all in one place.",
+      badge: "I use this",
+      badgeColor: "#5A9E96",
+      url: "CLOUDFLARE_REFERRAL_LINK",
+    },
+  ]},
   { label: "Devices & Tech", cards: [] },
   { label: "Carriers & Connectivity", cards: [] },
 ];
