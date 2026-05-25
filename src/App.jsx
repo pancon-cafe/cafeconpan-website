@@ -2266,11 +2266,20 @@ const RESOURCE_CATEGORIES = [
       url: "HELCIM_REFERRAL_LINK",
     },
   ]},
-  { label: "Devices & Tech", cards: [] },
+  { label: "Devices & Tech", cards: [
+    {
+      name: "Apple Custom Store for Business",
+      desc: "Access Apple's exclusive business storefront — custom-configured devices, business pricing, and direct procurement. Not publicly available. You need to be set up through Café Con Pan to get access.",
+      badge: "Client exclusive",
+      badgeColor: C.red,
+      btnLabel: "Get Access →",
+      internal: "Discovery",
+    },
+  ]},
   { label: "Carriers & Connectivity", cards: [] },
 ];
 
-function ResourcesPage() {
+function ResourcesPage({ go }) {
   const cardStyle = {
     background: C.cream,
     border: `3px solid ${C.espresso}`,
@@ -2313,19 +2322,34 @@ function ResourcesPage() {
                         )}
                       </div>
                       <p style={{fontSize:14,lineHeight:1.8,color:"#555",fontWeight:600,margin:0}}>{card.desc}</p>
-                      <a href={card.url} target="_blank" rel="noopener noreferrer" style={{
-                        display:"inline-block",marginTop:"auto",
-                        background:C.espresso,color:C.cream,
-                        fontFamily:"'Nunito',sans-serif",fontWeight:800,fontSize:12,
-                        letterSpacing:"0.1em",textTransform:"uppercase",
-                        padding:"10px 20px",textDecoration:"none",
-                        boxShadow:`3px 3px 0 ${C.gold}`,
-                        transition:"transform 0.1s,box-shadow 0.1s",
-                        alignSelf:"flex-start",
-                      }}
-                        onMouseEnter={e=>{e.currentTarget.style.transform="translate(2px,2px)";e.currentTarget.style.boxShadow=`1px 1px 0 ${C.gold}`;}}
-                        onMouseLeave={e=>{e.currentTarget.style.transform="";e.currentTarget.style.boxShadow=`3px 3px 0 ${C.gold}`;}}
-                      >Get Started →</a>
+                      {card.internal ? (
+                        <button onClick={() => go(card.internal)} style={{
+                          display:"inline-block",marginTop:"auto",alignSelf:"flex-start",
+                          background:C.espresso,color:C.cream,border:"none",cursor:"pointer",
+                          fontFamily:"'Nunito',sans-serif",fontWeight:800,fontSize:12,
+                          letterSpacing:"0.1em",textTransform:"uppercase",
+                          padding:"10px 20px",textDecoration:"none",
+                          boxShadow:`3px 3px 0 ${C.gold}`,
+                          transition:"transform 0.1s,box-shadow 0.1s",
+                        }}
+                          onMouseEnter={e=>{e.currentTarget.style.transform="translate(2px,2px)";e.currentTarget.style.boxShadow=`1px 1px 0 ${C.gold}`;}}
+                          onMouseLeave={e=>{e.currentTarget.style.transform="";e.currentTarget.style.boxShadow=`3px 3px 0 ${C.gold}`;}}
+                        >{card.btnLabel || "Get Started →"}</button>
+                      ) : (
+                        <a href={card.url} target="_blank" rel="noopener noreferrer" style={{
+                          display:"inline-block",marginTop:"auto",
+                          background:C.espresso,color:C.cream,
+                          fontFamily:"'Nunito',sans-serif",fontWeight:800,fontSize:12,
+                          letterSpacing:"0.1em",textTransform:"uppercase",
+                          padding:"10px 20px",textDecoration:"none",
+                          boxShadow:`3px 3px 0 ${C.gold}`,
+                          transition:"transform 0.1s,box-shadow 0.1s",
+                          alignSelf:"flex-start",
+                        }}
+                          onMouseEnter={e=>{e.currentTarget.style.transform="translate(2px,2px)";e.currentTarget.style.boxShadow=`1px 1px 0 ${C.gold}`;}}
+                          onMouseLeave={e=>{e.currentTarget.style.transform="";e.currentTarget.style.boxShadow=`3px 3px 0 ${C.gold}`;}}
+                        >{card.btnLabel || "Get Started →"}</a>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -2606,7 +2630,7 @@ export default function CafeConPan() {
       case "Find My Plan": return <FindMyPlanPage go={go} t={t} />;
       case "The Grind": return <AdminGate><TheGrindPage go={go} /></AdminGate>;
       case "Discovery": return <DiscoveryPage go={go} t={t} />;
-      case "Resources": return <ResourcesPage />;
+      case "Resources": return <ResourcesPage go={go} />;
       default: return <HomePage go={go} t={t} lang={lang} />;
     }
   };
