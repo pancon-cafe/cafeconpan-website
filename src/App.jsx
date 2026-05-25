@@ -2426,9 +2426,6 @@ export default function CafeConPan() {
   const [lang, setLang] = useState(getBrowserLang);
   const [gameActive, setGameActive] = useState(false);
   const [secretNavActive, setSecretNavActive] = useState(false);
-  const [adminPwInput, setAdminPwInput] = useState("");
-  const [adminPwError, setAdminPwError] = useState(false);
-  const [adminNavUnlocked, setAdminNavUnlocked] = useState(false);
   const [highlightSocials, setHighlightSocials] = useState(false);
   const scrollPositions = useRef({});
   const isBackNav = useRef(false);
@@ -2498,34 +2495,19 @@ export default function CafeConPan() {
       {gameActive && <CafeGame onClose={() => setGameActive(false)} />}
       {secretNavActive && (
         <div onClick={() => setSecretNavActive(false)} style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.7)",zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center"}}>
-          <div onClick={e => e.stopPropagation()} style={{background:C.espresso,border:`2px solid ${C.gold}`,boxShadow:`6px 6px 0 ${C.gold}44`,padding:"40px 48px",minWidth:300,textAlign:"center"}}>
+          <div onClick={e => e.stopPropagation()} style={{background:C.espresso,border:`2px solid ${C.gold}`,boxShadow:`6px 6px 0 ${C.gold}44`,padding:"40px 48px",minWidth:280,textAlign:"center"}}>
             <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:24}}>Admin Access</div>
-            {!adminNavUnlocked ? (
-              <form onSubmit={e => { e.preventDefault(); if (adminPwInput === "ccp1242202") { setAdminNavUnlocked(true); setAdminPwError(false); } else { setAdminPwError(true); setAdminPwInput(""); } }}>
-                <input
-                  type="password"
-                  value={adminPwInput}
-                  onChange={e => { setAdminPwInput(e.target.value); setAdminPwError(false); }}
-                  placeholder="Password"
-                  autoFocus
-                  style={{width:"100%",padding:"10px 14px",fontFamily:"'Nunito',sans-serif",fontSize:14,background:"rgba(255,255,255,0.08)",border:`1.5px solid ${adminPwError ? C.red : C.beige}44`,color:C.cream,outline:"none",marginBottom:8,boxSizing:"border-box",letterSpacing:"0.1em"}}
-                />
-                {adminPwError && <div style={{fontSize:11,color:C.red,marginBottom:8,letterSpacing:"0.08em"}}>Incorrect password</div>}
-                <button type="submit" style={{width:"100%",background:C.gold,border:"none",color:C.espresso,cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:12,letterSpacing:"0.14em",textTransform:"uppercase",padding:"10px 0",marginTop:4}}>Enter</button>
-              </form>
-            ) : (
-              <div style={{display:"flex",flexDirection:"column",gap:12}}>
-                {[["The Grind","the-grind"],["La Mesa","la-mesa"],["La Mesa Referral","la-mesa-referral"],["Pay","pay"]].map(([label,hash]) => (
-                  <button key={hash} onClick={() => { window.open(`${window.location.origin}/#${hash}`, "_blank"); setSecretNavActive(false); setAdminNavUnlocked(false); }}
-                    style={{background:"none",border:`2px solid ${C.beige}33`,color:C.cream,cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,letterSpacing:"0.1em",textTransform:"uppercase",padding:"12px 24px",transition:"border-color 0.2s"}}
-                    onMouseEnter={e=>e.currentTarget.style.borderColor=C.gold}
-                    onMouseLeave={e=>e.currentTarget.style.borderColor=`${C.beige}33`}>
-                    {label}
-                  </button>
-                ))}
-              </div>
-            )}
-            <button onClick={() => { setSecretNavActive(false); setAdminNavUnlocked(false); setAdminPwInput(""); setAdminPwError(false); }} style={{marginTop:24,background:"none",border:"none",cursor:"pointer",fontSize:11,color:`rgba(245,237,214,0.3)`,letterSpacing:"0.1em",textTransform:"uppercase",fontWeight:700}}>Close</button>
+            <div style={{display:"flex",flexDirection:"column",gap:12}}>
+              {[["The Grind","the-grind"],["La Mesa","la-mesa"],["La Mesa Referral","la-mesa-referral"],["Pay","pay"]].map(([label,hash]) => (
+                <button key={hash} onClick={() => { window.open(`${window.location.origin}/#${hash}`, "_blank"); setSecretNavActive(false); }}
+                  style={{background:"none",border:`2px solid ${C.beige}33`,color:C.cream,cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,letterSpacing:"0.1em",textTransform:"uppercase",padding:"12px 24px",transition:"border-color 0.2s"}}
+                  onMouseEnter={e=>e.currentTarget.style.borderColor=C.gold}
+                  onMouseLeave={e=>e.currentTarget.style.borderColor=`${C.beige}33`}>
+                  {label}
+                </button>
+              ))}
+            </div>
+            <button onClick={() => setSecretNavActive(false)} style={{marginTop:24,background:"none",border:"none",cursor:"pointer",fontSize:11,color:`rgba(245,237,214,0.3)`,letterSpacing:"0.1em",textTransform:"uppercase",fontWeight:700}}>Close</button>
           </div>
         </div>
       )}
@@ -2581,7 +2563,7 @@ export default function CafeConPan() {
               copyClickCount.current += 1;
               if (copyClickCount.current >= 3) {
                 copyClickCount.current = 0;
-                setSecretNavActive(true); setAdminPwInput(""); setAdminPwError(false); setAdminNavUnlocked(false);
+                setSecretNavActive(true);
               } else {
                 copyClickTimer.current = setTimeout(() => { copyClickCount.current = 0; }, 1500);
               }
