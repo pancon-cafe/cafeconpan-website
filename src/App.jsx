@@ -2284,7 +2284,16 @@ const RESOURCE_CATEGORIES = [
       internal: "Discovery",
     },
   ]},
-  { label: "Carriers & Connectivity", cards: [] },
+  { label: "Carriers & Connectivity", cards: [
+    {
+      name: "Comcast Business",
+      desc: "Business internet and connectivity solutions. Interested? Reach out to me directly — I submit the referral on your behalf through my network and make sure you get taken care of.",
+      badge: "Trusted Referral",
+      badgeColor: C.beige,
+      btnLabel: "Contact Me →",
+      internal: "Discovery",
+    },
+  ]},
 ];
 
 function ResourcesPage({ go }) {
