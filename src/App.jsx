@@ -799,6 +799,7 @@ const css = `
     .section{padding:56px 24px}
     .services-grid{grid-template-columns:1fr}
     .about-grid{grid-template-columns:1fr;gap:36px}
+    .about-visual{position:static}
     .contact-grid{grid-template-columns:1fr;gap:36px}
     .grid-3,.grid-2{grid-template-columns:1fr}
     .grid-2>*:last-child:nth-child(odd){max-width:100%;grid-column:auto}
