@@ -2752,7 +2752,7 @@ export default function CafeConPan() {
         <div className="footer-tagline">{t.footer.tagline}</div>
         <div id="footer-socials" style={{display:"flex",flexDirection:"column",alignItems:"center",gap:8}}>
           <div style={{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:4}}>{t.socials.followLabel}</div>
-          <div style={{display:"grid",gridTemplateColumns:"repeat(3,auto)",gap:"12px 24px",justifyContent:"center"}}>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(3,auto)",gap:"12px 24px",justifyContent:"center",textAlign:"center"}}>
             {[
               {href:t.socials.discord,   label:t.socials.discordLabel},
               {href:t.socials.instagram, label:t.socials.instagramLabel},
