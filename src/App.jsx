@@ -2434,6 +2434,8 @@ export default function CafeConPan() {
   const isBackNav = useRef(false);
   const isProgrammaticNav = useRef(false);
   const pageRef = useRef(page);
+  const copyClickCount = useRef(0);
+  const copyClickTimer = useRef(null);
 
   const t = STRINGS[lang];
   const sLinkFt = {fontSize:12,color:C.cream,opacity:0.6,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"};
@@ -2574,7 +2576,16 @@ export default function CafeConPan() {
         <div style={{fontSize:11,color:`rgba(245,237,214,0.35)`,fontWeight:600,textAlign:"center",maxWidth:480,lineHeight:1.6}}>{t.footer.disclaimer}</div>
         <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:6}}>
           <div className="footer-copy">
-            <span onClick={() => { setSecretNavActive(true); setAdminPwInput(""); setAdminPwError(false); setAdminNavUnlocked(false); }} style={{cursor:"default"}}>©</span>
+            <span onClick={() => {
+              clearTimeout(copyClickTimer.current);
+              copyClickCount.current += 1;
+              if (copyClickCount.current >= 3) {
+                copyClickCount.current = 0;
+                setSecretNavActive(true); setAdminPwInput(""); setAdminPwError(false); setAdminNavUnlocked(false);
+              } else {
+                copyClickTimer.current = setTimeout(() => { copyClickCount.current = 0; }, 1500);
+              }
+            }} style={{cursor:"default"}}>©</span>
             {t.footer.copy.replace(/^©/, "")}
           </div>
           <button onClick={() => go("Privacy Policy")} style={{background:"none",border:"none",cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontSize:10,color:`rgba(245,237,214,0.2)`,fontWeight:600,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"underline",transition:"color 0.2s",padding:0}}
