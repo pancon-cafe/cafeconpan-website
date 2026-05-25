@@ -315,7 +315,7 @@ const STRINGS = {
     },
   },
   es: {
-    nav: { items:["Inicio","Servicios Tech","Nuestra Historia","Contacto"], cta:"Cotización", langBtn:"EN" },
+    nav: { items:["Inicio","Servicios Tech","Nuestra Historia","Contacto"], cta:"Comenzar", langBtn:"EN" },
     hero: { stamp:"☕ Raíces Hondureño-Americanas · Est. 2025", subtitle:"Tech · Café · Cultura · Comunidad", origin:"El café siempre fue donde la tecnología y la comunidad se encontraban. El nuestro comenzó en Honduras, entre café y pan dulce.", signal:"Tech para pequeños negocios, enfocado en Apple. Construido por alguien que conoce el sistema por dentro — y que habla tu idioma. Literal y culturalmente.", cta:"Encontrar Mi Plan →", ctaSecondary:"Ver Nuestros Servicios →", scroll:"Desliza" },
     story: { eyebrow:"Nuestra Historia", title:"Más Que una", titleSpan:"Taza de Café", body:"El nombre viene de Honduras. Cada mañana, la abuela preparaba el café en un tazón — remojabas las rosquillas y las ojaldras como si fuera sopa. Ese ritual nunca fue solo sobre el café. Era sobre estar presente para las personas en tu mesa. Eso es lo que seguimos haciendo — solo que ahora con dispositivos Apple y contratos de carrier en lugar de pan dulce.", storyCta:"Leer la historia completa →" },
     paraTi: {
