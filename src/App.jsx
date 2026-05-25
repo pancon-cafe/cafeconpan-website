@@ -756,6 +756,8 @@ const css = `
   .footer-tagline{font-size:12px;letter-spacing:0.15em;text-transform:uppercase;
     color:${C.teal};font-weight:700}
   .footer-copy{font-size:12px;color:rgba(245,237,214,0.4);font-weight:600}
+  .no-scrollbar{scrollbar-width:none;-ms-overflow-style:none}
+  .no-scrollbar::-webkit-scrollbar{display:none}
 
 
   .soft-cta-row{display:flex;gap:48px;align-items:flex-start;justify-content:center;max-width:860px;margin:0 auto}
@@ -2371,7 +2373,7 @@ function ResourcesPage({ go }) {
               {cat.cards.length === 0 ? (
                 <div style={{fontSize:13,color:"#999",fontStyle:"italic",fontWeight:600}}>More coming soon.</div>
               ) : (
-                <div style={{display:"flex",flexDirection:"row",gap:24,overflowX:"auto",paddingBottom:8,scrollSnapType:"x mandatory"}}>
+                <div className="no-scrollbar" style={{display:"flex",flexDirection:"row",gap:24,overflowX:"auto",paddingBottom:8,scrollSnapType:"x mandatory"}}>
                   {[...cat.cards].sort((a,b) => a.name.localeCompare(b.name)).map(card => (
                     <div key={card.name} style={cardStyle}>
                       <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",gap:8}}>
