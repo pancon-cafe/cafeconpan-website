@@ -2254,7 +2254,7 @@ function ResourcesPage() {
 
   return (
     <>
-      <section id="resources" className="section">
+      <section id="resources" className="section" style={{paddingTop:100}}>
         <div className="section-header">
           <div className="section-eyebrow">Tools &amp; Resources</div>
           <h2 className="section-title">Things I <span>Actually Use</span></h2>
