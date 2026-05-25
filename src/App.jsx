@@ -2296,6 +2296,10 @@ function ResourcesPage({ go }) {
     display: "flex",
     flexDirection: "column",
     gap: 12,
+    minWidth: 280,
+    maxWidth: 320,
+    flex: "0 0 auto",
+    scrollSnapAlign: "start",
   };
 
   return (
@@ -2318,7 +2322,7 @@ function ResourcesPage({ go }) {
               {cat.cards.length === 0 ? (
                 <div style={{fontSize:13,color:"#999",fontStyle:"italic",fontWeight:600}}>More coming soon.</div>
               ) : (
-                <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:24}}>
+                <div style={{display:"flex",flexDirection:"row",gap:24,overflowX:"auto",paddingBottom:8,scrollSnapType:"x mandatory"}}>
                   {[...cat.cards].sort((a,b) => a.name.localeCompare(b.name)).map(card => (
                     <div key={card.name} style={cardStyle}>
                       <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",gap:8}}>
