@@ -2752,16 +2752,16 @@ export default function CafeConPan() {
         <div className="footer-tagline">{t.footer.tagline}</div>
         <div id="footer-socials" style={{display:"flex",flexDirection:"column",alignItems:"center",gap:8}}>
           <div style={{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:4}}>{t.socials.followLabel}</div>
-          <div style={{display:"flex",gap:16,flexWrap:"wrap",justifyContent:"center"}}>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(3,auto)",gap:"12px 24px",justifyContent:"center"}}>
             {[
+              {href:t.socials.discord,   label:t.socials.discordLabel},
               {href:t.socials.instagram, label:t.socials.instagramLabel},
               {href:t.socials.linkedin,  label:t.socials.linkedinLabel},
-              {href:t.socials.twitter,   label:t.socials.twitterLabel},
               {href:t.socials.tiktok,    label:t.socials.tiktokLabel},
-              ...(t.socials.youtube  ? [{href:t.socials.youtube,  label:t.socials.youtubeLabel}]  : []),
+              {href:t.socials.twitter,   label:t.socials.twitterLabel},
+              {href:t.socials.youtube,   label:t.socials.youtubeLabel},
               ...(t.socials.facebook ? [{href:t.socials.facebook, label:t.socials.facebookLabel}] : []),
-              ...(t.socials.discord  ? [{href:t.socials.discord,  label:t.socials.discordLabel}]  : []),
-            ].map(({href,label},i) => (
+            ].filter(s => s.href).map(({href,label},i) => (
               <a key={label} href={href} target="_blank" rel="noopener noreferrer"
                 style={{...sLinkFt, animation:highlightSocials?`socialFlash 0.75s ease ${i*400}ms both`:undefined}}
                 onMouseEnter={e=>e.currentTarget.style.opacity=1}
