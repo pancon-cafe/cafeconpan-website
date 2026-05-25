@@ -2143,6 +2143,7 @@ function DiscoveryPage({ go, t }) {
                         <button type="button" key={opt} style={chip(form.bestTime===opt)} onClick={()=>setForm(f=>({...f,bestTime:f.bestTime===opt?"":opt}))}>{opt}</button>
                       ))}
                     </div>
+                    <a href="https://calendly.com/jason-pancon/30min" target="_blank" rel="noreferrer" style={{display:"inline-block",marginTop:10,fontSize:13,color:C.teal,textDecoration:"underline",textUnderlineOffset:3,fontFamily:"'Nunito',sans-serif",fontWeight:700,cursor:"pointer"}}>Or skip ahead and pick a time directly →</a>
                   </div>
                 </div>
 
