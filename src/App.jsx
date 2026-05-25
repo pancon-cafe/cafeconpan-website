@@ -2283,6 +2283,22 @@ const RESOURCE_CATEGORIES = [
       btnLabel: "Get Access →",
       internal: "Discovery",
     },
+    {
+      name: "Mosyle",
+      desc: "My go-to MDM for Apple device management. Powerful, intuitive, and built specifically for Apple environments. Full Mosyle deployment is included in my Apple Operations package.",
+      badge: "I use this",
+      badgeColor: "#5A9E96",
+      btnLabel: "Learn More →",
+      url: "MOSYLE_REFERRAL_LINK",
+    },
+    {
+      name: "Jamf",
+      desc: "The industry standard for Apple device management at scale. Enterprise-grade MDM trusted by some of the biggest Apple deployments in the world. Full Jamf deployment is included in my Apple Operations package.",
+      badge: "I use this",
+      badgeColor: "#5A9E96",
+      btnLabel: "Learn More →",
+      url: "JAMF_REFERRAL_LINK",
+    },
   ]},
   { label: "Carriers & Connectivity", cards: [
     {
