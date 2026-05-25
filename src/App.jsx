@@ -255,7 +255,7 @@ const STRINGS = {
     privacy:{ footerLink:"Privacy Policy" },
     discovery:{
       eyebrow:"Pre-Call Questionnaire", title:"Before", titleSpan:"We Talk",
-      sub:"Five quick questions so we can make the most of our first conversation. Takes about 3 minutes.",
+      sub:"A few quick questions so we can make the most of our first conversation. Takes about 3 minutes.",
       nameLabel:"Your name", namePlaceholder:"First and last name",
       emailLabel:"Your email", emailPlaceholder:"Your email address",
       phoneLabel:"Phone number", phonePlaceholder:"Best number to reach you",
