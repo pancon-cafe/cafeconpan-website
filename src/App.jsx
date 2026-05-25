@@ -2265,6 +2265,14 @@ const RESOURCE_CATEGORIES = [
       badgeColor: "#5A9E96",
       url: "HELCIM_REFERRAL_LINK",
     },
+    {
+      name: "Apple Business",
+      desc: "Apple's unified business platform — manage your devices, apps, people, and Apple presence all in one place. Formerly known as Apple Business Manager. I help clients get set up and running from day one.",
+      badge: "I set this up",
+      badgeColor: "#5A9E96",
+      btnLabel: "Learn More →",
+      url: "https://business.apple.com",
+    },
   ]},
   { label: "Devices & Tech", cards: [
     {
