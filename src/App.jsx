@@ -2232,7 +2232,7 @@ const RESOURCE_CATEGORIES = [
         desc: "Business email, Drive, Docs, Meet — the full suite. What I use to run Café Con Pan day to day.",
         badge: "I use this",
         badgeColor: "#5A9E96",
-        url: "GOOGLE_WORKSPACE_REFERRAL_LINK",
+        url: "https://referworkspace.app.goo.gl/kjNC",
       },
     ],
   },
