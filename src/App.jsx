@@ -2257,7 +2257,7 @@ function ResourcesPage() {
       <section id="resources" className="section" style={{paddingTop:100}}>
         <div className="section-header">
           <div className="section-eyebrow">Tools &amp; Resources</div>
-          <h2 className="section-title">Things I <span>Actually Use</span></h2>
+          <h2 className="section-title">The Stack <span>We Trust</span></h2>
           <p className="section-sub" style={{maxWidth:640,margin:"12px auto 0",textAlign:"center"}}>
             Every tool on this page is something I've either used myself, recommend to clients, or trust enough to put my name behind. No fluff, no random affiliates.
           </p>
