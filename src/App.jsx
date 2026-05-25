@@ -77,7 +77,7 @@ const SteamSVG = () => (
 
 const STRINGS = {
   en: {
-    nav: { items:["Home","Tech Services","Our Story","Contact"], cta:"Get a Quote", langBtn:"ES" },
+    nav: { items:["Home","Tech Services","Our Story","Contact"], cta:"Get Started", langBtn:"ES" },
     hero: { stamp:"☕ Honduran American Roots · Est. 2025", subtitle:"Tech · Coffee · Culture · Community", origin:"The café was always where tech and community met. Ours started in Honduras, over coffee and pan dulce.", signal:"Apple-focused tech for small businesses. Built by someone who's been on the inside — and speaks your language.", cta:"Find My Fit →", ctaSecondary:"See Our Services →", scroll:"Scroll" },
     story: { eyebrow:"Our Story", title:"More Than a", titleSpan:"Cup of Coffee", body:"The name comes from Honduras. Every morning, abuela made coffee in a bowl — you'd soak your rosquillas and ojaldras in it like soup. That ritual was never just about coffee. It was about showing up for the people at your table. That's still what we do — just now with Apple devices and carrier contracts instead of pan dulce.", storyCta:"Read the full story →" },
     painPoints: {
