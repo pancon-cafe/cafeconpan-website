@@ -204,7 +204,7 @@ const STRINGS = {
     },
     about:{
       eyebrow:"The Story", title:"Roots,", titleSpan:"Community,", titleEnd:"Purpose",
-      quote:"Every morning without fail, she made coffee in a bowl. Rosquillas and ojaldras soaked in like soup. I was five years old. I've never stopped thinking about that cup.",
+      quote:"Every morning without fail, my grandma made coffee in a bowl. Rosquillas and ojaldras soaked in like soup. I was five years old. I've never stopped thinking about that cup.",
       quoteAttr:"— Jason, Founder",
       paragraphs:[
         "My grandmother was not a small woman in the world. People knew her name across Honduras — her family name, her children, her grandchildren. She was funny, sharp, generous beyond measure, and tough exactly when she needed to be. She spent her life quietly acquiring land, piece by piece, making sure her sons and daughters would be okay long after she was gone. She knew something most people spend their whole lives figuring out — that the most important thing you can leave someone isn't money. It's roots.",
