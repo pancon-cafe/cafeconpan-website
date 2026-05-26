@@ -942,9 +942,9 @@ function PainPointsSection({ go, t }) {
         ))}
       </div>
       <div style={{textAlign:"center",maxWidth:640,margin:"56px auto 0"}}>
-        <p style={{fontFamily:"'Pacifico',cursive",fontSize:20,color:C.espresso,lineHeight:1.6,marginBottom:32}}>"{t.painPoints.bridge}"</p>
+        <p style={{fontFamily:"'Nunito',sans-serif",fontSize:20,fontWeight:800,fontStyle:"italic",color:C.espresso,lineHeight:1.6,marginBottom:32}}>"{t.painPoints.bridge}"</p>
         <button className="hero-cta" onClick={() => go("Discovery")}>{t.painPoints.cta}</button>
-        <p style={{marginTop:16,fontSize:13,color:C.espresso,fontWeight:600,opacity:0.6}}>
+        <p style={{marginTop:28,fontSize:13,color:C.espresso,fontWeight:600,opacity:0.6}}>
           {t.finder.painPrompt}{" "}
           <button onClick={() => go("Find My Plan")} style={{background:"none",border:"none",cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,color:C.teal,textDecoration:"underline",padding:0}}>
             {t.finder.painLink}
