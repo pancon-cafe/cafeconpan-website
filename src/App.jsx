@@ -2349,15 +2349,16 @@ function ResourcesPage({ go }) {
   const cardStyle = {
     background: C.cream,
     border: `3px solid ${C.espresso}`,
-    boxShadow: `4px 4px 0 ${C.espresso}`,
+    boxShadow: `5px 5px 0 ${C.espresso}`,
     padding: "28px 32px",
     display: "flex",
     flexDirection: "column",
     gap: 12,
-    minWidth: 280,
-    maxWidth: 320,
-    flex: "0 0 auto",
+    flex: "0 0 300px",
+    width: 300,
     scrollSnapAlign: "start",
+    transition: "transform 0.15s,box-shadow 0.15s,background 0.15s,border-color 0.15s",
+    cursor: "default",
   };
 
   return (
@@ -2380,9 +2381,12 @@ function ResourcesPage({ go }) {
               {cat.cards.length === 0 ? (
                 <div style={{fontSize:13,color:"#999",fontStyle:"italic",fontWeight:600}}>More coming soon.</div>
               ) : (
-                <div className="no-scrollbar" style={{display:"flex",flexDirection:"row",gap:24,overflowX:"auto",paddingBottom:8,scrollSnapType:"x mandatory"}}>
+                <div className="no-scrollbar" style={{display:"flex",flexDirection:"row",gap:24,overflowX:"auto",padding:"8px 8px 16px 8px",scrollSnapType:"x mandatory"}}>
                   {[...cat.cards].sort((a,b) => a.name.localeCompare(b.name)).map(card => (
-                    <div key={card.name} style={cardStyle}>
+                    <div key={card.name} style={cardStyle}
+                      onMouseEnter={e=>{e.currentTarget.style.transform="translate(-2px,-2px)";e.currentTarget.style.background=C.parchment;e.currentTarget.style.borderColor=card.badgeColor;e.currentTarget.style.boxShadow=`7px 7px 0 ${card.badgeColor}`;}}
+                      onMouseLeave={e=>{e.currentTarget.style.transform="";e.currentTarget.style.background=C.cream;e.currentTarget.style.borderColor=C.espresso;e.currentTarget.style.boxShadow=`5px 5px 0 ${C.espresso}`;}}
+                    >
                       <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",gap:8}}>
                         <div style={{fontFamily:"'Lilita One',cursive",fontSize:20,color:C.espresso,lineHeight:1.2}}>{card.name}</div>
                         {card.badge && (
