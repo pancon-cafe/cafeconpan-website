@@ -780,6 +780,12 @@ const css = `
   .footer-copy{font-size:12px;color:rgba(245,237,214,0.4);font-weight:600}
   .no-scrollbar{scrollbar-width:none;-ms-overflow-style:none}
   .no-scrollbar::-webkit-scrollbar{display:none}
+  .resource-row{display:flex;flex-direction:row;overflow-x:auto;padding:8px 8px 16px;scroll-snap-type:x mandatory;gap:24px}
+  .resource-card{flex:0 0 300px;width:300px;scroll-snap-align:start}
+  @media(min-width:768px){
+    .resource-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));overflow-x:visible;padding:8px;scroll-snap-type:unset}
+    .resource-card{flex:unset;width:auto}
+  }
 
 
   .soft-cta-row{display:flex;gap:48px;align-items:flex-start;justify-content:center;max-width:860px;margin:0 auto}
@@ -2340,9 +2346,6 @@ function ResourcesPage({ go, t, lang }) {
     display: "flex",
     flexDirection: "column",
     gap: 12,
-    flex: "0 0 300px",
-    width: 300,
-    scrollSnapAlign: "start",
     transition: "transform 0.15s,box-shadow 0.15s,background 0.15s,border-color 0.15s",
     cursor: "default",
   };
@@ -2356,7 +2359,7 @@ function ResourcesPage({ go, t, lang }) {
           <p className="section-sub" style={{maxWidth:640,margin:"12px auto 0",textAlign:"center"}}>{r.sub}</p>
         </div>
 
-        <div style={{maxWidth:860,margin:"0 auto",display:"flex",flexDirection:"column",gap:56}}>
+        <div style={{maxWidth:1100,margin:"0 auto",display:"flex",flexDirection:"column",gap:56}}>
           {RESOURCE_CATEGORIES.map(cat => (
             <div key={cat.categoryKey}>
               <div style={{fontSize:11,letterSpacing:"0.18em",textTransform:"uppercase",fontWeight:700,color:C.espresso,borderBottom:`2px solid ${C.espresso}`,paddingBottom:10,marginBottom:24,opacity:0.55}}>
@@ -2365,9 +2368,9 @@ function ResourcesPage({ go, t, lang }) {
               {cat.cards.length === 0 ? (
                 <div style={{fontSize:13,color:"#999",fontStyle:"italic",fontWeight:600}}>{r.comingSoon}</div>
               ) : (
-                <div className="no-scrollbar" style={{display:"flex",flexDirection:"row",gap:24,overflowX:"auto",padding:"8px 8px 16px 8px",scrollSnapType:"x mandatory"}}>
+                <div className="resource-row no-scrollbar">
                   {[...cat.cards].sort((a,b) => a.name.localeCompare(b.name)).map(card => (
-                    <div key={card.name} style={cardStyle}
+                    <div key={card.name} className="resource-card" style={cardStyle}
                       onMouseEnter={e=>{e.currentTarget.style.transform="translate(-2px,-2px)";e.currentTarget.style.background=C.parchment;e.currentTarget.style.borderColor=card.badgeColor;e.currentTarget.style.boxShadow=`7px 7px 0 ${card.badgeColor}`;}}
                       onMouseLeave={e=>{e.currentTarget.style.transform="";e.currentTarget.style.background=C.cream;e.currentTarget.style.borderColor=C.espresso;e.currentTarget.style.boxShadow=`5px 5px 0 ${C.espresso}`;}}
                     >
