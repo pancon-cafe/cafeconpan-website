@@ -2347,7 +2347,7 @@ const RESOURCE_CATEGORIES = [
 
 function ResourcesPage({ go }) {
   const cardStyle = {
-    background: C.parchment,
+    background: C.cream,
     border: `3px solid ${C.espresso}`,
     boxShadow: `4px 4px 0 ${C.espresso}`,
     padding: "28px 32px",
