@@ -220,20 +220,20 @@ const STRINGS = {
       storyCta:"Let's Build Something Together →",
     },
     socials:{
+      discord:"https://discordapp.com/users/1508469925134729250",
+      facebook:"https://www.facebook.com/share/1E4yWafzsU/?mibextid=wwXIfr",
       instagram:"https://instagram.com/icafeconpan",
       linkedin:"https://linkedin.com/company/cafeconpan",
-      twitter:"https://twitter.com/icafeconpan",
       tiktok:"https://tiktok.com/@icafeconpan",
+      twitter:"https://twitter.com/icafeconpan",
       youtube:"https://youtube.com/@icafeconpan",
-      facebook:"",
-      discord:"https://discordapp.com/users/1508469925134729250",
+      discordLabel:"Discord",
+      facebookLabel:"Facebook",
       instagramLabel:"Instagram",
       linkedinLabel:"LinkedIn",
-      twitterLabel:"Twitter",
       tiktokLabel:"TikTok",
+      twitterLabel:"Twitter",
       youtubeLabel:"YouTube",
-      facebookLabel:"Facebook",
-      discordLabel:"Discord",
       followLabel:"Socials", contactNote:"Follow Us ↓",
     },
     contact:{
@@ -264,6 +264,8 @@ const STRINGS = {
       q1Label:"Business name & what you do", q1Placeholder:"Tell us your business name and describe what you do day-to-day.",
       devicesOptions:["iPhone","iPad","Mac","Windows PC","Android","Unknown/Mixed"],
       q2Label:"Devices your team currently uses",
+      servicesLabel:"Services I'm interested in",
+      servicesNotSure:"Not sure yet",
       q3Label:"Biggest tech frustration", q3Placeholder:"What's the most frustrating technology problem in your business right now?",
       q4Label:"What you wish your business could do", q4Placeholder:"What would you love your business to be able to do that it can't today?",
       q5Label:"Timeline or deadline", q5Placeholder:"Any specific date or urgency we should know about? (optional)",
@@ -479,20 +481,20 @@ const STRINGS = {
       storyCta:"Construyamos Algo Juntos →",
     },
     socials:{
+      discord:"https://discordapp.com/users/1508469925134729250",
+      facebook:"https://www.facebook.com/share/1E4yWafzsU/?mibextid=wwXIfr",
       instagram:"https://instagram.com/icafeconpan",
       linkedin:"https://linkedin.com/company/cafeconpan",
-      twitter:"https://twitter.com/icafeconpan",
       tiktok:"https://tiktok.com/@icafeconpan",
+      twitter:"https://twitter.com/icafeconpan",
       youtube:"https://youtube.com/@icafeconpan",
-      facebook:"",
-      discord:"https://discordapp.com/users/1508469925134729250",
+      discordLabel:"Discord",
+      facebookLabel:"Facebook",
       instagramLabel:"Instagram",
       linkedinLabel:"LinkedIn",
-      twitterLabel:"Twitter",
       tiktokLabel:"TikTok",
+      twitterLabel:"Twitter",
       youtubeLabel:"YouTube",
-      facebookLabel:"Facebook",
-      discordLabel:"Discord",
       followLabel:"Redes Sociales", contactNote:"Síguenos ↓",
     },
     contact:{
@@ -523,6 +525,8 @@ const STRINGS = {
       q1Label:"Nombre del negocio y qué haces", q1Placeholder:"Cuéntanos el nombre de tu negocio y describe lo que haces día a día.",
       devicesOptions:["iPhone","iPad","Mac","Windows PC","Android","No sé/Mixto"],
       q2Label:"Dispositivos que usa tu equipo",
+      servicesLabel:"Servicios de mi interés",
+      servicesNotSure:"Aún no lo sé",
       q3Label:"Tu mayor frustración tecnológica", q3Placeholder:"¿Cuál es el problema tecnológico más frustrante en tu negocio ahora mismo?",
       q4Label:"Lo que desearías que tu negocio pudiera hacer", q4Placeholder:"¿Qué te gustaría que tu negocio pudiera hacer hoy que todavía no puede?",
       q5Label:"Plazo o fecha límite", q5Placeholder:"¿Alguna fecha específica o urgencia que debamos saber? (opcional)",
@@ -596,6 +600,9 @@ const css = `
   @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
   @keyframes pop{from{opacity:0;transform:scale(0.92)}to{opacity:1;transform:scale(1)}}
   @keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes slideInRight{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:translateX(0)}}
+  @keyframes slideInLeft{from{opacity:0;transform:translateX(-36px)}to{opacity:1;transform:translateX(0)}}
+  @keyframes btnPulse{0%,100%{border-color:${C.espresso}}50%{border-color:${C.gold}}}
   .fade-up{animation:fadeUp 0.6s ease forwards}
   .pop{animation:pop 0.5s ease forwards}
   .page{animation:pageIn 0.25s ease forwards}
@@ -661,9 +668,6 @@ const css = `
     box-shadow:4px 4px 0 ${C.espresso};
     transition:transform 0.1s,box-shadow 0.1s}
   .hero-cta:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 ${C.espresso}}
-  .hero-domain{margin-top:20px;font-size:13px;color:${C.espresso};opacity:0.5;
-    letter-spacing:0.15em;text-transform:uppercase;font-weight:700}
-
   .section{padding:72px 40px;background:${C.cream}}
   .section-alt{background:${C.parchment}}
   .section-dark{background:${C.espresso}}
@@ -960,7 +964,7 @@ function PainPointsSection({ go, t }) {
         ))}
       </div>
       <div style={{textAlign:"center",maxWidth:640,margin:"56px auto 0"}}>
-        <p style={{fontFamily:"'Nunito',sans-serif",fontSize:20,fontWeight:800,fontStyle:"italic",color:C.espresso,lineHeight:1.6,marginBottom:32}}>"{t.painPoints.bridge}"</p>
+        <p style={{fontFamily:"'Nunito',sans-serif",fontSize:17,fontWeight:800,fontStyle:"italic",color:C.espresso,lineHeight:1.6,marginBottom:32}}>"{t.painPoints.bridge}"</p>
         <button className="hero-cta" onClick={() => go("Discovery")}>{t.painPoints.cta}</button>
         <p style={{marginTop:28,fontSize:13,color:C.espresso,fontWeight:600,opacity:0.6}}>
           {t.finder.painPrompt}{" "}
@@ -1424,12 +1428,11 @@ function AdminGate({ children }) {
 
   if (unlocked) return children;
 
-  const C2 = { espresso:"#3D2B1F", cream:"#F5EDD6", gold:"#C8922A", red:"#B8503E", beige:"#D4A97A" };
   return (
-    <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",background:C2.espresso}}>
-      <div style={{background:"rgba(255,255,255,0.05)",border:`2px solid ${C2.gold}`,padding:"48px 40px",minWidth:300,textAlign:"center"}}>
-        <div style={{fontFamily:"'Pacifico',cursive",fontSize:22,color:C2.cream,marginBottom:4}}>Café Con <span style={{color:"#F2B0AC"}}>Pan</span></div>
-        <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C2.gold,fontWeight:700,marginBottom:28}}>Admin Access</div>
+    <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",background:C.espresso}}>
+      <div style={{background:"rgba(255,255,255,0.05)",border:`2px solid ${C.gold}`,padding:"48px 40px",minWidth:300,textAlign:"center"}}>
+        <div style={{fontFamily:"'Pacifico',cursive",fontSize:22,color:C.cream,marginBottom:4}}>Café Con <span style={{color:C.blush}}>Pan</span></div>
+        <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.gold,fontWeight:700,marginBottom:28}}>Admin Access</div>
         <form onSubmit={e => { e.preventDefault(); if (pw === ADMIN_PW) setUnlocked(true); else { setError(true); setPw(""); } }}>
           <input
             type="password"
@@ -1437,10 +1440,10 @@ function AdminGate({ children }) {
             onChange={e => { setPw(e.target.value); setError(false); }}
             placeholder="Password"
             autoFocus
-            style={{width:"100%",padding:"10px 14px",fontFamily:"'Nunito',sans-serif",fontSize:14,background:"rgba(255,255,255,0.08)",border:`1.5px solid ${error ? C2.red : C2.beige}44`,color:C2.cream,outline:"none",marginBottom:8,boxSizing:"border-box",letterSpacing:"0.1em"}}
+            style={{width:"100%",padding:"10px 14px",fontFamily:"'Nunito',sans-serif",fontSize:14,background:"rgba(255,255,255,0.08)",border:`1.5px solid ${error ? C.red : C.beige}44`,color:C.cream,outline:"none",marginBottom:8,boxSizing:"border-box",letterSpacing:"0.1em"}}
           />
-          {error && <div style={{fontSize:11,color:C2.red,marginBottom:8,letterSpacing:"0.08em"}}>Incorrect password</div>}
-          <button type="submit" style={{width:"100%",background:C2.gold,border:"none",color:C2.espresso,cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:12,letterSpacing:"0.14em",textTransform:"uppercase",padding:"10px 0",marginTop:4}}>Enter</button>
+          {error && <div style={{fontSize:11,color:C.red,marginBottom:8,letterSpacing:"0.08em"}}>Incorrect password</div>}
+          <button type="submit" style={{width:"100%",background:C.gold,border:"none",color:C.espresso,cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:12,letterSpacing:"0.14em",textTransform:"uppercase",padding:"10px 0",marginTop:4}}>Enter</button>
         </form>
       </div>
     </div>
@@ -1941,6 +1944,8 @@ function FindMyPlanPage({ go, t }) {
   const [q1, setQ1] = useState(null);
   const [q2, setQ2] = useState(null);
   const [q3, setQ3] = useState([]);
+  const [dir, setDir] = useState("forward");
+  const [pulsing, setPulsing] = useState(false);
 
   const TOTAL = 3;
 
@@ -1982,8 +1987,12 @@ function FindMyPlanPage({ go, t }) {
     boxShadow: selected ? `3px 3px 0 rgba(90,158,150,0.25)` : "none",
   });
 
-  const back = () => { setStep(s => s - 1); if (step === 3) setQ3([]); else setQ2(null); };
-  const next = () => step < TOTAL ? setStep(s => s + 1) : setStep(TOTAL + 1);
+  const back = () => { setDir("backward"); setStep(s => s - 1); if (step === 3) setQ3([]); else setQ2(null); };
+  const handleNext = () => {
+    if (pulsing || !activeQ) return;
+    setPulsing(true);
+    setTimeout(() => { setPulsing(false); setDir("forward"); step < TOTAL ? setStep(s => s + 1) : setStep(TOTAL + 1); }, 440);
+  };
 
   const stepLabel = step === 1 ? t.finder.q1 : step === 2 ? t.finder.q2 : t.finder.q3;
 
@@ -2000,7 +2009,8 @@ function FindMyPlanPage({ go, t }) {
             <p style={{fontSize:15,color:"#555",fontWeight:600,lineHeight:1.7}}>{t.finder.sub}</p>
           </div>
 
-          <div style={{background:C.parchment,border:`3px solid ${C.espresso}`,boxShadow:`5px 5px 0 ${C.espresso}`,padding:"40px 40px 36px"}}>
+          <div style={{background:C.parchment,border:`3px solid ${C.espresso}`,boxShadow:`5px 5px 0 ${C.espresso}`,padding:"40px 40px 36px",overflow:"hidden"}}>
+            <div key={step} style={{animation:`${dir==="forward"?"slideInRight":"slideInLeft"} 0.28s ease forwards`}}>
 
             {step <= TOTAL ? (
               <>
@@ -2045,16 +2055,18 @@ function FindMyPlanPage({ go, t }) {
                 })}
 
                 <button
-                  disabled={!activeQ}
-                  onClick={next}
+                  disabled={!activeQ || pulsing}
+                  onClick={handleNext}
                   style={{
                     width:"100%",marginTop:24,padding:"16px",
                     background: activeQ ? C.espresso : "#C5B9AA",
-                    color:C.cream,border:"none",
+                    color:C.cream,
+                    border:`3px solid ${activeQ ? C.espresso : "#C5B9AA"}`,
                     fontFamily:"'Nunito',sans-serif",fontWeight:700,
                     fontSize:14,letterSpacing:"0.1em",textTransform:"uppercase",
                     cursor: activeQ ? "pointer" : "not-allowed",
                     transition:"background 0.2s",
+                    animation: pulsing ? "btnPulse 0.22s ease-in-out 2" : "none",
                   }}
                 >
                   {step === TOTAL ? t.finder.seeResult : t.finder.continue}
@@ -2093,7 +2105,7 @@ function FindMyPlanPage({ go, t }) {
                   </div>
                 )}
 
-                <button className="hero-cta" onClick={() => go("Contact")} style={{width:"100%",textAlign:"center",marginBottom:12,display:"block"}}>
+                <button className="hero-cta" onClick={() => go("Discovery", { serviceIdxs: Array.from(new Set([RESULT_IDX[q2], ...companions.map(c => t.tech.packages.indexOf(c))])) })} style={{width:"100%",textAlign:"center",marginBottom:12,display:"block"}}>
                   {t.tech.creds.cta}
                 </button>
                 <button onClick={() => go("Tech Services")} style={{width:"100%",background:"none",border:`2px solid ${C.espresso}`,color:C.espresso,fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,letterSpacing:"0.08em",textTransform:"uppercase",padding:"14px",cursor:"pointer",marginBottom:20}}>
@@ -2107,6 +2119,7 @@ function FindMyPlanPage({ go, t }) {
                 </div>
               </>
             )}
+            </div>
           </div>
 
         </div>
@@ -2116,11 +2129,16 @@ function FindMyPlanPage({ go, t }) {
   );
 }
 
-function DiscoveryPage({ go, t }) {
+function DiscoveryPage({ go, t, prefillRef }) {
   const d = t.discovery;
   const DEVICES = d.devicesOptions;
-  const blank = {name:"",email:"",phone:"",bestTime:"",bizDesc:"",devices:[],frustration:"",wishList:"",timeline:""};
-  const [form, setForm] = useState(blank);
+  const PACKAGES = ["Open for Business","Apple Presence","Apple Operations","Connectivity Consulting","Tech Concierge"];
+  const blank = {name:"",email:"",phone:"",bestTime:"",bizDesc:"",devices:[],services:[],frustration:"",wishList:"",timeline:""};
+  const [form, setForm] = useState(() => {
+    const pf = prefillRef?.current || null;
+    if (prefillRef) prefillRef.current = null;
+    return { ...blank, services: pf?.serviceIdxs?.map(i => PACKAGES[i]).filter(Boolean) || [] };
+  });
   const [status, setStatus] = useState("idle");
 
   const toggle = val => setForm(f => ({...f, devices: f.devices.includes(val) ? f.devices.filter(x=>x!==val) : [...f.devices,val]}));
@@ -2138,7 +2156,7 @@ function DiscoveryPage({ go, t }) {
           name:form.name,
           email:form.email,
           replyto:form.email,
-          message:`PHONE: ${form.phone||"Not provided"}\nBEST TIME: ${form.bestTime||"Not specified"}\n\nBUSINESS: ${form.bizDesc}\n\nDEVICES: ${form.devices.join(", ")||"Not specified"}\n\nFRUSTRATION: ${form.frustration}\n\nWISH LIST: ${form.wishList}\n\nTIMELINE: ${form.timeline||"Not specified"}`,
+          message:`PHONE: ${form.phone||"Not provided"}\nBEST TIME: ${form.bestTime||"Not specified"}\n\nBUSINESS: ${form.bizDesc}\n\nDEVICES: ${form.devices.join(", ")||"Not specified"}\n\nINTERESTED IN: ${form.services.map(s=>s==="not-sure"?"Not sure yet":s).join(", ")||"Not specified"}\n\nFRUSTRATION: ${form.frustration}\n\nWISH LIST: ${form.wishList}\n\nTIMELINE: ${form.timeline||"Not specified"}`,
         }),
       });
       const data = await res.json();
@@ -2181,8 +2199,8 @@ function DiscoveryPage({ go, t }) {
                     <input style={fld} required value={form.name} onChange={e=>setForm(f=>({...f,name:e.target.value}))} placeholder={d.namePlaceholder} />
                   </div>
                   <div>
-                    <label style={lbl}>{d.phoneLabel}</label>
-                    <input style={fld} type="tel" value={form.phone} onChange={e=>setForm(f=>({...f,phone:e.target.value}))} placeholder={d.phonePlaceholder} />
+                    <label style={lbl}>{d.phoneLabel} *</label>
+                    <input style={fld} required type="tel" value={form.phone} onChange={e=>setForm(f=>({...f,phone:e.target.value}))} placeholder={d.phonePlaceholder} />
                   </div>
                 </div>
 
@@ -2210,6 +2228,22 @@ function DiscoveryPage({ go, t }) {
                 <div>
                   <label style={lbl}>{d.q2Label}</label>
                   <div style={{marginTop:10,display:"flex",flexWrap:"wrap",gap:8}}>{DEVICES.map(dev=><button type="button" key={dev} style={chip(form.devices.includes(dev))} onClick={()=>toggle(dev)}>{dev}</button>)}</div>
+                </div>
+
+                <div>
+                  <label style={lbl}>{d.servicesLabel}</label>
+                  <div style={{marginTop:10,display:"flex",flexWrap:"wrap",gap:8}}>
+                    {PACKAGES.map(pkg=>(
+                      <button type="button" key={pkg} style={chip(form.services.includes(pkg))}
+                        onClick={()=>setForm(f=>({...f,services:f.services.includes(pkg)?f.services.filter(x=>x!==pkg):[...f.services,pkg]}))}>
+                        {pkg}
+                      </button>
+                    ))}
+                    <button type="button" style={chip(form.services.includes("not-sure"))}
+                      onClick={()=>setForm(f=>({...f,services:f.services.includes("not-sure")?f.services.filter(x=>x!=="not-sure"):[...f.services,"not-sure"]}))}>
+                      {d.servicesNotSure}
+                    </button>
+                  </div>
                 </div>
 
                 <div>
@@ -2245,27 +2279,27 @@ function DiscoveryPage({ go, t }) {
 
 const RESOURCE_CATEGORIES = [
   { categoryKey:"productivity", cards:[
-    { name:"Google Workspace", badgeKey:"iUseThis", badgeColor:"#5A9E96", url:"https://referworkspace.app.goo.gl/kjNC",
+    { name:"Google Workspace", badgeKey:"iUseThis", badgeColor:C.teal, url:"https://referworkspace.app.goo.gl/kjNC",
       desc:"Business email, Drive, Docs, Meet — the full suite. What I use to run Café Con Pan day to day.",
       descEs:"Suite completa de negocios — correo, Drive, Docs, Meet. Lo que uso para gestionar Café Con Pan día a día." },
-    { name:"Calendly", badgeKey:"iUseThis", badgeColor:"#5A9E96", url:"https://calendly.com/signup",
+    { name:"Calendly", badgeKey:"iUseThis", badgeColor:C.teal, url:"https://calendly.com/signup",
       desc:"How I let clients book discovery calls without the back-and-forth. Set your availability once and let people book directly.",
       descEs:"Así permito que mis clientes agenden llamadas sin tanto ida y vuelta. Configura tu disponibilidad una vez y deja que las personas reserven directamente." },
   ]},
   { categoryKey:"infrastructure", cards:[
-    { name:"Apple Business", badgeKey:"iSetThisUp", badgeColor:"#5A9E96", btnLabelKey:"learnMore", url:"https://business.apple.com",
+    { name:"Apple Business", badgeKey:"iSetThisUp", badgeColor:C.teal, btnLabelKey:"learnMore", url:"https://business.apple.com",
       desc:"Apple's unified business platform — manage your devices, apps, people, and Apple presence all in one place. Formerly known as Apple Business Manager. I help clients get set up and running from day one.",
       descEs:"La plataforma unificada de Apple para negocios — administra dispositivos, apps, personas y tu presencia Apple en un solo lugar. Antes conocida como Apple Business Manager. Ayudo a mis clientes a configurarla desde el primer día." },
-    { name:"Chase Business Checking", badgeKey:"iUseThis", badgeColor:"#5A9E96", url:"CHASE_BUSINESS_REFERRAL_LINK",
+    { name:"Chase Business Checking", badgeKey:"iUseThis", badgeColor:C.teal, url:"CHASE_BUSINESS_REFERRAL_LINK",
       desc:"Where Café Con Pan banks. Solid business checking with a large ATM network, easy online banking, and branch access when you need it. One of the first things I recommend setting up when launching a business.",
       descEs:"Donde opera Café Con Pan. Cuenta corriente de negocios sólida con amplia red de cajeros, banca en línea fácil y acceso a sucursales cuando lo necesitas. Una de las primeras cosas que recomiendo al lanzar un negocio." },
-    { name:"Cloudflare", badgeKey:"iUseThis", badgeColor:"#5A9E96", url:"CLOUDFLARE_REFERRAL_LINK",
+    { name:"Cloudflare", badgeKey:"iUseThis", badgeColor:C.teal, url:"CLOUDFLARE_REFERRAL_LINK",
       desc:"Where pancon.cafe lives. Fast, secure, free tier that covers most small businesses. I use it for DNS, hosting, and SSL — all in one place.",
       descEs:"Donde vive pancon.cafe. Rápido, seguro, con una capa gratuita que cubre a la mayoría de los pequeños negocios. Lo uso para DNS, hosting y SSL — todo en un solo lugar." },
-    { name:"Helcim", badgeKey:"iUseThis", badgeColor:"#5A9E96", url:"HELCIM_REFERRAL_LINK",
+    { name:"Helcim", badgeKey:"iUseThis", badgeColor:C.teal, url:"HELCIM_REFERRAL_LINK",
       desc:"The payment processor I recommend for small businesses. No monthly fees, transparent pricing, and they actually treat small businesses like real customers.",
       descEs:"El procesador de pagos que recomiendo para pequeños negocios. Sin cuotas mensuales, precios transparentes y realmente tratan a los pequeños negocios como clientes reales." },
-    { name:"Namecheap", badgeKey:"iUseThis", badgeColor:"#5A9E96", url:"NAMECHEAP_REFERRAL_LINK",
+    { name:"Namecheap", badgeKey:"iUseThis", badgeColor:C.teal, url:"NAMECHEAP_REFERRAL_LINK",
       desc:"Where I register domains. Simple, affordable, and straightforward — no dark patterns or surprise upsells at checkout.",
       descEs:"Donde registro dominios. Simple, accesible y directo — sin patrones engañosos ni sorpresas en el checkout." },
   ]},
@@ -2273,15 +2307,15 @@ const RESOURCE_CATEGORIES = [
     { name:"Apple Custom Store for Business", badgeKey:"clientExclusive", badgeColor:C.red, btnLabelKey:"getAccess", internal:"Discovery",
       desc:"Access Apple's exclusive business storefront — custom-configured devices, business pricing, and direct procurement. Not publicly available. You need to be set up through Café Con Pan to get access.",
       descEs:"Acceso a la tienda empresarial exclusiva de Apple — dispositivos con configuración personalizada, precios para negocios y adquisición directa. No está disponible al público. Necesitas ser configurado a través de Café Con Pan para obtener acceso." },
-    { name:"Jamf", badgeKey:"iUseThis", badgeColor:"#5A9E96", btnLabelKey:"learnMore", url:"JAMF_REFERRAL_LINK",
+    { name:"Jamf", badgeKey:"iUseThis", badgeColor:C.teal, btnLabelKey:"learnMore", url:"JAMF_REFERRAL_LINK",
       desc:"The industry standard for Apple device management at scale. Enterprise-grade MDM trusted by some of the biggest Apple deployments in the world. Full Jamf deployment is included in my Apple Operations package.",
       descEs:"El estándar de la industria para gestión de dispositivos Apple a escala. MDM de nivel empresarial utilizado por algunos de los mayores despliegues Apple del mundo. El despliegue completo de Jamf está incluido en mi paquete Apple Operations." },
-    { name:"Mosyle", badgeKey:"iUseThis", badgeColor:"#5A9E96", btnLabelKey:"learnMore", url:"MOSYLE_REFERRAL_LINK",
+    { name:"Mosyle", badgeKey:"iUseThis", badgeColor:C.teal, btnLabelKey:"learnMore", url:"MOSYLE_REFERRAL_LINK",
       desc:"My go-to MDM for Apple device management. Powerful, intuitive, and built specifically for Apple environments. Full Mosyle deployment is included in my Apple Operations package.",
       descEs:"Mi MDM preferido para gestión de dispositivos Apple. Potente, intuitivo y construido específicamente para entornos Apple. El despliegue completo de Mosyle está incluido en mi paquete Apple Operations." },
   ]},
   { categoryKey:"carriers", cards:[
-    { name:"AT&T", badgeKey:"iUseThis", badgeColor:"#5A9E96", btnLabelKey:"letsTalk", internal:"Discovery",
+    { name:"AT&T", badgeKey:"iUseThis", badgeColor:C.teal, btnLabelKey:"letsTalk", internal:"Discovery",
       desc:"My personal mobile carrier. Great coverage in the DMV and solid business plan options. Carrier setup and plan optimization is included in my Connectivity Consulting service.",
       descEs:"Mi operadora móvil personal. Gran cobertura en el DMV y sólidas opciones de planes empresariales. La configuración de carrier y optimización de planes está incluida en mi servicio de Consultoría de Conectividad." },
     { name:"Comcast Business", badgeKey:"trustedReferral", badgeColor:C.beige, btnLabelKey:"contactMe", internal:"Discovery",
@@ -2290,7 +2324,7 @@ const RESOURCE_CATEGORIES = [
     { name:"T-Mobile", badgeKey:"trustedPartner", badgeColor:C.beige, btnLabelKey:"letsTalk", internal:"Discovery",
       desc:"Competitive business plans with strong value at scale. A solid option depending on your coverage needs and team size. Carrier setup and plan optimization is included in my Connectivity Consulting service.",
       descEs:"Planes empresariales competitivos con gran valor a escala. Una opción sólida según tus necesidades de cobertura y tamaño del equipo. La configuración de carrier y optimización de planes está incluida en mi servicio de Consultoría de Conectividad." },
-    { name:"Verizon", badgeKey:"iUseThis", badgeColor:"#5A9E96", btnLabelKey:"letsTalk", internal:"Discovery",
+    { name:"Verizon", badgeKey:"iUseThis", badgeColor:C.teal, btnLabelKey:"letsTalk", internal:"Discovery",
       desc:"My personal mobile and internet provider. Strong coverage, reliable service, and a plan worth auditing if you haven't looked at it recently. Carrier setup and plan optimization is included in my Connectivity Consulting service.",
       descEs:"Mi proveedor personal de móvil e internet. Buena cobertura, servicio confiable y un plan que vale la pena revisar si no lo has visto recientemente. La configuración de carrier y optimización de planes está incluida en mi servicio de Consultoría de Conectividad." },
   ]},
@@ -2324,7 +2358,7 @@ function ResourcesPage({ go, t, lang }) {
 
         <div style={{maxWidth:860,margin:"0 auto",display:"flex",flexDirection:"column",gap:56}}>
           {RESOURCE_CATEGORIES.map(cat => (
-            <div key={cat.label}>
+            <div key={cat.categoryKey}>
               <div style={{fontSize:11,letterSpacing:"0.18em",textTransform:"uppercase",fontWeight:700,color:C.espresso,borderBottom:`2px solid ${C.espresso}`,paddingBottom:10,marginBottom:24,opacity:0.55}}>
                 {r.categories[cat.categoryKey]}
               </div>
@@ -2599,6 +2633,7 @@ export default function CafeConPan() {
   const pageRef = useRef(page);
   const copyClickCount = useRef(0);
   const copyClickTimer = useRef(null);
+  const discoveryPrefill = useRef(null);
 
   const t = STRINGS[lang];
   const sLinkFt = {fontSize:12,color:C.cream,opacity:0.6,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"none",transition:"opacity 0.2s"};
@@ -2607,7 +2642,8 @@ export default function CafeConPan() {
     setHighlightSocials(true);
     setTimeout(() => setHighlightSocials(false), 2400);
   };
-  const go = (p) => {
+  const go = (p, state = null) => {
+    if (state) discoveryPrefill.current = state;
     if (p === "Home" && page === "Home") { window.location.reload(); return; }
     scrollPositions.current[page] = window.scrollY;
     isProgrammaticNav.current = true;
@@ -2651,7 +2687,7 @@ export default function CafeConPan() {
       case "Privacy Policy": return <PrivacyPolicyPage lang={lang} />;
       case "Find My Plan": return <FindMyPlanPage go={go} t={t} />;
       case "The Grind": return <AdminGate><TheGrindPage go={go} /></AdminGate>;
-      case "Discovery": return <DiscoveryPage go={go} t={t} />;
+      case "Discovery": return <DiscoveryPage go={go} t={t} prefillRef={discoveryPrefill} />;
       case "Resources": return <ResourcesPage go={go} t={t} lang={lang} />;
       default: return <HomePage go={go} t={t} lang={lang} />;
     }
@@ -2704,15 +2740,15 @@ export default function CafeConPan() {
         <div className="footer-tagline">{t.footer.tagline}</div>
         <div id="footer-socials" style={{display:"flex",flexDirection:"column",alignItems:"center",gap:8}}>
           <div style={{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:4}}>{t.socials.followLabel}</div>
-          <div style={{display:"grid",gridTemplateColumns:"repeat(3,auto)",gap:"12px 24px",justifyContent:"center",textAlign:"center"}}>
+          <div style={{display:"flex",flexWrap:"wrap",justifyContent:"center",gap:"12px 24px",textAlign:"center"}}>
             {[
               {href:t.socials.discord,   label:t.socials.discordLabel},
+              {href:t.socials.facebook,  label:t.socials.facebookLabel},
               {href:t.socials.instagram, label:t.socials.instagramLabel},
               {href:t.socials.linkedin,  label:t.socials.linkedinLabel},
               {href:t.socials.tiktok,    label:t.socials.tiktokLabel},
               {href:t.socials.twitter,   label:t.socials.twitterLabel},
               {href:t.socials.youtube,   label:t.socials.youtubeLabel},
-              ...(t.socials.facebook ? [{href:t.socials.facebook, label:t.socials.facebookLabel}] : []),
             ].filter(s => s.href).map(({href,label},i) => (
               <a key={label} href={href} target="_blank" rel="noopener noreferrer"
                 style={{...sLinkFt, animation:highlightSocials?`socialFlash 0.75s ease ${i*400}ms both`:undefined}}
