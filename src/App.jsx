@@ -313,6 +313,15 @@ const STRINGS = {
       painPrompt:"Not sure which service fits?",
       painLink:"Find your package →",
     },
+    resources:{
+      eyebrow:"Tools & Resources", title:"The Stack", titleSpan:"We Trust",
+      sub:"Every tool on this page is something I've either used myself, recommend to clients, or trust enough to put my name behind. No fluff, no random affiliates.",
+      comingSoon:"More coming soon.",
+      disclaimer:"Some of these links are referral or affiliate links. If you sign up through them, I may earn a small credit or commission — at no extra cost to you. I only recommend things I'd tell a friend to use.",
+      categories:{ productivity:"Productivity & Communication", infrastructure:"Business Infrastructure", devices:"Devices & Tech", carriers:"Carriers & Connectivity" },
+      badges:{ iUseThis:"I use this", clientExclusive:"Client exclusive", iSetThisUp:"I set this up", trustedReferral:"Trusted Referral", trustedPartner:"Trusted Partner" },
+      btn:{ getStarted:"Get Started →", learnMore:"Learn More →", getAccess:"Get Access →", contactMe:"Contact Me →", letsTalk:"Let's Talk →" },
+    },
   },
   es: {
     nav: { items:["Inicio","Servicios Tech","Nuestra Historia","Contacto"], cta:"Comenzar", langBtn:"EN" },
@@ -562,6 +571,15 @@ const STRINGS = {
       techCta:"Encuentra Tu Paquete →",
       painPrompt:"¿No sabes qué servicio te conviene?",
       painLink:"Encuentra tu paquete →",
+    },
+    resources:{
+      eyebrow:"Herramientas y Recursos", title:"El Stack", titleSpan:"En Que Confiamos",
+      sub:"Cada herramienta en esta página es algo que he usado personalmente, recomiendo a clientes, o en lo que confío lo suficiente como para poner mi nombre. Sin relleno, sin afiliados al azar.",
+      comingSoon:"Más próximamente.",
+      disclaimer:"Algunos de estos enlaces son de referido o afiliados. Si te registras a través de ellos, es posible que gane un pequeño crédito o comisión — sin costo adicional para ti. Solo recomiendo cosas que le diría a un amigo que use.",
+      categories:{ productivity:"Productividad y Comunicación", infrastructure:"Infraestructura Empresarial", devices:"Dispositivos y Tecnología", carriers:"Operadoras y Conectividad" },
+      badges:{ iUseThis:"Lo uso yo", clientExclusive:"Exclusivo para clientes", iSetThisUp:"Yo lo configuro", trustedReferral:"Referido de confianza", trustedPartner:"Socio de confianza" },
+      btn:{ getStarted:"Comenzar →", learnMore:"Más Info →", getAccess:"Solicitar Acceso →", contactMe:"Contáctame →", letsTalk:"Hablemos →" },
     },
   },
 };
@@ -2226,126 +2244,60 @@ function DiscoveryPage({ go, t }) {
 }
 
 const RESOURCE_CATEGORIES = [
-  {
-    label: "Productivity & Communication",
-    cards: [
-      {
-        name: "Google Workspace",
-        desc: "Business email, Drive, Docs, Meet — the full suite. What I use to run Café Con Pan day to day.",
-        badge: "I use this",
-        badgeColor: "#5A9E96",
-        url: "https://referworkspace.app.goo.gl/kjNC",
-      },
-      {
-        name: "Calendly",
-        desc: "How I let clients book discovery calls without the back-and-forth. Set your availability once and let people book directly.",
-        badge: "I use this",
-        badgeColor: "#5A9E96",
-        url: "https://calendly.com/signup",
-      },
-    ],
-  },
-  { label: "Business Infrastructure", cards: [
-    {
-      name: "Cloudflare",
-      desc: "Where pancon.cafe lives. Fast, secure, free tier that covers most small businesses. I use it for DNS, hosting, and SSL — all in one place.",
-      badge: "I use this",
-      badgeColor: "#5A9E96",
-      url: "CLOUDFLARE_REFERRAL_LINK",
-    },
-    {
-      name: "Namecheap",
-      desc: "Where I register domains. Simple, affordable, and straightforward — no dark patterns or surprise upsells at checkout.",
-      badge: "I use this",
-      badgeColor: "#5A9E96",
-      url: "NAMECHEAP_REFERRAL_LINK",
-    },
-    {
-      name: "Helcim",
-      desc: "The payment processor I recommend for small businesses. No monthly fees, transparent pricing, and they actually treat small businesses like real customers.",
-      badge: "I use this",
-      badgeColor: "#5A9E96",
-      url: "HELCIM_REFERRAL_LINK",
-    },
-    {
-      name: "Apple Business",
-      desc: "Apple's unified business platform — manage your devices, apps, people, and Apple presence all in one place. Formerly known as Apple Business Manager. I help clients get set up and running from day one.",
-      badge: "I set this up",
-      badgeColor: "#5A9E96",
-      btnLabel: "Learn More →",
-      url: "https://business.apple.com",
-    },
-    {
-      name: "Chase Business Checking",
-      desc: "Where Café Con Pan banks. Solid business checking with a large ATM network, easy online banking, and branch access when you need it. One of the first things I recommend setting up when launching a business.",
-      badge: "I use this",
-      badgeColor: "#5A9E96",
-      url: "CHASE_BUSINESS_REFERRAL_LINK",
-    },
+  { categoryKey:"productivity", cards:[
+    { name:"Google Workspace", badgeKey:"iUseThis", badgeColor:"#5A9E96", url:"https://referworkspace.app.goo.gl/kjNC",
+      desc:"Business email, Drive, Docs, Meet — the full suite. What I use to run Café Con Pan day to day.",
+      descEs:"Suite completa de negocios — correo, Drive, Docs, Meet. Lo que uso para gestionar Café Con Pan día a día." },
+    { name:"Calendly", badgeKey:"iUseThis", badgeColor:"#5A9E96", url:"https://calendly.com/signup",
+      desc:"How I let clients book discovery calls without the back-and-forth. Set your availability once and let people book directly.",
+      descEs:"Así permito que mis clientes agenden llamadas sin tanto ida y vuelta. Configura tu disponibilidad una vez y deja que las personas reserven directamente." },
   ]},
-  { label: "Devices & Tech", cards: [
-    {
-      name: "Apple Custom Store for Business",
-      desc: "Access Apple's exclusive business storefront — custom-configured devices, business pricing, and direct procurement. Not publicly available. You need to be set up through Café Con Pan to get access.",
-      badge: "Client exclusive",
-      badgeColor: C.red,
-      btnLabel: "Get Access →",
-      internal: "Discovery",
-    },
-    {
-      name: "Mosyle",
-      desc: "My go-to MDM for Apple device management. Powerful, intuitive, and built specifically for Apple environments. Full Mosyle deployment is included in my Apple Operations package.",
-      badge: "I use this",
-      badgeColor: "#5A9E96",
-      btnLabel: "Learn More →",
-      url: "MOSYLE_REFERRAL_LINK",
-    },
-    {
-      name: "Jamf",
-      desc: "The industry standard for Apple device management at scale. Enterprise-grade MDM trusted by some of the biggest Apple deployments in the world. Full Jamf deployment is included in my Apple Operations package.",
-      badge: "I use this",
-      badgeColor: "#5A9E96",
-      btnLabel: "Learn More →",
-      url: "JAMF_REFERRAL_LINK",
-    },
+  { categoryKey:"infrastructure", cards:[
+    { name:"Apple Business", badgeKey:"iSetThisUp", badgeColor:"#5A9E96", btnLabelKey:"learnMore", url:"https://business.apple.com",
+      desc:"Apple's unified business platform — manage your devices, apps, people, and Apple presence all in one place. Formerly known as Apple Business Manager. I help clients get set up and running from day one.",
+      descEs:"La plataforma unificada de Apple para negocios — administra dispositivos, apps, personas y tu presencia Apple en un solo lugar. Antes conocida como Apple Business Manager. Ayudo a mis clientes a configurarla desde el primer día." },
+    { name:"Chase Business Checking", badgeKey:"iUseThis", badgeColor:"#5A9E96", url:"CHASE_BUSINESS_REFERRAL_LINK",
+      desc:"Where Café Con Pan banks. Solid business checking with a large ATM network, easy online banking, and branch access when you need it. One of the first things I recommend setting up when launching a business.",
+      descEs:"Donde opera Café Con Pan. Cuenta corriente de negocios sólida con amplia red de cajeros, banca en línea fácil y acceso a sucursales cuando lo necesitas. Una de las primeras cosas que recomiendo al lanzar un negocio." },
+    { name:"Cloudflare", badgeKey:"iUseThis", badgeColor:"#5A9E96", url:"CLOUDFLARE_REFERRAL_LINK",
+      desc:"Where pancon.cafe lives. Fast, secure, free tier that covers most small businesses. I use it for DNS, hosting, and SSL — all in one place.",
+      descEs:"Donde vive pancon.cafe. Rápido, seguro, con una capa gratuita que cubre a la mayoría de los pequeños negocios. Lo uso para DNS, hosting y SSL — todo en un solo lugar." },
+    { name:"Helcim", badgeKey:"iUseThis", badgeColor:"#5A9E96", url:"HELCIM_REFERRAL_LINK",
+      desc:"The payment processor I recommend for small businesses. No monthly fees, transparent pricing, and they actually treat small businesses like real customers.",
+      descEs:"El procesador de pagos que recomiendo para pequeños negocios. Sin cuotas mensuales, precios transparentes y realmente tratan a los pequeños negocios como clientes reales." },
+    { name:"Namecheap", badgeKey:"iUseThis", badgeColor:"#5A9E96", url:"NAMECHEAP_REFERRAL_LINK",
+      desc:"Where I register domains. Simple, affordable, and straightforward — no dark patterns or surprise upsells at checkout.",
+      descEs:"Donde registro dominios. Simple, accesible y directo — sin patrones engañosos ni sorpresas en el checkout." },
   ]},
-  { label: "Carriers & Connectivity", cards: [
-    {
-      name: "Comcast Business",
-      desc: "Business internet and connectivity solutions. Interested? Reach out to me directly — I submit the referral on your behalf through my network and make sure you get taken care of.",
-      badge: "Trusted Referral",
-      badgeColor: C.beige,
-      btnLabel: "Contact Me →",
-      internal: "Discovery",
-    },
-    {
-      name: "Verizon",
-      desc: "My personal mobile and internet provider. Strong coverage, reliable service, and a plan worth auditing if you haven't looked at it recently. Carrier setup and plan optimization is included in my Connectivity Consulting service.",
-      badge: "I use this",
-      badgeColor: "#5A9E96",
-      btnLabel: "Let's Talk →",
-      internal: "Discovery",
-    },
-    {
-      name: "AT&T",
-      desc: "My personal mobile carrier. Great coverage in the DMV and solid business plan options. Carrier setup and plan optimization is included in my Connectivity Consulting service.",
-      badge: "I use this",
-      badgeColor: "#5A9E96",
-      btnLabel: "Let's Talk →",
-      internal: "Discovery",
-    },
-    {
-      name: "T-Mobile",
-      desc: "Competitive business plans with strong value at scale. A solid option depending on your coverage needs and team size. Carrier setup and plan optimization is included in my Connectivity Consulting service.",
-      badge: "Trusted Partner",
-      badgeColor: C.beige,
-      btnLabel: "Let's Talk →",
-      internal: "Discovery",
-    },
+  { categoryKey:"devices", cards:[
+    { name:"Apple Custom Store for Business", badgeKey:"clientExclusive", badgeColor:C.red, btnLabelKey:"getAccess", internal:"Discovery",
+      desc:"Access Apple's exclusive business storefront — custom-configured devices, business pricing, and direct procurement. Not publicly available. You need to be set up through Café Con Pan to get access.",
+      descEs:"Acceso a la tienda empresarial exclusiva de Apple — dispositivos con configuración personalizada, precios para negocios y adquisición directa. No está disponible al público. Necesitas ser configurado a través de Café Con Pan para obtener acceso." },
+    { name:"Jamf", badgeKey:"iUseThis", badgeColor:"#5A9E96", btnLabelKey:"learnMore", url:"JAMF_REFERRAL_LINK",
+      desc:"The industry standard for Apple device management at scale. Enterprise-grade MDM trusted by some of the biggest Apple deployments in the world. Full Jamf deployment is included in my Apple Operations package.",
+      descEs:"El estándar de la industria para gestión de dispositivos Apple a escala. MDM de nivel empresarial utilizado por algunos de los mayores despliegues Apple del mundo. El despliegue completo de Jamf está incluido en mi paquete Apple Operations." },
+    { name:"Mosyle", badgeKey:"iUseThis", badgeColor:"#5A9E96", btnLabelKey:"learnMore", url:"MOSYLE_REFERRAL_LINK",
+      desc:"My go-to MDM for Apple device management. Powerful, intuitive, and built specifically for Apple environments. Full Mosyle deployment is included in my Apple Operations package.",
+      descEs:"Mi MDM preferido para gestión de dispositivos Apple. Potente, intuitivo y construido específicamente para entornos Apple. El despliegue completo de Mosyle está incluido en mi paquete Apple Operations." },
+  ]},
+  { categoryKey:"carriers", cards:[
+    { name:"AT&T", badgeKey:"iUseThis", badgeColor:"#5A9E96", btnLabelKey:"letsTalk", internal:"Discovery",
+      desc:"My personal mobile carrier. Great coverage in the DMV and solid business plan options. Carrier setup and plan optimization is included in my Connectivity Consulting service.",
+      descEs:"Mi operadora móvil personal. Gran cobertura en el DMV y sólidas opciones de planes empresariales. La configuración de carrier y optimización de planes está incluida en mi servicio de Consultoría de Conectividad." },
+    { name:"Comcast Business", badgeKey:"trustedReferral", badgeColor:C.beige, btnLabelKey:"contactMe", internal:"Discovery",
+      desc:"Business internet and connectivity solutions. Interested? Reach out to me directly — I submit the referral on your behalf through my network and make sure you get taken care of.",
+      descEs:"Soluciones de internet y conectividad para negocios. ¿Interesado? Contáctame directamente — envío el referido en tu nombre a través de mi red y me aseguro de que te atiendan bien." },
+    { name:"T-Mobile", badgeKey:"trustedPartner", badgeColor:C.beige, btnLabelKey:"letsTalk", internal:"Discovery",
+      desc:"Competitive business plans with strong value at scale. A solid option depending on your coverage needs and team size. Carrier setup and plan optimization is included in my Connectivity Consulting service.",
+      descEs:"Planes empresariales competitivos con gran valor a escala. Una opción sólida según tus necesidades de cobertura y tamaño del equipo. La configuración de carrier y optimización de planes está incluida en mi servicio de Consultoría de Conectividad." },
+    { name:"Verizon", badgeKey:"iUseThis", badgeColor:"#5A9E96", btnLabelKey:"letsTalk", internal:"Discovery",
+      desc:"My personal mobile and internet provider. Strong coverage, reliable service, and a plan worth auditing if you haven't looked at it recently. Carrier setup and plan optimization is included in my Connectivity Consulting service.",
+      descEs:"Mi proveedor personal de móvil e internet. Buena cobertura, servicio confiable y un plan que vale la pena revisar si no lo has visto recientemente. La configuración de carrier y optimización de planes está incluida en mi servicio de Consultoría de Conectividad." },
   ]},
 ];
 
-function ResourcesPage({ go }) {
+function ResourcesPage({ go, t, lang }) {
+  const r = t.resources;
   const cardStyle = {
     background: C.cream,
     border: `3px solid ${C.espresso}`,
@@ -2365,21 +2317,19 @@ function ResourcesPage({ go }) {
     <>
       <section id="resources" className="section" style={{paddingTop:100}}>
         <div className="section-header">
-          <div className="section-eyebrow">Tools &amp; Resources</div>
-          <h2 className="section-title">The Stack <span>We Trust</span></h2>
-          <p className="section-sub" style={{maxWidth:640,margin:"12px auto 0",textAlign:"center"}}>
-            Every tool on this page is something I've either used myself, recommend to clients, or trust enough to put my name behind. No fluff, no random affiliates.
-          </p>
+          <div className="section-eyebrow">{r.eyebrow}</div>
+          <h2 className="section-title">{r.title} <span>{r.titleSpan}</span></h2>
+          <p className="section-sub" style={{maxWidth:640,margin:"12px auto 0",textAlign:"center"}}>{r.sub}</p>
         </div>
 
         <div style={{maxWidth:860,margin:"0 auto",display:"flex",flexDirection:"column",gap:56}}>
           {RESOURCE_CATEGORIES.map(cat => (
             <div key={cat.label}>
               <div style={{fontSize:11,letterSpacing:"0.18em",textTransform:"uppercase",fontWeight:700,color:C.espresso,borderBottom:`2px solid ${C.espresso}`,paddingBottom:10,marginBottom:24,opacity:0.55}}>
-                {cat.label}
+                {r.categories[cat.categoryKey]}
               </div>
               {cat.cards.length === 0 ? (
-                <div style={{fontSize:13,color:"#999",fontStyle:"italic",fontWeight:600}}>More coming soon.</div>
+                <div style={{fontSize:13,color:"#999",fontStyle:"italic",fontWeight:600}}>{r.comingSoon}</div>
               ) : (
                 <div className="no-scrollbar" style={{display:"flex",flexDirection:"row",gap:24,overflowX:"auto",padding:"8px 8px 16px 8px",scrollSnapType:"x mandatory"}}>
                   {[...cat.cards].sort((a,b) => a.name.localeCompare(b.name)).map(card => (
@@ -2389,13 +2339,13 @@ function ResourcesPage({ go }) {
                     >
                       <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",gap:8}}>
                         <div style={{fontFamily:"'Lilita One',cursive",fontSize:20,color:C.espresso,lineHeight:1.2}}>{card.name}</div>
-                        {card.badge && (
+                        {card.badgeKey && (
                           <span style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",color:"#fff",background:card.badgeColor,padding:"3px 8px",whiteSpace:"nowrap",flexShrink:0,marginTop:3}}>
-                            {card.badge}
+                            {r.badges[card.badgeKey]}
                           </span>
                         )}
                       </div>
-                      <p style={{fontSize:14,lineHeight:1.8,color:"#555",fontWeight:600,margin:0}}>{card.desc}</p>
+                      <p style={{fontSize:14,lineHeight:1.8,color:"#555",fontWeight:600,margin:0}}>{lang === "es" && card.descEs ? card.descEs : card.desc}</p>
                       {card.internal ? (
                         <button onClick={() => go(card.internal)} style={{
                           display:"inline-block",marginTop:"auto",alignSelf:"flex-start",
@@ -2408,7 +2358,7 @@ function ResourcesPage({ go }) {
                         }}
                           onMouseEnter={e=>{e.currentTarget.style.transform="translate(2px,2px)";e.currentTarget.style.boxShadow=`1px 1px 0 ${C.gold}`;}}
                           onMouseLeave={e=>{e.currentTarget.style.transform="";e.currentTarget.style.boxShadow=`3px 3px 0 ${C.gold}`;}}
-                        >{card.btnLabel || "Get Started →"}</button>
+                        >{r.btn[card.btnLabelKey || "getStarted"]}</button>
                       ) : (
                         <a href={card.url} target="_blank" rel="noopener noreferrer" style={{
                           display:"inline-block",marginTop:"auto",
@@ -2422,7 +2372,7 @@ function ResourcesPage({ go }) {
                         }}
                           onMouseEnter={e=>{e.currentTarget.style.transform="translate(2px,2px)";e.currentTarget.style.boxShadow=`1px 1px 0 ${C.gold}`;}}
                           onMouseLeave={e=>{e.currentTarget.style.transform="";e.currentTarget.style.boxShadow=`3px 3px 0 ${C.gold}`;}}
-                        >{card.btnLabel || "Get Started →"}</a>
+                        >{r.btn[card.btnLabelKey || "getStarted"]}</a>
                       )}
                     </div>
                   ))}
@@ -2432,9 +2382,7 @@ function ResourcesPage({ go }) {
           ))}
         </div>
 
-        <p style={{textAlign:"center",fontSize:12,fontStyle:"italic",color:"rgba(61,43,31,0.45)",fontWeight:600,maxWidth:600,margin:"56px auto 0",lineHeight:1.7}}>
-          Some of these links are referral or affiliate links. If you sign up through them, I may earn a small credit or commission — at no extra cost to you. I only recommend things I'd tell a friend to use.
-        </p>
+        <p style={{textAlign:"center",fontSize:12,fontStyle:"italic",color:"rgba(61,43,31,0.45)",fontWeight:600,maxWidth:600,margin:"56px auto 0",lineHeight:1.7}}>{r.disclaimer}</p>
       </section>
       <TextileBorder flip />
     </>
@@ -2704,7 +2652,7 @@ export default function CafeConPan() {
       case "Find My Plan": return <FindMyPlanPage go={go} t={t} />;
       case "The Grind": return <AdminGate><TheGrindPage go={go} /></AdminGate>;
       case "Discovery": return <DiscoveryPage go={go} t={t} />;
-      case "Resources": return <ResourcesPage go={go} />;
+      case "Resources": return <ResourcesPage go={go} t={t} lang={lang} />;
       default: return <HomePage go={go} t={t} lang={lang} />;
     }
   };
