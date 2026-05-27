@@ -2430,6 +2430,9 @@ function ResourcesPage({ go, t, lang }) {
 }
 
 const APPLE_STORES = [
+  { region:"Remote", stores:[
+    {city:"Austin, TX", name:"Remote Business Team",            email:"", phone:""},
+  ]},
   { region:"Hawaii", stores:[
     {city:"Honolulu", name:"Ala Moana",                          email:"alamoanabusiness@apple.com",     phone:""},
     {city:"Honolulu", name:"Kahala",                             email:"kahalabusiness@apple.com",       phone:""},
