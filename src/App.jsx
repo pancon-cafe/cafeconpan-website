@@ -2440,22 +2440,22 @@ const APPLE_STORES = [
   { region:"Maryland", stores:[
     {city:"Annapolis", name:"Annapolis",                         email:"", phone:""},
     {city:"Bethesda",  name:"Bethesda Row",                      email:"", phone:""},
-    {city:"Bethesda",  name:"Montgomery Mall",                   email:"", phone:""},
     {city:"Columbia",  name:"Columbia",                          email:"", phone:""},
+    {city:"Bethesda",  name:"Montgomery Mall",                   email:"", phone:""},
   ]},
   { region:"Virginia", stores:[
-    {city:"Arlington",     name:"Clarendon",                     email:"clarendonbusiness@apple.com",    phone:"(703) 623-7973"},
-    {city:"Arlington",     name:"Pentagon City",                 email:"", phone:""},
+    {city:"Arlington",     name:"Clarendon",                     email:"clarendonbusiness@apple.com",     phone:"(703) 623-7973"},
     {city:"Fairfax",       name:"Fairfax Corner",                email:"fairfaxcornerbusiness@apple.com", phone:"(703) 251-7403"},
-    {city:"McLean",        name:"Tysons Corner",                 email:"tysonscornerbusiness@apple.com",  phone:"(703) 336-8453"},
+    {city:"Virginia Beach",name:"Lynnhaven Mall",                email:"", phone:""},
+    {city:"Arlington",     name:"Pentagon City",                 email:"", phone:""},
     {city:"Reston",        name:"Reston",                        email:"restonbusiness@apple.com",        phone:"(571) 449-4803"},
     {city:"Richmond",      name:"Short Pump Town Center",        email:"", phone:""},
-    {city:"Virginia Beach",name:"Lynnhaven Mall",                email:"", phone:""},
     {city:"Woodbridge",    name:"Stonebridge Potomac Town Center",email:"", phone:""},
+    {city:"McLean",        name:"Tysons Corner",                 email:"tysonscornerbusiness@apple.com",  phone:"(703) 336-8453"},
   ]},
   { region:"Washington DC", stores:[
     {city:"Washington", name:"Carnegie Library",                 email:"", phone:""},
-    {city:"Washington", name:"Georgetown",                       email:"georgetownbusiness@apple.com",   phone:""},
+    {city:"Washington", name:"Georgetown",                       email:"georgetownbusiness@apple.com",   phone:"(202) 572-1463"},
   ]},
 ];
 
