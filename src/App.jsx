@@ -2443,7 +2443,7 @@ const APPLE_STORES = [
   { region:"Virginia", stores:[
     {city:"Arlington",     name:"Clarendon",                     email:"", phone:""},
     {city:"Arlington",     name:"Pentagon City",                 email:"", phone:""},
-    {city:"Fairfax",       name:"Fairfax Corner",                email:"fairfaxcornerbusiness@apple.com", phone:""},
+    {city:"Fairfax",       name:"Fairfax Corner",                email:"fairfaxcornerbusiness@apple.com", phone:"(703) 251-7403"},
     {city:"McLean",        name:"Tysons Corner",                 email:"tysonscornerbusiness@apple.com",  phone:""},
     {city:"Reston",        name:"Reston",                        email:"restonbusiness@apple.com",        phone:""},
     {city:"Richmond",      name:"Short Pump Town Center",        email:"", phone:""},
@@ -2487,8 +2487,14 @@ function AppleTeamsPage() {
                         >{email}</a>
                       : <span style={{color:dim}}>—</span>}
                   </div>
-                  <div style={{fontFamily:"'Nunito',sans-serif",fontSize:13,color: phone ? C.cream : dim, fontStyle: phone ? "normal" : "italic"}}>
-                    {phone || "—"}
+                  <div style={{fontFamily:"'Nunito',sans-serif",fontSize:13,fontStyle: phone ? "normal" : "italic"}}>
+                    {phone
+                      ? <a href={`tel:${phone.replace(/\D/g,"")}`}
+                          style={{color:C.teal,textDecoration:"none",fontWeight:700,transition:"color 0.15s"}}
+                          onMouseEnter={e=>e.currentTarget.style.color=C.gold}
+                          onMouseLeave={e=>e.currentTarget.style.color=C.teal}
+                        >{phone}</a>
+                      : <span style={{color:dim}}>—</span>}
                   </div>
                 </div>
               ))}
@@ -2764,7 +2770,7 @@ export default function CafeConPan() {
       case "Privacy Policy": return <PrivacyPolicyPage lang={lang} />;
       case "Find My Plan": return <FindMyPlanPage go={go} t={t} />;
       case "The Grind": return <AdminGate><TheGrindPage go={go} /></AdminGate>;
-      case "Apple Teams": return <AdminGate><AppleTeamsPage /></AdminGate>;
+      case "Apple Teams": return <AppleTeamsPage />;
       case "Discovery": return <DiscoveryPage go={go} t={t} prefillRef={discoveryPrefill} />;
       case "Resources": return <ResourcesPage go={go} t={t} lang={lang} />;
       default: return <HomePage go={go} t={t} lang={lang} />;
