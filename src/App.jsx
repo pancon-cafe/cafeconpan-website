@@ -2468,7 +2468,7 @@ function AppleTeamsPage() {
             style={{fontFamily:"'Nunito',sans-serif",fontSize:12,color:C.teal,textDecoration:"none",letterSpacing:"0.06em",fontWeight:700,transition:"color 0.15s"}}
             onMouseEnter={e=>e.currentTarget.style.color=C.gold}
             onMouseLeave={e=>e.currentTarget.style.color=C.teal}
-          >apple.com/retail ↗</a>
+          >Find the Closest Store ↗</a>
         </div>
 
         {APPLE_STORES.map(({ region, stores }) => (
