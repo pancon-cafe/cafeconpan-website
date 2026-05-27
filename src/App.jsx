@@ -2429,64 +2429,41 @@ function ResourcesPage({ go, t, lang }) {
   );
 }
 
-const APPLE_STORE_KEY = "ccp-apple-teams";
 const APPLE_STORES = [
   { region:"Hawaii", stores:[
-    {city:"Honolulu", name:"Ala Moana"},
-    {city:"Honolulu", name:"Kahala"},
+    {city:"Honolulu", name:"Ala Moana",                          email:"alamoanabusiness@apple.com",     phone:""},
+    {city:"Honolulu", name:"Kahala",                             email:"kahalabusiness@apple.com",       phone:""},
   ]},
   { region:"Maryland", stores:[
-    {city:"Annapolis", name:"Annapolis"},
-    {city:"Bethesda",  name:"Bethesda Row"},
-    {city:"Bethesda",  name:"Montgomery Mall"},
-    {city:"Columbia",  name:"Columbia"},
+    {city:"Annapolis", name:"Annapolis",                         email:"", phone:""},
+    {city:"Bethesda",  name:"Bethesda Row",                      email:"", phone:""},
+    {city:"Bethesda",  name:"Montgomery Mall",                   email:"", phone:""},
+    {city:"Columbia",  name:"Columbia",                          email:"", phone:""},
   ]},
   { region:"Virginia", stores:[
-    {city:"Arlington",     name:"Clarendon"},
-    {city:"Arlington",     name:"Pentagon City"},
-    {city:"Fairfax",       name:"Fairfax Corner"},
-    {city:"McLean",        name:"Tysons Corner"},
-    {city:"Reston",        name:"Reston"},
-    {city:"Richmond",      name:"Short Pump Town Center"},
-    {city:"Virginia Beach",name:"Lynnhaven Mall"},
-    {city:"Woodbridge",    name:"Stonebridge Potomac Town Center"},
+    {city:"Arlington",     name:"Clarendon",                     email:"", phone:""},
+    {city:"Arlington",     name:"Pentagon City",                 email:"", phone:""},
+    {city:"Fairfax",       name:"Fairfax Corner",                email:"fairfaxcornerbusiness@apple.com", phone:""},
+    {city:"McLean",        name:"Tysons Corner",                 email:"tysonscornerbusiness@apple.com",  phone:""},
+    {city:"Reston",        name:"Reston",                        email:"restonbusiness@apple.com",        phone:""},
+    {city:"Richmond",      name:"Short Pump Town Center",        email:"", phone:""},
+    {city:"Virginia Beach",name:"Lynnhaven Mall",                email:"", phone:""},
+    {city:"Woodbridge",    name:"Stonebridge Potomac Town Center",email:"", phone:""},
   ]},
   { region:"Washington DC", stores:[
-    {city:"Washington", name:"Carnegie Library"},
-    {city:"Washington", name:"Georgetown"},
+    {city:"Washington", name:"Carnegie Library",                 email:"", phone:""},
+    {city:"Washington", name:"Georgetown",                       email:"georgetownbusiness@apple.com",   phone:""},
   ]},
 ];
 
 function AppleTeamsPage() {
-  const [contacts, setContacts] = useState(() => {
-    try { return JSON.parse(localStorage.getItem(APPLE_STORE_KEY)) || {}; }
-    catch { return {}; }
-  });
-
-  const storeKey = (region, name) => `${region}|${name}`;
-  const get = (region, name, field) => contacts[storeKey(region, name)]?.[field] || "";
-  const update = (region, name, field, val) => {
-    const k = storeKey(region, name);
-    const next = { ...contacts, [k]: { ...contacts[k], [field]: val } };
-    setContacts(next);
-    localStorage.setItem(APPLE_STORE_KEY, JSON.stringify(next));
-  };
-
-  const inputSt = {
-    width:"100%", padding:"8px 12px",
-    fontFamily:"'Nunito',sans-serif", fontSize:13,
-    background:"rgba(255,255,255,0.06)",
-    border:`1px solid rgba(212,169,122,0.25)`,
-    color:C.cream, outline:"none", boxSizing:"border-box",
-  };
-
+  const dim = "rgba(245,237,214,0.38)";
   return (
     <div style={{minHeight:"100vh",background:C.espresso,padding:"100px clamp(20px,5vw,56px) 80px"}}>
       <div style={{maxWidth:900,margin:"0 auto"}}>
         <div style={{textAlign:"center",marginBottom:56}}>
           <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:12}}>Internal Reference</div>
-          <h1 style={{fontFamily:"'Lilita One',cursive",fontSize:"clamp(28px,5vw,42px)",color:C.cream,margin:"0 0 10px"}}>Apple Business Teams</h1>
-          <p style={{fontFamily:"'Nunito',sans-serif",fontSize:12,color:`rgba(245,237,214,0.4)`,letterSpacing:"0.06em"}}>Edits save automatically to this device</p>
+          <h1 style={{fontFamily:"'Lilita One',cursive",fontSize:"clamp(28px,5vw,42px)",color:C.cream,margin:0}}>Apple Business Teams</h1>
         </div>
 
         {APPLE_STORES.map(({ region, stores }) => (
@@ -2495,14 +2472,24 @@ function AppleTeamsPage() {
               {region}
             </div>
             <div style={{display:"flex",flexDirection:"column",gap:10}}>
-              {stores.map(({ city, name }) => (
+              {stores.map(({ city, name, email, phone }) => (
                 <div key={name} style={{display:"grid",gridTemplateColumns:"1.2fr 1.6fr 1.2fr",gap:12,alignItems:"center",background:"rgba(255,255,255,0.04)",border:`1px solid rgba(212,169,122,0.12)`,padding:"14px 20px"}}>
                   <div>
                     <div style={{fontFamily:"'Nunito',sans-serif",fontSize:13,fontWeight:700,color:C.cream}}>{name}</div>
-                    <div style={{fontSize:11,color:`rgba(245,237,214,0.38)`,marginTop:2}}>{city}</div>
+                    <div style={{fontSize:11,color:dim,marginTop:2}}>{city}</div>
                   </div>
-                  <input type="email" placeholder="Business team email" value={get(region,name,"email")} onChange={e=>update(region,name,"email",e.target.value)} style={inputSt} />
-                  <input type="tel"   placeholder="Phone number"        value={get(region,name,"phone")} onChange={e=>update(region,name,"phone",e.target.value)} style={inputSt} />
+                  <div style={{fontFamily:"'Nunito',sans-serif",fontSize:13,fontStyle: email ? "normal" : "italic"}}>
+                    {email
+                      ? <a href={`mailto:${email}`}
+                          style={{color:C.teal,textDecoration:"none",fontWeight:700,transition:"color 0.15s"}}
+                          onMouseEnter={e=>e.currentTarget.style.color=C.gold}
+                          onMouseLeave={e=>e.currentTarget.style.color=C.teal}
+                        >{email}</a>
+                      : <span style={{color:dim}}>—</span>}
+                  </div>
+                  <div style={{fontFamily:"'Nunito',sans-serif",fontSize:13,color: phone ? C.cream : dim, fontStyle: phone ? "normal" : "italic"}}>
+                    {phone || "—"}
+                  </div>
                 </div>
               ))}
             </div>
