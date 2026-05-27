@@ -854,6 +854,7 @@ const PAGE_HASH = {
   "Privacy Policy":"privacy-policy",
   "Find My Plan":"find-my-plan",
   "The Grind":"the-grind",
+  "Apple Teams":"apple-teams",
   "Discovery":"discovery",
   "Resources":"resources",
 };
@@ -2428,6 +2429,90 @@ function ResourcesPage({ go, t, lang }) {
   );
 }
 
+const APPLE_STORE_KEY = "ccp-apple-teams";
+const APPLE_STORES = [
+  { region:"Hawaii", stores:[
+    {city:"Honolulu", name:"Ala Moana"},
+    {city:"Honolulu", name:"Kahala"},
+  ]},
+  { region:"Maryland", stores:[
+    {city:"Annapolis", name:"Annapolis"},
+    {city:"Bethesda",  name:"Bethesda Row"},
+    {city:"Bethesda",  name:"Montgomery Mall"},
+    {city:"Columbia",  name:"Columbia"},
+  ]},
+  { region:"Virginia", stores:[
+    {city:"Arlington",     name:"Clarendon"},
+    {city:"Arlington",     name:"Pentagon City"},
+    {city:"Fairfax",       name:"Fairfax Corner"},
+    {city:"McLean",        name:"Tysons Corner"},
+    {city:"Reston",        name:"Reston"},
+    {city:"Richmond",      name:"Short Pump Town Center"},
+    {city:"Virginia Beach",name:"Lynnhaven Mall"},
+    {city:"Woodbridge",    name:"Stonebridge Potomac Town Center"},
+  ]},
+  { region:"Washington DC", stores:[
+    {city:"Washington", name:"Carnegie Library"},
+    {city:"Washington", name:"Georgetown"},
+  ]},
+];
+
+function AppleTeamsPage() {
+  const [contacts, setContacts] = useState(() => {
+    try { return JSON.parse(localStorage.getItem(APPLE_STORE_KEY)) || {}; }
+    catch { return {}; }
+  });
+
+  const storeKey = (region, name) => `${region}|${name}`;
+  const get = (region, name, field) => contacts[storeKey(region, name)]?.[field] || "";
+  const update = (region, name, field, val) => {
+    const k = storeKey(region, name);
+    const next = { ...contacts, [k]: { ...contacts[k], [field]: val } };
+    setContacts(next);
+    localStorage.setItem(APPLE_STORE_KEY, JSON.stringify(next));
+  };
+
+  const inputSt = {
+    width:"100%", padding:"8px 12px",
+    fontFamily:"'Nunito',sans-serif", fontSize:13,
+    background:"rgba(255,255,255,0.06)",
+    border:`1px solid rgba(212,169,122,0.25)`,
+    color:C.cream, outline:"none", boxSizing:"border-box",
+  };
+
+  return (
+    <div style={{minHeight:"100vh",background:C.espresso,padding:"100px clamp(20px,5vw,56px) 80px"}}>
+      <div style={{maxWidth:900,margin:"0 auto"}}>
+        <div style={{textAlign:"center",marginBottom:56}}>
+          <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:12}}>Internal Reference</div>
+          <h1 style={{fontFamily:"'Lilita One',cursive",fontSize:"clamp(28px,5vw,42px)",color:C.cream,margin:"0 0 10px"}}>Apple Business Teams</h1>
+          <p style={{fontFamily:"'Nunito',sans-serif",fontSize:12,color:`rgba(245,237,214,0.4)`,letterSpacing:"0.06em"}}>Edits save automatically to this device</p>
+        </div>
+
+        {APPLE_STORES.map(({ region, stores }) => (
+          <div key={region} style={{marginBottom:48}}>
+            <div style={{fontSize:10,letterSpacing:"0.2em",textTransform:"uppercase",fontWeight:700,color:C.gold,borderBottom:`1px solid rgba(200,146,42,0.3)`,paddingBottom:10,marginBottom:20}}>
+              {region}
+            </div>
+            <div style={{display:"flex",flexDirection:"column",gap:10}}>
+              {stores.map(({ city, name }) => (
+                <div key={name} style={{display:"grid",gridTemplateColumns:"1.2fr 1.6fr 1.2fr",gap:12,alignItems:"center",background:"rgba(255,255,255,0.04)",border:`1px solid rgba(212,169,122,0.12)`,padding:"14px 20px"}}>
+                  <div>
+                    <div style={{fontFamily:"'Nunito',sans-serif",fontSize:13,fontWeight:700,color:C.cream}}>{name}</div>
+                    <div style={{fontSize:11,color:`rgba(245,237,214,0.38)`,marginTop:2}}>{city}</div>
+                  </div>
+                  <input type="email" placeholder="Business team email" value={get(region,name,"email")} onChange={e=>update(region,name,"email",e.target.value)} style={inputSt} />
+                  <input type="tel"   placeholder="Phone number"        value={get(region,name,"phone")} onChange={e=>update(region,name,"phone",e.target.value)} style={inputSt} />
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function TheGrindPage({ go }) {
   const PACKAGES = ["Open for Business","Apple Presence","Apple Operations","Connectivity Consulting","Tech Concierge"];
   const PKG_DESC = {
@@ -2692,6 +2777,7 @@ export default function CafeConPan() {
       case "Privacy Policy": return <PrivacyPolicyPage lang={lang} />;
       case "Find My Plan": return <FindMyPlanPage go={go} t={t} />;
       case "The Grind": return <AdminGate><TheGrindPage go={go} /></AdminGate>;
+      case "Apple Teams": return <AdminGate><AppleTeamsPage /></AdminGate>;
       case "Discovery": return <DiscoveryPage go={go} t={t} prefillRef={discoveryPrefill} />;
       case "Resources": return <ResourcesPage go={go} t={t} lang={lang} />;
       default: return <HomePage go={go} t={t} lang={lang} />;
@@ -2706,7 +2792,7 @@ export default function CafeConPan() {
           <div onClick={e => e.stopPropagation()} style={{background:C.espresso,border:`2px solid ${C.gold}`,boxShadow:`6px 6px 0 ${C.gold}44`,padding:"40px 48px",minWidth:280,textAlign:"center"}}>
             <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:24}}>Admin Access</div>
             <div style={{display:"flex",flexDirection:"column",gap:12}}>
-              {[["The Grind","the-grind"],["La Mesa","la-mesa"],["La Mesa Referral","la-mesa-referral"],["Pay","pay"]].map(([label,hash]) => (
+              {[["The Grind","the-grind"],["Apple Teams","apple-teams"],["La Mesa","la-mesa"],["La Mesa Referral","la-mesa-referral"],["Pay","pay"]].map(([label,hash]) => (
                 <button key={hash} onClick={() => { window.open(`${window.location.origin}/#${hash}`, "_blank"); setSecretNavActive(false); }}
                   style={{background:"none",border:`2px solid ${C.beige}33`,color:C.cream,cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,letterSpacing:"0.1em",textTransform:"uppercase",padding:"12px 24px",transition:"border-color 0.2s"}}
                   onMouseEnter={e=>e.currentTarget.style.borderColor=C.gold}
