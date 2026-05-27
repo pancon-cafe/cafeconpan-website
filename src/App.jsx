@@ -2444,7 +2444,7 @@ const APPLE_STORES = [
     {city:"Columbia",  name:"Columbia",                          email:"", phone:""},
   ]},
   { region:"Virginia", stores:[
-    {city:"Arlington",     name:"Clarendon",                     email:"", phone:""},
+    {city:"Arlington",     name:"Clarendon",                     email:"clarendonbusiness@apple.com",    phone:"(703) 623-7973"},
     {city:"Arlington",     name:"Pentagon City",                 email:"", phone:""},
     {city:"Fairfax",       name:"Fairfax Corner",                email:"fairfaxcornerbusiness@apple.com", phone:"(703) 251-7403"},
     {city:"McLean",        name:"Tysons Corner",                 email:"tysonscornerbusiness@apple.com",  phone:"(703) 336-8453"},
