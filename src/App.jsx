@@ -2463,7 +2463,12 @@ function AppleTeamsPage() {
       <div style={{maxWidth:900,margin:"0 auto"}}>
         <div style={{textAlign:"center",marginBottom:56}}>
           <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:12}}>Internal Reference</div>
-          <h1 style={{fontFamily:"'Lilita One',cursive",fontSize:"clamp(28px,5vw,42px)",color:C.cream,margin:0}}>Apple Business Teams</h1>
+          <h1 style={{fontFamily:"'Lilita One',cursive",fontSize:"clamp(28px,5vw,42px)",color:C.cream,margin:"0 0 14px"}}>Apple Business Teams</h1>
+          <a href="https://www.apple.com/retail/" target="_blank" rel="noopener noreferrer"
+            style={{fontFamily:"'Nunito',sans-serif",fontSize:12,color:C.teal,textDecoration:"none",letterSpacing:"0.06em",fontWeight:700,transition:"color 0.15s"}}
+            onMouseEnter={e=>e.currentTarget.style.color=C.gold}
+            onMouseLeave={e=>e.currentTarget.style.color=C.teal}
+          >apple.com/retail ↗</a>
         </div>
 
         {APPLE_STORES.map(({ region, stores }) => (
