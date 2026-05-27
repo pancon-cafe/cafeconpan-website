@@ -2434,8 +2434,8 @@ const APPLE_STORES = [
     {city:"Austin, TX", name:"Remote Business Team",            email:"", phone:""},
   ]},
   { region:"Hawaii", stores:[
-    {city:"Honolulu", name:"Ala Moana",                          email:"alamoanabusiness@apple.com",     phone:""},
-    {city:"Honolulu", name:"Kahala",                             email:"kahalabusiness@apple.com",       phone:""},
+    {city:"Honolulu", name:"Ala Moana",                          email:"alamoanabusiness@apple.com",     phone:"(808) 983-7653"},
+    {city:"Honolulu", name:"Kahala",                             email:"kahalabusiness@apple.com",       phone:"(808) 738-4403"},
   ]},
   { region:"Maryland", stores:[
     {city:"Annapolis", name:"Annapolis",                         email:"", phone:""},
