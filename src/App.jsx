@@ -2768,7 +2768,24 @@ export default function CafeConPan() {
   const renderPage = () => {
     switch(page) {
       case "Home": return <HomePage go={go} t={t} lang={lang} />;
-      case "Tech Services": return <TechPage go={go} t={t} />;
+      case "Tech Services": return (
+        <>
+          <TextileBorder />
+          <section className="section" style={{minHeight:"70vh",display:"flex",alignItems:"center",justifyContent:"center",background:C.parchment}}>
+            <div style={{maxWidth:520,margin:"0 auto",textAlign:"center",padding:"0 24px"}}>
+              <div className="section-eyebrow" style={{marginBottom:16}}>Coming Soon</div>
+              <h1 style={{fontFamily:"'Lilita One',cursive",fontSize:"clamp(32px,6vw,52px)",color:C.espresso,lineHeight:1.1,margin:"0 0 20px"}}>
+                Something Better <span style={{color:C.red}}>Is Brewing</span>
+              </h1>
+              <p style={{fontSize:16,lineHeight:1.8,color:"#555",fontWeight:600,maxWidth:400,margin:"0 auto 40px"}}>
+                We're reshaping our tech service offerings. Check back soon — or reach out directly if you have something in mind.
+              </p>
+              <button className="hero-cta" onClick={() => go("Discovery")}>Get in Touch →</button>
+            </div>
+          </section>
+          <TextileBorder flip />
+        </>
+      );
       case "Community": return null;
       case "Our Story": return <AboutPage t={t} go={go} />;
       case "Contact": return <ContactPage t={t} scrollToSocials={scrollToSocials} setGameActive={setGameActive} />;
