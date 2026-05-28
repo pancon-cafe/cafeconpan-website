@@ -773,8 +773,8 @@ const css = `
   .submit-btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 ${C.beige}}
 
   footer{background:${C.espresso};padding:48px 40px;
-    display:flex;justify-content:space-between;align-items:center;
-    flex-wrap:wrap;gap:24px}
+    display:flex;flex-direction:column;align-items:center;
+    text-align:center;gap:24px}
   .footer-logo{font-family:'Pacifico',cursive;font-size:22px;color:${C.cream}}
   .footer-logo span{color:${C.blush}}
   .footer-tagline{font-size:12px;letter-spacing:0.15em;text-transform:uppercase;
@@ -2731,7 +2731,7 @@ export default function CafeConPan() {
   const scrollToSocials = () => {
     document.getElementById("footer-socials")?.scrollIntoView({behavior:"smooth"});
     setHighlightSocials(true);
-    setTimeout(() => setHighlightSocials(false), 2400);
+    setTimeout(() => setHighlightSocials(false), 3200);
   };
   const go = (p, state = null) => {
     if (state) discoveryPrefill.current = state;
