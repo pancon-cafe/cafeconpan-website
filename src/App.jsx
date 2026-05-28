@@ -2447,7 +2447,7 @@ const APPLE_STORES = [
     {city:"Arlington",     name:"Clarendon",                     email:"clarendonbusiness@apple.com",     phone:"(703) 623-7973"},
     {city:"Fairfax",       name:"Fairfax Corner",                email:"fairfaxcornerbusiness@apple.com", phone:"(703) 251-7403"},
     {city:"Virginia Beach",name:"Lynnhaven Mall",                email:"", phone:""},
-    {city:"Arlington",     name:"Pentagon City",                 email:"", phone:""},
+    {city:"Arlington",     name:"Pentagon City",                 email:"", phone:"(703) 236-1553"},
     {city:"Reston",        name:"Reston",                        email:"restonbusiness@apple.com",        phone:"(571) 449-4803"},
     {city:"Richmond",      name:"Short Pump Town Center",        email:"", phone:""},
     {city:"Woodbridge",    name:"Stonebridge Potomac Town Center",email:"", phone:""},
