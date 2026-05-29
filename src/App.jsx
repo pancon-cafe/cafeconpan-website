@@ -2454,7 +2454,7 @@ const APPLE_STORES = [
     {city:"McLean",        name:"Tysons Corner",                 email:"tysonscornerbusiness@apple.com",  phone:"(703) 336-8453"},
   ]},
   { region:"Washington DC", stores:[
-    {city:"Washington", name:"Carnegie Library",                 email:"", phone:""},
+    {city:"Washington", name:"Carnegie Library",                 email:"carnegielibrarybusiness@apple.com", phone:""},
     {city:"Washington", name:"Georgetown",                       email:"georgetownbusiness@apple.com",   phone:"(202) 572-1463"},
   ]},
 ];
