@@ -2475,7 +2475,7 @@ const APPLE_STORES = [
     {city:"Arlington",     name:"Pentagon City",                 email:"",                                            phone:"(703) 236-1553"},
     {city:"Reston",        name:"Reston",                        email:"restonbusiness@apple.com",                    phone:"(571) 449-4803"},
     {city:"Richmond",      name:"Short Pump Town Center",        email:"",                                            phone:"(804) 420-3003"},
-    {city:"Woodbridge",    name:"Stonebridge Potomac Town Center",email:"stonebridgepotomactowncenter@apple.com",    phone:"(703) 986-2033"},
+    {city:"Woodbridge",    name:"Stonebridge Potomac Town Center",email:"stonebridgepotomactowncenterbusiness@apple.com",    phone:"(703) 986-2033"},
     {city:"McLean",        name:"Tysons Corner",                 email:"tysonscornerbusiness@apple.com",              phone:"(703) 336-8453"},
   ]},
   { region:"Washington DC", stores:[
