@@ -2446,6 +2446,28 @@ const APPLE_STORES = [
     {city:"Columbia",  name:"Columbia",                          email:"", phone:"(410) 423-1803"},
     {city:"Bethesda",  name:"Montgomery Mall",                   email:"", phone:"(301) 634-9933"},
   ]},
+  { region:"North Carolina", stores:[
+    {city:"Charlotte",    name:"SouthPark",              email:"", phone:""},
+    {city:"Durham",       name:"Southpoint",             email:"", phone:""},
+    {city:"Greensboro",   name:"Friendly Center",        email:"", phone:""},
+    {city:"Huntersville", name:"Birkdale Village",       email:"", phone:""},
+    {city:"Raleigh",      name:"Crabtree Valley Mall",   email:"", phone:""},
+  ]},
+  { region:"Pennsylvania", stores:[
+    {city:"Ardmore",      name:"Suburban Square",        email:"", phone:""},
+    {city:"King of Prussia", name:"King of Prussia",     email:"", phone:""},
+    {city:"Lancaster",    name:"Park City",              email:"", phone:""},
+    {city:"Philadelphia", name:"Walnut Street",          email:"", phone:""},
+    {city:"Pittsburgh",   name:"Ross Park",              email:"", phone:""},
+    {city:"Pittsburgh",   name:"Shadyside",              email:"", phone:""},
+    {city:"Pittsburgh",   name:"South Hills Village",    email:"", phone:""},
+    {city:"Whitehall",    name:"Lehigh Valley",          email:"", phone:""},
+    {city:"Willow Grove", name:"Willow Grove Park",      email:"", phone:""},
+  ]},
+  { region:"South Carolina", stores:[
+    {city:"Charleston",   name:"Charleston",             email:"", phone:""},
+    {city:"Greenville",   name:"Haywood Mall",           email:"", phone:""},
+  ]},
   { region:"Virginia", stores:[
     {city:"Arlington",     name:"Clarendon",                     email:"clarendonbusiness@apple.com",     phone:"(703) 623-7973"},
     {city:"Fairfax",       name:"Fairfax Corner",                email:"fairfaxcornerbusiness@apple.com", phone:"(703) 251-7403"},
