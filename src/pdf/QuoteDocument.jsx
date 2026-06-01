@@ -166,13 +166,18 @@ const LINE_WIDTHS = [84, null, 24, 64, 64]; // null = flex:1
 // Standard terms (used if data.terms is not provided)
 // ─────────────────────────────────────────────────────────────────────────────
 
-const DEFAULT_TERMS =
-  'This quote is valid for 30 days from the date issued. A 50% deposit is required ' +
-  'to schedule and begin work; the remaining balance is due upon project completion. ' +
-  'All services are performed by Cafe Con Pan LLC. Prices are in USD. Scope changes ' +
-  'requested after work begins may result in a revised quote. By signing below, the ' +
-  'client acknowledges the scope of work described above and authorizes Cafe Con Pan ' +
-  'LLC to proceed on the agreed terms.';
+function buildTerms(total) {
+  const schedule = total < 2000
+    ? 'A 50% deposit is required to schedule and begin work; the remaining 50% is due upon project completion.'
+    : 'A 50% deposit is required to schedule and begin work; 25% is due at the project midpoint; and the remaining 25% is due upon completion.';
+  return (
+    'This quote is valid for 30 days from the date issued. ' + schedule + ' ' +
+    'All services are performed by Cafe Con Pan LLC. Prices are in USD. Scope changes ' +
+    'requested after work begins may result in a revised quote. By signing below, the ' +
+    'client acknowledges the scope of work described above and authorizes Cafe Con Pan ' +
+    'LLC to proceed on the agreed terms.'
+  );
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Document
@@ -272,7 +277,7 @@ export default function QuoteDocument({ data }) {
 
         {/* ── Terms ────────────────────────────────────────────────────────── */}
         <CCPSection title="Terms &amp; Acceptance" />
-        <Text style={s.mutedText}>{data.terms ?? DEFAULT_TERMS}</Text>
+        <Text style={s.mutedText}>{data.terms ?? buildTerms(data.total)}</Text>
 
         {/* ── Signature block ───────────────────────────────────────────────── */}
         <View style={s.sigArea}>
