@@ -64,7 +64,7 @@ const s = StyleSheet.create({
   },
   wordmark: {
     fontSize:      15,
-    fontWeight:    700,
+    fontWeight:    400,
     color:         C.beige,
     letterSpacing: 2,
   },
