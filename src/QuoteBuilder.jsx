@@ -700,11 +700,12 @@ export default function QuoteBuilder() {
 
   return(
     <div style={{fontFamily:'Georgia,serif',background:C.bg,minHeight:'100vh',color:C.cream,
-      display:'flex',flexDirection:'column',maxWidth:480,margin:'0 auto',position:'relative'}}>
+      display:'flex',flexDirection:'column',maxWidth:480,margin:'0 auto',position:'relative',
+      paddingTop:64}}>
 
       {/* ── HEADER ── */}
       <div style={{background:C.surf,borderBottom:`1px solid ${C.b0}`,padding:'13px 20px 0',flexShrink:0,
-        position:'sticky',top:0,zIndex:50}}>
+        position:'sticky',top:64,zIndex:50}}>
         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:9}}>
           <span style={{fontSize:11,color:C.beige,textTransform:'uppercase',letterSpacing:'0.14em'}}>
             ☕ Café Con Pan · Quote Builder
@@ -725,7 +726,7 @@ export default function QuoteBuilder() {
       {/* ── RUNNING TALLY ── */}
       {!isSummary&&(
         <div style={{background:C.card,borderBottom:`1px solid ${C.b0}`,padding:'10px 20px',
-          display:'flex',flexShrink:0,position:'sticky',top:72,zIndex:49}}>
+          display:'flex',flexShrink:0,position:'sticky',top:136,zIndex:49}}>
           <div style={{flex:1,textAlign:'center'}}>
             <div style={{fontSize:9,color:C.muted,textTransform:'uppercase',letterSpacing:'0.1em',marginBottom:3}}>One-time</div>
             <div style={{fontSize:18,color:C.beige,fontFamily:'Georgia,serif'}}>{fmt(q.net)}</div>

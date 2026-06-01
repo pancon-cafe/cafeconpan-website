@@ -599,6 +599,7 @@ const getBrowserLang = () => {
 const css = `
   *{margin:0;padding:0;box-sizing:border-box}
   body{font-family:'Nunito',sans-serif;background:${C.cream};overflow-x:hidden}
+  input,select,textarea{font-size:16px}
 
   @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
   @keyframes pop{from{opacity:0;transform:scale(0.92)}to{opacity:1;transform:scale(1)}}
