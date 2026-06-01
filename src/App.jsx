@@ -1442,6 +1442,10 @@ function AdminGate({ children }) {
   const [unlocked, setUnlocked] = useState(false);
   const [error, setError] = useState(false);
 
+  useEffect(() => {
+    if (unlocked) requestAnimationFrame(() => window.scrollTo(0, 0));
+  }, [unlocked]);
+
   if (unlocked) return children;
 
   return (
