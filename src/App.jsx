@@ -847,7 +847,7 @@ const css = `
   }
   .teams-store-row{display:grid;grid-template-columns:1.2fr 1.6fr 1.2fr;gap:12px;align-items:center}
   @media(max-width:640px){
-    .teams-store-row{display:flex;flex-direction:column;gap:4px}
+    .teams-store-row{display:flex;flex-direction:column;gap:4px;align-items:center;text-align:center}
   }
 `;
 
