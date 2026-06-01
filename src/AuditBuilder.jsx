@@ -14,14 +14,50 @@ const C = {
   amber: '#CC7A2A', green: '#68AF88',
 };
 
-// ─── CONSTANTS ─────────────────────────────────────────────────────────────────
-const DEFAULT_CATEGORIES = [
-  'Devices & MDM',
-  'Email & Communication',
-  'Connectivity',
-  'Apple Presence',
-  'Security & Compliance',
-  'Operations & Support',
+// ─── DISCOVERY QUESTIONS ───────────────────────────────────────────────────────
+const CATEGORIES = [
+  { name: 'Devices & MDM', questions: [
+    'How many devices and what types? (iPhones, Macs, iPads, etc.)',
+    'Are devices enrolled in MDM? If yes, which platform?',
+    'Business-owned or personal devices?',
+    'Are all devices on the latest OS?',
+    'Any devices that are old, broken, or unaccounted for?',
+  ]},
+  { name: 'Email & Communication', questions: [
+    'What email platform? (Gmail, Outlook, personal @gmail, Yahoo, etc.)',
+    'On a custom business domain? (e.g. name@theirbusiness.com)',
+    'How many email users?',
+    'Any spam filtering or security beyond the default?',
+    'Shared inboxes or aliases in use? (info@, hello@, etc.)',
+  ]},
+  { name: 'Connectivity', questions: [
+    'Business-grade internet or residential?',
+    'Current provider and approximate speed?',
+    'Wi-Fi secured? Guest network separate from business traffic?',
+    'Mobile carrier — business account or personal?',
+    'Any reliability issues, outages, or dead zones?',
+  ]},
+  { name: 'Apple Presence', questions: [
+    'Enrolled in Apple Business Manager / Business Register?',
+    'Apple Maps listing — claimed and verified?',
+    'Apple Business Messages or Tap to Pay active?',
+    'Apple Customer Number (ACN) established?',
+    'Brand profile consistent across Apple surfaces?',
+  ]},
+  { name: 'Security & Compliance', questions: [
+    'MFA/2FA enabled on all accounts?',
+    'Password manager in use?',
+    'When did they last review who has access to what?',
+    'Any compliance requirements? (HIPAA, PCI, etc.)',
+    'Any past security incidents — even minor ones?',
+  ]},
+  { name: 'Operations & Support', questions: [
+    'Who handles IT support today?',
+    'Is the tech environment documented anywhere?',
+    'Critical files and data backed up? Where?',
+    'How are licenses and renewals tracked? (domain, email, software)',
+    'When something breaks — what\'s the current process?',
+  ]},
 ];
 
 const DEFAULT_ROADMAP = [
@@ -31,12 +67,10 @@ const DEFAULT_ROADMAP = [
 ];
 
 const STEPS = [
-  { id: 'client',   title: 'Client Info' },
-  { id: 'scores',   title: 'Assessment Scores' },
-  { id: 'summary',  title: 'Executive Summary' },
-  { id: 'findings', title: 'Findings' },
-  { id: 'roadmap',  title: 'Roadmap' },
-  { id: 'report',   title: 'Report' },
+  { id: 'client',    title: 'Client Info' },
+  { id: 'discovery', title: 'Discovery' },
+  { id: 'review',    title: 'Review & Edit' },
+  { id: 'report',    title: 'Report' },
 ];
 
 const SEV_COLOR = { critical: C.red, high: C.amber, medium: C.beige, low: C.teal };
@@ -48,14 +82,12 @@ function scoreColor(n) {
   if (n >= 40) return C.amber;
   return C.red;
 }
-
 function scoreLabel(n) {
   if (n >= 80) return 'Excellent';
   if (n >= 60) return 'Good';
   if (n >= 40) return 'Needs Work';
   return 'Critical';
 }
-
 function scoreStatus(n) {
   if (n >= 80) return 'excellent';
   if (n >= 60) return 'good';
@@ -70,10 +102,8 @@ function buildPDFData(a) {
   const reportId = `CCP-AUD-${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}-${slug}`;
   const cats = a.categories || [];
   const avg = cats.length ? Math.round(cats.reduce((s, c) => s + (c.score || 0), 0) / cats.length) : 0;
-
   return {
-    reportId,
-    date:       fmt(now),
+    reportId, date: fmt(now),
     preparedBy: 'Jason F. Reyes, Founder & CEO',
     client: {
       businessName: a.clientName  || 'Client',
@@ -84,19 +114,14 @@ function buildPDFData(a) {
     executiveSummary: a.executiveSummary || '',
     overallScore:     a.overallScore != null ? a.overallScore : avg,
     categories: cats.map(c => ({
-      name:    c.name,
-      score:   c.score || 0,
-      status:  scoreStatus(c.score || 0),
-      summary: c.summary || '',
+      name: c.name, score: c.score || 0,
+      status: scoreStatus(c.score || 0), summary: c.summary || '',
     })),
     findings: (a.findings || []).map((f, i) => ({
-      id:             `F-${String(i + 1).padStart(3, '0')}`,
-      category:       f.category || '',
-      severity:       f.severity || 'medium',
-      finding:        f.finding  || '',
-      impact:         f.impact   || '',
-      recommendation: f.recommendation || '',
-      effort:         f.effort   || 'Medium',
+      id: `F-${String(i + 1).padStart(3, '0')}`,
+      category: f.category || '', severity: f.severity || 'medium',
+      finding: f.finding || '', impact: f.impact || '',
+      recommendation: f.recommendation || '', effort: f.effort || 'Medium',
     })),
     roadmap: (a.roadmap || [])
       .map(p => ({ ...p, items: p.items.filter(Boolean) }))
@@ -106,15 +131,12 @@ function buildPDFData(a) {
 
 function blankState() {
   return {
-    clientName:       '',
-    contactName:      '',
-    clientEmail:      '',
-    clientPhone:      '',
-    categories:       DEFAULT_CATEGORIES.map(name => ({ name, score: 70, summary: '' })),
-    executiveSummary: '',
-    overallScore:     null,
-    findings:         [],
-    roadmap:          DEFAULT_ROADMAP.map(r => ({ ...r, items: [] })),
+    clientName: '', contactName: '', clientEmail: '', clientPhone: '',
+    auditType: 'remote',
+    discovery: Object.fromEntries(CATEGORIES.map(c => [c.name, ''])),
+    categories: CATEGORIES.map(c => ({ name: c.name, score: 50, summary: '' })),
+    executiveSummary: '', overallScore: null, findings: [],
+    roadmap: DEFAULT_ROADMAP.map(r => ({ ...r, items: [] })),
   };
 }
 
@@ -135,57 +157,30 @@ export default function AuditBuilder() {
   const isFinal = cur.id === 'report';
 
   function set(k, v) { setA(p => ({ ...p, [k]: v })); }
-
+  function setDiscovery(name, val) {
+    setA(p => ({ ...p, discovery: { ...p.discovery, [name]: val } }));
+  }
   function setCat(i, key, val) {
-    setA(p => {
-      const cats = [...p.categories];
-      cats[i] = { ...cats[i], [key]: val };
-      return { ...p, categories: cats };
-    });
+    setA(p => { const cats = [...p.categories]; cats[i] = { ...cats[i], [key]: val }; return { ...p, categories: cats }; });
   }
-
   function setFinding(i, key, val) {
-    setA(p => {
-      const findings = [...p.findings];
-      findings[i] = { ...findings[i], [key]: val };
-      return { ...p, findings };
-    });
+    setA(p => { const findings = [...p.findings]; findings[i] = { ...findings[i], [key]: val }; return { ...p, findings }; });
   }
-
   function addFinding() {
-    setA(p => ({
-      ...p,
-      findings: [...p.findings, {
-        category: p.categories[0]?.name || '',
-        severity: 'medium', effort: 'Medium',
-        finding: '', impact: '', recommendation: '',
-      }],
-    }));
+    setA(p => ({ ...p, findings: [...p.findings, {
+      category: p.categories[0]?.name || '', severity: 'medium', effort: 'Medium',
+      finding: '', impact: '', recommendation: '',
+    }]}));
   }
-
-  function removeFinding(i) {
-    setA(p => ({ ...p, findings: p.findings.filter((_, j) => j !== i) }));
-  }
-
+  function removeFinding(i) { setA(p => ({ ...p, findings: p.findings.filter((_, j) => j !== i) })); }
   function addRoadmapItem(pi) {
     const val = roadmapInput[pi]?.trim();
     if (!val) return;
-    setA(p => ({
-      ...p,
-      roadmap: p.roadmap.map((r, i) =>
-        i === pi ? { ...r, items: [...r.items, val] } : r
-      ),
-    }));
+    setA(p => ({ ...p, roadmap: p.roadmap.map((r, i) => i === pi ? { ...r, items: [...r.items, val] } : r) }));
     setRoadmapInput(prev => prev.map((v, i) => i === pi ? '' : v));
   }
-
   function removeRoadmapItem(pi, ii) {
-    setA(p => ({
-      ...p,
-      roadmap: p.roadmap.map((r, i) =>
-        i === pi ? { ...r, items: r.items.filter((_, j) => j !== ii) } : r
-      ),
-    }));
+    setA(p => ({ ...p, roadmap: p.roadmap.map((r, i) => i === pi ? { ...r, items: r.items.filter((_, j) => j !== ii) } : r) }));
   }
 
   const avgScore = useMemo(() => {
@@ -213,12 +208,41 @@ export default function AuditBuilder() {
     ...inp(mb), resize: 'vertical', minHeight: rows * 22 + 22, lineHeight: 1.6,
   });
 
+  function sectionHead(title) {
+    return (
+      <div style={{
+        fontSize: 10, color: C.teal, textTransform: 'uppercase',
+        letterSpacing: '0.18em', fontWeight: 700,
+        marginTop: 28, marginBottom: 14,
+        paddingTop: 18, borderTop: `1px solid ${C.b0}`,
+      }}>
+        {title}
+      </div>
+    );
+  }
+
   // ── STEP CONTENT ────────────────────────────────────────────────────────────
   const renderStep = () => {
     switch (cur.id) {
 
       case 'client': return (
         <>
+          <p style={{ fontSize: 13, color: C.muted, marginTop: 0, marginBottom: 16, lineHeight: 1.6 }}>
+            Remote audits are $250 · On-site audits are $450 (+ $150 travel fee).
+          </p>
+          <div style={{ display: 'flex', gap: 10, marginBottom: 20 }}>
+            {['remote', 'onsite'].map(t => (
+              <button key={t} onClick={() => set('auditType', t)} style={{
+                flex: 1, background: a.auditType === t ? C.beige : 'transparent',
+                border: `1px solid ${a.auditType === t ? C.beige : C.b1}`,
+                color: a.auditType === t ? C.bg : C.muted,
+                borderRadius: 8, padding: '10px 0', cursor: 'pointer',
+                fontSize: 13, fontFamily: 'Georgia,serif',
+                fontWeight: a.auditType === t ? 'bold' : 'normal',
+                textTransform: 'capitalize',
+              }}>{t === 'onsite' ? 'On-Site' : 'Remote'}</button>
+            ))}
+          </div>
           <label style={lbl}>Business name *</label>
           <input style={inp(16)} type="text" placeholder="e.g. Main Street Dental"
             value={a.clientName} onChange={e => set('clientName', e.target.value)} />
@@ -234,11 +258,70 @@ export default function AuditBuilder() {
         </>
       );
 
-      case 'scores': return (
+      case 'discovery': return (
         <>
-          <p style={{ fontSize: 13, color: C.muted, marginBottom: 20, lineHeight: 1.6, marginTop: 0 }}>
-            Score each area 0–100. Status derives automatically. Add a 1–2 sentence summary per area.
+          <p style={{ fontSize: 13, color: C.muted, marginTop: 0, marginBottom: 20, lineHeight: 1.6 }}>
+            Write whatever you observed — rough notes, shorthand, fragments are fine.
+            The questions are prompts, not required fields.
+            AI will synthesize everything into scores, findings, and a roadmap.
           </p>
+          {CATEGORIES.map(cat => (
+            <div key={cat.name} style={{
+              background: C.card, border: `1px solid ${C.b0}`,
+              borderRadius: 10, padding: 16, marginBottom: 14,
+            }}>
+              <div style={{ fontSize: 13, color: C.beige, fontWeight: 'bold', marginBottom: 10 }}>
+                {cat.name}
+              </div>
+              <ul style={{ margin: '0 0 12px 0', padding: '0 0 0 16px' }}>
+                {cat.questions.map(q => (
+                  <li key={q} style={{ fontSize: 11, color: C.muted, marginBottom: 4, lineHeight: 1.5 }}>
+                    {q}
+                  </li>
+                ))}
+              </ul>
+              <textarea
+                style={{ ...ta(4, 0), fontSize: 14 }}
+                placeholder="Write your observations here…"
+                value={a.discovery[cat.name] || ''}
+                onChange={e => setDiscovery(cat.name, e.target.value)}
+              />
+            </div>
+          ))}
+        </>
+      );
+
+      case 'review': return (
+        <>
+          {/* AI Generate CTA */}
+          <div style={{
+            background: 'rgba(90,158,150,0.06)', border: `1px dashed rgba(90,158,150,0.3)`,
+            borderRadius: 10, padding: 20, marginBottom: 8, textAlign: 'center',
+          }}>
+            <div style={{ fontSize: 10, color: C.teal, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 8 }}>
+              Coming Soon
+            </div>
+            <div style={{ fontSize: 16, color: C.cream, marginBottom: 8, fontFamily: 'Georgia,serif' }}>
+              Generate with AI
+            </div>
+            <div style={{ fontSize: 12, color: C.muted, marginBottom: 16, lineHeight: 1.7, maxWidth: 360, margin: '0 auto 16px' }}>
+              One click will read your discovery notes and auto-fill every field below —
+              scores, findings, executive summary, and a prioritized roadmap with real pricing.
+              All editable before downloading.
+            </div>
+            <button disabled style={{
+              background: 'rgba(90,158,150,0.15)', border: `1px solid rgba(90,158,150,0.25)`,
+              color: 'rgba(90,158,150,0.5)', borderRadius: 8, padding: '10px 28px',
+              cursor: 'not-allowed', fontSize: 13, fontFamily: 'Georgia,serif',
+            }}>Generate Report Draft</button>
+          </div>
+
+          <p style={{ fontSize: 11, color: C.muted, textAlign: 'center', marginBottom: 0, lineHeight: 1.5 }}>
+            Until then, fill in the fields below manually.
+          </p>
+
+          {/* Category Scores */}
+          {sectionHead('Category Scores')}
           {a.categories.map((cat, i) => {
             const color = scoreColor(cat.score || 0);
             return (
@@ -265,8 +348,15 @@ export default function AuditBuilder() {
               </div>
             );
           })}
-          <div style={{ background: C.card, border: `1px solid ${C.b0}`, borderRadius: 10, padding: '14px 16px', marginTop: 8 }}>
-            <div style={{ fontSize: 11, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 8 }}>Overall score</div>
+
+          {/* Overall Score */}
+          <div style={{
+            background: C.card, border: `1px solid ${C.b0}`, borderRadius: 10,
+            padding: '14px 16px', marginTop: 8,
+          }}>
+            <div style={{ fontSize: 11, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 8 }}>
+              Overall Score
+            </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 10 }}>
               <div style={{ fontSize: 28, color: scoreColor(overallScore), fontWeight: 'bold' }}>
                 {overallScore}<span style={{ fontSize: 12, color: C.muted, fontWeight: 'normal' }}>/100</span>
@@ -276,7 +366,9 @@ export default function AuditBuilder() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <input type="checkbox" id="score-override" checked={a.overallScore != null}
                 onChange={e => set('overallScore', e.target.checked ? avgScore : null)} />
-              <label htmlFor="score-override" style={{ ...lbl, display: 'inline', marginBottom: 0 }}>Override manually</label>
+              <label htmlFor="score-override" style={{ ...lbl, display: 'inline', marginBottom: 0 }}>
+                Override manually
+              </label>
               {a.overallScore != null && (
                 <input type="number" min="0" max="100"
                   style={{ ...inp(0), width: 80, display: 'inline', marginBottom: 0 }}
@@ -285,28 +377,26 @@ export default function AuditBuilder() {
               )}
             </div>
           </div>
-        </>
-      );
 
-      case 'summary': return (
-        <>
-          <p style={{ fontSize: 13, color: C.muted, marginBottom: 16, lineHeight: 1.6, marginTop: 0 }}>
-            2–4 paragraphs on the overall state of their tech. This is the first thing the client reads.
+          {/* Executive Summary */}
+          {sectionHead('Executive Summary')}
+          <p style={{ fontSize: 12, color: C.muted, marginTop: 0, marginBottom: 12, lineHeight: 1.6 }}>
+            2–4 paragraphs on the overall state of their tech. First thing the client reads.
           </p>
           <textarea style={ta(10, 6)}
             placeholder="e.g. Main Street Dental has a solid foundational setup with a few critical gaps that pose security and operational risk if left unaddressed…"
             value={a.executiveSummary}
             onChange={e => set('executiveSummary', e.target.value)} />
-          <div style={{ fontSize: 11, color: C.muted }}>
-            {a.executiveSummary.length > 0 ? `${a.executiveSummary.length} characters` : 'Aim for 300–600 characters'}
+          <div style={{ fontSize: 11, color: C.muted, marginBottom: 8 }}>
+            {a.executiveSummary.length > 0
+              ? `${a.executiveSummary.length} characters`
+              : 'Aim for 300–600 characters'}
           </div>
-        </>
-      );
 
-      case 'findings': return (
-        <>
-          <p style={{ fontSize: 13, color: C.muted, marginBottom: 16, lineHeight: 1.6, marginTop: 0 }}>
-            One card per issue. The PDF sorts them by severity automatically.
+          {/* Findings */}
+          {sectionHead('Findings')}
+          <p style={{ fontSize: 12, color: C.muted, marginTop: 0, marginBottom: 16, lineHeight: 1.6 }}>
+            One card per issue. PDF sorts by severity automatically.
           </p>
           {a.findings.map((f, i) => (
             <div key={i} style={{
@@ -326,7 +416,7 @@ export default function AuditBuilder() {
                 <div>
                   <label style={lbl}>Category</label>
                   <select style={inp(0)} value={f.category} onChange={e => setFinding(i, 'category', e.target.value)}>
-                    {a.categories.map(c => <option key={c.name}>{c.name}</option>)}
+                    {CATEGORIES.map(c => <option key={c.name}>{c.name}</option>)}
                   </select>
                 </div>
                 <div>
@@ -358,23 +448,23 @@ export default function AuditBuilder() {
           <button onClick={addFinding} style={{
             width: '100%', background: 'transparent', border: `1px dashed ${C.b1}`,
             borderRadius: 10, color: C.beige, padding: 14, cursor: 'pointer',
-            fontSize: 14, fontFamily: 'Georgia,serif',
+            fontSize: 14, fontFamily: 'Georgia,serif', marginBottom: 8,
           }}>+ Add Finding</button>
-        </>
-      );
 
-      case 'roadmap': return (
-        <>
-          <p style={{ fontSize: 13, color: C.muted, marginBottom: 20, lineHeight: 1.6, marginTop: 0 }}>
-            Add action items per phase. Press Enter or click Add. Empty phases are omitted from the PDF.
+          {/* Roadmap */}
+          {sectionHead('Roadmap')}
+          <p style={{ fontSize: 12, color: C.muted, marginTop: 0, marginBottom: 20, lineHeight: 1.6 }}>
+            Add action items per phase. Empty phases are omitted from the PDF.
           </p>
           {a.roadmap.map((phase, pi) => (
             <div key={pi} style={{
-              background: C.card, border: `1px solid ${C.b0}`, borderRadius: 10,
-              padding: 16, marginBottom: 14,
+              background: C.card, border: `1px solid ${C.b0}`,
+              borderRadius: 10, padding: 16, marginBottom: 14,
             }}>
-              <div style={{ fontSize: 11, color: C.teal, fontWeight: 'bold', letterSpacing: '0.08em',
-                textTransform: 'uppercase', marginBottom: 12 }}>
+              <div style={{
+                fontSize: 11, color: C.teal, fontWeight: 'bold',
+                letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 12,
+              }}>
                 {phase.phase}
               </div>
               {phase.items.map((item, ii) => (
@@ -408,25 +498,41 @@ export default function AuditBuilder() {
         const data = pdfData;
         return (
           <>
-            <div style={{ background: C.card, border: `1px solid ${C.b0}`, borderRadius: 10, padding: 16, marginBottom: 16 }}>
-              <div style={{ fontSize: 10, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 10 }}>Report Summary</div>
-              <div style={{ fontSize: 20, color: C.white, fontFamily: 'Georgia,serif', marginBottom: 4 }}>{data.client.businessName}</div>
-              <div style={{ fontSize: 12, color: C.muted, marginBottom: 16 }}>Prepared for {data.client.contactName}</div>
+            <div style={{
+              background: C.card, border: `1px solid ${C.b0}`,
+              borderRadius: 10, padding: 16, marginBottom: 16,
+            }}>
+              <div style={{ fontSize: 10, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 10 }}>
+                Report Summary
+              </div>
+              <div style={{ fontSize: 20, color: C.white, fontFamily: 'Georgia,serif', marginBottom: 4 }}>
+                {data.client.businessName}
+              </div>
+              <div style={{ fontSize: 12, color: C.muted, marginBottom: 16 }}>
+                Prepared for {data.client.contactName}
+              </div>
               {[
                 ['Report ID',           data.reportId],
                 ['Date',                data.date],
+                ['Audit Type',          a.auditType === 'onsite' ? 'On-Site' : 'Remote'],
                 ['Categories Assessed', data.categories.length],
                 ['Findings',            data.findings.length],
                 ['Roadmap Phases',      data.roadmap.length],
               ].map(([label, val]) => (
-                <div key={label} style={{ display: 'flex', justifyContent: 'space-between', padding: '7px 0', borderBottom: `1px solid ${C.b0}` }}>
+                <div key={label} style={{
+                  display: 'flex', justifyContent: 'space-between',
+                  padding: '7px 0', borderBottom: `1px solid ${C.b0}`,
+                }}>
                   <span style={{ fontSize: 12, color: C.muted }}>{label}</span>
                   <span style={{ fontSize: 12, color: C.cream }}>{val}</span>
                 </div>
               ))}
               <div style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0 0' }}>
                 <span style={{ fontSize: 12, color: C.muted }}>Overall Score</span>
-                <span style={{ fontSize: 20, color: scoreColor(data.overallScore), fontWeight: 'bold', fontFamily: 'Georgia,serif' }}>
+                <span style={{
+                  fontSize: 20, color: scoreColor(data.overallScore),
+                  fontWeight: 'bold', fontFamily: 'Georgia,serif',
+                }}>
                   {data.overallScore}/100
                 </span>
               </div>
@@ -434,8 +540,11 @@ export default function AuditBuilder() {
 
             <div style={{ width: '100%', marginBottom: 10 }}>
               <Suspense fallback={
-                <button style={{ width: '100%', background: 'transparent', border: `1px solid ${C.b0}`,
-                  borderRadius: 9, color: C.muted, padding: 13, fontSize: 14, fontFamily: 'Georgia,serif', cursor: 'default' }}>
+                <button style={{
+                  width: '100%', background: 'transparent', border: `1px solid ${C.b0}`,
+                  borderRadius: 9, color: C.muted, padding: 13, fontSize: 14,
+                  fontFamily: 'Georgia,serif', cursor: 'default',
+                }}>
                   Preparing PDF…
                 </button>
               }>
@@ -465,12 +574,10 @@ export default function AuditBuilder() {
   };
 
   const stepQ = {
-    client:   "Who is this report for?",
-    scores:   "How does each area score?",
-    summary:  "Write the executive summary.",
-    findings: "What did you find?",
-    roadmap:  "What's the recommended roadmap?",
-    report:   null,
+    client:    'Who is this audit for?',
+    discovery: 'What did you observe?',
+    review:    'Review and edit the report.',
+    report:    null,
   }[cur.id];
 
   // ── NAV BUTTONS ─────────────────────────────────────────────────────────────
@@ -483,38 +590,67 @@ export default function AuditBuilder() {
   const nextBtn = (
     <button style={{
       flex: step > 0 ? 2 : 1, background: C.beige, border: 'none', borderRadius: 9,
-      color: C.bg, padding: 12, cursor: 'pointer', fontSize: 15, fontWeight: 'bold', fontFamily: 'Georgia,serif',
+      color: C.bg, padding: 12, cursor: 'pointer', fontSize: 15, fontWeight: 'bold',
+      fontFamily: 'Georgia,serif',
     }} onClick={() => setStep(s => Math.min(s + 1, STEPS.length - 1))}>
-      {step >= STEPS.length - 2 ? 'Generate Report →' : 'Continue →'}
+      {step >= STEPS.length - 2 ? 'Finalize Report →' : 'Continue →'}
     </button>
   );
 
   // ── LIVE PREVIEW ─────────────────────────────────────────────────────────────
   const livePreview = (
     <div>
-      <div style={{ fontSize: 10, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 14 }}>Live Preview</div>
+      <div style={{ fontSize: 10, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 14 }}>
+        Live Preview
+      </div>
       <div style={{ marginBottom: 16 }}>
         <div style={{ fontSize: 10, color: C.muted, marginBottom: 4 }}>Overall Score</div>
         <div style={{ fontSize: 28, color: scoreColor(overallScore), fontWeight: 'bold' }}>
           {overallScore}<span style={{ fontSize: 12, color: C.muted }}>/100</span>
         </div>
       </div>
-      {a.categories.map(cat => (
-        <div key={cat.name} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-          padding: '6px 0', borderBottom: `1px solid ${C.b0}` }}>
-          <span style={{ fontSize: 12, color: C.cream }}>{cat.name}</span>
-          <span style={{ fontSize: 13, color: scoreColor(cat.score || 0), fontWeight: 'bold' }}>{cat.score || 0}</span>
-        </div>
-      ))}
+
+      {cur.id === 'discovery'
+        ? CATEGORIES.map(cat => {
+            const filled = !!(a.discovery[cat.name]?.trim());
+            return (
+              <div key={cat.name} style={{
+                display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                padding: '6px 0', borderBottom: `1px solid ${C.b0}`,
+              }}>
+                <span style={{ fontSize: 12, color: C.cream }}>{cat.name}</span>
+                <span style={{ fontSize: 11, color: filled ? C.teal : C.muted }}>
+                  {filled ? '✓' : '—'}
+                </span>
+              </div>
+            );
+          })
+        : a.categories.map(cat => (
+            <div key={cat.name} style={{
+              display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+              padding: '6px 0', borderBottom: `1px solid ${C.b0}`,
+            }}>
+              <span style={{ fontSize: 12, color: C.cream }}>{cat.name}</span>
+              <span style={{ fontSize: 13, color: scoreColor(cat.score || 0), fontWeight: 'bold' }}>
+                {cat.score || 0}
+              </span>
+            </div>
+          ))
+      }
+
       {a.findings.length > 0 && (
         <div style={{ marginTop: 16 }}>
-          <div style={{ fontSize: 10, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 8 }}>Findings</div>
+          <div style={{ fontSize: 10, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 8 }}>
+            Findings
+          </div>
           {['critical', 'high', 'medium', 'low'].map(sev => {
             const count = a.findings.filter(f => f.severity === sev).length;
             if (!count) return null;
             return (
               <div key={sev} style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 0' }}>
-                <span style={{ fontSize: 12, color: SEV_COLOR[sev] }}>{sev[0].toUpperCase() + sev.slice(1)}</span>
+                <span style={{ fontSize: 12, color: SEV_COLOR[sev] }}>
+                  {sev[0].toUpperCase() + sev.slice(1)}
+                </span>
                 <span style={{ fontSize: 12, color: C.cream }}>{count}</span>
               </div>
             );
@@ -527,7 +663,8 @@ export default function AuditBuilder() {
   // ── RENDER ──────────────────────────────────────────────────────────────────
   return (
     <div style={{
-      fontFamily: 'Georgia,serif', background: C.bg, minHeight: '100vh', color: C.cream, paddingTop: 64,
+      fontFamily: 'Georgia,serif', background: C.bg, minHeight: '100vh',
+      color: C.cream, paddingTop: 64,
       ...(isDesktop ? {} : { display: 'flex', flexDirection: 'column', maxWidth: 480, margin: '0 auto', position: 'relative' }),
     }}>
 
@@ -543,12 +680,15 @@ export default function AuditBuilder() {
             </span>
             <span style={{
               fontSize: 9, background: 'rgba(184,80,62,0.13)', color: C.redL,
-              border: '1px solid rgba(184,80,62,0.22)', borderRadius: 3, padding: '2px 7px',
-              letterSpacing: '0.1em', textTransform: 'uppercase',
+              border: '1px solid rgba(184,80,62,0.22)', borderRadius: 3,
+              padding: '2px 7px', letterSpacing: '0.1em', textTransform: 'uppercase',
             }}>Internal</span>
           </div>
           <div style={{ height: 2, background: C.dim, borderRadius: 1, overflow: 'hidden', marginBottom: 7 }}>
-            <div style={{ height: '100%', background: C.beige, borderRadius: 1, width: `${progress}%`, transition: 'width 0.38s ease' }} />
+            <div style={{
+              height: '100%', background: C.beige, borderRadius: 1,
+              width: `${progress}%`, transition: 'width 0.38s ease',
+            }} />
           </div>
           <div style={{ fontSize: 10, color: C.muted, letterSpacing: '0.1em', textTransform: 'uppercase', paddingBottom: 10 }}>
             {cur.title} · {step + 1} of {STEPS.length}
@@ -564,7 +704,7 @@ export default function AuditBuilder() {
         ) : (
           <div style={{ display: 'flex', maxWidth: 1040, margin: '0 auto', minHeight: 'calc(100vh - 136px)' }}>
 
-            {/* Left: step */}
+            {/* Left: step form */}
             <div style={{ flex: 1, padding: '32px 40px 40px', overflowY: 'auto' }}>
               {stepQ && (
                 <h2 style={{ fontSize: 24, lineHeight: 1.3, color: C.white, fontFamily: 'Georgia,serif', margin: '0 0 24px 0' }}>
