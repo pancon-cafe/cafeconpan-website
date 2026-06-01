@@ -247,6 +247,12 @@ export default function QuoteDocument({ data }) {
             <Text style={s.totalsLineLabel}>Subtotal</Text>
             <Text style={s.totalsLineValue}>{usd(data.subtotal)}</Text>
           </View>
+          {data.discount > 0 && (
+            <View style={s.totalsLine}>
+              <Text style={s.totalsLineLabel}>Founding Client Discount (50%)</Text>
+              <Text style={[s.totalsLineValue, { color: C.teal }]}>−{usd(data.discount)}</Text>
+            </View>
+          )}
           {tax > 0 && (
             <View style={s.totalsLine}>
               <Text style={s.totalsLineLabel}>Tax</Text>

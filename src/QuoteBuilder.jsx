@@ -211,15 +211,6 @@ function buildPDFData(a, q) {
     };
   });
 
-  if (q.disc > 0) {
-    lineItems.push({
-      category:    'Discount',
-      description: 'Founding Client Program — 50% reduction applied to all one-time service fees.',
-      qty:         1,
-      unitPrice:   -q.disc,
-      total:       -q.disc,
-    });
-  }
 
   const noteLines = [
     q.savings > 0 ? `Bundle savings applied: −${fmt(q.savings)}` : null,
@@ -238,6 +229,7 @@ function buildPDFData(a, q) {
     },
     lineItems,
     subtotal:  q.sub,
+    discount:  q.disc,
     total:     q.net,
     notes:     noteLines.length ? noteLines.join('\n') : undefined,
     recurring: a.recurring === true && q.mo > 0 ? {
