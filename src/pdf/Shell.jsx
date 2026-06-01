@@ -239,7 +239,7 @@ export function CCPFooter() {
         <Text style={s.footerDot}>·</Text>
         <Text style={s.footerText}>jason@pancon.cafe</Text>
         <Text style={s.footerDot}>·</Text>
-        <Text style={s.footerText}>703-338-0208</Text>
+        <Text style={s.footerText}>808-868-6161</Text>
       </View>
 
       {/* Right: page number (rendered dynamically by react-pdf) */}
