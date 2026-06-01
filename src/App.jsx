@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import CafeGame from "./CafeGame";
+const QuoteBuilder = lazy(() => import("./QuoteBuilder"));
 
 const C = {
   cream: "#F5EDD6",
@@ -854,6 +855,7 @@ const PAGE_HASH = {
   "Privacy Policy":"privacy-policy",
   "Find My Plan":"find-my-plan",
   "The Grind":"the-grind",
+  "Quote Builder":"quote-builder",
   "Apple Teams":"apple-teams",
   "Discovery":"discovery",
   "Resources":"resources",
@@ -2820,6 +2822,7 @@ export default function CafeConPan() {
       case "Privacy Policy": return <PrivacyPolicyPage lang={lang} />;
       case "Find My Plan": return <FindMyPlanPage go={go} t={t} />;
       case "The Grind": return <AdminGate><TheGrindPage go={go} /></AdminGate>;
+      case "Quote Builder": return <AdminGate><Suspense fallback={null}><QuoteBuilder /></Suspense></AdminGate>;
       case "Apple Teams": return <AppleTeamsPage />;
       case "Discovery": return <DiscoveryPage go={go} t={t} prefillRef={discoveryPrefill} />;
       case "Resources": return <ResourcesPage go={go} t={t} lang={lang} />;
@@ -2835,7 +2838,7 @@ export default function CafeConPan() {
           <div onClick={e => e.stopPropagation()} style={{background:C.espresso,border:`2px solid ${C.gold}`,boxShadow:`6px 6px 0 ${C.gold}44`,padding:"40px 48px",minWidth:280,textAlign:"center"}}>
             <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:24}}>Admin Access</div>
             <div style={{display:"flex",flexDirection:"column",gap:12}}>
-              {[["The Grind","the-grind"],["Apple Teams","apple-teams"],["La Mesa","la-mesa"],["La Mesa Referral","la-mesa-referral"],["Pay","pay"]].map(([label,hash]) => (
+              {[["The Grind","the-grind"],["Quote Builder","quote-builder"],["Apple Teams","apple-teams"],["La Mesa","la-mesa"],["La Mesa Referral","la-mesa-referral"],["Pay","pay"]].map(([label,hash]) => (
                 <button key={hash} onClick={() => { window.open(`${window.location.origin}/#${hash}`, "_blank"); setSecretNavActive(false); }}
                   style={{background:"none",border:`2px solid ${C.beige}33`,color:C.cream,cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,letterSpacing:"0.1em",textTransform:"uppercase",padding:"12px 24px",transition:"border-color 0.2s"}}
                   onMouseEnter={e=>e.currentTarget.style.borderColor=C.gold}
