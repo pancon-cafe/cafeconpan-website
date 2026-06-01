@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, lazy, Suspense } from "react";
+import { useGoogleLogin } from "@react-oauth/google";
 import CafeGame from "./CafeGame";
 const QuoteBuilder = lazy(() => import("./QuoteBuilder"));
 
@@ -1435,36 +1436,72 @@ function PayPage({ t }) {
   );
 }
 
-const ADMIN_PW = "ccp1242202";
+const AUTH_KEY = 'ccp_google_auth';
 
-function AdminGate({ children }) {
-  const [pw, setPw] = useState("");
-  const [unlocked, setUnlocked] = useState(false);
-  const [error, setError] = useState(false);
+function GoogleAuthGate({ children }) {
+  const [user, setUser] = useState(() => {
+    try {
+      const stored = localStorage.getItem(AUTH_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.exp && Date.now() < parsed.exp) return parsed;
+      }
+    } catch {}
+    return null;
+  });
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (unlocked) requestAnimationFrame(() => window.scrollTo(0, 0));
-  }, [unlocked]);
+    if (user) requestAnimationFrame(() => window.scrollTo(0, 0));
+  }, [user]);
 
-  if (unlocked) return children;
+  const login = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      setLoading(true);
+      try {
+        const res = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+        });
+        const info = await res.json();
+        if (info.hd !== 'pancon.cafe') {
+          setError('Access restricted to @pancon.cafe accounts.');
+          setLoading(false);
+          return;
+        }
+        const session = { email: info.email, name: info.name, exp: Date.now() + 24 * 60 * 60 * 1000 };
+        localStorage.setItem(AUTH_KEY, JSON.stringify(session));
+        setUser(session);
+      } catch {
+        setError('Sign-in failed. Please try again.');
+        setLoading(false);
+      }
+    },
+    onError: () => { setError('Sign-in failed. Please try again.'); setLoading(false); },
+  });
+
+  if (user) return children;
 
   return (
     <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",background:C.espresso}}>
       <div style={{background:"rgba(255,255,255,0.05)",border:`2px solid ${C.gold}`,padding:"48px 40px",minWidth:300,textAlign:"center"}}>
         <div style={{fontFamily:"'Pacifico',cursive",fontSize:22,color:C.cream,marginBottom:4}}>Café Con <span style={{color:C.blush}}>Pan</span></div>
         <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.gold,fontWeight:700,marginBottom:28}}>Admin Access</div>
-        <form onSubmit={e => { e.preventDefault(); if (pw === ADMIN_PW) setUnlocked(true); else { setError(true); setPw(""); } }}>
-          <input
-            type="password"
-            value={pw}
-            onChange={e => { setPw(e.target.value); setError(false); }}
-            placeholder="Password"
-            autoFocus
-            style={{width:"100%",padding:"10px 14px",fontFamily:"'Nunito',sans-serif",fontSize:18,background:"rgba(255,255,255,0.08)",border:`1.5px solid ${error ? C.red : C.beige}44`,color:C.cream,outline:"none",marginBottom:8,boxSizing:"border-box",letterSpacing:"0.1em",touchAction:"manipulation"}}
-          />
-          {error && <div style={{fontSize:11,color:C.red,marginBottom:8,letterSpacing:"0.08em"}}>Incorrect password</div>}
-          <button type="submit" style={{width:"100%",background:C.gold,border:"none",color:C.espresso,cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:12,letterSpacing:"0.14em",textTransform:"uppercase",padding:"10px 0",marginTop:4}}>Enter</button>
-        </form>
+        {error && <div style={{fontSize:12,color:C.red,marginBottom:16,letterSpacing:"0.05em"}}>{error}</div>}
+        <button
+          onClick={() => { setError(null); login(); }}
+          disabled={loading}
+          style={{display:"flex",alignItems:"center",gap:10,background:"#fff",color:"#3c4043",border:"none",cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:600,fontSize:14,padding:"12px 20px",borderRadius:4,margin:"0 auto",boxShadow:"0 1px 3px rgba(0,0,0,0.3)",opacity:loading ? 0.6 : 1}}
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
+          {loading ? 'Signing in…' : 'Sign in with Google'}
+        </button>
+        <div style={{marginTop:16,fontSize:11,color:C.beige,opacity:0.5,letterSpacing:"0.08em"}}>@pancon.cafe accounts only</div>
       </div>
     </div>
   );
@@ -2825,13 +2862,13 @@ export default function CafeConPan() {
       case "Community": return null;
       case "Our Story": return <AboutPage t={t} go={go} />;
       case "Contact": return <ContactPage t={t} scrollToSocials={scrollToSocials} setGameActive={setGameActive} />;
-      case "La Mesa": return <AdminGate><LaMesaPage t={t} go={go} /></AdminGate>;
-      case "La Mesa Referral": return <AdminGate><LaMesaReferralPage t={t} go={go} /></AdminGate>;
+      case "La Mesa": return <GoogleAuthGate><LaMesaPage t={t} go={go} /></GoogleAuthGate>;
+      case "La Mesa Referral": return <GoogleAuthGate><LaMesaReferralPage t={t} go={go} /></GoogleAuthGate>;
       case "Pay": return <PayPage t={t} />;
       case "Privacy Policy": return <PrivacyPolicyPage lang={lang} />;
       case "Find My Plan": return <FindMyPlanPage go={go} t={t} />;
-      case "The Grind": return <AdminGate><TheGrindPage go={go} /></AdminGate>;
-      case "Quote Builder": return <AdminGate><Suspense fallback={null}><QuoteBuilder /></Suspense></AdminGate>;
+      case "The Grind": return <GoogleAuthGate><TheGrindPage go={go} /></GoogleAuthGate>;
+      case "Quote Builder": return <GoogleAuthGate><Suspense fallback={null}><QuoteBuilder /></Suspense></GoogleAuthGate>;
       case "Apple Teams": return <AppleTeamsPage />;
       case "Discovery": return <DiscoveryPage go={go} t={t} prefillRef={discoveryPrefill} />;
       case "Resources": return <ResourcesPage go={go} t={t} lang={lang} />;
