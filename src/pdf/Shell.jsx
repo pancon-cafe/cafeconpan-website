@@ -1,20 +1,5 @@
-/**
- * CCP PDF — Document Shell
- *
- * Reusable layout components for all Cafe Con Pan documents.
- * All components use @react-pdf/renderer primitives (not HTML/DOM).
- *
- * Exports:
- *   CCPPage      — full Letter page with fixed header + footer
- *   CCPHeader    — branded header (renders on every page via `fixed`)
- *   CCPFooter    — contact + page-number footer (renders on every page)
- *   CCPSection   — section heading with teal accent bar + trailing rule
- *   CCPInfoRow   — label / value metadata pair
- *   CCPDivider   — horizontal rule
- *   CCPCallout   — left-accented highlight box
- *   CCPBadge     — colored status pill
- *   CCPColumns   — two-column flex layout
- */
+// CCP PDF — reusable layout components (CCPPage, CCPHeader, CCPFooter, CCPSection,
+// CCPInfoRow, CCPDivider, CCPCallout, CCPBadge, CCPColumns). All use @react-pdf/renderer primitives.
 
 import React from 'react';
 import { Page, View, Text, StyleSheet } from '@react-pdf/renderer';
@@ -224,9 +209,7 @@ export function CCPHeader({ docType }) {
   );
 }
 
-/**
- * Fixed footer — contact info left, page number right, appears on every page.
- */
+// Fixed footer — contact info left, page number right, every page.
 export function CCPFooter() {
   return (
     <View style={s.footer} fixed>
@@ -253,11 +236,7 @@ export function CCPFooter() {
   );
 }
 
-/**
- * Section heading: [teal bar] SECTION TITLE ─────────────
- * @param {string}  title — section label
- * @param {object}  style — additional View styles
- */
+// Section heading: [teal bar] TITLE ──────────
 export function CCPSection({ title, style }) {
   return (
     <View style={[s.section, style]}>
@@ -268,12 +247,7 @@ export function CCPSection({ title, style }) {
   );
 }
 
-/**
- * Metadata label/value row.
- * @param {string} label       — left label (88pt wide, muted)
- * @param {string} value       — right value
- * @param {object} valueStyle  — additional Text style for value
- */
+// Metadata label/value row. Returns null if value is falsy.
 export function CCPInfoRow({ label, value, valueStyle }) {
   if (!value) return null;
   return (
@@ -284,12 +258,7 @@ export function CCPInfoRow({ label, value, valueStyle }) {
   );
 }
 
-/**
- * Horizontal rule.
- * @param {string} color  — override color (default: C.espBorder)
- * @param {number} mt     — marginTop in pt
- * @param {number} mb     — marginBottom in pt
- */
+// Horizontal rule. color overrides default C.espBorder.
 export function CCPDivider({ color, mt = SP[4], mb = SP[4] }) {
   return (
     <View
@@ -302,11 +271,7 @@ export function CCPDivider({ color, mt = SP[4], mb = SP[4] }) {
   );
 }
 
-/**
- * Left-accented highlight box.
- * @param {'teal'|'red'|'beige'} accent — left border color
- * @param {object} style                — additional View styles
- */
+// Left-accented highlight box. accent: 'teal' | 'red' | 'beige'.
 export function CCPCallout({ accent = 'teal', style, children }) {
   return (
     <View
@@ -322,11 +287,7 @@ export function CCPCallout({ accent = 'teal', style, children }) {
   );
 }
 
-/**
- * Small colored status badge.
- * @param {string} label
- * @param {'critical'|'high'|'warning'|'good'|'excellent'|'default'} status
- */
+// Colored status pill. status: 'critical' | 'high' | 'warning' | 'good' | 'excellent' | 'default'.
 export function CCPBadge({ label, status = 'default' }) {
   const palette = {
     critical:  { bg: C.redDim,   fg: C.red   },
@@ -354,12 +315,7 @@ export function CCPBadge({ label, status = 'default' }) {
   );
 }
 
-/**
- * Two-column flex row.
- * @param {ReactNode} left
- * @param {ReactNode} right
- * @param {number}    gap   — space between columns in pt
- */
+// Two-column flex row.
 export function CCPColumns({ left, right, gap = SP[6] }) {
   return (
     <View style={{ flexDirection: 'row' }}>
@@ -369,16 +325,7 @@ export function CCPColumns({ left, right, gap = SP[6] }) {
   );
 }
 
-/**
- * Full US-Letter page with a fixed branded header and footer.
- *
- * @param {string}    docType  — badge text in header (e.g. "Quote", "Audit Report")
- * @param {object}    style    — additional Page styles
- * @param {ReactNode} children — main content (flows between header + footer)
- *
- * NOTE: If content overflows a single page, react-pdf auto-creates additional
- * pages. The fixed header + footer appear on every generated page automatically.
- */
+// Full US-Letter page with fixed branded header and footer. Auto-paginates on overflow.
 export function CCPPage({ docType, style, children }) {
   return (
     <Page size="LETTER" style={[s.page, style]}>

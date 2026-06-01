@@ -1,35 +1,5 @@
-/**
- * CCP Quote PDF Document
- *
- * Client-facing quote with line items, pricing summary, terms, and signature block.
- * Exported as the default export for lazy-loading (keeps bundle size down).
- *
- * ── Required prop shape ──────────────────────────────────────────────────────
- * {
- *   quoteNumber:  string,      // e.g. 'CCP-Q-2024-001'
- *   date:         string,      // e.g. 'June 1, 2024'
- *   expiresDate:  string,      // e.g. 'July 1, 2024'
- *   preparedBy:   string,      // 'Jason F. Reyes'
- *   client: {
- *     businessName: string,
- *     contactName:  string,
- *     email:        string,
- *     phone?:       string,
- *   },
- *   lineItems: Array<{
- *     category:    string,     // e.g. 'Apple Presence'
- *     description: string,
- *     qty:         number,
- *     unitPrice:   number,
- *     total:       number,
- *   }>,
- *   subtotal:  number,
- *   tax?:      number,         // defaults to 0 (VA tech services typically untaxed)
- *   total:     number,
- *   notes?:    string,
- *   terms?:    string,         // falls back to CCP standard terms
- * }
- */
+// CCP Quote PDF — client-facing quote with line items, pricing, terms, and signature block.
+// Default export for lazy-loading. Expects a `data` prop shaped by buildPDFData() in QuoteBuilder.jsx.
 
 import React from 'react';
 import { Document, View, Text, StyleSheet } from '@react-pdf/renderer';
