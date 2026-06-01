@@ -303,7 +303,7 @@ export default function QuoteBuilder() {
         <input style={inp(16)} type="text" placeholder="e.g. Tim Cook"
           value={a.contactName||''} onChange={e=>set('contactName',e.target.value)}/>
         <label style={lbl}>Contact email</label>
-        <input style={inp(16)} type="email" placeholder="e.g. tim@apple.com"
+        <input style={inp(16)} type="email" placeholder="e.g. tcook@apple.com"
           value={a.clientEmail||''} onChange={e=>set('clientEmail',e.target.value)}/>
         <label style={lbl}>Contact phone</label>
         <input style={inp(16)} type="tel" placeholder="e.g. (703) 555-0100"
