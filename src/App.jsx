@@ -2885,7 +2885,7 @@ export default function CafeConPan() {
             <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:24}}>Admin Access</div>
             <div style={{display:"flex",flexDirection:"column",gap:12}}>
               {[["The Grind","the-grind"],["Quote Builder","quote-builder"],["Apple Teams","apple-teams"],["La Mesa","la-mesa"],["La Mesa Referral","la-mesa-referral"],["Pay","pay"]].map(([label,hash]) => (
-                <button key={hash} onClick={() => { window.open(`${window.location.origin}/#${hash}`, "_blank"); setSecretNavActive(false); }}
+                <button key={hash} onClick={() => { go(label); setSecretNavActive(false); }}
                   style={{background:"none",border:`2px solid ${C.beige}33`,color:C.cream,cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,letterSpacing:"0.1em",textTransform:"uppercase",padding:"12px 24px",transition:"border-color 0.2s"}}
                   onMouseEnter={e=>e.currentTarget.style.borderColor=C.gold}
                   onMouseLeave={e=>e.currentTarget.style.borderColor=`${C.beige}33`}>
