@@ -845,6 +845,10 @@ const css = `
     .email-input,.email-btn{width:100%;box-sizing:border-box}
     .email-btn{padding:14px 20px;text-align:center}
   }
+  .teams-store-row{display:grid;grid-template-columns:1.2fr 1.6fr 1.2fr;gap:12px;align-items:center}
+  @media(max-width:640px){
+    .teams-store-row{display:flex;flex-direction:column;gap:4px}
+  }
 `;
 
 const navKeys = ["Home","Tech Services","Our Story","Contact"];
@@ -2509,12 +2513,12 @@ function AppleTeamsPage() {
             </div>
             <div style={{display:"flex",flexDirection:"column",gap:10}}>
               {stores.map(({ city, name, email, phone }) => (
-                <div key={name} style={{display:"grid",gridTemplateColumns:"1.2fr 1.6fr 1.2fr",gap:12,alignItems:"center",background:"rgba(255,255,255,0.04)",border:`1px solid rgba(212,169,122,0.12)`,padding:"14px 20px"}}>
+                <div key={name} className="teams-store-row" style={{background:"rgba(255,255,255,0.04)",border:`1px solid rgba(212,169,122,0.12)`,padding:"14px 20px"}}>
                   <div>
                     <div style={{fontFamily:"'Nunito',sans-serif",fontSize:13,fontWeight:700,color:C.cream}}>{name}</div>
                     <div style={{fontSize:11,color:dim,marginTop:2}}>{city}</div>
                   </div>
-                  <div style={{fontFamily:"'Nunito',sans-serif",fontSize:13,fontStyle: email ? "normal" : "italic"}}>
+                  <div style={{fontFamily:"'Nunito',sans-serif",fontSize:13,fontStyle: email ? "normal" : "italic",overflowWrap:"anywhere"}}>
                     {email
                       ? <a href={`mailto:${email}`}
                           style={{color:C.teal,textDecoration:"none",fontWeight:700,transition:"color 0.15s"}}
@@ -2523,7 +2527,7 @@ function AppleTeamsPage() {
                         >{email}</a>
                       : <span style={{color:dim}}>—</span>}
                   </div>
-                  <div style={{fontFamily:"'Nunito',sans-serif",fontSize:13,fontStyle: phone ? "normal" : "italic"}}>
+                  <div style={{fontFamily:"'Nunito',sans-serif",fontSize:13,fontStyle: phone ? "normal" : "italic",overflowWrap:"anywhere"}}>
                     {phone
                       ? <a href={`tel:${phone.replace(/\D/g,"")}`}
                           style={{color:C.teal,textDecoration:"none",fontWeight:700,transition:"color 0.15s"}}
@@ -2777,7 +2781,7 @@ export default function CafeConPan() {
       requestAnimationFrame(() => window.scrollTo(0, y));
       isBackNav.current = false;
     } else {
-      window.scrollTo(0, 0);
+      requestAnimationFrame(() => window.scrollTo(0, 0));
     }
   }, [page]);
 
