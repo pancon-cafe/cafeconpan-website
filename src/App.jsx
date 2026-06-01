@@ -1441,7 +1441,7 @@ function AdminGate({ children }) {
   if (unlocked) return children;
 
   return (
-    <div style={{minHeight:"100vh",display:"flex",alignItems:"flex-start",justifyContent:"center",background:C.espresso,paddingTop:100}}>
+    <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",background:C.espresso}}>
       <div style={{background:"rgba(255,255,255,0.05)",border:`2px solid ${C.gold}`,padding:"48px 40px",minWidth:300,textAlign:"center"}}>
         <div style={{fontFamily:"'Pacifico',cursive",fontSize:22,color:C.cream,marginBottom:4}}>Café Con <span style={{color:C.blush}}>Pan</span></div>
         <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.gold,fontWeight:700,marginBottom:28}}>Admin Access</div>
