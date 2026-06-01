@@ -26,7 +26,7 @@ export const C = {
 
 /** Typography */
 export const F = {
-  serif: 'Lora',           // Georgia-equivalent, registered via fonts.js
+  serif: 'Times-Roman',    // built-in react-pdf font — no network fetch required
   size: {
     '2xs': 6,
     xs:    7,

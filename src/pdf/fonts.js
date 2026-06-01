@@ -25,17 +25,6 @@ let _registered = false;
 export function registerCCPFonts() {
   if (_registered) return;
   _registered = true;
-
-  Font.register({
-    family: 'Lora',
-    fonts: [
-      { src: `${CDN}/lora-latin-400-normal.woff2`,  fontWeight: 400 },
-      { src: `${CDN}/lora-latin-700-normal.woff2`,  fontWeight: 700 },
-      { src: `${CDN}/lora-latin-400-italic.woff2`,  fontWeight: 400, fontStyle: 'italic' },
-      { src: `${CDN}/lora-latin-700-italic.woff2`,  fontWeight: 700, fontStyle: 'italic' },
-    ],
-  });
-
   // Disable mid-word hyphenation — react-pdf hyphenates aggressively by default.
   Font.registerHyphenationCallback(word => [word]);
 }
