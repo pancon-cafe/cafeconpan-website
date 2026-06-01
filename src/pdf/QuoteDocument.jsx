@@ -172,10 +172,10 @@ function buildTerms(total) {
     : 'A 50% deposit is required to schedule and begin work; 25% is due at the project midpoint; and the remaining 25% is due upon completion.';
   return (
     'This quote is valid for 30 days from the date issued. ' + schedule + ' ' +
-    'All services are performed by Cafe Con Pan LLC. Prices are in USD. Scope changes ' +
-    'requested after work begins may result in a revised quote. By signing below, the ' +
-    'client acknowledges the scope of work described above and authorizes Cafe Con Pan ' +
-    'LLC to proceed on the agreed terms.'
+    'All services are performed by Cafe Con Pan LLC. Prices are in USD. ' +
+    'Third-party pass-through costs — including but not limited to domain registration, Google Workspace licenses, MDM software, AppleCare, MSP platform fees, and carrier charges — are the direct financial responsibility of the client and are not reflected in this quote. These costs will be identified and communicated in writing prior to any purchase being made on the client\'s behalf. ' +
+    'Scope changes requested after work begins may result in a revised quote. ' +
+    'By signing below, both parties acknowledge the scope of work described above and authorize Cafe Con Pan LLC to proceed on the agreed terms.'
   );
 }
 
@@ -265,6 +265,46 @@ export default function QuoteDocument({ data }) {
           </View>
         </View>
 
+        {/* ── Recurring managed services ───────────────────────────────────── */}
+        {data.recurring && (
+          <>
+            <CCPSection title="Monthly Managed Services" />
+            <CCPTable>
+              <CCPTableHead columns={['Service', 'Monthly Rate']} widths={[null, 80]} />
+              {data.recurring.lines.map((l, i) => (
+                <CCPTableRow
+                  key={i}
+                  alt={i % 2 === 1}
+                  widths={[null, 80]}
+                  cells={[
+                    { value: l.label },
+                    { value: usd(l.price), align: 'right', variant: 'highlight' },
+                  ]}
+                />
+              ))}
+            </CCPTable>
+            <View style={s.totalsBox}>
+              <View style={s.totalsLine}>
+                <Text style={s.totalsLineLabel}>Commitment</Text>
+                <Text style={s.totalsLineValue}>{data.recurring.commitmentLabel}</Text>
+              </View>
+              <View style={s.totalsLine}>
+                <Text style={s.totalsLineLabel}>Annual Total</Text>
+                <Text style={s.totalsLineValue}>{usd(data.recurring.annual)}</Text>
+              </View>
+              <View style={s.totalsGrandRow}>
+                <Text style={s.totalsGrandLabel}>Monthly Total</Text>
+                <Text style={s.totalsGrandValue}>{usd(data.recurring.monthly)}</Text>
+              </View>
+            </View>
+            <CCPCallout accent="teal" style={{ marginTop: SP[3] }}>
+              <Text style={s.bodyText}>
+                {'Recurring services are billed on the 1st or 14th of the month. Days between activation and the first billing date are provided as a complimentary onboarding window — no proration applies. Services continue for the full duration of the agreed commitment term. Early termination of an Annual or 2-Year agreement may result in a termination fee equal to the remaining contracted balance. Month-to-Month agreements require 30 days written notice to cancel.'}
+              </Text>
+            </CCPCallout>
+          </>
+        )}
+
         {/* ── Notes (optional) ─────────────────────────────────────────────── */}
         {data.notes ? (
           <>
@@ -279,7 +319,7 @@ export default function QuoteDocument({ data }) {
         <CCPSection title="Terms &amp; Acceptance" />
         <Text style={s.mutedText}>{data.terms ?? buildTerms(data.total)}</Text>
 
-        {/* ── Signature block ───────────────────────────────────────────────── */}
+        {/* ── Client signature ─────────────────────────────────────────────── */}
         <View style={s.sigArea}>
           <View style={s.sigBox}>
             <View style={s.sigLine} />
@@ -288,6 +328,22 @@ export default function QuoteDocument({ data }) {
           <View style={s.sigBox}>
             <View style={s.sigLine} />
             <Text style={s.sigLabel}>Printed Name</Text>
+          </View>
+          <View style={s.sigBoxLast}>
+            <View style={s.sigLine} />
+            <Text style={s.sigLabel}>Date</Text>
+          </View>
+        </View>
+
+        {/* ── Cafe Con Pan countersignature ────────────────────────────────── */}
+        <View style={[s.sigArea, { marginTop: SP[4] }]}>
+          <View style={s.sigBox}>
+            <View style={s.sigLine} />
+            <Text style={s.sigLabel}>Cafe Con Pan LLC — Authorized Signature</Text>
+          </View>
+          <View style={s.sigBox}>
+            <View style={s.sigLine} />
+            <Text style={s.sigLabel}>Printed Name & Title</Text>
           </View>
           <View style={s.sigBoxLast}>
             <View style={s.sigLine} />

@@ -145,8 +145,51 @@ const TAG_CATEGORY = {
   flagship:   'Flagship',
   foundation: 'Foundation',
   bundle:     'Bundle',
-  module:     'Module',
+  module:     'Service',
   device:     'Apple Devices',
+};
+
+const CLIENT_DESC = {
+  'aud-r': 'Technology assessment and written scorecard delivered within 24 hours. Includes a screen-share review session. Fee credits in full toward any engagement of $500+ if signed within 30 days.',
+  'aud-o': 'In-person technology walk-through and full written assessment report. Includes on-site visit and travel.',
+  'fnd':   'Apple Business Manager setup, first device enrollment, and MDM configuration. The operational foundation for all Apple-managed services.',
+  'fg':    'All-inclusive Apple Business setup — Foundation, device deployment, brand layer, connectivity, and communications at a single fixed price.',
+  'ex':    'Additional device zero-touch enrollment and configuration beyond the included package allotment.',
+  'b-cm':  'Carrier plan audit, carrier switch or new account implementation, and AI-powered business phone system — delivered as a bundled service at a reduced rate.',
+  'b-cn':  'Carrier plan audit and business internet setup — delivered as a bundled service at a reduced rate.',
+  'b-lp':  'Business formation guidance and banking & payments setup — delivered as a bundled service at a reduced rate.',
+  'b-oe':  'Banking & payments setup and initial device deployment — delivered as a bundled service at a reduced rate.',
+  'b-ap':  'Multi-device zero-touch deployment and full Apple brand configuration — delivered as a bundled service at a reduced rate.',
+  'c1r':   'Zero-touch enrollment and configuration for new Apple devices via Apple Business Manager.',
+  'ma':    'LLC/EIN filing guidance, business name availability check, and virtual mailbox advisory. Client completes the actual state filing.',
+  'mb':    'Business banking referral and account setup, payment processor configuration (Helcim or Stripe), and Tap to Pay activation.',
+  'mD1':   'Carrier plan analysis — rate comparison across providers, savings projection, and written findings report. Billable regardless of whether a switch is executed.',
+  'mD2':   'Carrier switch execution — new business account setup, number porting, or plan restructuring on the client\'s behalf.',
+  'mE':    'Business internet provider evaluation, referral coordination, install scheduling, and service verification.',
+  'mH':   'AI-powered business phone system setup — custom call routing, caller ID (CNAM) configuration, and post-deployment testing.',
+  'mG':    'Full Apple brand layer — Branded Mail, Verify with Apple Wallet, Tap to Pay branding, and complete Apple Maps Business Profile.',
+  'mF':    'Business website design and development — contact forms, payment integration, and brand-consistent design. Complex builds are quoted separately.',
+  'mJ':    'Apple Messages for Business registration and Heymarket MSP setup for direct customer messaging on Apple platforms.',
+  'c2':    'Manual MDM enrollment and configuration for existing Apple devices already in use.',
+  'c3':    'On-site technician visit for hands-on device deployment, configuration, and staff orientation.',
+  'c4':    'Hardware procurement coordination — sourcing, ordering, and delivery logistics management.',
+};
+
+const DEVICE_UNIT_PRICES = { c1r:150, c2:200, c3:150, c4:150, ex:150 };
+
+function parseLineQty(id, label, price) {
+  const unitPrice = DEVICE_UNIT_PRICES[id];
+  if (unitPrice) {
+    const match = label.match(/×(\d+)/);
+    if (match) return { qty: parseInt(match[1]), unitPrice };
+  }
+  return { qty: 1, unitPrice: price };
+}
+
+const COMMITMENT_LABEL = {
+  m2m:    'Month-to-Month',
+  annual: 'Annual (12-Month)',
+  '2yr':  '2-Year (24-Month)',
 };
 
 function buildPDFData(a, q) {
@@ -157,18 +200,21 @@ function buildPDFData(a, q) {
   const slug = (a.clientName||'client').toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
   const qNum = `CCP-Q-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}-${slug}`;
 
-  const lineItems = q.lines.map(l => ({
-    category:    TAG_CATEGORY[l.tag] || l.tag,
-    description: l.label,
-    qty:         1,
-    unitPrice:   l.price,
-    total:       l.price,
-  }));
+  const lineItems = q.lines.map(l => {
+    const { qty, unitPrice } = parseLineQty(l.id, l.label, l.price);
+    return {
+      category:    TAG_CATEGORY[l.tag] || l.tag,
+      description: CLIENT_DESC[l.id] || l.label,
+      qty,
+      unitPrice,
+      total: l.price,
+    };
+  });
 
   if (q.disc > 0) {
     lineItems.push({
       category:    'Discount',
-      description: 'Founding Client — 50% off one-time fees',
+      description: 'Founding Client Program — 50% reduction applied to all one-time service fees.',
       qty:         1,
       unitPrice:   -q.disc,
       total:       -q.disc,
@@ -177,23 +223,29 @@ function buildPDFData(a, q) {
 
   const noteLines = [
     q.savings > 0 ? `Bundle savings applied: −${fmt(q.savings)}` : null,
-    a.recurring === true && q.mo > 0 ? `Monthly retainer: ${fmt(q.mo)}/mo (not included above — see separate retainer agreement)` : null,
   ].filter(Boolean);
 
   return {
     quoteNumber:  qNum,
     date:         fmtDate(now),
     expiresDate:  fmtDate(expires),
-    preparedBy:   'Jason F. Reyes',
+    preparedBy:   'Jason F. Reyes, Founder & CEO',
     client: {
       businessName: a.clientName || 'Client',
       contactName:  a.contactName || '',
-      email:        '',
+      email:        a.clientEmail || '',
+      phone:        a.clientPhone || '',
     },
     lineItems,
-    subtotal: q.sub,
-    total:    q.net,
-    notes:    noteLines.length ? noteLines.join('\n') : undefined,
+    subtotal:  q.sub,
+    total:     q.net,
+    notes:     noteLines.length ? noteLines.join('\n') : undefined,
+    recurring: a.recurring === true && q.mo > 0 ? {
+      lines:           q.recLines,
+      monthly:         q.mo,
+      annual:          q.yr,
+      commitmentLabel: COMMITMENT_LABEL[a.commitment || 'annual'],
+    } : null,
   };
 }
 
@@ -250,6 +302,12 @@ export default function QuoteBuilder() {
         <label style={lbl}>Contact name</label>
         <input style={inp(16)} type="text" placeholder="e.g. Tim Cook"
           value={a.contactName||''} onChange={e=>set('contactName',e.target.value)}/>
+        <label style={lbl}>Contact email</label>
+        <input style={inp(16)} type="email" placeholder="e.g. tim@apple.com"
+          value={a.clientEmail||''} onChange={e=>set('clientEmail',e.target.value)}/>
+        <label style={lbl}>Contact phone</label>
+        <input style={inp(16)} type="tel" placeholder="e.g. (703) 555-0100"
+          value={a.clientPhone||''} onChange={e=>set('clientPhone',e.target.value)}/>
         <label style={lbl}>Industry / vertical</label>
         <select style={inp(0)} value={a.vertical||''} onChange={e=>set('vertical',e.target.value)}>
           <option value="">Select…</option>
