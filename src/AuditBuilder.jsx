@@ -145,6 +145,8 @@ export default function AuditBuilder() {
   const [a, setA]         = useState(blankState);
   const [step, setStep]   = useState(0);
   const [roadmapInput, setRoadmapInput] = useState(['', '', '']);
+  const [generating, setGenerating]     = useState(false);
+  const [genError, setGenError]         = useState(null);
   const [isDesktop, setIsDesktop] = useState(() => window.innerWidth >= 700);
 
   useEffect(() => {
@@ -181,6 +183,144 @@ export default function AuditBuilder() {
   }
   function removeRoadmapItem(pi, ii) {
     setA(p => ({ ...p, roadmap: p.roadmap.map((r, i) => i === pi ? { ...r, items: r.items.filter((_, j) => j !== ii) } : r) }));
+  }
+
+  async function generateWithAI() {
+    setGenerating(true);
+    setGenError(null);
+
+    const discoveryText = CATEGORIES.map(cat =>
+      `### ${cat.name}\n${a.discovery[cat.name]?.trim() || '(no notes provided)'}`
+    ).join('\n\n');
+
+    const prompt = `You are an Apple technology consultant at Cafe Con Pan LLC preparing a technology audit report for a small business client. Based on the discovery notes below, generate a complete structured report.
+
+CLIENT: ${a.clientName || 'Unknown'}
+CONTACT: ${a.contactName || 'Unknown'}
+AUDIT TYPE: ${a.auditType === 'onsite' ? 'On-Site' : 'Remote'}
+
+DISCOVERY NOTES:
+${discoveryText}
+
+CCP SERVICE CATALOG (reference these in roadmap items with exact pricing):
+- Foundation Core: $1,500 — business email+domain setup, Apple Business Manager, MDM first device, Apple Maps listing
+- Module C1: $150/device — new device deployment, zero-touch MDM enrollment
+- Module C2: $200/device — existing device enrollment (factory reset, manual MDM)
+- Module D1: $300 — carrier audit & recommendation (billable regardless of outcome)
+- Module D2: $300 add-on — carrier implementation (only if client proceeds after D1)
+- Module E: $300 — ISP/business internet setup
+- Connectivity Bundle (D1 + E): $475
+- Module G: $450 — Apple Brands full layer (Branded Mail, Verify with Wallet, Tap to Pay branding, full Brand Profile)
+- Module H: $600 — IVR setup (Twilio + AI call routing)
+- Communications Bundle (D1 + D2 + H): $950
+- Module F: $750 — business website (via Claude Code, webforms, payment integration)
+- Module J: $400 + MSP — Apple Business Messages setup
+- Security & Compliance (coming soon): endpoint protection, MFA/password manager setup
+- Recurring Apple Operations: $35–40/device/mo (MDM, device management)
+- Recurring Partner Access: $300–350/mo (check-ins, QBRs, SLA, procurement, renewals)
+- IVR Management: $75/mo + usage
+
+SCORING GUIDE (0–100):
+- 0–25: Nothing in place, critical risk
+- 26–45: Informal/ad-hoc, significant gaps
+- 46–65: Partially deployed, inconsistent
+- 66–80: Mostly in place, minor gaps
+- 81–100: Fully deployed, monitored, documented
+
+SEVERITY:
+- critical: immediate threat to operations, data, or compliance
+- high: significant risk, address within 30 days
+- medium: notable gap, address within 90 days
+- low: best practice improvement, flexible timeline
+
+EFFORT:
+- Low: under 2 hours
+- Medium: 2–8 hours or 1–3 sessions
+- High: multiple sessions or ongoing
+
+Respond with ONLY valid JSON — no markdown, no code fences, no explanation — in this exact shape:
+{
+  "categories": [
+    { "name": "Devices & MDM", "score": 0-100, "summary": "1-2 sentences on current state" },
+    { "name": "Email & Communication", "score": 0-100, "summary": "1-2 sentences" },
+    { "name": "Connectivity", "score": 0-100, "summary": "1-2 sentences" },
+    { "name": "Apple Presence", "score": 0-100, "summary": "1-2 sentences" },
+    { "name": "Security & Compliance", "score": 0-100, "summary": "1-2 sentences" },
+    { "name": "Operations & Support", "score": 0-100, "summary": "1-2 sentences" }
+  ],
+  "executiveSummary": "2-4 paragraphs, professional tone, addresses the business situation directly",
+  "findings": [
+    {
+      "category": "exact category name from the list above",
+      "severity": "critical|high|medium|low",
+      "finding": "clear statement of the specific issue",
+      "impact": "what happens if left unaddressed",
+      "recommendation": "specific action, reference CCP service + price where applicable",
+      "effort": "Low|Medium|High"
+    }
+  ],
+  "roadmap": [
+    { "phase": "Immediate (0–30 days)", "items": ["action item, include CCP service + price where applicable"] },
+    { "phase": "Short-Term (30–90 days)", "items": ["..."] },
+    { "phase": "Long-Term (90+ days)", "items": ["..."] }
+  ]
+}
+
+Generate 3–8 findings based on what the notes reveal. If notes are sparse for a category, score conservatively (assume the worst unless the notes suggest otherwise) and note that further assessment is needed. Include CCP service pricing in roadmap items where a specific service applies.`;
+
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': import.meta.env.VITE_ANTHROPIC_KEY,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true',
+        },
+        body: JSON.stringify({
+          model: 'claude-haiku-4-5-20251001',
+          max_tokens: 4096,
+          messages: [{ role: 'user', content: prompt }],
+        }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err?.error?.message || `API error ${res.status}`);
+      }
+
+      const result = await res.json();
+      const parsed = JSON.parse(result.content[0].text);
+
+      setA(p => ({
+        ...p,
+        categories: CATEGORIES.map(cat => {
+          const gen = parsed.categories?.find(c => c.name === cat.name);
+          return gen
+            ? { name: cat.name, score: Math.min(100, Math.max(0, gen.score || 50)), summary: gen.summary || '' }
+            : { name: cat.name, score: 50, summary: '' };
+        }),
+        executiveSummary: parsed.executiveSummary || '',
+        findings: (parsed.findings || []).map(f => ({
+          category:       f.category       || CATEGORIES[0].name,
+          severity:       f.severity       || 'medium',
+          finding:        f.finding        || '',
+          impact:         f.impact         || '',
+          recommendation: f.recommendation || '',
+          effort:         f.effort         || 'Medium',
+        })),
+        roadmap: DEFAULT_ROADMAP.map(r => {
+          const gen = parsed.roadmap?.find(rp => rp.phase === r.phase);
+          return gen ? { ...r, items: gen.items || [] } : { ...r, items: [] };
+        }),
+      }));
+
+    } catch (err) {
+      console.error('AI generation error:', err);
+      setGenError(err.message || 'Generation failed. Check your API key or try again.');
+    } finally {
+      setGenerating(false);
+    }
   }
 
   const avgScore = useMemo(() => {
@@ -295,30 +435,36 @@ export default function AuditBuilder() {
         <>
           {/* AI Generate CTA */}
           <div style={{
-            background: 'rgba(90,158,150,0.06)', border: `1px dashed rgba(90,158,150,0.3)`,
-            borderRadius: 10, padding: 20, marginBottom: 8, textAlign: 'center',
+            background: 'rgba(90,158,150,0.06)', border: `1px solid rgba(90,158,150,0.25)`,
+            borderRadius: 10, padding: 20, marginBottom: 16, textAlign: 'center',
           }}>
-            <div style={{ fontSize: 10, color: C.teal, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 8 }}>
-              Coming Soon
-            </div>
             <div style={{ fontSize: 16, color: C.cream, marginBottom: 8, fontFamily: 'Georgia,serif' }}>
               Generate with AI
             </div>
-            <div style={{ fontSize: 12, color: C.muted, marginBottom: 16, lineHeight: 1.7, maxWidth: 360, margin: '0 auto 16px' }}>
-              One click will read your discovery notes and auto-fill every field below —
-              scores, findings, executive summary, and a prioritized roadmap with real pricing.
-              All editable before downloading.
+            <div style={{ fontSize: 12, color: C.muted, marginBottom: 16, lineHeight: 1.7, maxWidth: 380, margin: '0 auto 16px' }}>
+              Reads your discovery notes and fills in scores, findings, executive summary,
+              and a prioritized roadmap with real CCP pricing. Everything stays editable.
             </div>
-            <button disabled style={{
-              background: 'rgba(90,158,150,0.15)', border: `1px solid rgba(90,158,150,0.25)`,
-              color: 'rgba(90,158,150,0.5)', borderRadius: 8, padding: '10px 28px',
-              cursor: 'not-allowed', fontSize: 13, fontFamily: 'Georgia,serif',
-            }}>Generate Report Draft</button>
+            {genError && (
+              <div style={{ fontSize: 12, color: C.red, marginBottom: 12, padding: '8px 12px', background: 'rgba(184,80,62,0.1)', borderRadius: 6 }}>
+                {genError}
+              </div>
+            )}
+            <button
+              onClick={generateWithAI}
+              disabled={generating}
+              style={{
+                background: generating ? 'rgba(90,158,150,0.2)' : C.teal,
+                border: 'none', borderRadius: 8, padding: '11px 32px',
+                color: generating ? 'rgba(90,158,150,0.6)' : C.bg,
+                cursor: generating ? 'not-allowed' : 'pointer',
+                fontSize: 14, fontFamily: 'Georgia,serif', fontWeight: 'bold',
+                transition: 'background 0.2s',
+              }}
+            >
+              {generating ? 'Generating…' : 'Generate Report Draft'}
+            </button>
           </div>
-
-          <p style={{ fontSize: 11, color: C.muted, textAlign: 'center', marginBottom: 0, lineHeight: 1.5 }}>
-            Until then, fill in the fields below manually.
-          </p>
 
           {/* Category Scores */}
           {sectionHead('Category Scores')}
