@@ -247,7 +247,7 @@ export default function QuoteBuilder() {
     client:()=>(
       <>
         <label style={lbl}>Client name</label>
-        <input style={inp(16)} type="text" placeholder="e.g. Reston Doctors"
+        <input style={inp(16)} type="text" placeholder="e.g. Apple Inc."
           value={a.clientName||''} onChange={e=>set('clientName',e.target.value)}/>
         <label style={lbl}>Industry / vertical</label>
         <select style={inp(0)} value={a.vertical||''} onChange={e=>set('vertical',e.target.value)}>
