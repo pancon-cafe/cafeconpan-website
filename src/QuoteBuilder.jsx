@@ -187,7 +187,7 @@ function buildPDFData(a, q) {
     preparedBy:   'Jason F. Reyes',
     client: {
       businessName: a.clientName || 'Client',
-      contactName:  a.clientName || '—',
+      contactName:  a.contactName || '',
       email:        '',
     },
     lineItems,
@@ -244,9 +244,12 @@ export default function QuoteBuilder() {
   const steps_map = {
     client:()=>(
       <>
-        <label style={lbl}>Client name</label>
+        <label style={lbl}>Business name</label>
         <input style={inp(16)} type="text" placeholder="e.g. Apple Inc."
           value={a.clientName||''} onChange={e=>set('clientName',e.target.value)}/>
+        <label style={lbl}>Contact name</label>
+        <input style={inp(16)} type="text" placeholder="e.g. Tim Cook"
+          value={a.contactName||''} onChange={e=>set('contactName',e.target.value)}/>
         <label style={lbl}>Industry / vertical</label>
         <select style={inp(0)} value={a.vertical||''} onChange={e=>set('vertical',e.target.value)}>
           <option value="">Select…</option>
