@@ -66,7 +66,7 @@ const s = StyleSheet.create({
     fontSize:      15,
     fontWeight:    400,
     color:         C.beige,
-    letterSpacing: 2,
+    letterSpacing: 0.5,
   },
   wordmarkSub: {
     fontSize:      F.size['2xs'],
