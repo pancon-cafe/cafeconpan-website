@@ -1452,7 +1452,7 @@ function AdminGate({ children }) {
             onChange={e => { setPw(e.target.value); setError(false); }}
             placeholder="Password"
             autoFocus
-            style={{width:"100%",padding:"10px 14px",fontFamily:"'Nunito',sans-serif",fontSize:16,background:"rgba(255,255,255,0.08)",border:`1.5px solid ${error ? C.red : C.beige}44`,color:C.cream,outline:"none",marginBottom:8,boxSizing:"border-box",letterSpacing:"0.1em"}}
+            style={{width:"100%",padding:"10px 14px",fontFamily:"'Nunito',sans-serif",fontSize:18,background:"rgba(255,255,255,0.08)",border:`1.5px solid ${error ? C.red : C.beige}44`,color:C.cream,outline:"none",marginBottom:8,boxSizing:"border-box",letterSpacing:"0.1em",touchAction:"manipulation"}}
           />
           {error && <div style={{fontSize:11,color:C.red,marginBottom:8,letterSpacing:"0.08em"}}>Incorrect password</div>}
           <button type="submit" style={{width:"100%",background:C.gold,border:"none",color:C.espresso,cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:12,letterSpacing:"0.14em",textTransform:"uppercase",padding:"10px 0",marginTop:4}}>Enter</button>
