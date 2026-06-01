@@ -37,20 +37,7 @@ export default defineConfig({
           },
         ],
       },
-      workbox: {
-        globPatterns: ['**/*.{js,css,svg,woff2}', 'pwa-*.png'],
-        navigateFallback: 'index.html',
-        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
-        cleanupOutdatedCaches: true,
-        // Always fetch HTML from network so deploys take effect immediately
-        runtimeCaching: [
-          {
-            urlPattern: ({ request }) => request.mode === 'navigate',
-            handler: 'NetworkFirst',
-            options: { cacheName: 'html-cache', networkTimeoutSeconds: 3 },
-          },
-        ],
-      },
+      selfDestroying: true,
     }),
   ],
 })
