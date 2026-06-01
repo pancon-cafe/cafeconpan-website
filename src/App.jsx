@@ -2872,7 +2872,7 @@ export default function CafeConPan() {
       case "The Grind": return <GoogleAuthGate><TheGrindPage go={go} /></GoogleAuthGate>;
       case "Quote Builder": return <GoogleAuthGate><Suspense fallback={null}><QuoteBuilder /></Suspense></GoogleAuthGate>;
       case "Audit Builder": return <GoogleAuthGate><Suspense fallback={null}><AuditBuilder /></Suspense></GoogleAuthGate>;
-      case "Apple Teams": return <AppleTeamsPage />;
+      case "Apple Teams": return <GoogleAuthGate><AppleTeamsPage /></GoogleAuthGate>;
       case "Discovery": return <DiscoveryPage go={go} t={t} prefillRef={discoveryPrefill} />;
       case "Resources": return <ResourcesPage go={go} t={t} lang={lang} />;
       default: return <HomePage go={go} t={t} lang={lang} />;
@@ -2886,14 +2886,27 @@ export default function CafeConPan() {
         <div onClick={() => setSecretNavActive(false)} style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.7)",zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center"}}>
           <div onClick={e => e.stopPropagation()} style={{background:C.espresso,border:`2px solid ${C.gold}`,boxShadow:`6px 6px 0 ${C.gold}44`,padding:"40px 48px",minWidth:280,textAlign:"center"}}>
             <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:24}}>Admin Access</div>
-            <div style={{display:"flex",flexDirection:"column",gap:12}}>
-              {[["The Grind","the-grind"],["Quote Builder","quote-builder"],["Audit Builder","audit-builder"],["Apple Teams","apple-teams"],["La Mesa","la-mesa"],["La Mesa Referral","la-mesa-referral"],["Pay","pay"]].map(([label,hash]) => (
-                <button key={hash} onClick={() => { go(label); setSecretNavActive(false); }}
-                  style={{background:"none",border:`2px solid ${C.beige}33`,color:C.cream,cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,letterSpacing:"0.1em",textTransform:"uppercase",padding:"12px 24px",transition:"border-color 0.2s"}}
-                  onMouseEnter={e=>e.currentTarget.style.borderColor=C.gold}
-                  onMouseLeave={e=>e.currentTarget.style.borderColor=`${C.beige}33`}>
-                  {label}
-                </button>
+            <div style={{display:"flex",flexDirection:"column",gap:0}}>
+              {[
+                { label:"Tools", items:[["The Grind","the-grind",true],["Audit Builder","audit-builder",true],["Quote Builder","quote-builder",true]] },
+                { label:"La Mesa", items:[["La Mesa","la-mesa",true],["La Mesa Referral","la-mesa-referral",true]] },
+                { label:"Other", items:[["Apple Teams","apple-teams",true],["Pay","pay",false]] },
+              ].map((section,si) => (
+                <div key={section.label}>
+                  {si>0&&<div style={{height:1,background:`${C.beige}22`,margin:"14px 0 10px"}}/>}
+                  <div style={{fontSize:9,color:C.teal,letterSpacing:"0.18em",textTransform:"uppercase",fontWeight:700,marginBottom:8}}>{section.label}</div>
+                  <div style={{display:"flex",flexDirection:"column",gap:8}}>
+                    {section.items.map(([label,hash,locked])=>(
+                      <button key={hash} onClick={()=>{go(label);setSecretNavActive(false);}}
+                        style={{background:"none",border:`2px solid ${locked?`${C.beige}33`:`${C.teal}44`}`,color:locked?C.cream:C.teal,cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,letterSpacing:"0.1em",textTransform:"uppercase",padding:"10px 24px",transition:"border-color 0.2s",display:"flex",alignItems:"center",justifyContent:"center",gap:8}}
+                        onMouseEnter={e=>e.currentTarget.style.borderColor=locked?C.gold:C.teal}
+                        onMouseLeave={e=>e.currentTarget.style.borderColor=locked?`${C.beige}33`:`${C.teal}44`}>
+                        {locked&&<span style={{fontSize:10,opacity:0.5}}>🔒</span>}
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
             <button onClick={() => setSecretNavActive(false)} style={{marginTop:24,background:"none",border:"none",cursor:"pointer",fontSize:11,color:`rgba(245,237,214,0.3)`,letterSpacing:"0.1em",textTransform:"uppercase",fontWeight:700}}>Close</button>
