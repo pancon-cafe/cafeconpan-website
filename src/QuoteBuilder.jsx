@@ -1,4 +1,4 @@
-import { useState, useMemo, lazy, Suspense } from "react";
+import { useState, useMemo, useEffect, lazy, Suspense } from "react";
 import { DownloadPDFButton } from "./pdf/DownloadButton";
 
 const QuoteDocument = lazy(() => import("./pdf/QuoteDocument"));
@@ -246,6 +246,13 @@ export default function QuoteBuilder() {
   const [a, setA] = useState({});
   const [sid, setSid] = useState('client');
   const [copied, setCopied] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(() => window.innerWidth >= 700);
+
+  useEffect(() => {
+    const check = () => setIsDesktop(window.innerWidth >= 700);
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   const steps = useMemo(()=>getSteps(a),[a]);
   const idx   = useMemo(()=>{ const i=steps.findIndex(s=>s.id===sid); return i<0?0:i; },[steps,sid]);
@@ -699,82 +706,160 @@ export default function QuoteBuilder() {
   const progress=step?.progress??100;
 
   return(
-    <div style={{fontFamily:'Georgia,serif',background:C.bg,minHeight:'100vh',color:C.cream,
-      display:'flex',flexDirection:'column',maxWidth:480,margin:'0 auto',position:'relative',
-      paddingTop:64}}>
+    <div style={{fontFamily:'Georgia,serif',background:C.bg,minHeight:'100vh',color:C.cream,paddingTop:64,
+      ...(isDesktop?{}:{display:'flex',flexDirection:'column',maxWidth:480,margin:'0 auto',position:'relative'})}}>
 
       {/* ── HEADER ── */}
       <div style={{background:C.surf,borderBottom:`1px solid ${C.b0}`,padding:'13px 20px 0',flexShrink:0,
         position:'sticky',top:64,zIndex:50}}>
-        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:9}}>
-          <span style={{fontSize:11,color:C.beige,textTransform:'uppercase',letterSpacing:'0.14em'}}>
-            ☕ Café Con Pan · Quote Builder
-          </span>
-          <span style={{fontSize:9,background:'rgba(184,80,62,0.13)',color:C.redL,
-            border:'1px solid rgba(184,80,62,0.22)',borderRadius:3,padding:'2px 7px',
-            letterSpacing:'0.1em',textTransform:'uppercase'}}>Internal</span>
-        </div>
-        <div style={{height:2,background:C.dim,borderRadius:1,overflow:'hidden',marginBottom:7}}>
-          <div style={{height:'100%',background:C.beige,borderRadius:1,
-            width:`${progress}%`,transition:'width 0.38s ease'}}/>
-        </div>
-        <div style={{fontSize:10,color:C.muted,letterSpacing:'0.1em',textTransform:'uppercase',paddingBottom:10}}>
-          {meta.title} · {idx+1} of {steps.length}
-        </div>
-      </div>
-
-      {/* ── RUNNING TALLY ── */}
-      {!isSummary&&(
-        <div style={{background:C.card,borderBottom:`1px solid ${C.b0}`,padding:'10px 20px',
-          display:'flex',flexShrink:0,position:'sticky',top:136,zIndex:49}}>
-          <div style={{flex:1,textAlign:'center'}}>
-            <div style={{fontSize:9,color:C.muted,textTransform:'uppercase',letterSpacing:'0.1em',marginBottom:3}}>One-time</div>
-            <div style={{fontSize:18,color:C.beige,fontFamily:'Georgia,serif'}}>{fmt(q.net)}</div>
+        <div style={{maxWidth:isDesktop?1040:480,margin:'0 auto'}}>
+          <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:9}}>
+            <span style={{fontSize:11,color:C.beige,textTransform:'uppercase',letterSpacing:'0.14em'}}>
+              ☕ Café Con Pan · Quote Builder
+            </span>
+            <span style={{fontSize:9,background:'rgba(184,80,62,0.13)',color:C.redL,
+              border:'1px solid rgba(184,80,62,0.22)',borderRadius:3,padding:'2px 7px',
+              letterSpacing:'0.1em',textTransform:'uppercase'}}>Internal</span>
           </div>
-          {a.recurring===true&&(
-            <div style={{flex:1,textAlign:'center',borderLeft:`1px solid ${C.b0}`}}>
-              <div style={{fontSize:9,color:C.muted,textTransform:'uppercase',letterSpacing:'0.1em',marginBottom:3}}>Monthly</div>
-              <div style={{fontSize:18,color:C.beige,fontFamily:'Georgia,serif'}}>{fmt(q.mo)}/mo</div>
-            </div>
-          )}
-          {q.savings>0&&(
-            <div style={{flex:1,textAlign:'center',borderLeft:`1px solid ${C.b0}`}}>
-              <div style={{fontSize:9,color:C.muted,textTransform:'uppercase',letterSpacing:'0.1em',marginBottom:3}}>Saved</div>
-              <div style={{fontSize:18,color:C.teal,fontFamily:'Georgia,serif'}}>−{fmt(q.savings)}</div>
-            </div>
-          )}
+          <div style={{height:2,background:C.dim,borderRadius:1,overflow:'hidden',marginBottom:7}}>
+            <div style={{height:'100%',background:C.beige,borderRadius:1,
+              width:`${progress}%`,transition:'width 0.38s ease'}}/>
+          </div>
+          <div style={{fontSize:10,color:C.muted,letterSpacing:'0.1em',textTransform:'uppercase',paddingBottom:10}}>
+            {meta.title} · {idx+1} of {steps.length}
+          </div>
         </div>
-      )}
-
-      {/* ── BODY ── */}
-      <div style={{flex:1,padding:'24px 20px 100px'}}>
-        {meta.q&&(
-          <h2 style={{fontSize:21,lineHeight:1.3,color:C.white,fontFamily:'Georgia,serif',
-            margin:'0 0 20px 0'}}>
-            {meta.q}
-          </h2>
-        )}
-        {steps_map[step?.id]?.()}
       </div>
 
-      {/* ── FOOTER NAV ── */}
-      {!isSummary&&(
-        <div style={{position:'sticky',bottom:0,background:C.surf,borderTop:`1px solid ${C.b0}`,
-          padding:'14px 20px',display:'flex',gap:10,flexShrink:0,zIndex:50}}>
-          {idx>0&&(
-            <button
-              style={{flex:1,background:'transparent',border:`1px solid ${C.b0}`,borderRadius:9,
-                color:C.muted,padding:12,cursor:'pointer',fontSize:14,fontFamily:'Georgia,serif'}}
-              onClick={back}>← Back</button>
+      {isDesktop ? (
+        isSummary ? (
+          /* ── DESKTOP SUMMARY ── */
+          <div style={{maxWidth:720,margin:'0 auto',padding:'40px 40px 80px'}}>
+            {steps_map['summary']?.()}
+          </div>
+        ) : (
+          /* ── DESKTOP TWO-COLUMN ── */
+          <div style={{display:'flex',maxWidth:1040,margin:'0 auto',minHeight:'calc(100vh - 136px)'}}>
+
+            {/* Left: step wizard */}
+            <div style={{flex:1,padding:'32px 40px 40px',overflowY:'auto'}}>
+              {meta.q&&(
+                <h2 style={{fontSize:24,lineHeight:1.3,color:C.white,fontFamily:'Georgia,serif',margin:'0 0 24px 0'}}>
+                  {meta.q}
+                </h2>
+              )}
+              {steps_map[step?.id]?.()}
+              <div style={{display:'flex',gap:10,marginTop:32,paddingTop:20,borderTop:`1px solid ${C.b0}`}}>
+                {idx>0&&(
+                  <button style={{flex:1,background:'transparent',border:`1px solid ${C.b0}`,borderRadius:9,
+                    color:C.muted,padding:12,cursor:'pointer',fontSize:14,fontFamily:'Georgia,serif'}}
+                    onClick={back}>← Back</button>
+                )}
+                <button style={{flex:idx>0?2:1,background:C.beige,border:'none',borderRadius:9,
+                  color:C.bg,padding:12,cursor:'pointer',fontSize:15,fontWeight:'bold',fontFamily:'Georgia,serif'}}
+                  onClick={next}>
+                  {idx>=steps.length-2?'View Quote →':'Continue →'}
+                </button>
+              </div>
+            </div>
+
+            {/* Right: live quote summary */}
+            <div style={{width:300,flexShrink:0,padding:'28px 28px',borderLeft:`1px solid ${C.b0}`,
+              position:'sticky',top:136,alignSelf:'start',maxHeight:'calc(100vh - 136px)',overflowY:'auto'}}>
+              <div style={{fontSize:10,color:C.muted,textTransform:'uppercase',letterSpacing:'0.1em',marginBottom:16}}>
+                Live Quote
+              </div>
+              {q.lines.length===0?(
+                <div style={{fontSize:13,color:C.muted,lineHeight:1.7}}>
+                  Your quote will appear here as you build it.
+                </div>
+              ):(
+                <>
+                  {q.lines.map(l=>(
+                    <div key={l.id} style={{display:'flex',justifyContent:'space-between',padding:'7px 0',borderBottom:`1px solid ${C.b0}`}}>
+                      <span style={{fontSize:12,color:l.tag==='bundle'?C.tealL:C.cream,flex:1,paddingRight:8,lineHeight:1.4}}>{l.label}</span>
+                      <span style={{fontSize:12,color:C.beige,whiteSpace:'nowrap'}}>{fmt(l.price)}</span>
+                    </div>
+                  ))}
+                  {q.savings>0&&(
+                    <div style={{display:'flex',justifyContent:'space-between',padding:'7px 0',borderBottom:`1px solid ${C.b0}`}}>
+                      <span style={{fontSize:11,color:C.teal}}>Bundle savings</span>
+                      <span style={{fontSize:11,color:C.teal}}>−{fmt(q.savings)}</span>
+                    </div>
+                  )}
+                  {q.disc>0&&(
+                    <div style={{display:'flex',justifyContent:'space-between',padding:'7px 0',borderBottom:`1px solid ${C.b0}`}}>
+                      <span style={{fontSize:11,color:C.blush}}>Founding Client (50%)</span>
+                      <span style={{fontSize:11,color:C.blush}}>−{fmt(q.disc)}</span>
+                    </div>
+                  )}
+                  <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',padding:'14px 0 0'}}>
+                    <span style={{fontSize:12,color:C.cream,fontWeight:'bold'}}>One-time total</span>
+                    <span style={{fontSize:24,color:C.beige,fontFamily:'Georgia,serif',fontWeight:'bold'}}>{fmt(q.net)}</span>
+                  </div>
+                  {a.recurring===true&&q.mo>0&&(
+                    <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',
+                      marginTop:8,paddingTop:8,borderTop:`1px solid ${C.b0}`}}>
+                      <span style={{fontSize:11,color:C.muted}}>Monthly retainer</span>
+                      <span style={{fontSize:16,color:C.beige,fontFamily:'Georgia,serif'}}>{fmt(q.mo)}/mo</span>
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+          </div>
+        )
+      ) : (
+        /* ── MOBILE LAYOUT ── */
+        <>
+          {/* Running tally */}
+          {!isSummary&&(
+            <div style={{background:C.card,borderBottom:`1px solid ${C.b0}`,padding:'10px 20px',
+              display:'flex',flexShrink:0,position:'sticky',top:136,zIndex:49}}>
+              <div style={{flex:1,textAlign:'center'}}>
+                <div style={{fontSize:9,color:C.muted,textTransform:'uppercase',letterSpacing:'0.1em',marginBottom:3}}>One-time</div>
+                <div style={{fontSize:18,color:C.beige,fontFamily:'Georgia,serif'}}>{fmt(q.net)}</div>
+              </div>
+              {a.recurring===true&&(
+                <div style={{flex:1,textAlign:'center',borderLeft:`1px solid ${C.b0}`}}>
+                  <div style={{fontSize:9,color:C.muted,textTransform:'uppercase',letterSpacing:'0.1em',marginBottom:3}}>Monthly</div>
+                  <div style={{fontSize:18,color:C.beige,fontFamily:'Georgia,serif'}}>{fmt(q.mo)}/mo</div>
+                </div>
+              )}
+              {q.savings>0&&(
+                <div style={{flex:1,textAlign:'center',borderLeft:`1px solid ${C.b0}`}}>
+                  <div style={{fontSize:9,color:C.muted,textTransform:'uppercase',letterSpacing:'0.1em',marginBottom:3}}>Saved</div>
+                  <div style={{fontSize:18,color:C.teal,fontFamily:'Georgia,serif'}}>−{fmt(q.savings)}</div>
+                </div>
+              )}
+            </div>
           )}
-          <button
-            style={{flex:idx>0?2:3,background:C.beige,border:'none',borderRadius:9,
-              color:C.bg,padding:12,cursor:'pointer',fontSize:15,fontWeight:'bold',
-              fontFamily:'Georgia,serif'}}
-            onClick={next}>
-            {idx>=steps.length-2?'View Quote →':'Continue →'}
-          </button>
-        </div>
+          {/* Body */}
+          <div style={{flex:1,padding:'24px 20px 100px'}}>
+            {meta.q&&(
+              <h2 style={{fontSize:21,lineHeight:1.3,color:C.white,fontFamily:'Georgia,serif',margin:'0 0 20px 0'}}>
+                {meta.q}
+              </h2>
+            )}
+            {steps_map[step?.id]?.()}
+          </div>
+          {/* Footer nav */}
+          {!isSummary&&(
+            <div style={{position:'sticky',bottom:0,background:C.surf,borderTop:`1px solid ${C.b0}`,
+              padding:'14px 20px',display:'flex',gap:10,flexShrink:0,zIndex:50}}>
+              {idx>0&&(
+                <button style={{flex:1,background:'transparent',border:`1px solid ${C.b0}`,borderRadius:9,
+                  color:C.muted,padding:12,cursor:'pointer',fontSize:14,fontFamily:'Georgia,serif'}}
+                  onClick={back}>← Back</button>
+              )}
+              <button style={{flex:idx>0?2:3,background:C.beige,border:'none',borderRadius:9,
+                color:C.bg,padding:12,cursor:'pointer',fontSize:15,fontWeight:'bold',fontFamily:'Georgia,serif'}}
+                onClick={next}>
+                {idx>=steps.length-2?'View Quote →':'Continue →'}
+              </button>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
