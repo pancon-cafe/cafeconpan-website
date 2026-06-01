@@ -169,9 +169,9 @@ const LINE_WIDTHS = [84, null, 24, 64, 64]; // null = flex:1
 const DEFAULT_TERMS =
   'This quote is valid for 30 days from the date issued. A 50% deposit is required ' +
   'to schedule and begin work; the remaining balance is due upon project completion. ' +
-  'All services are performed by Café Con Pan LLC. Prices are in USD. Scope changes ' +
+  'All services are performed by Cafe Con Pan LLC. Prices are in USD. Scope changes ' +
   'requested after work begins may result in a revised quote. By signing below, the ' +
-  'client acknowledges the scope of work described above and authorizes Café Con Pan ' +
+  'client acknowledges the scope of work described above and authorizes Cafe Con Pan ' +
   'LLC to proceed on the agreed terms.';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -184,7 +184,7 @@ export default function QuoteDocument({ data }) {
   return (
     <Document
       title={`Quote ${data.quoteNumber} — ${data.client.businessName}`}
-      author="Café Con Pan LLC"
+      author="Cafe Con Pan LLC"
       subject="Service Quote"
       creator="pancon.cafe"
       keywords="quote, technology, apple, smb"

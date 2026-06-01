@@ -1,7 +1,7 @@
 /**
  * CCP PDF — Document Shell
  *
- * Reusable layout components for all Café Con Pan documents.
+ * Reusable layout components for all Cafe Con Pan documents.
  * All components use @react-pdf/renderer primitives (not HTML/DOM).
  *
  * Exports:
@@ -207,7 +207,7 @@ export function CCPHeader({ docType }) {
     <View style={s.header} fixed>
       {/* Left: wordmark + tagline */}
       <View>
-        <Text style={s.wordmark}>Café Con Pan</Text>
+        <Text style={s.wordmark}>Cafe Con Pan</Text>
         <Text style={s.wordmarkSub}>Technology Services</Text>
       </View>
 

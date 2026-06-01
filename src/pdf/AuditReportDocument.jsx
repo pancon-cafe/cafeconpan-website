@@ -217,7 +217,7 @@ function CoverPage({ data }) {
       {/* Top: wordmark + badge */}
       <View style={coverS.topBar}>
         <View>
-          <Text style={coverS.wordmark}>Café Con Pan</Text>
+          <Text style={coverS.wordmark}>Cafe Con Pan</Text>
           <Text style={coverS.wordmarkSub}>Technology Services</Text>
         </View>
         <View style={coverS.badge}>
@@ -484,7 +484,7 @@ export default function AuditReportDocument({ data }) {
   return (
     <Document
       title={`Technology Assessment Report — ${data.client.businessName}`}
-      author="Café Con Pan LLC"
+      author="Cafe Con Pan LLC"
       subject="Technology Assessment"
       creator="pancon.cafe"
     >
@@ -600,7 +600,7 @@ export default function AuditReportDocument({ data }) {
         <CCPCallout accent="teal">
           <Text style={rs.bodyText}>
             This report was prepared exclusively for {data.client.businessName} by{' '}
-            {data.preparedBy} of Café Con Pan LLC. The findings and recommendations
+            {data.preparedBy} of Cafe Con Pan LLC. The findings and recommendations
             are based on information gathered during the assessment and are intended
             solely to guide technology strategy decisions for this organization.
             Questions or follow-up? Reach us at jason@pancon.cafe or 703-338-0208.
