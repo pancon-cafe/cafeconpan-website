@@ -176,8 +176,6 @@ function buildPDFData(a, q) {
   }
 
   const noteLines = [
-    a.vertical ? `Industry: ${a.vertical}` : null,
-    a.stage === 'pre' ? 'Stage: Pre-launch' : a.stage === 'operational' ? 'Stage: Operational' : a.stage === 'targeted' ? 'Stage: Targeted' : null,
     q.savings > 0 ? `Bundle savings applied: −${fmt(q.savings)}` : null,
     a.recurring === true && q.mo > 0 ? `Monthly retainer: ${fmt(q.mo)}/mo (not included above — see separate retainer agreement)` : null,
   ].filter(Boolean);
