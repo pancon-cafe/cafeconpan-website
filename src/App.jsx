@@ -13,6 +13,16 @@ const C = {
   teal: "#5A9E96",
   gold: "#C8922A",
   parchment: "#EDE0C4",
+  // dark tool tokens (shared with The Cupping & The Pour)
+  bg:    '#0D0702',
+  surf:  '#1B0E07',
+  card:  '#241408',
+  b0:    'rgba(212,169,122,0.13)',
+  b1:    'rgba(212,169,122,0.28)',
+  muted: '#7A5830',
+  dim:   '#3D2818',
+  dkCream: '#E0C89A',
+  white: '#F5EDD8',
 };
 
 const fonts = `@import url('https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@400;600;700&family=Pacifico&display=swap');`;
@@ -2700,9 +2710,9 @@ serviceRationale: If the situation suggests a different fit than expected, say s
     window.location.hash = '#audit-builder';
   }
 
-  const fld  = { display:"block", width:"100%", padding:"12px 14px", fontFamily:"'Nunito',sans-serif", fontSize:16, fontWeight:600, color:C.espresso, background:C.cream, border:`2px solid ${C.espresso}22`, borderRadius:0, outline:"none", boxSizing:"border-box", marginTop:6 };
-  const lbl  = { fontSize:11, letterSpacing:"0.14em", textTransform:"uppercase", fontWeight:700, color:C.espresso, opacity:0.6 };
-  const chip = active => ({ display:"inline-block", padding:"6px 14px", border:`2px solid ${active ? C.teal : C.espresso}`, background: active ? C.teal : "transparent", color: active ? C.cream : C.espresso, fontFamily:"'Nunito',sans-serif", fontSize:12, fontWeight:700, cursor:"pointer", letterSpacing:"0.08em", textTransform:"uppercase", transition:"all 0.15s" });
+  const fld  = { display:"block", width:"100%", boxSizing:"border-box", background:C.card, border:`1px solid ${C.b0}`, borderRadius:8, padding:"12px 14px", color:C.dkCream, fontSize:16, outline:"none", fontFamily:"'Nunito',sans-serif", marginTop:6 };
+  const lbl  = { fontSize:11, letterSpacing:"0.14em", textTransform:"uppercase", fontWeight:700, color:C.muted, display:"block", marginBottom:6 };
+  const chip = active => ({ display:"inline-block", padding:"6px 14px", border:`1px solid ${active ? C.teal : C.b1}`, background: active ? C.teal : "transparent", color: active ? C.bg : C.dkCream, fontFamily:"'Nunito',sans-serif", fontSize:12, fontWeight:700, cursor:"pointer", letterSpacing:"0.08em", textTransform:"uppercase", transition:"all 0.15s" });
 
   // ── Output section card
   const OutSection = ({ label, color, children }) => (
@@ -2740,78 +2750,70 @@ serviceRationale: If the situation suggests a different fit than expected, say s
         </div>
       </section>
 
-      <TextileBorder flip />
-
-      <section className="section" style={{ background:C.parchment }}>
+      <section style={{ background:C.bg, padding:"48px clamp(24px,5vw,40px) 80px" }}>
         <div style={{ maxWidth:640, margin:"0 auto" }}>
 
           {brewing ? (
             <div style={{ textAlign:"center", padding:"64px 24px" }}>
               <div style={{ display:"inline-block", transform:"scale(2)", transformOrigin:"center top", marginBottom:56 }}><SteamSVG /></div>
-              <div style={{ fontFamily:"'Lilita One',cursive", fontSize:26, color:C.espresso }}>Brewing<span className="brew-dots">...</span></div>
-              <div style={{ width:200, height:5, background:`${C.espresso}15`, margin:"20px auto 0", overflow:"hidden" }}>
-                <div className="brew-bar" style={{ height:"100%", background:C.espresso }} />
+              <div style={{ fontFamily:"'Lilita One',cursive", fontSize:26, color:C.dkCream }}>Brewing<span className="brew-dots">...</span></div>
+              <div style={{ width:200, height:5, background:C.b0, margin:"20px auto 0", overflow:"hidden" }}>
+                <div className="brew-bar" style={{ height:"100%", background:C.beige }} />
               </div>
-              <p style={{ marginTop:14, fontSize:11, color:C.espresso, opacity:0.3, fontWeight:700, letterSpacing:"0.14em", textTransform:"uppercase" }}>Grinding the beans...</p>
+              <p style={{ marginTop:14, fontSize:11, color:C.muted, fontWeight:700, letterSpacing:"0.14em", textTransform:"uppercase" }}>Grinding the beans...</p>
             </div>
 
           ) : result ? (
             <div>
-              {/* Header */}
-              <div style={{ marginBottom:32, paddingBottom:20, borderBottom:`2px solid ${C.espresso}18` }}>
+              <div style={{ marginBottom:32, paddingBottom:20, borderBottom:`1px solid ${C.b0}` }}>
                 <div style={{ fontSize:10, letterSpacing:"0.2em", textTransform:"uppercase", fontWeight:700, color:C.teal, marginBottom:6 }}>Pre-Call Brief</div>
-                <div style={{ fontFamily:"'Lilita One',cursive", fontSize:28, color:C.espresso, marginBottom:4 }}>{form.bizName}</div>
-                {form.personName && <div style={{ fontSize:14, color:C.espresso, opacity:0.5, fontWeight:600 }}>{form.personName} · {form.industry}</div>}
+                <div style={{ fontFamily:"'Lilita One',cursive", fontSize:28, color:C.white, marginBottom:4 }}>{form.bizName}</div>
+                {form.personName && <div style={{ fontSize:14, color:C.muted, fontWeight:600 }}>{form.personName} · {form.industry}</div>}
               </div>
 
-              {/* Discovery questions */}
               <OutSection label="Ask These Questions">
                 {result.discoveryQuestions?.map((q, i) => (
                   <div key={i} style={{ display:"flex", gap:12, marginBottom:10, alignItems:"flex-start" }}>
                     <span style={{ fontSize:11, color:C.teal, fontWeight:700, flexShrink:0, marginTop:2 }}>{i+1}.</span>
-                    <span style={{ fontSize:14, color:C.espresso, lineHeight:1.6, fontWeight:600 }}>{q}</span>
+                    <span style={{ fontSize:14, color:C.dkCream, lineHeight:1.6, fontWeight:600 }}>{q}</span>
                   </div>
                 ))}
               </OutSection>
 
-              {/* Look for */}
               <OutSection label="What to Look For" color={C.gold}>
                 {result.lookFor?.map((item, i) => (
                   <div key={i} style={{ display:"flex", gap:12, marginBottom:8, alignItems:"flex-start" }}>
                     <span style={{ fontSize:14, color:C.gold, flexShrink:0, marginTop:1 }}>→</span>
-                    <span style={{ fontSize:14, color:C.espresso, lineHeight:1.6, fontWeight:600 }}>{item}</span>
+                    <span style={{ fontSize:14, color:C.dkCream, lineHeight:1.6, fontWeight:600 }}>{item}</span>
                   </div>
                 ))}
               </OutSection>
 
-              {/* Opportunities */}
               <OutSection label="Creative Opportunities" color={C.red}>
                 {result.opportunities?.map((opp, i) => (
                   <div key={i} style={{ borderLeft:`3px solid ${C.red}`, paddingLeft:14, marginBottom:14 }}>
-                    <div style={{ fontSize:13, fontWeight:800, color:C.espresso, marginBottom:4, letterSpacing:"0.02em" }}>{opp.headline}</div>
-                    <div style={{ fontSize:13, color:C.espresso, opacity:0.65, lineHeight:1.6, fontWeight:600 }}>{opp.description}</div>
+                    <div style={{ fontSize:13, fontWeight:800, color:C.dkCream, marginBottom:4, letterSpacing:"0.02em" }}>{opp.headline}</div>
+                    <div style={{ fontSize:13, color:C.muted, lineHeight:1.6, fontWeight:600 }}>{opp.description}</div>
                   </div>
                 ))}
               </OutSection>
 
-              {/* Services */}
               <OutSection label="Services That Likely Apply">
                 <div style={{ display:"flex", flexWrap:"wrap", gap:8, marginBottom:12 }}>
                   {result.likelyServices?.map(s => (
-                    <span key={s} style={{ background:`${C.teal}18`, border:`1px solid ${C.teal}44`, color:C.espresso, fontFamily:"'Nunito',sans-serif", fontSize:12, fontWeight:700, padding:"5px 12px", borderRadius:3 }}>{s}</span>
+                    <span key={s} style={{ background:`${C.teal}18`, border:`1px solid ${C.teal}44`, color:C.dkCream, fontFamily:"'Nunito',sans-serif", fontSize:12, fontWeight:700, padding:"5px 12px", borderRadius:4 }}>{s}</span>
                   ))}
                 </div>
                 {result.serviceRationale && (
-                  <p style={{ fontSize:13, color:C.espresso, opacity:0.6, lineHeight:1.7, fontWeight:600, margin:0 }}>{result.serviceRationale}</p>
+                  <p style={{ fontSize:13, color:C.muted, lineHeight:1.7, fontWeight:600, margin:0 }}>{result.serviceRationale}</p>
                 )}
               </OutSection>
 
-              {/* Actions */}
-              <div style={{ borderTop:`2px solid ${C.espresso}18`, paddingTop:24, display:"flex", gap:12, flexWrap:"wrap" }}>
-                <button className="hero-cta" onClick={beginAudit}>
+              <div style={{ borderTop:`1px solid ${C.b0}`, paddingTop:24, display:"flex", gap:12, flexWrap:"wrap" }}>
+                <button onClick={beginAudit} style={{ background:C.teal, border:"none", borderRadius:9, color:C.bg, padding:"13px 24px", cursor:"pointer", fontFamily:"'Nunito',sans-serif", fontWeight:700, fontSize:14, letterSpacing:"0.05em" }}>
                   Begin Audit for {form.bizName} →
                 </button>
-                <button onClick={() => { setResult(null); setForm(blank); }} style={{ background:"none", border:`2px solid ${C.espresso}`, color:C.espresso, cursor:"pointer", fontFamily:"'Nunito',sans-serif", fontWeight:700, fontSize:13, letterSpacing:"0.1em", textTransform:"uppercase", padding:"12px 24px" }}>
+                <button onClick={() => { setResult(null); setForm(blank); }} style={{ background:"none", border:`1px solid ${C.b0}`, color:C.muted, borderRadius:9, cursor:"pointer", fontFamily:"'Nunito',sans-serif", fontWeight:700, fontSize:13, letterSpacing:"0.08em", textTransform:"uppercase", padding:"13px 24px" }}>
                   New Client
                 </button>
               </div>
@@ -2865,9 +2867,9 @@ serviceRationale: If the situation suggests a different fit than expected, say s
                   <textarea style={{...fld, minHeight:80, resize:"vertical"}} value={form.extra} onChange={e=>setForm(f=>({...f,extra:e.target.value}))} placeholder="Referral source, budget signals, specific goals, anything else…" />
                 </div>
 
-                {error && <div style={{ fontSize:13, color:C.red, fontWeight:700, padding:"10px 14px", background:`${C.red}11`, border:`1px solid ${C.red}33` }}>{error}</div>}
+                {error && <div style={{ fontSize:13, color:C.red, fontWeight:700, padding:"10px 14px", background:`${C.red}15`, border:`1px solid ${C.red}44`, borderRadius:6 }}>{error}</div>}
 
-                <button type="submit" className="hero-cta" style={{ alignSelf:"flex-start" }}>Brew the Brief →</button>
+                <button type="submit" style={{ alignSelf:"flex-start", background:C.beige, border:"none", borderRadius:9, color:C.bg, padding:"13px 28px", cursor:"pointer", fontFamily:"'Nunito',sans-serif", fontWeight:700, fontSize:14, letterSpacing:"0.05em" }}>Brew the Brief →</button>
               </div>
             </form>
           )}
