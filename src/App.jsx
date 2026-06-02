@@ -92,7 +92,7 @@ const SteamSVG = () => (
 const STRINGS = {
   en: {
     nav: { items:["Home","Tech Services","Our Story","Contact"], cta:"Get Started", langBtn:"ES" },
-    hero: { stamp:"☕ Honduran American Roots · Est. 2025", subtitle:"Tech · Coffee · Culture · Community", origin:"The café was always where tech and community met. Ours started in Honduras, over coffee and pan dulce.", signal:"Apple-focused tech for small businesses. Built by someone who's been on the inside — and speaks your language.", cta:"Get Started →", ctaSecondary:"See Our Services →", scroll:"Scroll", steps:["Intro call","Tech audit","Your roadmap"] },
+    hero: { stamp:"☕ Honduran American Roots · Est. 2025", subtitle:"Tech · Coffee · Culture · Community", origin:"Before most people had internet at home, the café was where you went to get connected — online, to each other, to the tools that made business possible. We carry that forward, for small businesses built on Apple.", cta:"Get Started →", ctaSecondary:"See Our Services →", scroll:"Scroll", steps:["Intro call","Tech audit","Your roadmap"] },
     story: { eyebrow:"Our Story", title:"More Than a", titleSpan:"Cup of Coffee", body:"The name comes from Honduras. Every morning, abuela made coffee in a bowl — you'd soak your rosquillas and ojaldras in it like soup. That ritual was never just about coffee. It was about showing up for the people at your table. That's still what we do — just now with Apple devices and carrier contracts instead of pan dulce.", storyCta:"Read the full story →" },
     painPoints: {
       eyebrow:"Real Talk",
@@ -353,7 +353,7 @@ const STRINGS = {
   },
   es: {
     nav: { items:["Inicio","Servicios Tech","Nuestra Historia","Contacto"], cta:"Comenzar", langBtn:"EN" },
-    hero: { stamp:"☕ Raíces Hondureño-Americanas · Est. 2025", subtitle:"Tech · Café · Cultura · Comunidad", origin:"El café siempre fue donde la tecnología y la comunidad se encontraban. El nuestro comenzó en Honduras, entre café y pan dulce.", signal:"Tech para pequeños negocios, enfocado en Apple. Construido por alguien que conoce el sistema por dentro — y que habla tu idioma. Literal y culturalmente.", cta:"Comenzar →", ctaSecondary:"Ver Nuestros Servicios →", scroll:"Desliza", steps:["Llamada inicial","Auditoría tech","Tu plan de acción"] },
+    hero: { stamp:"☕ Raíces Hondureño-Americanas · Est. 2025", subtitle:"Tech · Café · Cultura · Comunidad", origin:"Antes de que la mayoría tuviera internet en casa, el café era donde ibas a conectarte — en línea, con los demás, con las herramientas que hacían posible el negocio. Nosotros llevamos eso hacia adelante, para pequeños negocios construidos en Apple.", cta:"Comenzar →", ctaSecondary:"Ver Nuestros Servicios →", scroll:"Desliza", steps:["Llamada inicial","Auditoría tech","Tu plan de acción"] },
     story: { eyebrow:"Nuestra Historia", title:"Más Que una", titleSpan:"Taza de Café", body:"El nombre viene de Honduras. Cada mañana, la abuela preparaba el café en un tazón — remojabas las rosquillas y las ojaldras como si fuera sopa. Ese ritual nunca fue solo sobre el café. Era sobre estar presente para las personas en tu mesa. Eso es lo que seguimos haciendo — solo que ahora con dispositivos Apple y contratos de carrier en lugar de pan dulce.", storyCta:"Leer la historia completa →" },
     paraTi: {
       eyebrow:"Para Ti",
@@ -1037,8 +1037,7 @@ function HomePage({ go, t, lang }) {
             <span className="line-teal"> Pan</span>
           </h1>
           <p className="hero-subtitle">{t.hero.subtitle}</p>
-          <p style={{fontSize:15,color:C.espresso,opacity:0.7,fontStyle:"italic",fontFamily:"'Nunito',sans-serif",margin:"12px auto",lineHeight:1.7,maxWidth:520}}>{t.hero.origin}</p>
-          <p style={{fontSize:15,color:C.espresso,fontWeight:600,letterSpacing:"0.03em",margin:"8px auto 24px",lineHeight:1.7,opacity:0.75,maxWidth:520}}>{t.hero.signal}</p>
+          <p style={{fontSize:15,color:C.espresso,opacity:0.7,fontStyle:"italic",fontFamily:"'Nunito',sans-serif",margin:"12px auto 24px",lineHeight:1.7,maxWidth:520}}>{t.hero.origin}</p>
           <div style={{display:"flex",gap:16,justifyContent:"center",flexWrap:"wrap",marginTop:32,marginBottom:16}}>
             <button className="hero-cta" onClick={() => go("Discovery")}>{t.hero.cta}</button>
             <button onClick={() => go("Tech Services")} style={{
