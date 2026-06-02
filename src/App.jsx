@@ -862,8 +862,8 @@ const PAGE_HASH = {
   "Privacy Policy":"privacy-policy",
   "Find My Plan":"find-my-plan",
   "The Grind":"the-grind",
-  "Quote Builder":"quote-builder",
-  "Audit Builder":"audit-builder",
+  "The Pour":"quote-builder",
+  "The Cupping":"audit-builder",
   "Apple Teams":"apple-teams",
   "Discovery":"discovery",
   "Resources":"resources",
@@ -2722,7 +2722,7 @@ serviceRationale: If the situation suggests a different fit than expected, say s
           <div style={{ fontSize:10, letterSpacing:"0.22em", textTransform:"uppercase", color:C.teal, fontWeight:700, marginBottom:16 }}>Admin · Pre-Call Prep</div>
           <h1 style={{ fontFamily:"'Lilita One',cursive", fontSize:"clamp(40px,7vw,72px)", color:C.cream, lineHeight:1.1, marginBottom:16 }}>The <span style={{ color:C.gold }}>Grind</span></h1>
           <p style={{ fontSize:15, color:`rgba(245,237,214,0.6)`, fontWeight:600, maxWidth:480, margin:"0 auto" }}>
-            Enter what you know before the intro call. Get smart discovery questions, what to look for, creative opportunities, and a one-click handoff to the Audit Builder.
+            Enter what you know before the intro call. Get smart discovery questions, what to look for, creative opportunities, and a one-click handoff to The Cupping.
           </p>
         </div>
       </section>
@@ -2948,8 +2948,8 @@ export default function CafeConPan() {
       case "Privacy Policy": return <PrivacyPolicyPage lang={lang} />;
       case "Find My Plan": return <FindMyPlanPage go={go} t={t} />;
       case "The Grind": return <GoogleAuthGate><TheGrindPage go={go} /></GoogleAuthGate>;
-      case "Quote Builder": return <GoogleAuthGate><Suspense fallback={null}><QuoteBuilder /></Suspense></GoogleAuthGate>;
-      case "Audit Builder": return <GoogleAuthGate><Suspense fallback={null}><AuditBuilder /></Suspense></GoogleAuthGate>;
+      case "The Pour": return <GoogleAuthGate><Suspense fallback={null}><QuoteBuilder /></Suspense></GoogleAuthGate>;
+      case "The Cupping": return <GoogleAuthGate><Suspense fallback={null}><AuditBuilder /></Suspense></GoogleAuthGate>;
       case "Apple Teams": return <GoogleAuthGate><AppleTeamsPage /></GoogleAuthGate>;
       case "Discovery": return <DiscoveryPage go={go} t={t} prefillRef={discoveryPrefill} />;
       case "Resources": return <ResourcesPage go={go} t={t} lang={lang} />;
@@ -2966,7 +2966,7 @@ export default function CafeConPan() {
             <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:24}}>Admin Access</div>
             <div style={{display:"flex",flexDirection:"column",gap:0}}>
               {[
-                { label:"Tools", items:[["The Grind","the-grind",true],["Audit Builder","audit-builder",true],["Quote Builder","quote-builder",true]] },
+                { label:"Tools", items:[["The Grind","the-grind",true],["The Cupping","audit-builder",true],["The Pour","quote-builder",true]] },
                 { label:"La Mesa", items:[["La Mesa","la-mesa",true],["La Mesa Referral","la-mesa-referral",true]] },
                 { label:"Other", items:[["Apple Teams","apple-teams",true],["Pay","pay",false]] },
               ].map((section,si) => (

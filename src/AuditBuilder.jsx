@@ -961,7 +961,7 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
         <div style={{ maxWidth: isDesktop ? 1040 : 480, margin: '0 auto' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 9 }}>
             <span style={{ fontSize: 11, color: C.beige, textTransform: 'uppercase', letterSpacing: '0.14em' }}>
-              ☕ Café Con Pan · Audit Builder
+              ☕ Café Con Pan · The Cupping
             </span>
             <span style={{
               fontSize: 9, background: 'rgba(184,80,62,0.13)', color: C.redL,
