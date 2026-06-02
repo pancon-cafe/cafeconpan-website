@@ -290,47 +290,6 @@ const STRINGS = {
       trustNote:"No pitch, no pressure. We'll reach out within 24 hours to confirm your intro call.",
       successTitle:"You're in. ☕", successBody:"We got your info and we'll reach out within 24 hours to schedule your intro call — the first step toward your tech roadmap.", backToHome:"Back to Home →",
     },
-    finder:{
-      eyebrow:"Package Finder",
-      title:"Find the right", titleSpan:"fit", titleEnd:"for you",
-      sub:"Three quick questions — we'll point you to the right starting place.",
-      q1:"Where are you in your business journey?",
-      q2:"What do you need most right now?",
-      q3:"What else would be helpful?",
-      q3Sub:"Select all that apply.",
-      q1Options:[
-        { label:"Just getting started", desc:"Building my business from the ground up" },
-        { label:"Already in business",  desc:"I have an established or operating business" },
-      ],
-      q2Options:[
-        { label:"Launch everything from scratch",   desc:"Devices, website, banking, payments, and more" },
-        { label:"Get visible on Apple devices",     desc:"Apple Maps, Tap to Pay, Brand Profile" },
-        { label:"Manage my Apple devices",          desc:"Ongoing IT, security, and device management" },
-        { label:"Lower my phone or internet costs", desc:"Carrier audit, negotiation, ISP setup" },
-        { label:"Have a trusted tech contact",      desc:"One number to call when technology fails" },
-      ],
-      q3Options:[
-        { label:"Ongoing tech support",         desc:"A reliable contact after setup is done" },
-        { label:"Better carrier rates",         desc:"Audit and negotiate my phone/internet bills" },
-        { label:"Day-to-day device management", desc:"Keeping Apple devices updated and secure" },
-      ],
-      startingNotes:{
-        visible:"Since you're just launching, consider pairing this with Open for Business to handle the full setup first.",
-        devices:"Just getting started? Open for Business handles full setup — including device procurement — before ongoing management makes sense.",
-      },
-      match:"Your Match",
-      alsoConsider:"You Might Also Consider",
-      seeAll:"See All Packages",
-      startOver:"Start over",
-      continue:"Continue →",
-      seeResult:"See My Recommendation →",
-      stepOf:"of",
-      techBody:"Answer three quick questions and we'll point you to the right package.",
-      packagesNote:"Every business is different. These ranges reflect most engagements — your actual scope gets confirmed on our first call.",
-      techCta:"Find My Package →",
-      painPrompt:"Not sure which service fits?",
-      painLink:"Find your package →",
-    },
     resources:{
       eyebrow:"Tools & Resources", title:"The Stack", titleSpan:"We Trust",
       sub:"Every tool on this page is something I've either used myself, recommend to clients, or trust enough to put my name behind. No fluff, no random affiliates.",
@@ -553,47 +512,6 @@ const STRINGS = {
       submit:"Enviar →", sending:"Enviando…",
       trustNote:"Sin presión. Nos comunicamos en menos de 24 horas para confirmar tu llamada introductoria.",
       successTitle:"Ya estás dentro. ☕", successBody:"Recibimos tu información y nos comunicaremos en menos de 24 horas para agendar tu llamada introductoria — el primer paso hacia tu plan tech.", backToHome:"Volver al Inicio →",
-    },
-    finder:{
-      eyebrow:"Buscador de Paquetes",
-      title:"Encuentra el", titleSpan:"paquete", titleEnd:"adecuado para ti",
-      sub:"Tres preguntas rápidas — te indicaremos el mejor punto de partida.",
-      q1:"¿En qué punto estás con tu negocio?",
-      q2:"¿Qué necesitas más ahora mismo?",
-      q3:"¿Qué más te sería útil?",
-      q3Sub:"Selecciona todo lo que aplique.",
-      q1Options:[
-        { label:"Apenas empezando", desc:"Construyendo mi negocio desde cero" },
-        { label:"Ya tengo negocio", desc:"Tengo un negocio establecido en operación" },
-      ],
-      q2Options:[
-        { label:"Lanzar todo desde cero",                   desc:"Dispositivos, sitio web, banca, pagos y más" },
-        { label:"Aparecer en dispositivos Apple",            desc:"Apple Maps, Tap to Pay, Perfil de Marca" },
-        { label:"Gestionar mis dispositivos Apple",          desc:"IT continuo, seguridad y gestión de dispositivos" },
-        { label:"Reducir mis costos de teléfono o internet", desc:"Auditoría de carrier, negociación, ISP" },
-        { label:"Tener un contacto tech de confianza",       desc:"Un número al que llamar cuando la tecnología falla" },
-      ],
-      q3Options:[
-        { label:"Soporte tech continuo",          desc:"Un contacto confiable después de la configuración" },
-        { label:"Mejores tarifas de carrier",     desc:"Auditar y negociar mis facturas de teléfono e internet" },
-        { label:"Gestión diaria de dispositivos", desc:"Mantener los dispositivos Apple al día y seguros" },
-      ],
-      startingNotes:{
-        visible:"Como estás comenzando, considera combinar esto con Abrir el Negocio para manejar la configuración completa primero.",
-        devices:"¿Apenas empezando? Abrir el Negocio maneja la configuración completa — incluyendo dispositivos — antes de que la gestión continua tenga sentido.",
-      },
-      match:"Tu Coincidencia",
-      alsoConsider:"También Podrías Considerar",
-      seeAll:"Ver Todos los Paquetes",
-      startOver:"Empezar de nuevo",
-      continue:"Continuar →",
-      seeResult:"Ver Mi Recomendación →",
-      stepOf:"de",
-      techBody:"Responde tres preguntas rápidas y te indicaremos el paquete adecuado.",
-      packagesNote:"Cada negocio es diferente. Estos rangos reflejan la mayoría de los proyectos — tu alcance real se confirma en nuestra primera llamada.",
-      techCta:"Encuentra Tu Paquete →",
-      painPrompt:"¿No sabes qué servicio te conviene?",
-      painLink:"Encuentra tu paquete →",
     },
     resources:{
       eyebrow:"Herramientas y Recursos", title:"El Stack", titleSpan:"En Que Confiamos",
@@ -874,7 +792,6 @@ const PAGE_HASH = {
   "Our Story":"our-story","Contact":"contact","La Mesa":"la-mesa","Pay":"pay",
   "La Mesa Referral":"la-mesa-referral",
   "Privacy Policy":"privacy-policy",
-  "Find My Plan":"find-my-plan",
   "The Grind":"the-grind",
   "The Pour":"quote-builder",
   "The Cupping":"audit-builder",
@@ -999,12 +916,6 @@ function PainPointsSection({ go, t }) {
       <div style={{textAlign:"center",maxWidth:640,margin:"56px auto 0"}}>
         <p style={{fontFamily:"'Nunito',sans-serif",fontSize:17,fontWeight:800,fontStyle:"italic",color:C.espresso,lineHeight:1.6,marginBottom:32}}>"{t.painPoints.bridge}"</p>
         <button className="hero-cta" onClick={() => go("Discovery")}>{t.painPoints.cta}</button>
-        <p style={{marginTop:28,fontSize:13,color:C.espresso,fontWeight:600,opacity:0.6}}>
-          {t.finder.painPrompt}{" "}
-          <button onClick={() => go("Find My Plan")} style={{background:"none",border:"none",cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,color:C.teal,textDecoration:"underline",padding:0}}>
-            {t.finder.painLink}
-          </button>
-        </p>
       </div>
     </section>
   );
@@ -1158,11 +1069,11 @@ function TechPage({ go, t }) {
             </div>
           ))}
         </div>
-        <p style={{textAlign:"center",fontSize:12,color:C.espresso,opacity:0.45,fontWeight:600,letterSpacing:"0.03em",marginTop:32,marginBottom:0,lineHeight:1.7,maxWidth:520,marginLeft:"auto",marginRight:"auto"}}>{t.finder.packagesNote}</p>
+        <p style={{textAlign:"center",fontSize:12,color:C.espresso,opacity:0.45,fontWeight:600,letterSpacing:"0.03em",marginTop:32,marginBottom:0,lineHeight:1.7,maxWidth:520,marginLeft:"auto",marginRight:"auto"}}>Every business is different. Your actual scope gets confirmed on your first call — no surprises.</p>
         <div style={{textAlign:"center",marginTop:32,padding:"40px 32px",background:C.parchment,border:`3px solid ${C.espresso}`,boxShadow:`4px 4px 0 ${C.espresso}`,maxWidth:520,marginLeft:"auto",marginRight:"auto"}}>
           <div style={{fontSize:10,letterSpacing:"0.18em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:12}}>{t.softCta.eyebrow}</div>
-          <p style={{fontSize:15,color:"#555",fontWeight:600,lineHeight:1.7,marginBottom:24,maxWidth:380,margin:"0 auto 24px"}}>{t.finder.techBody}</p>
-          <button className="hero-cta" onClick={() => go("Find My Plan")}>{t.finder.techCta}</button>
+          <p style={{fontSize:15,color:"#555",fontWeight:600,lineHeight:1.7,marginBottom:24,maxWidth:380,margin:"0 auto 24px"}}>{t.softCta.body}</p>
+          <button className="hero-cta" onClick={() => go("Discovery")}>{t.hero.cta}</button>
         </div>
       </section>
 
@@ -2033,195 +1944,6 @@ function PrivacyPolicyPage({ lang }) {
   );
 }
 
-function FindMyPlanPage({ go, t }) {
-  const [step, setStep] = useState(1);
-  const [q1, setQ1] = useState(null);
-  const [q2, setQ2] = useState(null);
-  const [q3, setQ3] = useState([]);
-  const [dir, setDir] = useState("forward");
-  const [pulsing, setPulsing] = useState(false);
-
-  const TOTAL = 3;
-
-  const Q1_IDS   = ["starting","running"];
-  const Q1_ICONS = ["🌱","🏢"];
-  const Q2_IDS   = ["launch","visible","devices","bills","support"];
-  const Q2_ICONS = ["🚀","📍","🔁","📡","🤝"];
-  const Q3_IDS   = ["ongoingSupport","carrierCosts","deviceMgmt"];
-  const Q3_ICONS = ["🤝","📡","🔁"];
-
-  const q1Options = t.finder.q1Options.map((o,i) => ({ id:Q1_IDS[i], icon:Q1_ICONS[i], ...o }));
-  const q2Options = t.finder.q2Options.map((o,i) => ({ id:Q2_IDS[i], icon:Q2_ICONS[i], ...o }));
-  const q3Options = t.finder.q3Options.map((o,i) => ({ id:Q3_IDS[i], icon:Q3_ICONS[i], ...o }));
-
-  const RESULT_IDX = { launch:0, visible:1, devices:2, bills:3, support:4 };
-  const Q3_PKG_IDX  = { ongoingSupport:4, carrierCosts:3, deviceMgmt:2 };
-
-  const STARTING_NOTE = {
-    visible: t.finder.startingNotes.visible,
-    devices: t.finder.startingNotes.devices,
-  };
-
-  const pkg = q2 ? t.tech.packages[RESULT_IDX[q2]] : null;
-  const note = q2 && q1 === "starting" ? (STARTING_NOTE[q2] || null) : null;
-  const companions = q2
-    ? q3.filter(id => Q3_PKG_IDX[id] !== RESULT_IDX[q2]).map(id => t.tech.packages[Q3_PKG_IDX[id]])
-    : [];
-
-  const toggleQ3 = (id) => setQ3(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
-
-  const activeQ = step === 1 ? q1 : step === 2 ? q2 : true;
-
-  const optCard = (selected) => ({
-    display:"flex", alignItems:"center", gap:16,
-    padding:"18px 20px",
-    border:`2px solid ${selected ? C.teal : "#D4C5B0"}`,
-    background: selected ? "rgba(90,158,150,0.08)" : C.cream,
-    cursor:"pointer", transition:"all 0.15s", marginBottom:10,
-    boxShadow: selected ? `3px 3px 0 rgba(90,158,150,0.25)` : "none",
-  });
-
-  const back = () => { setDir("backward"); setStep(s => s - 1); if (step === 3) setQ3([]); else setQ2(null); };
-  const handleNext = () => {
-    if (pulsing || !activeQ) return;
-    setPulsing(true);
-    setTimeout(() => { setPulsing(false); setDir("forward"); step < TOTAL ? setStep(s => s + 1) : setStep(TOTAL + 1); }, 440);
-  };
-
-  const stepLabel = step === 1 ? t.finder.q1 : step === 2 ? t.finder.q2 : t.finder.q3;
-
-  return (
-    <>
-      <section className="section" style={{paddingTop:100,paddingBottom:80}}>
-        <div style={{maxWidth:560,margin:"0 auto"}}>
-
-          <div style={{textAlign:"center",marginBottom:48}}>
-            <div className="section-eyebrow" style={{color:C.teal}}>{t.finder.eyebrow}</div>
-            <h1 className="section-title" style={{marginBottom:8}}>
-              {t.finder.title} <span style={{color:C.red}}>{t.finder.titleSpan}</span> {t.finder.titleEnd}
-            </h1>
-            <p style={{fontSize:15,color:"#555",fontWeight:600,lineHeight:1.7}}>{t.finder.sub}</p>
-          </div>
-
-          <div style={{background:C.parchment,border:`3px solid ${C.espresso}`,boxShadow:`5px 5px 0 ${C.espresso}`,padding:"40px 40px 36px",overflow:"hidden"}}>
-            <div key={step} style={{animation:`${dir==="forward"?"slideInRight":"slideInLeft"} 0.28s ease forwards`}}>
-
-            {step <= TOTAL ? (
-              <>
-                {/* Progress bar */}
-                <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:32}}>
-                  {step > 1 && (
-                    <button onClick={back} style={{background:"none",border:"none",cursor:"pointer",padding:0,color:C.espresso,fontSize:22,lineHeight:1,flexShrink:0,marginRight:2}}>‹</button>
-                  )}
-                  <div style={{flex:1,height:4,background:"#D4C5B0",borderRadius:2,overflow:"hidden"}}>
-                    <div style={{width:`${(step/TOTAL)*100}%`,height:"100%",background:C.teal,transition:"width 0.3s"}} />
-                  </div>
-                  <div style={{fontSize:11,fontWeight:700,letterSpacing:"0.12em",color:C.espresso,opacity:0.4,flexShrink:0,textTransform:"uppercase"}}>{step} {t.finder.stepOf} {TOTAL}</div>
-                </div>
-
-                <h2 style={{fontFamily:"'Lilita One',cursive",fontSize:24,color:C.espresso,marginBottom:step===3?8:28,lineHeight:1.3}}>
-                  {stepLabel}
-                </h2>
-
-                {step === 3 && (
-                  <p style={{fontSize:13,color:"#777",fontWeight:600,marginBottom:24}}>{t.finder.q3Sub}</p>
-                )}
-
-                {(step === 1 ? q1Options : step === 2 ? q2Options : q3Options).map(opt => {
-                  const selected = step === 1 ? q1 === opt.id : step === 2 ? q2 === opt.id : q3.includes(opt.id);
-                  return (
-                    <div key={opt.id}
-                      onClick={() => step === 1 ? setQ1(opt.id) : step === 2 ? setQ2(opt.id) : toggleQ3(opt.id)}
-                      style={optCard(selected)}
-                    >
-                      <span style={{fontSize:24,flexShrink:0}}>{opt.icon}</span>
-                      <div style={{flex:1}}>
-                        <div style={{fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:15,color:C.espresso,marginBottom:2}}>{opt.label}</div>
-                        <div style={{fontSize:13,color:"#777",fontWeight:600}}>{opt.desc}</div>
-                      </div>
-                      {step === 3 && (
-                        <div style={{width:18,height:18,border:`2px solid ${q3.includes(opt.id) ? C.teal : "#C0B0A0"}`,background:q3.includes(opt.id) ? C.teal : "transparent",flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.15s"}}>
-                          {q3.includes(opt.id) && <span style={{color:C.cream,fontSize:11,fontWeight:900,lineHeight:1}}>✓</span>}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-
-                <button
-                  disabled={!activeQ || pulsing}
-                  onClick={handleNext}
-                  style={{
-                    width:"100%",marginTop:24,padding:"16px",
-                    background: activeQ ? C.espresso : "#C5B9AA",
-                    color:C.cream,
-                    border:`3px solid ${activeQ ? C.espresso : "#C5B9AA"}`,
-                    fontFamily:"'Nunito',sans-serif",fontWeight:700,
-                    fontSize:14,letterSpacing:"0.1em",textTransform:"uppercase",
-                    cursor: activeQ ? "pointer" : "not-allowed",
-                    transition:"background 0.2s",
-                    animation: pulsing ? "btnPulse 0.22s ease-in-out 2" : "none",
-                  }}
-                >
-                  {step === TOTAL ? t.finder.seeResult : t.finder.continue}
-                </button>
-              </>
-            ) : (
-              <>
-                {/* Result */}
-                <div style={{textAlign:"center",marginBottom:28}}>
-                  <div style={{fontSize:10,letterSpacing:"0.2em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:10}}>{t.finder.match}</div>
-                  <div style={{fontSize:40,marginBottom:8}}>{pkg.icon}</div>
-                  <div style={{fontFamily:"'Lilita One',cursive",fontSize:26,color:C.espresso,marginBottom:6}}>{pkg.name}</div>
-                  <div style={{display:"inline-block",background:C.teal,color:C.cream,fontSize:10,fontWeight:700,letterSpacing:"0.15em",textTransform:"uppercase",padding:"4px 12px",marginBottom:20}}>{pkg.tag}</div>
-                  <p style={{fontSize:15,lineHeight:1.8,color:"#4a3728",fontWeight:600,marginBottom:20}}>{pkg.desc}</p>
-                  <div style={{fontFamily:"'Lilita One',cursive",fontSize:20,color:C.teal}}>{pkg.price}</div>
-                </div>
-
-                {note && (
-                  <div style={{border:`2px solid ${C.beige}`,background:"rgba(200,146,42,0.07)",padding:"14px 18px",marginBottom:24,fontSize:13,color:"#4a3728",fontWeight:600,lineHeight:1.7}}>
-                    💡 {note}
-                  </div>
-                )}
-
-                {companions.length > 0 && (
-                  <div style={{marginBottom:24,paddingTop:20,borderTop:`1px solid ${C.espresso}22`}}>
-                    <div style={{fontSize:10,letterSpacing:"0.18em",textTransform:"uppercase",color:C.espresso,fontWeight:700,opacity:0.5,marginBottom:14}}>{t.finder.alsoConsider}</div>
-                    {companions.map(c => (
-                      <div key={c.name} style={{display:"flex",alignItems:"center",gap:12,padding:"12px 16px",border:`1px solid ${C.beige}`,background:C.cream,marginBottom:8}}>
-                        <span style={{fontSize:22}}>{c.icon}</span>
-                        <div>
-                          <div style={{fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:14,color:C.espresso}}>{c.name}</div>
-                          <div style={{fontSize:12,color:C.teal,fontWeight:700,marginTop:2}}>{c.price}</div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                <button className="hero-cta" onClick={() => go("Discovery", { serviceIdxs: Array.from(new Set([RESULT_IDX[q2], ...companions.map(c => t.tech.packages.indexOf(c))])) })} style={{width:"100%",textAlign:"center",marginBottom:12,display:"block"}}>
-                  {t.tech.creds.cta}
-                </button>
-                <button onClick={() => go("Tech Services")} style={{width:"100%",background:"none",border:`2px solid ${C.espresso}`,color:C.espresso,fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,letterSpacing:"0.08em",textTransform:"uppercase",padding:"14px",cursor:"pointer",marginBottom:20}}>
-                  {t.finder.seeAll}
-                </button>
-                <div style={{textAlign:"center"}}>
-                  <button onClick={() => { setStep(1); setQ1(null); setQ2(null); setQ3([]); }}
-                    style={{background:"none",border:"none",cursor:"pointer",fontSize:12,color:C.espresso,opacity:0.45,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",textDecoration:"underline"}}>
-                    {t.finder.startOver}
-                  </button>
-                </div>
-              </>
-            )}
-            </div>
-          </div>
-
-        </div>
-      </section>
-      <TextileBorder />
-    </>
-  );
-}
 
 function DiscoveryPage({ go, t, prefillRef }) {
   const d = t.discovery;
@@ -3315,7 +3037,6 @@ export default function CafeConPan() {
       case "La Mesa Referral": return <GoogleAuthGate><LaMesaReferralPage t={t} go={go} /></GoogleAuthGate>;
       case "Pay": return <PayPage t={t} />;
       case "Privacy Policy": return <PrivacyPolicyPage lang={lang} />;
-      case "Find My Plan": return <FindMyPlanPage go={go} t={t} />;
       case "The Grind": return <GoogleAuthGate><TheGrindPage go={go} /></GoogleAuthGate>;
       case "The Pour": return <GoogleAuthGate><Suspense fallback={null}><QuoteBuilder /></Suspense></GoogleAuthGate>;
       case "The Cupping": return <GoogleAuthGate><Suspense fallback={null}><AuditBuilder /></Suspense></GoogleAuthGate>;
