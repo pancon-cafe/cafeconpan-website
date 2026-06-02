@@ -2616,6 +2616,13 @@ function TheGrindPage({ go }) {
   const [result, setResult]   = useState(null);
   const [brewing, setBrewing] = useState(false);
   const [error, setError]     = useState(null);
+  const [isDesktop, setIsDesktop] = useState(() => window.innerWidth >= 700);
+
+  useEffect(() => {
+    const onResize = () => setIsDesktop(window.innerWidth >= 700);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
 
   const toggle = (field, val) => setForm(f => ({
     ...f, [field]: f[field].includes(val) ? f[field].filter(x => x !== val) : [...f[field], val]
@@ -2722,12 +2729,111 @@ serviceRationale: If the situation suggests a different fit than expected, say s
     </div>
   );
 
+  const GrindForm = () => (
+    <form onSubmit={brew}>
+      <div style={{ display:"flex", flexDirection:"column", gap:28 }}>
+        <div>
+          <span style={lbl}>Business Name *</span>
+          <input style={fld} required value={form.bizName} onChange={e=>setForm(f=>({...f,bizName:e.target.value}))} placeholder="e.g. Maria's Salon LLC" />
+        </div>
+        <div>
+          <span style={lbl}>Contact Name</span>
+          <input style={fld} value={form.personName} onChange={e=>setForm(f=>({...f,personName:e.target.value}))} placeholder="e.g. Maria Gonzalez" />
+        </div>
+        <div>
+          <span style={lbl}>Industry *</span>
+          <input style={fld} required value={form.industry} onChange={e=>setForm(f=>({...f,industry:e.target.value}))} placeholder="e.g. Restaurant, Dental Office, Barbershop…" />
+        </div>
+        <div>
+          <span style={lbl}>What they do *</span>
+          <textarea style={{...fld, minHeight:80, resize:"vertical"}} required value={form.whatTheyDo} onChange={e=>setForm(f=>({...f,whatTheyDo:e.target.value}))} placeholder="Brief description of their business and day-to-day operations…" />
+        </div>
+        <div>
+          <span style={lbl}>Why they reached out / pain points</span>
+          <textarea style={{...fld, minHeight:80, resize:"vertical"}} value={form.painPoints} onChange={e=>setForm(f=>({...f,painPoints:e.target.value}))} placeholder="What problems are they facing? What made them reach out?" />
+        </div>
+        <div>
+          <span style={lbl}>Team size</span>
+          <div style={{ marginTop:10, display:"flex", flexWrap:"wrap", gap:8 }}>
+            {SIZES.map(s => <button type="button" key={s} style={chip(form.teamSize===s)} onClick={()=>setForm(f=>({...f,teamSize:s}))}>{s}</button>)}
+          </div>
+        </div>
+        <div>
+          <span style={lbl}>Current devices</span>
+          <div style={{ marginTop:10, display:"flex", flexWrap:"wrap", gap:8 }}>
+            {DEVICES.map(d => <button type="button" key={d} style={chip(form.devices.includes(d))} onClick={()=>toggle("devices",d)}>{d}</button>)}
+          </div>
+        </div>
+        <div>
+          <span style={lbl}>Extra context</span>
+          <textarea style={{...fld, minHeight:80, resize:"vertical"}} value={form.extra} onChange={e=>setForm(f=>({...f,extra:e.target.value}))} placeholder="Referral source, budget signals, specific goals, anything else…" />
+        </div>
+        {error && <div style={{ fontSize:13, color:C.red, fontWeight:700, padding:"10px 14px", background:`${C.red}15`, border:`1px solid ${C.red}44`, borderRadius:6 }}>{error}</div>}
+        <button type="submit" disabled={brewing} style={{ alignSelf:"flex-start", background:C.beige, border:"none", borderRadius:9, color:C.bg, padding:"13px 28px", cursor:brewing?"not-allowed":"pointer", fontFamily:"'Nunito',sans-serif", fontWeight:700, fontSize:14, letterSpacing:"0.05em", opacity:brewing?0.5:1 }}>
+          {brewing ? "Brewing…" : "Brew the Brief →"}
+        </button>
+      </div>
+    </form>
+  );
+
+  const GrindResult = () => result ? (
+    <div>
+      <div style={{ marginBottom:20, paddingBottom:16, borderBottom:`1px solid ${C.b0}` }}>
+        <div style={{ fontFamily:"'Lilita One',cursive", fontSize:isDesktop?22:28, color:C.white, marginBottom:4 }}>{form.bizName}</div>
+        {form.personName && <div style={{ fontSize:isDesktop?12:14, color:C.muted, fontWeight:600 }}>{form.personName} · {form.industry}</div>}
+      </div>
+      <OutSection label="Ask These Questions">
+        {result.discoveryQuestions?.map((q, i) => (
+          <div key={i} style={{ display:"flex", gap:10, marginBottom:8, alignItems:"flex-start" }}>
+            <span style={{ fontSize:isDesktop?10:11, color:C.teal, fontWeight:700, flexShrink:0, marginTop:2 }}>{i+1}.</span>
+            <span style={{ fontSize:isDesktop?13:14, color:C.dkCream, lineHeight:1.6, fontWeight:600 }}>{q}</span>
+          </div>
+        ))}
+      </OutSection>
+      <OutSection label="What to Look For" color={C.gold}>
+        {result.lookFor?.map((item, i) => (
+          <div key={i} style={{ display:"flex", gap:10, marginBottom:8, alignItems:"flex-start" }}>
+            <span style={{ fontSize:isDesktop?13:14, color:C.gold, flexShrink:0, marginTop:1 }}>→</span>
+            <span style={{ fontSize:isDesktop?13:14, color:C.dkCream, lineHeight:1.6, fontWeight:600 }}>{item}</span>
+          </div>
+        ))}
+      </OutSection>
+      <OutSection label="Creative Opportunities" color={C.red}>
+        {result.opportunities?.map((opp, i) => (
+          <div key={i} style={{ borderLeft:`3px solid ${C.red}`, paddingLeft:isDesktop?12:14, marginBottom:isDesktop?12:14 }}>
+            <div style={{ fontSize:isDesktop?12:13, fontWeight:800, color:C.dkCream, marginBottom:3 }}>{opp.headline}</div>
+            <div style={{ fontSize:isDesktop?12:13, color:C.muted, lineHeight:1.6, fontWeight:600 }}>{opp.description}</div>
+          </div>
+        ))}
+      </OutSection>
+      <OutSection label="Services That Likely Apply">
+        <div style={{ display:"flex", flexWrap:"wrap", gap:isDesktop?6:8, marginBottom:isDesktop?10:12 }}>
+          {result.likelyServices?.map(s => (
+            <span key={s} style={{ background:`${C.teal}18`, border:`1px solid ${C.teal}44`, color:C.dkCream, fontFamily:"'Nunito',sans-serif", fontSize:isDesktop?11:12, fontWeight:700, padding:isDesktop?"4px 10px":"5px 12px", borderRadius:4 }}>{s}</span>
+          ))}
+        </div>
+        {result.serviceRationale && (
+          <p style={{ fontSize:isDesktop?12:13, color:C.muted, lineHeight:1.7, fontWeight:600, margin:0 }}>{result.serviceRationale}</p>
+        )}
+      </OutSection>
+      <div style={{ borderTop:`1px solid ${C.b0}`, paddingTop:isDesktop?20:24, display:"flex", flexDirection:isDesktop?"column":"row", gap:isDesktop?10:12, flexWrap:"wrap" }}>
+        <button onClick={beginAudit} style={{ background:C.teal, border:"none", borderRadius:9, color:C.bg, padding:isDesktop?"12px 20px":"13px 24px", cursor:"pointer", fontFamily:"'Nunito',sans-serif", fontWeight:700, fontSize:isDesktop?13:14, letterSpacing:"0.05em" }}>
+          Begin Audit for {form.bizName} →
+        </button>
+        <button onClick={() => { setResult(null); setForm(blank); }} style={{ background:"none", border:`1px solid ${C.b0}`, color:C.muted, borderRadius:9, cursor:"pointer", fontFamily:"'Nunito',sans-serif", fontWeight:700, fontSize:isDesktop?12:13, letterSpacing:"0.08em", textTransform:"uppercase", padding:isDesktop?"10px 20px":"13px 24px" }}>
+          New Client
+        </button>
+      </div>
+    </div>
+  ) : null;
+
   return (
-    <div style={{ fontFamily:"'Nunito',sans-serif", background:C.bg, minHeight:"100vh", color:C.dkCream, paddingTop:64 }}>
+    <div style={{ fontFamily:"'Nunito',sans-serif", background:C.bg, minHeight:"100vh", color:C.dkCream, paddingTop:64,
+      ...(isDesktop ? {} : { display:'flex', flexDirection:'column', maxWidth:480, margin:'0 auto', position:'relative' }) }}>
 
       {/* Sticky header — matches The Cupping & The Pour */}
-      <div style={{ background:C.surf, borderBottom:`1px solid ${C.b0}`, padding:"13px 20px 0", position:"sticky", top:64, zIndex:50 }}>
-        <div style={{ maxWidth:640, margin:"0 auto" }}>
+      <div style={{ background:C.surf, borderBottom:`1px solid ${C.b0}`, padding:"13px 20px 0", position:"sticky", top:64, zIndex:50, flexShrink:0 }}>
+        <div style={{ maxWidth: isDesktop ? 1040 : 480, margin:"0 auto" }}>
           <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:6, marginBottom:10 }}>
             {[["The Grind","the-grind"],["The Cupping","audit-builder"],["The Pour","quote-builder"]].map(([name,hash],i) => (
               <span key={hash} style={{ display:"flex", alignItems:"center", gap:6 }}>
@@ -2753,8 +2859,41 @@ serviceRationale: If the situation suggests a different fit than expected, say s
         </div>
       </div>
 
-      <div style={{ maxWidth:640, margin:"0 auto", padding:"32px 24px 80px" }}>
+      {isDesktop ? (
+        /* ── DESKTOP TWO-COLUMN ── */
+        <div style={{ display:"flex", maxWidth:1040, margin:"0 auto", minHeight:"calc(100vh - 136px)" }}>
 
+          {/* Left: form (always visible on desktop) */}
+          <div style={{ flex:1, padding:"32px 40px 40px", overflowY:"auto" }}>
+            <h2 style={{ fontFamily:"'Lilita One',cursive", fontSize:24, lineHeight:1.3, color:C.white, margin:"0 0 24px 0" }}>
+              Tell me about your prospect.
+            </h2>
+            <GrindForm />
+          </div>
+
+          {/* Right: pre-call brief (sticky sidebar) */}
+          <div style={{ width:340, flexShrink:0, padding:"28px 28px", borderLeft:`1px solid ${C.b0}`, position:"sticky", top:136, alignSelf:"start", maxHeight:"calc(100vh - 136px)", overflowY:"auto" }}>
+            <div style={{ fontSize:10, color:C.muted, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:16 }}>Pre-Call Brief</div>
+            {brewing ? (
+              <div style={{ textAlign:"center", padding:"40px 0" }}>
+                <div style={{ display:"inline-block", transform:"scale(1.5)", transformOrigin:"center top", marginBottom:36 }}><SteamSVG /></div>
+                <div style={{ fontFamily:"'Lilita One',cursive", fontSize:20, color:C.dkCream }}>Brewing<span className="brew-dots">...</span></div>
+                <div style={{ width:160, height:4, background:C.b0, margin:"14px auto 0", overflow:"hidden" }}>
+                  <div className="brew-bar" style={{ height:"100%", background:C.beige }} />
+                </div>
+              </div>
+            ) : result ? (
+              <GrindResult />
+            ) : (
+              <div style={{ fontSize:13, color:C.muted, lineHeight:1.8, fontWeight:600 }}>
+                Fill in the client info and hit "Brew the Brief" to generate your pre-call prep.
+              </div>
+            )}
+          </div>
+        </div>
+      ) : (
+        /* ── MOBILE SINGLE COLUMN ── */
+        <div style={{ padding:"32px 24px 80px" }}>
           {brewing ? (
             <div style={{ textAlign:"center", padding:"64px 24px" }}>
               <div style={{ display:"inline-block", transform:"scale(2)", transformOrigin:"center top", marginBottom:56 }}><SteamSVG /></div>
@@ -2764,118 +2903,18 @@ serviceRationale: If the situation suggests a different fit than expected, say s
               </div>
               <p style={{ marginTop:14, fontSize:11, color:C.muted, fontWeight:700, letterSpacing:"0.14em", textTransform:"uppercase" }}>Grinding the beans...</p>
             </div>
-
           ) : result ? (
             <div>
               <div style={{ marginBottom:32, paddingBottom:20, borderBottom:`1px solid ${C.b0}` }}>
                 <div style={{ fontSize:10, letterSpacing:"0.2em", textTransform:"uppercase", fontWeight:700, color:C.teal, marginBottom:6 }}>Pre-Call Brief</div>
-                <div style={{ fontFamily:"'Lilita One',cursive", fontSize:28, color:C.white, marginBottom:4 }}>{form.bizName}</div>
-                {form.personName && <div style={{ fontSize:14, color:C.muted, fontWeight:600 }}>{form.personName} · {form.industry}</div>}
               </div>
-
-              <OutSection label="Ask These Questions">
-                {result.discoveryQuestions?.map((q, i) => (
-                  <div key={i} style={{ display:"flex", gap:12, marginBottom:10, alignItems:"flex-start" }}>
-                    <span style={{ fontSize:11, color:C.teal, fontWeight:700, flexShrink:0, marginTop:2 }}>{i+1}.</span>
-                    <span style={{ fontSize:14, color:C.dkCream, lineHeight:1.6, fontWeight:600 }}>{q}</span>
-                  </div>
-                ))}
-              </OutSection>
-
-              <OutSection label="What to Look For" color={C.gold}>
-                {result.lookFor?.map((item, i) => (
-                  <div key={i} style={{ display:"flex", gap:12, marginBottom:8, alignItems:"flex-start" }}>
-                    <span style={{ fontSize:14, color:C.gold, flexShrink:0, marginTop:1 }}>→</span>
-                    <span style={{ fontSize:14, color:C.dkCream, lineHeight:1.6, fontWeight:600 }}>{item}</span>
-                  </div>
-                ))}
-              </OutSection>
-
-              <OutSection label="Creative Opportunities" color={C.red}>
-                {result.opportunities?.map((opp, i) => (
-                  <div key={i} style={{ borderLeft:`3px solid ${C.red}`, paddingLeft:14, marginBottom:14 }}>
-                    <div style={{ fontSize:13, fontWeight:800, color:C.dkCream, marginBottom:4, letterSpacing:"0.02em" }}>{opp.headline}</div>
-                    <div style={{ fontSize:13, color:C.muted, lineHeight:1.6, fontWeight:600 }}>{opp.description}</div>
-                  </div>
-                ))}
-              </OutSection>
-
-              <OutSection label="Services That Likely Apply">
-                <div style={{ display:"flex", flexWrap:"wrap", gap:8, marginBottom:12 }}>
-                  {result.likelyServices?.map(s => (
-                    <span key={s} style={{ background:`${C.teal}18`, border:`1px solid ${C.teal}44`, color:C.dkCream, fontFamily:"'Nunito',sans-serif", fontSize:12, fontWeight:700, padding:"5px 12px", borderRadius:4 }}>{s}</span>
-                  ))}
-                </div>
-                {result.serviceRationale && (
-                  <p style={{ fontSize:13, color:C.muted, lineHeight:1.7, fontWeight:600, margin:0 }}>{result.serviceRationale}</p>
-                )}
-              </OutSection>
-
-              <div style={{ borderTop:`1px solid ${C.b0}`, paddingTop:24, display:"flex", gap:12, flexWrap:"wrap" }}>
-                <button onClick={beginAudit} style={{ background:C.teal, border:"none", borderRadius:9, color:C.bg, padding:"13px 24px", cursor:"pointer", fontFamily:"'Nunito',sans-serif", fontWeight:700, fontSize:14, letterSpacing:"0.05em" }}>
-                  Begin Audit for {form.bizName} →
-                </button>
-                <button onClick={() => { setResult(null); setForm(blank); }} style={{ background:"none", border:`1px solid ${C.b0}`, color:C.muted, borderRadius:9, cursor:"pointer", fontFamily:"'Nunito',sans-serif", fontWeight:700, fontSize:13, letterSpacing:"0.08em", textTransform:"uppercase", padding:"13px 24px" }}>
-                  New Client
-                </button>
-              </div>
+              <GrindResult />
             </div>
-
           ) : (
-            <form onSubmit={brew}>
-              <div style={{ display:"flex", flexDirection:"column", gap:28 }}>
-
-                <div>
-                  <span style={lbl}>Business Name *</span>
-                  <input style={fld} required value={form.bizName} onChange={e=>setForm(f=>({...f,bizName:e.target.value}))} placeholder="e.g. Maria's Salon LLC" />
-                </div>
-
-                <div>
-                  <span style={lbl}>Contact Name</span>
-                  <input style={fld} value={form.personName} onChange={e=>setForm(f=>({...f,personName:e.target.value}))} placeholder="e.g. Maria Gonzalez" />
-                </div>
-
-                <div>
-                  <span style={lbl}>Industry *</span>
-                  <input style={fld} required value={form.industry} onChange={e=>setForm(f=>({...f,industry:e.target.value}))} placeholder="e.g. Restaurant, Dental Office, Barbershop…" />
-                </div>
-
-                <div>
-                  <span style={lbl}>What they do *</span>
-                  <textarea style={{...fld, minHeight:80, resize:"vertical"}} required value={form.whatTheyDo} onChange={e=>setForm(f=>({...f,whatTheyDo:e.target.value}))} placeholder="Brief description of their business and day-to-day operations…" />
-                </div>
-
-                <div>
-                  <span style={lbl}>Why they reached out / pain points</span>
-                  <textarea style={{...fld, minHeight:80, resize:"vertical"}} value={form.painPoints} onChange={e=>setForm(f=>({...f,painPoints:e.target.value}))} placeholder="What problems are they facing? What made them reach out?" />
-                </div>
-
-                <div>
-                  <span style={lbl}>Team size</span>
-                  <div style={{ marginTop:10, display:"flex", flexWrap:"wrap", gap:8 }}>
-                    {SIZES.map(s => <button type="button" key={s} style={chip(form.teamSize===s)} onClick={()=>setForm(f=>({...f,teamSize:s}))}>{s}</button>)}
-                  </div>
-                </div>
-
-                <div>
-                  <span style={lbl}>Current devices</span>
-                  <div style={{ marginTop:10, display:"flex", flexWrap:"wrap", gap:8 }}>
-                    {DEVICES.map(d => <button type="button" key={d} style={chip(form.devices.includes(d))} onClick={()=>toggle("devices",d)}>{d}</button>)}
-                  </div>
-                </div>
-
-                <div>
-                  <span style={lbl}>Extra context</span>
-                  <textarea style={{...fld, minHeight:80, resize:"vertical"}} value={form.extra} onChange={e=>setForm(f=>({...f,extra:e.target.value}))} placeholder="Referral source, budget signals, specific goals, anything else…" />
-                </div>
-
-                {error && <div style={{ fontSize:13, color:C.red, fontWeight:700, padding:"10px 14px", background:`${C.red}15`, border:`1px solid ${C.red}44`, borderRadius:6 }}>{error}</div>}
-
-                <button type="submit" style={{ alignSelf:"flex-start", background:C.beige, border:"none", borderRadius:9, color:C.bg, padding:"13px 28px", cursor:"pointer", fontFamily:"'Nunito',sans-serif", fontWeight:700, fontSize:14, letterSpacing:"0.05em" }}>Brew the Brief →</button>
-              </div>
-            </form>
+            <GrindForm />
           )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
