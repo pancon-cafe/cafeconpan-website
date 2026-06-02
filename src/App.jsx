@@ -296,6 +296,17 @@ const STRINGS = {
       ctaSub:"Fill out a quick intake form and we'll reach out within 24 hours to schedule your intro call.",
       ctaDisclaimer:"No surprises, no hidden fees — your Total Investment Summary is signed before any work begins.",
       ctaBtn:"Get Started →",
+      credsEyebrow:"Credentials & Structure", credsTitle:"Built to", credsTitleSpan:"Back It Up",
+      credsSub:"Certifications, legal structure, and partner programs in place before going to market — because credibility is built before the first client, not after.",
+      credsBadges:[
+        {label:"MDM Certifications",val:"Jamf · Mosyle · Hands-On"},
+        {label:"Apple Partnership",val:"ACN — Applied"},
+        {label:"Carrier Approach",val:"100% Agnostic"},
+        {label:"Business Status",val:"LLC · EIN"},
+        {label:"Procurement",val:"Reseller Exempt"},
+        {label:"Gov Contracting",val:"SAM · CAGE Registered"},
+      ],
+      credsCta:"Request a Consultation →",
     },
     discovery:{
       eyebrow:"Get Started", title:"Tell Us About", titleSpan:"Your Business",
@@ -547,6 +558,17 @@ const STRINGS = {
       ctaSub:"Completa un formulario rápido y nos comunicaremos en 24 horas para programar tu llamada inicial.",
       ctaDisclaimer:"Sin sorpresas, sin cargos ocultos — tu Resumen de Inversión Total se firma antes de que comience cualquier trabajo.",
       ctaBtn:"Comenzar →",
+      credsEyebrow:"Credenciales y Estructura", credsTitle:"Construido para", credsTitleSpan:"Respaldarlo",
+      credsSub:"Certificaciones, estructura legal y programas de socios en marcha antes de salir al mercado — porque la credibilidad se construye antes del primer cliente, no después.",
+      credsBadges:[
+        {label:"Certificaciones MDM",val:"Jamf · Mosyle · Hands-On"},
+        {label:"Asociación Apple",val:"ACN — Aplicado"},
+        {label:"Enfoque Carrier",val:"100% Independiente"},
+        {label:"Estado del Negocio",val:"LLC · EIN"},
+        {label:"Adquisición",val:"Exención Revendedor"},
+        {label:"Contratación Gov",val:"SAM · CAGE Registrado"},
+      ],
+      credsCta:"Solicitar una Consulta →",
     },
     discovery:{
       eyebrow:"Comenzar", title:"Cuéntanos Sobre", titleSpan:"Tu Negocio",
@@ -2906,6 +2928,28 @@ function TechServicesPage({ go, t }) {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <TextileBorder />
+
+      {/* ── CREDENTIALS ── */}
+      <section className="section section-dark">
+        <div className="section-header">
+          <div className="section-eyebrow" style={{color:C.teal}}>{ts.credsEyebrow}</div>
+          <h2 className="section-title section-title-light">{ts.credsTitle} <span>{ts.credsTitleSpan}</span></h2>
+          <p className="section-sub section-sub-light">{ts.credsSub}</p>
+        </div>
+        <div className="creds-row">
+          {ts.credsBadges.map(c => (
+            <div key={c.label} className="cred-badge">
+              <div className="cred-badge-label">{c.label}</div>
+              <div className="cred-badge-val">{c.val}</div>
+            </div>
+          ))}
+        </div>
+        <div style={{textAlign:"center",marginTop:48}}>
+          <button className="hero-cta" onClick={() => go("Discovery")}>{ts.credsCta}</button>
         </div>
       </section>
 
