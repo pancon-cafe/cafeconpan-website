@@ -253,7 +253,7 @@ function CoverPage({ data }) {
         </View>
         <View style={coverS.metaRow}>
           <Text style={coverS.metaLabel}>Contact</Text>
-          <Text style={coverS.metaValue}>jason@pancon.cafe  ·  703-338-0208</Text>
+          <Text style={coverS.metaValue}>jason@pancon.cafe  ·  808-868-6161</Text>
         </View>
 
         {/* Confidential strip */}
@@ -603,7 +603,7 @@ export default function AuditReportDocument({ data }) {
             {data.preparedBy} of Cafe Con Pan LLC. The findings and recommendations
             are based on information gathered during the assessment and are intended
             solely to guide technology strategy decisions for this organization.
-            Questions or follow-up? Reach us at jason@pancon.cafe or 703-338-0208.
+            Questions or follow-up? Reach us at jason@pancon.cafe or 808-868-6161.
           </Text>
         </CCPCallout>
 
