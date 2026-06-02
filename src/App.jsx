@@ -628,10 +628,11 @@ const css = `
     background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
     opacity:0.5}
 
+  :root{--safe-top:env(safe-area-inset-top,0px);--nav-h:calc(64px + var(--safe-top))}
   nav{position:fixed;top:0;left:0;right:0;z-index:100;
     background:${C.espresso};
     display:flex;align-items:center;justify-content:space-between;
-    padding:0 40px;height:64px;
+    padding:var(--safe-top) 40px 0;height:var(--nav-h);
     border-bottom:3px solid ${C.beige}}
   .nav-logo{font-family:'Pacifico',cursive;font-size:20px;color:${C.cream};
     cursor:pointer;letter-spacing:0.02em;line-height:1}
@@ -658,7 +659,7 @@ const css = `
 
   .hero{min-height:100vh;background:${C.cream};display:flex;
     align-items:center;justify-content:center;
-    padding:80px 40px 140px;position:relative;overflow:hidden;text-align:center}
+    padding:calc(80px + var(--safe-top)) 40px 140px;position:relative;overflow:hidden;text-align:center}
   .hero-sunburst{position:absolute;top:50%;left:50%;
     transform:translate(-50%,-50%);z-index:0}
   .hero-content{position:relative;z-index:2;max-width:800px}
@@ -836,14 +837,14 @@ const css = `
   .scroll-btn-mobile{display:none;background:none;border:none;cursor:pointer;flex-direction:column;align-items:center;gap:4px;padding:0;margin:20px auto 0}
 
   @media(max-width:768px){
-    nav{padding:0 20px}
+    nav{padding:var(--safe-top) 20px 0}
     .nav-links{display:none}
-    .nav-links.open{display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:${C.espresso};padding:16px 20px 24px;gap:2px;z-index:99;border-bottom:3px solid ${C.beige}}
+    .nav-links.open{display:flex;flex-direction:column;position:fixed;top:var(--nav-h);left:0;right:0;background:${C.espresso};padding:16px 20px 24px;gap:2px;z-index:99;border-bottom:3px solid ${C.beige}}
     .nav-btn{width:100%;text-align:left;padding:12px 10px;font-size:14px}
     .nav-cta-btn{width:100%;text-align:center;margin-top:12px;padding:14px 20px}
     .lang-btn{margin-top:8px;width:100%;text-align:center}
     .nav-hamburger{display:flex}
-    .hero{padding:100px 24px 80px;min-height:100vh}
+    .hero{padding:calc(100px + var(--safe-top)) 24px 80px;min-height:100vh}
     .scroll-btn{display:none}
     .scroll-btn-mobile{display:flex}
     .section{padding:56px 24px}
@@ -1131,7 +1132,7 @@ function HomePage({ go, t, lang }) {
 function AboutPage({ t, go }) {
   return (
     <>
-      <section className="section" style={{paddingTop:100}}>
+      <section className="section" style={{paddingTop:"calc(100px + env(safe-area-inset-top, 0px))"}}>
         <div className="section-header">
           <div className="section-eyebrow">{t.about.eyebrow}</div>
           <h2 className="section-title">{t.about.title} <span>{t.about.titleSpan}</span> {t.about.titleEnd}</h2>
@@ -1193,7 +1194,7 @@ function ContactPage({ t, go, scrollToSocials, setGameActive }) {
   };
 
   return (
-    <section className="section" style={{paddingTop:100}}>
+    <section className="section" style={{paddingTop:"calc(100px + env(safe-area-inset-top, 0px))"}}>
       <div className="section-header">
         <div className="section-eyebrow">{t.contact.eyebrow}</div>
         <h2 className="section-title">{t.contact.title && `${t.contact.title} `}<span>{t.contact.titleSpan}</span></h2>
@@ -1277,7 +1278,7 @@ function ContactPage({ t, go, scrollToSocials, setGameActive }) {
 function CommunityPage({ t, go }) {
   return (
     <>
-      <section className="section section-alt" style={{paddingTop:100,position:"relative",overflow:"hidden"}}>
+      <section className="section section-alt" style={{paddingTop:"calc(100px + env(safe-area-inset-top, 0px))",position:"relative",overflow:"hidden"}}>
         <div style={{position:"absolute",left:-80,top:"50%",transform:"translateY(-50%)",opacity:0.1,pointerEvents:"none"}}>
           <Sunburst size={500} color={C.gold} opacity={0.8} />
         </div>
@@ -1509,7 +1510,7 @@ function LaMesaPage({ t, go }) {
     <>
       {/* Hero */}
       <section style={{
-        background:C.espresso,paddingTop:100,paddingBottom:72,
+        background:C.espresso,paddingTop:"calc(100px + env(safe-area-inset-top, 0px))",paddingBottom:72,
         paddingLeft:40,paddingRight:40,textAlign:"center",
         position:"relative",overflow:"hidden",
       }}>
@@ -1672,7 +1673,7 @@ function LaMesaReferralPage({ t, go }) {
 
   return (
     <>
-      <section style={{background:C.espresso,paddingTop:100,paddingBottom:56,paddingLeft:40,paddingRight:40,textAlign:"center",position:"relative",overflow:"hidden"}}>
+      <section style={{background:C.espresso,paddingTop:"calc(100px + env(safe-area-inset-top, 0px))",paddingBottom:56,paddingLeft:40,paddingRight:40,textAlign:"center",position:"relative",overflow:"hidden"}}>
         <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",opacity:0.06,pointerEvents:"none"}}>
           <Sunburst size={600} color={C.gold} opacity={0.8} />
         </div>
@@ -1800,7 +1801,7 @@ function PrivacyPolicyPage({ lang }) {
 
   return (
     <>
-      <section style={{background:C.espresso,paddingTop:100,paddingBottom:56,paddingLeft:40,paddingRight:40,textAlign:"center",position:"relative",overflow:"hidden"}}>
+      <section style={{background:C.espresso,paddingTop:"calc(100px + env(safe-area-inset-top, 0px))",paddingBottom:56,paddingLeft:40,paddingRight:40,textAlign:"center",position:"relative",overflow:"hidden"}}>
         <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",opacity:0.06,pointerEvents:"none"}}>
           <Sunburst size={600} color={C.gold} opacity={0.8} />
         </div>
@@ -2011,7 +2012,7 @@ function DiscoveryPage({ go, t, prefillRef }) {
 
   return (
     <>
-      <section style={{background:C.espresso,paddingTop:100,paddingBottom:56,paddingLeft:"clamp(24px,5vw,40px)",paddingRight:"clamp(24px,5vw,40px)",textAlign:"center",position:"relative",overflow:"hidden"}}>
+      <section style={{background:C.espresso,paddingTop:"calc(100px + env(safe-area-inset-top, 0px))",paddingBottom:56,paddingLeft:"clamp(24px,5vw,40px)",paddingRight:"clamp(24px,5vw,40px)",textAlign:"center",position:"relative",overflow:"hidden"}}>
         <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",opacity:0.06,pointerEvents:"none"}}><Sunburst size={600} color={C.gold} opacity={0.8} /></div>
         <div style={{position:"relative",zIndex:2}}>
           <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:16}}>{d.eyebrow}</div>
@@ -2195,7 +2196,7 @@ function ResourcesPage({ go, t, lang }) {
 
   return (
     <>
-      <section id="resources" className="section" style={{paddingTop:100}}>
+      <section id="resources" className="section" style={{paddingTop:"calc(100px + env(safe-area-inset-top, 0px))"}}>
         <div className="section-header">
           <div className="section-eyebrow">{r.eyebrow}</div>
           <h2 className="section-title">{r.title} <span>{r.titleSpan}</span></h2>
@@ -2327,7 +2328,7 @@ const APPLE_STORES = [
 function AppleTeamsPage() {
   const dim = "rgba(245,237,214,0.38)";
   return (
-    <div style={{minHeight:"100vh",background:C.espresso,padding:"100px clamp(20px,5vw,56px) 80px"}}>
+    <div style={{minHeight:"100vh",background:C.espresso,padding:"calc(100px + env(safe-area-inset-top, 0px)) clamp(20px,5vw,56px) 80px"}}>
       <div style={{maxWidth:900,margin:"0 auto"}}>
         <div style={{textAlign:"center",marginBottom:56}}>
           <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:12}}>Internal Reference</div>
@@ -2778,7 +2779,7 @@ function TechServicesPage({ go, t }) {
   return (
     <>
       {/* ── PHILOSOPHY HERO ── */}
-      <section style={{background:C.espresso,paddingTop:100,paddingBottom:64,paddingLeft:"clamp(24px,5vw,40px)",paddingRight:"clamp(24px,5vw,40px)",textAlign:"center",position:"relative",overflow:"hidden"}}>
+      <section style={{background:C.espresso,paddingTop:"calc(100px + env(safe-area-inset-top, 0px))",paddingBottom:64,paddingLeft:"clamp(24px,5vw,40px)",paddingRight:"clamp(24px,5vw,40px)",textAlign:"center",position:"relative",overflow:"hidden"}}>
         <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",opacity:0.05,pointerEvents:"none"}}><Sunburst size={700} color={C.gold} opacity={0.8} /></div>
         <div style={{position:"relative",zIndex:2,maxWidth:640,margin:"0 auto"}}>
           <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:16}}>{ts.eyebrow}</div>
