@@ -290,7 +290,9 @@ Generate 3–8 findings based on what the notes reveal. If notes are sparse for 
       }
 
       const result = await res.json();
-      const parsed = JSON.parse(result.content[0].text);
+      const raw = result.content[0].text.trim()
+        .replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/```\s*$/, '');
+      const parsed = JSON.parse(raw);
 
       setA(p => ({
         ...p,
