@@ -252,13 +252,14 @@ const STRINGS = {
     },
     contact:{
       eyebrow:"Get in Touch", title:"Let's", titleSpan:"Talk",
-      sub:"General questions, existing clients, or anything that doesn't fit a form — this is the right place.",
+      sub:"For existing clients, press, partnerships, and everything outside the usual process. Looking to get started with tech services? Use the intake form instead — it gets you further, faster.",
+      intakeCta:"Take Me to the Intake Form →",
       info:[{label:"Email",val:"hello@pancon.cafe"},{label:"Response Time",val:"Within 24 Hours"},{label:"Business",val:"Cafe Con Pan LLC"},{label:"Services",val:"Tech · Coffee · Culture"}],
       nameLabel:"Your Name", namePlaceholder:"Full name",
       emailLabel:"Email Address", emailPlaceholder:"Your email address",
-      inquiryLabel:"Inquiry Type", messageLabel:"Message", messagePlaceholder:"Tell us about your business and what you need...",
+      inquiryLabel:"Inquiry Type", messageLabel:"Message", messagePlaceholder:"What can we help you with?",
       inquiryPlaceholder:"Select an inquiry type...",
-      options:["Tech Services — MDM & Device Management","Tech Services — Carrier Audit & Negotiation","Tech Services — IT Consulting","Partnership Inquiry","Coffee & Events — Stay in the Loop"],
+      options:["Existing Client — Follow-up","Partnership Inquiry","Press & Media","Coffee & Events — Stay in the Loop","Something Else"],
       submit:"Send It →", submitting:"Sending...",
       success:"Message sent! We'll be in touch soon. ☕",
       error:"Something went wrong. Please try again or email us directly at hello@pancon.cafe.",
@@ -268,8 +269,9 @@ const STRINGS = {
     pay:{ eyebrow:"Pay Your Invoice", title:"Quick &", titleSpan:"Secure", body:"Enter your invoice number and amount on the next page. Payment is processed securely through Helcim.", cta:"Pay Now →", questions:"Questions? Email" },
     privacy:{ footerLink:"Privacy Policy" },
     discovery:{
-      eyebrow:"Pre-Call Questionnaire", title:"Before", titleSpan:"We Talk",
-      sub:"A few quick questions so we can make the most of our first conversation. Takes about 3 minutes.",
+      eyebrow:"Get Started", title:"Tell Us About", titleSpan:"Your Business",
+      sub:"Fill this out and we'll reach out within 24 hours. We'll go over your setup, find the gaps, and map out a clear tech roadmap — starting with a quick intro call.",
+      steps:["Intro call","Tech audit","Your roadmap"],
       nameLabel:"Your name", namePlaceholder:"First and last name",
       emailLabel:"Your email", emailPlaceholder:"Your email address",
       phoneLabel:"Phone number", phonePlaceholder:"Best number to reach you",
@@ -278,15 +280,15 @@ const STRINGS = {
       q1Label:"Business name & what you do", q1Placeholder:"Tell us your business name and describe what you do day-to-day.",
       devicesOptions:["iPhone","iPad","Mac","Windows PC","Android","Unknown/Mixed"],
       q2Label:"Devices your team currently uses",
-      servicesLabel:"Services I'm interested in",
+      servicesLabel:"What area do you need help with?",
       servicesNotSure:"Not sure yet",
       q3Label:"Biggest tech frustration", q3Placeholder:"What's the most frustrating technology problem in your business right now?",
       q4Label:"What you wish your business could do", q4Placeholder:"What would you love your business to be able to do that it can't today?",
       q5Label:"Timeline or deadline", q5Placeholder:"Any specific date or urgency we should know about? (optional)",
       calendlyLink:"Or skip ahead and pick a time directly →",
       submit:"Send It Over →", sending:"Sending…",
-      trustNote:"No pitch, no pressure. We'll reach out within 24 hours to schedule a quick conversation.",
-      successTitle:"You're in. ☕", successBody:"We got your info and we'll be in touch within 24 hours. In the meantime, feel free to look around.", backToHome:"Back to Home →",
+      trustNote:"No pitch, no pressure. We'll reach out within 24 hours to confirm your intro call.",
+      successTitle:"You're in. ☕", successBody:"We got your info and we'll reach out within 24 hours to schedule your intro call — the first step toward your tech roadmap.", backToHome:"Back to Home →",
     },
     finder:{
       eyebrow:"Package Finder",
@@ -514,13 +516,14 @@ const STRINGS = {
     },
     contact:{
       eyebrow:"Ponte en Contacto", title:"", titleSpan:"Hablemos",
-      sub:"Preguntas generales, clientes actuales, o cualquier cosa que no encaje en un formulario — este es el lugar indicado.",
+      sub:"Para clientes actuales, prensa, alianzas y todo lo que está fuera del proceso habitual. ¿Buscas empezar con servicios tech? Usa el formulario de inicio — es más rápido para ambos.",
+      intakeCta:"Ir al Formulario de Inicio →",
       info:[{label:"Correo",val:"hello@pancon.cafe"},{label:"Tiempo de Respuesta",val:"Dentro de 24 Horas"},{label:"Negocio",val:"Cafe Con Pan LLC"},{label:"Servicios",val:"Tech · Café · Cultura"}],
       nameLabel:"Tu Nombre", namePlaceholder:"Nombre completo",
       emailLabel:"Correo Electrónico", emailPlaceholder:"Tu correo electrónico",
-      inquiryLabel:"Tipo de Consulta", messageLabel:"Mensaje", messagePlaceholder:"Cuéntanos sobre tu negocio y lo que necesitas...",
+      inquiryLabel:"Tipo de Consulta", messageLabel:"Mensaje", messagePlaceholder:"¿En qué podemos ayudarte?",
       inquiryPlaceholder:"Selecciona un tipo de consulta...",
-      options:["Servicios Tech — Gestión MDM y Dispositivos","Servicios Tech — Auditoría y Negociación de Carrier","Servicios Tech — Consultoría IT","Consulta de Asociación","Café & Eventos — Mantente al Día"],
+      options:["Cliente Actual — Seguimiento","Consulta de Asociación","Prensa y Medios","Café & Eventos — Mantente al Día","Otro"],
       submit:"Enviar →", submitting:"Enviando...",
       success:"¡Mensaje enviado! Estaremos en contacto pronto. ☕",
       error:"Algo salió mal. Inténtalo de nuevo o escríbenos directamente a hello@pancon.cafe.",
@@ -530,8 +533,9 @@ const STRINGS = {
     pay:{ eyebrow:"Paga tu Factura", title:"Rápido y", titleSpan:"Seguro", body:"Ingresa el número de factura y el monto en la siguiente página. El pago se procesa de forma segura a través de Helcim.", cta:"Pagar Ahora →", questions:"¿Preguntas? Escríbenos a" },
     privacy:{ footerLink:"Política de Privacidad" },
     discovery:{
-      eyebrow:"Cuestionario Pre-Llamada", title:"Antes de", titleSpan:"Hablar",
-      sub:"Cinco preguntas rápidas para aprovechar al máximo nuestra primera conversación. Toma unos 3 minutos.",
+      eyebrow:"Comenzar", title:"Cuéntanos Sobre", titleSpan:"Tu Negocio",
+      sub:"Completa esto y nos comunicaremos en menos de 24 horas. Revisaremos tu configuración, encontraremos las brechas y trazaremos un plan tech claro — empezando con una llamada introductoria.",
+      steps:["Llamada inicial","Auditoría tech","Tu plan de acción"],
       nameLabel:"Tu nombre", namePlaceholder:"Nombre y apellido",
       emailLabel:"Tu correo", emailPlaceholder:"Tu correo electrónico",
       phoneLabel:"Número de teléfono", phonePlaceholder:"El mejor número para contactarte",
@@ -540,15 +544,15 @@ const STRINGS = {
       q1Label:"Nombre del negocio y qué haces", q1Placeholder:"Cuéntanos el nombre de tu negocio y describe lo que haces día a día.",
       devicesOptions:["iPhone","iPad","Mac","Windows PC","Android","No sé/Mixto"],
       q2Label:"Dispositivos que usa tu equipo",
-      servicesLabel:"Servicios de mi interés",
+      servicesLabel:"¿En qué área necesitas ayuda?",
       servicesNotSure:"Aún no lo sé",
       q3Label:"Tu mayor frustración tecnológica", q3Placeholder:"¿Cuál es el problema tecnológico más frustrante en tu negocio ahora mismo?",
       q4Label:"Lo que desearías que tu negocio pudiera hacer", q4Placeholder:"¿Qué te gustaría que tu negocio pudiera hacer hoy que todavía no puede?",
       q5Label:"Plazo o fecha límite", q5Placeholder:"¿Alguna fecha específica o urgencia que debamos saber? (opcional)",
       calendlyLink:"O salta directo y elige un horario →",
       submit:"Enviar →", sending:"Enviando…",
-      trustNote:"Sin presión. Nos comunicamos en menos de 24 horas para coordinar una conversación rápida.",
-      successTitle:"Ya estás dentro. ☕", successBody:"Recibimos tu información y nos comunicaremos en menos de 24 horas. Mientras tanto, siéntete libre de explorar.", backToHome:"Volver al Inicio →",
+      trustNote:"Sin presión. Nos comunicamos en menos de 24 horas para confirmar tu llamada introductoria.",
+      successTitle:"Ya estás dentro. ☕", successBody:"Recibimos tu información y nos comunicaremos en menos de 24 horas para agendar tu llamada introductoria — el primer paso hacia tu plan tech.", backToHome:"Volver al Inicio →",
     },
     finder:{
       eyebrow:"Buscador de Paquetes",
@@ -1219,7 +1223,7 @@ function AboutPage({ t, go }) {
   );
 }
 
-function ContactPage({ t, scrollToSocials, setGameActive }) {
+function ContactPage({ t, go, scrollToSocials, setGameActive }) {
   const [form, setForm] = useState({name:"",email:"",inquiry:"",message:""});
   const [status, setStatus] = useState("idle");
   const handle = e => setForm({...form, [e.target.name]: e.target.value});
@@ -1259,6 +1263,19 @@ function ContactPage({ t, scrollToSocials, setGameActive }) {
         <h2 className="section-title">{t.contact.title && `${t.contact.title} `}<span>{t.contact.titleSpan}</span></h2>
         <p className="section-sub">{t.contact.sub}</p>
       </div>
+
+      <div style={{maxWidth:640,margin:"0 auto 40px",padding:"0 24px"}}>
+        <div style={{background:C.espresso,border:`2px solid ${C.teal}33`,borderRadius:4,padding:"20px 24px",display:"flex",alignItems:"center",justifyContent:"space-between",gap:16,flexWrap:"wrap"}}>
+          <div>
+            <div style={{fontSize:11,letterSpacing:"0.14em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:4}}>New to Café Con Pan?</div>
+            <div style={{fontSize:14,color:C.cream,fontWeight:600,lineHeight:1.5}}>Looking to get started with tech services? Use the intake form — it's faster for both of us.</div>
+          </div>
+          <button onClick={() => go("Discovery")} style={{background:C.teal,border:"none",borderRadius:4,color:C.espresso,padding:"11px 20px",cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,letterSpacing:"0.05em",whiteSpace:"nowrap",flexShrink:0}}>
+            {t.contact.intakeCta}
+          </button>
+        </div>
+      </div>
+
       <div className="contact-grid">
         <div>
           {t.contact.info.map(i => (
@@ -2209,7 +2226,7 @@ function FindMyPlanPage({ go, t }) {
 function DiscoveryPage({ go, t, prefillRef }) {
   const d = t.discovery;
   const DEVICES = d.devicesOptions;
-  const PACKAGES = ["Open for Business","Apple Presence","Apple Operations","Connectivity Consulting","Tech Concierge"];
+  const PACKAGES = ["Full Business Setup","Apple Maps & Brand","Device Management","Phone & Internet","Ongoing Tech Support"];
   const blank = {name:"",email:"",phone:"",bestTime:"",bizDesc:"",devices:[],services:[],frustration:"",wishList:"",timeline:""};
   const [form, setForm] = useState(() => {
     const pf = prefillRef?.current || null;
@@ -2252,7 +2269,15 @@ function DiscoveryPage({ go, t, prefillRef }) {
         <div style={{position:"relative",zIndex:2}}>
           <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:16}}>{d.eyebrow}</div>
           <h1 style={{fontFamily:"'Lilita One',cursive",fontSize:"clamp(40px,7vw,72px)",color:C.cream,lineHeight:1.1,marginBottom:16}}>{d.title} <span style={{color:C.gold}}>{d.titleSpan}</span></h1>
-          <p style={{fontSize:15,color:`rgba(245,237,214,0.6)`,fontWeight:600,maxWidth:480,margin:"0 auto"}}>{d.sub}</p>
+          <p style={{fontSize:15,color:`rgba(245,237,214,0.6)`,fontWeight:600,maxWidth:480,margin:"0 auto 28px"}}>{d.sub}</p>
+          <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:8,flexWrap:"wrap"}}>
+            {d.steps.map((step,i) => (
+              <span key={step} style={{display:"inline-flex",alignItems:"center",gap:8}}>
+                {i > 0 && <span style={{fontSize:12,color:`rgba(245,237,214,0.3)`}}>→</span>}
+                <span style={{fontSize:11,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",color:`rgba(245,237,214,0.55)`}}>{step}</span>
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -2996,7 +3021,7 @@ export default function CafeConPan() {
       );
       case "Community": return null;
       case "Our Story": return <AboutPage t={t} go={go} />;
-      case "Contact": return <ContactPage t={t} scrollToSocials={scrollToSocials} setGameActive={setGameActive} />;
+      case "Contact": return <ContactPage t={t} go={go} scrollToSocials={scrollToSocials} setGameActive={setGameActive} />;
       case "La Mesa": return <GoogleAuthGate><LaMesaPage t={t} go={go} /></GoogleAuthGate>;
       case "La Mesa Referral": return <GoogleAuthGate><LaMesaReferralPage t={t} go={go} /></GoogleAuthGate>;
       case "Pay": return <PayPage t={t} />;
