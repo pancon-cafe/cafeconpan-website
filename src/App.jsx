@@ -91,7 +91,7 @@ const SteamSVG = () => (
 const STRINGS = {
   en: {
     nav: { items:["Home","Tech Services","Our Story","Contact"], cta:"Get Started", langBtn:"ES" },
-    hero: { stamp:"☕ Honduran American Roots · Est. 2025", subtitle:"Tech · Coffee · Culture · Community", origin:"The café was always where tech and community met. Ours started in Honduras, over coffee and pan dulce.", signal:"Apple-focused tech for small businesses. Built by someone who's been on the inside — and speaks your language.", cta:"Book a Tech Audit →", ctaSecondary:"See Our Services →", scroll:"Scroll", steps:["Intro call","Tech audit","Your roadmap"] },
+    hero: { stamp:"☕ Honduran American Roots · Est. 2025", subtitle:"Tech · Coffee · Culture · Community", origin:"The café was always where tech and community met. Ours started in Honduras, over coffee and pan dulce.", signal:"Apple-focused tech for small businesses. Built by someone who's been on the inside — and speaks your language.", cta:"Get Started →", ctaSecondary:"See Our Services →", scroll:"Scroll", steps:["Intro call","Tech audit","Your roadmap"] },
     story: { eyebrow:"Our Story", title:"More Than a", titleSpan:"Cup of Coffee", body:"The name comes from Honduras. Every morning, abuela made coffee in a bowl — you'd soak your rosquillas and ojaldras in it like soup. That ritual was never just about coffee. It was about showing up for the people at your table. That's still what we do — just now with Apple devices and carrier contracts instead of pan dulce.", storyCta:"Read the full story →" },
     painPoints: {
       eyebrow:"Real Talk",
@@ -343,7 +343,7 @@ const STRINGS = {
   },
   es: {
     nav: { items:["Inicio","Servicios Tech","Nuestra Historia","Contacto"], cta:"Comenzar", langBtn:"EN" },
-    hero: { stamp:"☕ Raíces Hondureño-Americanas · Est. 2025", subtitle:"Tech · Café · Cultura · Comunidad", origin:"El café siempre fue donde la tecnología y la comunidad se encontraban. El nuestro comenzó en Honduras, entre café y pan dulce.", signal:"Tech para pequeños negocios, enfocado en Apple. Construido por alguien que conoce el sistema por dentro — y que habla tu idioma. Literal y culturalmente.", cta:"Reservar una Auditoría →", ctaSecondary:"Ver Nuestros Servicios →", scroll:"Desliza", steps:["Llamada inicial","Auditoría tech","Tu plan de acción"] },
+    hero: { stamp:"☕ Raíces Hondureño-Americanas · Est. 2025", subtitle:"Tech · Café · Cultura · Comunidad", origin:"El café siempre fue donde la tecnología y la comunidad se encontraban. El nuestro comenzó en Honduras, entre café y pan dulce.", signal:"Tech para pequeños negocios, enfocado en Apple. Construido por alguien que conoce el sistema por dentro — y que habla tu idioma. Literal y culturalmente.", cta:"Comenzar →", ctaSecondary:"Ver Nuestros Servicios →", scroll:"Desliza", steps:["Llamada inicial","Auditoría tech","Tu plan de acción"] },
     story: { eyebrow:"Nuestra Historia", title:"Más Que una", titleSpan:"Taza de Café", body:"El nombre viene de Honduras. Cada mañana, la abuela preparaba el café en un tazón — remojabas las rosquillas y las ojaldras como si fuera sopa. Ese ritual nunca fue solo sobre el café. Era sobre estar presente para las personas en tu mesa. Eso es lo que seguimos haciendo — solo que ahora con dispositivos Apple y contratos de carrier en lugar de pan dulce.", storyCta:"Leer la historia completa →" },
     paraTi: {
       eyebrow:"Para Ti",
