@@ -365,6 +365,38 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
     }
   }
 
+  function sendTeaserEmail() {
+    const isOnsite = a.auditType === 'onsite';
+    const payUrl = isOnsite
+      ? 'https://cafe-con-pan.myhelcim.com/hosted/?token=f7ae2b902051d272a8aa8f&amount=450.00&amountHash=a9f8499d6038c8568bfcab3d288d0cb5bbf43482d3310f12e227f207a00e19d6'
+      : 'https://cafe-con-pan.myhelcim.com/hosted/?token=a7da2d64e189dc89089e0d&amount=250.00&amountHash=aa92f0e23a97cfa82d0e1e2fe0edcdf2245b09ebdb1a2b8b6daec312e79032d6';
+    const price = isOnsite ? '$450' : '$250';
+    const d = pdfData;
+    const name = d.client.contactName || d.client.businessName;
+    const to = d.client.email ? encodeURIComponent(d.client.email) : '';
+    const subject = encodeURIComponent(`Your Tech Audit Preview — ${d.client.businessName}`);
+    const body = encodeURIComponent(
+`Hi ${name},
+
+I finished the initial assessment for ${d.client.businessName} and wanted to get this over to you.
+
+Your overall score came in at ${d.overallScore}/100. I've attached a preview of the full report — it shows your category breakdown and a sample finding so you can see the level of detail we're working with.
+
+To unlock the complete report — ${d.findings.length} finding${d.findings.length !== 1 ? 's' : ''} with full impact analysis, your prioritized roadmap, and a custom set of opportunities for ${d.client.businessName} — you can pay the audit fee here:
+
+${payUrl}
+
+The fee is ${price} and applies in full toward your project if you move forward within 30 days.
+
+Let me know if you have any questions.
+
+Jason Reyes
+Cafe Con Pan LLC
+jason@pancon.cafe | 808-868-6161`
+    );
+    window.open(`mailto:${to}?subject=${subject}&body=${body}`, '_self');
+  }
+
   function buildQuoteFromAudit() {
     const recs = a.recommendedModules || {};
     const D1 = !!recs.D1, D2 = !!recs.D2, E = !!recs.E, H = !!recs.H;
@@ -827,6 +859,15 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
                 />
               </Suspense>
             </div>
+
+            <button onClick={sendTeaserEmail} style={{
+              width: '100%', background: C.gold, border: 'none',
+              borderRadius: 9, color: C.bg, padding: 13, fontSize: 14,
+              fontFamily: "'Nunito',sans-serif", fontWeight: 'bold', cursor: 'pointer',
+              marginBottom: 10,
+            }}>
+              Send Teaser to Client →
+            </button>
 
             <button onClick={buildQuoteFromAudit} style={{
               width: '100%', background: C.teal, border: 'none',

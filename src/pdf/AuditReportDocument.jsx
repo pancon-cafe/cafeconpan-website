@@ -44,7 +44,10 @@
  */
 
 import React from 'react';
-import { Document, Page, View, Text, StyleSheet } from '@react-pdf/renderer';
+import { Document, Page, View, Text, StyleSheet, Link } from '@react-pdf/renderer';
+
+const PAYMENT_REMOTE = 'https://cafe-con-pan.myhelcim.com/hosted/?token=a7da2d64e189dc89089e0d&amount=250.00&amountHash=aa92f0e23a97cfa82d0e1e2fe0edcdf2245b09ebdb1a2b8b6daec312e79032d6';
+const PAYMENT_ONSITE = 'https://cafe-con-pan.myhelcim.com/hosted/?token=f7ae2b902051d272a8aa8f&amount=450.00&amountHash=a9f8499d6038c8568bfcab3d288d0cb5bbf43482d3310f12e227f207a00e19d6';
 import { C, F, SP, PAGE } from './tokens';
 import {
   CCPPage,
@@ -679,12 +682,16 @@ export default function AuditReportDocument({ data, teaser = false }) {
               a fully prioritized roadmap with investment estimates
               {data.opportunities?.length > 0 ? `, and ${data.opportunities.length} custom opportunit${data.opportunities.length > 1 ? 'ies' : 'y'} specific to ${data.client.businessName}` : ''}.
             </Text>
-            <Text style={[rs.bodyText, { marginBottom: SP[1] }]}>
-              Remote audit: $250 · On-site audit: $450
+            <Text style={[rs.bodyText, { marginBottom: SP[2] }]}>
+              {data.audit === 'onsite' ? 'On-site audit fee: $450' : 'Remote audit fee: $250'} — applies in full toward your project within 30 days.
             </Text>
+            <Link src={data.audit === 'onsite' ? PAYMENT_ONSITE : PAYMENT_REMOTE}>
+              <Text style={{ fontSize: F.size.sm, fontWeight: 700, color: C.teal, marginBottom: SP[2], letterSpacing: 0.3 }}>
+                Pay Now and Unlock the Full Report →
+              </Text>
+            </Link>
             <Text style={rs.mutedText}>
-              Audit fee applies in full toward any engagement of $500+ within 30 days.
-              Contact jason@pancon.cafe or 808-868-6161 to proceed.
+              Questions? jason@pancon.cafe · 808-868-6161
             </Text>
           </CCPCallout>
         ) : (
