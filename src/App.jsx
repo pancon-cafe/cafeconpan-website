@@ -119,30 +119,6 @@ const STRINGS = {
       ],
     },
     biggerPicture: { emailPlaceholder:"Stay in the loop — drop your email", emailBtn:"I'm In" },
-    tech: {
-      eyebrow:"Pillar One — Available Now", title:"Your Business Runs on Apple.", titleSpan:"Let's Make Sure It Actually Works.",
-      sub:"Apple-focused MDM and device management, IT consulting, and carrier services — through one trusted, independent partner.",
-      packages:[
-        { icon:"🚀", name:"Open for Business", tag:"Launch Package", desc:"Complete business launch: LLC/EIN guidance, banking, domain + email, website, payment setup, Apple device procurement, MDM enrollment, and full Brands setup. Guidance only — we help you navigate the process, not act as your attorney or accountant.", price:"$2,500 – $5,000+" },
-        { icon:"🍎", name:"Apple Presence", tag:"Visibility Package", desc:"For existing businesses ready to show up in Apple's ecosystem: Apple Maps, Branded Mail, Tap to Pay branding, Brand Profile, and Maps Ads readiness.", price:"$500 – $1,500" },
-        { icon:"🔁", name:"Apple Operations", tag:"Managed Services", desc:"Ongoing device management, helpdesk, user onboarding/offboarding, software updates, app licensing, and security policy maintenance.", price:"$35 – $50 / device / month" },
-        { icon:"📡", name:"Connectivity Consulting", tag:"Carrier & ISP", desc:"Carrier plan audit, negotiation, number porting, new service activation, and ISP setup. 100% carrier-agnostic — we work for you, not the carrier.", price:"$150 – $300 / hr or flat fee" },
-        { icon:"🤝", name:"Tech Concierge", tag:"On-Call Support", desc:"Relationship-based on-call tech support for owners who want one trusted number to call. Monthly add-on to any package.", price:"$300 – $600 / month" },
-      ],
-      creds:{
-        eyebrow:"Credentials & Structure", title:"Built to", titleSpan:"Back It Up",
-        sub:"Certifications, legal structure, and partner programs in place before going to market — because credibility is built before the first client, not after.",
-        badges:[
-          {label:"MDM Certifications",val:"Jamf · Mosyle · Hands-On"},
-          {label:"Apple Partnership",val:"ACN — Applied"},
-          {label:"Carrier Approach",val:"100% Agnostic"},
-          {label:"Business Status",val:"LLC · EIN"},
-          {label:"Procurement",val:"Reseller Exempt"},
-          {label:"Gov Contracting",val:"SAM · CAGE Registered"},
-        ],
-        cta:"Request a Consultation →",
-      },
-    },
     community:{
       eyebrow:"Pillars Two & Three",
       title:"Coffee, Culture &",
@@ -254,6 +230,8 @@ const STRINGS = {
     contact:{
       eyebrow:"Get in Touch", title:"Let's", titleSpan:"Talk",
       sub:"For existing clients, press, partnerships, and everything outside the usual process. Looking to get started with tech services? Use the intake form instead — it gets you further, faster.",
+      newClientEyebrow:"New to Café Con Pan?",
+      newClientBody:"Looking to get started with tech services? Use the intake form — it's faster for both of us.",
       intakeCta:"Take Me to the Intake Form →",
       info:[{label:"Email",val:"hello@pancon.cafe"},{label:"Response Time",val:"Within 24 Hours"},{label:"Business",val:"Cafe Con Pan LLC"},{label:"Services",val:"Tech · Coffee · Culture"}],
       nameLabel:"Your Name", namePlaceholder:"Full name",
@@ -392,30 +370,6 @@ const STRINGS = {
       ],
     },
     biggerPicture: { emailPlaceholder:"Tu correo — mantente al día", emailBtn:"¡Apúntame!" },
-    tech: {
-      eyebrow:"Pilar Uno — Disponible Ahora", title:"Tu Negocio Funciona con Apple.", titleSpan:"Hagamos Que Realmente Funcione.",
-      sub:"Gestión de dispositivos Apple y MDM, consultoría IT y servicios de carrier — a través de un socio independiente de confianza.",
-      packages:[
-        { icon:"🚀", name:"Abrir el Negocio", tag:"Paquete de Lanzamiento", desc:"Lanzamiento completo del negocio: orientación para LLC/EIN, banca, dominio + correo, sitio web, configuración de pagos, adquisición de dispositivos Apple, inscripción MDM y configuración completa de Brands. Solo orientación — te ayudamos a navegar el proceso, sin actuar como tu abogado o contador.", price:"$2,500 – $5,000+" },
-        { icon:"🍎", name:"Presencia Apple", tag:"Paquete de Visibilidad", desc:"Para negocios existentes listos para aparecer en el ecosistema de Apple: Apple Maps, correo con marca, branding Tap to Pay, Perfil de Marca y preparación para Maps Ads.", price:"$500 – $1,500" },
-        { icon:"🔁", name:"Operaciones Apple", tag:"Servicios Gestionados", desc:"Gestión continua de dispositivos, helpdesk, incorporación y desvinculación de usuarios, actualizaciones de software, licencias de apps y mantenimiento de políticas de seguridad.", price:"$35 – $50 / dispositivo / mes" },
-        { icon:"📡", name:"Consultoría de Conectividad", tag:"Carrier e ISP", desc:"Auditoría de plan de carrier, negociación, portabilidad de número, activación de nuevo servicio y configuración de ISP. 100% independiente del carrier — trabajamos para ti, no para el carrier.", price:"$150 – $300 / hr o tarifa fija" },
-        { icon:"🤝", name:"Tech Concierge", tag:"Soporte On-Call", desc:"Soporte técnico on-call basado en relaciones para propietarios que quieren un número de confianza al que llamar. Complemento mensual a cualquier paquete.", price:"$300 – $600 / mes" },
-      ],
-      creds:{
-        eyebrow:"Credenciales y Estructura", title:"Construido para", titleSpan:"Respaldarlo",
-        sub:"Certificaciones, estructura legal y programas de socios en marcha antes de salir al mercado — porque la credibilidad se construye antes del primer cliente, no después.",
-        badges:[
-          {label:"Certificaciones MDM",val:"Jamf · Mosyle · Hands-On"},
-          {label:"Asociación Apple",val:"ACN — Aplicado"},
-          {label:"Enfoque Carrier",val:"100% Independiente"},
-          {label:"Estado del Negocio",val:"LLC · EIN"},
-          {label:"Adquisición",val:"Exención Revendedor"},
-          {label:"Contratación Gov",val:"SAM · CAGE Registrado"},
-        ],
-        cta:"Solicitar una Consulta →",
-      },
-    },
     community:{
       eyebrow:"Pilares Dos y Tres",
       title:"Café, Cultura y",
@@ -527,6 +481,8 @@ const STRINGS = {
     contact:{
       eyebrow:"Ponte en Contacto", title:"", titleSpan:"Hablemos",
       sub:"Para clientes actuales, prensa, alianzas y todo lo que está fuera del proceso habitual. ¿Buscas empezar con servicios tech? Usa el formulario de inicio — es más rápido para ambos.",
+      newClientEyebrow:"¿Nuevo en Café Con Pan?",
+      newClientBody:"¿Quieres empezar con servicios tech? Usa el formulario de inicio — es más rápido para ambos.",
       intakeCta:"Ir al Formulario de Inicio →",
       info:[{label:"Correo",val:"hello@pancon.cafe"},{label:"Tiempo de Respuesta",val:"Dentro de 24 Horas"},{label:"Negocio",val:"Cafe Con Pan LLC"},{label:"Servicios",val:"Tech · Café · Cultura"}],
       nameLabel:"Tu Nombre", namePlaceholder:"Nombre completo",
@@ -1149,59 +1105,6 @@ function HomePage({ go, t, lang }) {
   );
 }
 
-function TechPage({ go, t }) {
-  return (
-    <>
-      <section className="section" style={{paddingTop:100}}>
-        <div className="section-header">
-          <div className="section-eyebrow">{t.tech.eyebrow}</div>
-          <h2 className="section-title">{t.tech.title} <span>{t.tech.titleSpan}</span></h2>
-          <p className="section-sub">{t.tech.sub}</p>
-        </div>
-        <div className="grid-2">
-          {t.tech.packages.map((p) => (
-            <div key={p.name} className="service-card">
-              <span className="service-card-icon">{p.icon}</span>
-              <div className="service-card-name">{p.name}</div>
-              <p className="service-card-desc">{p.desc}</p>
-              <div style={{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",fontWeight:700,color:C.teal,marginBottom:6,marginTop:16}}>{p.tag}</div>
-              <span className="service-card-price">{p.price}</span>
-            </div>
-          ))}
-        </div>
-        <p style={{textAlign:"center",fontSize:12,color:C.espresso,opacity:0.45,fontWeight:600,letterSpacing:"0.03em",marginTop:32,marginBottom:0,lineHeight:1.7,maxWidth:520,marginLeft:"auto",marginRight:"auto"}}>Every business is different. Your actual scope gets confirmed on your first call — no surprises.</p>
-        <div style={{textAlign:"center",marginTop:32,padding:"40px 32px",background:C.parchment,border:`3px solid ${C.espresso}`,boxShadow:`4px 4px 0 ${C.espresso}`,maxWidth:520,marginLeft:"auto",marginRight:"auto"}}>
-          <div style={{fontSize:10,letterSpacing:"0.18em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:12}}>{t.softCta.eyebrow}</div>
-          <p style={{fontSize:15,color:"#555",fontWeight:600,lineHeight:1.7,marginBottom:24,maxWidth:380,margin:"0 auto 24px"}}>{t.softCta.body}</p>
-          <button className="hero-cta" onClick={() => go("Discovery")}>{t.hero.cta}</button>
-        </div>
-      </section>
-
-      <TextileBorder />
-
-      <section className="section section-dark">
-        <div className="section-header">
-          <div className="section-eyebrow" style={{color:C.teal}}>{t.tech.creds.eyebrow}</div>
-          <h2 className="section-title section-title-light">{t.tech.creds.title} <span>{t.tech.creds.titleSpan}</span></h2>
-          <p className="section-sub section-sub-light">{t.tech.creds.sub}</p>
-        </div>
-        <div className="creds-row">
-          {t.tech.creds.badges.map(c => (
-            <div key={c.label} className="cred-badge">
-              <div className="cred-badge-label">{c.label}</div>
-              <div className="cred-badge-val">{c.val}</div>
-            </div>
-          ))}
-        </div>
-        <div style={{textAlign:"center",marginTop:48}}>
-          <button className="hero-cta" onClick={() => go("Discovery")}>{t.tech.creds.cta}</button>
-        </div>
-      </section>
-
-      <TextileBorder flip />
-    </>
-  );
-}
 
 function AboutPage({ t, go }) {
   return (
@@ -1278,8 +1181,8 @@ function ContactPage({ t, go, scrollToSocials, setGameActive }) {
       <div style={{maxWidth:640,margin:"0 auto 40px",padding:"0 24px"}}>
         <div style={{background:C.espresso,border:`2px solid ${C.teal}33`,borderRadius:4,padding:"20px 24px",display:"flex",alignItems:"center",justifyContent:"space-between",gap:16,flexWrap:"wrap"}}>
           <div>
-            <div style={{fontSize:11,letterSpacing:"0.14em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:4}}>New to Café Con Pan?</div>
-            <div style={{fontSize:14,color:C.cream,fontWeight:600,lineHeight:1.5}}>Looking to get started with tech services? Use the intake form — it's faster for both of us.</div>
+            <div style={{fontSize:11,letterSpacing:"0.14em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:4}}>{t.contact.newClientEyebrow}</div>
+            <div style={{fontSize:14,color:C.cream,fontWeight:600,lineHeight:1.5}}>{t.contact.newClientBody}</div>
           </div>
           <button onClick={() => go("Discovery")} style={{background:C.teal,border:"none",borderRadius:4,color:C.espresso,padding:"11px 20px",cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,letterSpacing:"0.05em",whiteSpace:"nowrap",flexShrink:0}}>
             {t.contact.intakeCta}
@@ -2048,7 +1951,7 @@ function PrivacyPolicyPage({ lang }) {
 function DiscoveryPage({ go, t, prefillRef }) {
   const d = t.discovery;
   const DEVICES = d.devicesOptions;
-  const PACKAGES = ["Full Business Setup","Apple Maps & Brand","Device Management","Phone & Internet","Ongoing Tech Support"];
+  const PACKAGES = ["Foundation Core","Device Setup & MDM","Carrier & Internet","Branding & Communication","Business Website","Ongoing Operations"];
   const blank = {name:"",email:"",phone:"",bestTime:"",bizDesc:"",devices:[],services:[],frustration:"",wishList:"",timeline:""};
   const [form, setForm] = useState(() => {
     const pf = prefillRef?.current || null;
