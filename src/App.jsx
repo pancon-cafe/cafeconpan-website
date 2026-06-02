@@ -2723,35 +2723,37 @@ serviceRationale: If the situation suggests a different fit than expected, say s
   );
 
   return (
-    <>
-      <section style={{ background:C.espresso, paddingTop:100, paddingBottom:56, paddingLeft:"clamp(24px,5vw,40px)", paddingRight:"clamp(24px,5vw,40px)", textAlign:"center", position:"relative", overflow:"hidden" }}>
-        <div style={{ position:"absolute", top:"50%", left:"50%", transform:"translate(-50%,-50%)", opacity:0.06, pointerEvents:"none" }}>
-          <Sunburst size={600} color={C.gold} opacity={0.8} />
-        </div>
-        <div style={{ position:"relative", zIndex:2 }}>
-          <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:6, marginBottom:20 }}>
+    <div style={{ fontFamily:"'Nunito',sans-serif", background:C.bg, minHeight:"100vh", color:C.dkCream, paddingTop:64 }}>
+
+      {/* Sticky header — matches The Cupping & The Pour */}
+      <div style={{ background:C.surf, borderBottom:`1px solid ${C.b0}`, padding:"13px 20px 0", position:"sticky", top:64, zIndex:50 }}>
+        <div style={{ maxWidth:640, margin:"0 auto" }}>
+          <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:6, marginBottom:10 }}>
             {[["The Grind","the-grind"],["The Cupping","audit-builder"],["The Pour","quote-builder"]].map(([name,hash],i) => (
               <span key={hash} style={{ display:"flex", alignItems:"center", gap:6 }}>
-                {i > 0 && <span style={{ fontSize:9, color:`rgba(245,237,214,0.25)` }}>→</span>}
+                {i > 0 && <span style={{ fontSize:9, color:C.muted }}>→</span>}
                 <button onClick={() => { if (name !== "The Grind") window.location.hash = `#${hash}`; }}
                   disabled={name === "The Grind"}
-                  style={{ background:"none", border:"none", padding:"0 0 2px", cursor: name === "The Grind" ? "default" : "pointer", fontFamily:"'Nunito',sans-serif", fontSize:10, fontWeight:700, letterSpacing:"0.12em", textTransform:"uppercase", color: name === "The Grind" ? C.teal : `rgba(245,237,214,0.35)`, borderBottom: name === "The Grind" ? `1px solid ${C.teal}` : "1px solid transparent", transition:"color 0.15s" }}
-                  onMouseEnter={e => { if (name !== "The Grind") e.currentTarget.style.color = `rgba(245,237,214,0.8)`; }}
-                  onMouseLeave={e => { if (name !== "The Grind") e.currentTarget.style.color = `rgba(245,237,214,0.35)`; }}
+                  style={{ background:"none", border:"none", padding:"0 0 2px", cursor:name==="The Grind"?"default":"pointer", fontFamily:"'Nunito',sans-serif", fontSize:10, fontWeight:700, letterSpacing:"0.12em", textTransform:"uppercase", color:name==="The Grind"?C.teal:C.muted, borderBottom:name==="The Grind"?`1px solid ${C.teal}`:"1px solid transparent", transition:"color 0.15s" }}
+                  onMouseEnter={e=>{ if(name!=="The Grind") e.currentTarget.style.color=C.dkCream; }}
+                  onMouseLeave={e=>{ if(name!=="The Grind") e.currentTarget.style.color=C.muted; }}
                 >{name}</button>
               </span>
             ))}
           </div>
-          <div style={{ fontSize:10, letterSpacing:"0.22em", textTransform:"uppercase", color:C.teal, fontWeight:700, marginBottom:16 }}>Admin · Pre-Call Prep</div>
-          <h1 style={{ fontFamily:"'Lilita One',cursive", fontSize:"clamp(40px,7vw,72px)", color:C.cream, lineHeight:1.1, marginBottom:16 }}>The <span style={{ color:C.gold }}>Grind</span></h1>
-          <p style={{ fontSize:15, color:`rgba(245,237,214,0.6)`, fontWeight:600, maxWidth:480, margin:"0 auto" }}>
-            Enter what you know before the intro call. Get smart discovery questions, what to look for, creative opportunities, and a one-click handoff to The Cupping.
-          </p>
+          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:9 }}>
+            <span style={{ fontSize:11, color:C.beige, textTransform:"uppercase", letterSpacing:"0.14em" }}>
+              ☕ Café Con Pan · The Grind
+            </span>
+            <span style={{ fontSize:9, background:"rgba(184,80,62,0.13)", color:"#D47060", border:"1px solid rgba(184,80,62,0.22)", borderRadius:3, padding:"2px 7px", letterSpacing:"0.1em", textTransform:"uppercase" }}>Internal</span>
+          </div>
+          <div style={{ fontSize:10, color:C.muted, letterSpacing:"0.1em", textTransform:"uppercase", paddingBottom:10 }}>
+            Pre-Call Prep
+          </div>
         </div>
-      </section>
+      </div>
 
-      <section style={{ background:C.bg, padding:"48px clamp(24px,5vw,40px) 80px" }}>
-        <div style={{ maxWidth:640, margin:"0 auto" }}>
+      <div style={{ maxWidth:640, margin:"0 auto", padding:"32px 24px 80px" }}>
 
           {brewing ? (
             <div style={{ textAlign:"center", padding:"64px 24px" }}>
@@ -2873,9 +2875,8 @@ serviceRationale: If the situation suggests a different fit than expected, say s
               </div>
             </form>
           )}
-        </div>
-      </section>
-    </>
+      </div>
+    </div>
   );
 }
 
