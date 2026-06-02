@@ -36,6 +36,10 @@
  *     phase: string,               // 'Immediate (0–30 days)'
  *     items: string[],
  *   }>,
+ *   opportunities?: Array<{
+ *     headline: string,
+ *     description: string,
+ *   }>,
  * }
  */
 
@@ -594,6 +598,33 @@ export default function AuditReportDocument({ data }) {
             ))}
           </View>
         ))}
+
+        {/* Opportunities */}
+        {data.opportunities?.length > 0 && (
+          <>
+            <CCPSection title="Opportunities" />
+            <Text style={[rs.mutedText, { marginBottom: SP[4] }]}>
+              The following opportunities are not gaps to fix — they are possibilities
+              to explore. Each represents a way technology could help{' '}
+              {data.client.businessName} grow, differentiate, or operate better.
+            </Text>
+            {data.opportunities.map((opp, i) => (
+              <View key={i} wrap={false} style={{
+                borderLeftWidth: 3, borderLeftColor: C.teal, borderLeftStyle: 'solid',
+                backgroundColor: C.espCard, borderRadius: 3,
+                padding: SP[3], marginBottom: SP[3],
+              }}>
+                <Text style={{
+                  fontSize: F.size.sm, fontWeight: 700, color: C.teal,
+                  letterSpacing: 0.3, marginBottom: SP[1],
+                }}>
+                  {opp.headline}
+                </Text>
+                <Text style={rs.mutedText}>{opp.description}</Text>
+              </View>
+            ))}
+          </>
+        )}
 
         {/* Closing callout */}
         <CCPDivider mt={SP[6]} mb={SP[4]} />

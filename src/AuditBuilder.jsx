@@ -126,6 +126,7 @@ function buildPDFData(a) {
     roadmap: (a.roadmap || [])
       .map(p => ({ ...p, items: p.items.filter(Boolean) }))
       .filter(p => p.items.length > 0),
+    opportunities: (a.opportunities || []).filter(o => o.headline || o.description),
   };
 }
 
@@ -135,8 +136,10 @@ function blankState() {
     auditType: 'remote',
     discovery: Object.fromEntries(CATEGORIES.map(c => [c.name, ''])),
     categories: CATEGORIES.map(c => ({ name: c.name, score: 50, summary: '' })),
+    goals: '',
     executiveSummary: '', overallScore: null, findings: [],
     roadmap: DEFAULT_ROADMAP.map(r => ({ ...r, items: [] })),
+    opportunities: [],
     recommendedModules: null,
   };
 }
@@ -199,6 +202,7 @@ export default function AuditBuilder() {
 CLIENT: ${a.clientName || 'Unknown'}
 CONTACT: ${a.contactName || 'Unknown'}
 AUDIT TYPE: ${a.auditType === 'onsite' ? 'On-Site' : 'Remote'}
+GOALS & VISION: ${a.goals?.trim() || '(not provided)'}
 
 DISCOVERY NOTES:
 ${discoveryText}
@@ -265,6 +269,12 @@ Respond with ONLY valid JSON — no markdown, no code fences, no explanation —
     { "phase": "Short-Term (30–90 days)", "items": ["..."] },
     { "phase": "Long-Term (90+ days)", "items": ["..."] }
   ],
+  "opportunities": [
+    {
+      "headline": "short, specific title (5-8 words)",
+      "description": "2-3 sentences. Forward-looking and specific to this business and industry. Connect naturally to a CCP service without making it a sales pitch — lead with the benefit to the client."
+    }
+  ],
   "recommendedModules": {
     "A": false,
     "B": false,
@@ -281,9 +291,11 @@ Respond with ONLY valid JSON — no markdown, no code fences, no explanation —
   }
 }
 
-Set each recommendedModules flag to true/count if that service appears in the roadmap. D2 only true if D1 is also true. c1 = number of new devices to deploy, c2 = number of existing devices to enroll. recurring = true if you recommend the Partner relationship. These will pre-populate the Quote Builder automatically.
+Generate 3-5 opportunities — these are NOT problems, they are possibilities. Specific ways this business could use technology to grow, differentiate, or operate better based on their industry, goals, and current state. Each should connect naturally to a CCP service and reflect the client's stated goals where relevant.
 
-Generate 3–8 findings based on what the notes reveal. If notes are sparse for a category, score conservatively (assume the worst unless the notes suggest otherwise) and note that further assessment is needed. Include CCP service pricing in roadmap items where a specific service applies.`;
+Set each recommendedModules flag to true/count if that service appears in the roadmap. D2 only true if D1 is also true. c1 = number of new devices to deploy, c2 = number of existing devices to enroll. recurring = true if you recommend the Partner relationship.
+
+Generate 3–8 findings. If notes are sparse for a category, score conservatively and note further assessment is needed. Include CCP service pricing in roadmap items where applicable.`;
 
     try {
       const res = await fetch('https://api.anthropic.com/v1/messages', {
@@ -332,6 +344,10 @@ Generate 3–8 findings based on what the notes reveal. If notes are sparse for 
           const gen = parsed.roadmap?.find(rp => rp.phase === r.phase);
           return gen ? { ...r, items: gen.items || [] } : { ...r, items: [] };
         }),
+        opportunities: (parsed.opportunities || []).map(o => ({
+          headline: o.headline || '',
+          description: o.description || '',
+        })),
         recommendedModules: parsed.recommendedModules || null,
       }));
 
@@ -442,8 +458,15 @@ Generate 3–8 findings based on what the notes reveal. If notes are sparse for 
           <input style={inp(16)} type="email" placeholder="e.g. sarah@mainstreetdental.com"
             value={a.clientEmail} onChange={e => set('clientEmail', e.target.value)} />
           <label style={lbl}>Phone</label>
-          <input style={inp(0)} type="tel" placeholder="e.g. (703) 555-0100"
+          <input style={inp(20)} type="tel" placeholder="e.g. (703) 555-0100"
             value={a.clientPhone} onChange={e => set('clientPhone', e.target.value)} />
+          <label style={lbl}>Goals & Vision</label>
+          <p style={{ fontSize: 12, color: C.muted, marginTop: 0, marginBottom: 8, lineHeight: 1.6 }}>
+            What are they hoping to accomplish or build in the next 12 months?
+          </p>
+          <textarea style={ta(3, 0)}
+            placeholder="e.g. They want to open a second location, streamline how staff communicates with customers, and stop relying on personal phones for business…"
+            value={a.goals} onChange={e => set('goals', e.target.value)} />
         </>
       );
 
@@ -645,6 +668,40 @@ Generate 3–8 findings based on what the notes reveal. If notes are sparse for 
             borderRadius: 10, color: C.beige, padding: 14, cursor: 'pointer',
             fontSize: 14, fontFamily: 'Georgia,serif', marginBottom: 8,
           }}>+ Add Finding</button>
+
+          {/* Opportunities */}
+          {sectionHead('Opportunities')}
+          <p style={{ fontSize: 12, color: C.muted, marginTop: 0, marginBottom: 16, lineHeight: 1.6 }}>
+            Possibilities — not problems. What could this business build or become with the right tech?
+          </p>
+          {a.opportunities.map((opp, i) => (
+            <div key={i} style={{
+              background: C.card, border: `1px solid ${C.b0}`, borderRadius: 10,
+              padding: 16, marginBottom: 12, borderLeft: `3px solid ${C.teal}`,
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
+                <span style={{ fontSize: 11, color: C.teal, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                  Opportunity {i + 1}
+                </span>
+                <button onClick={() => setA(p => ({ ...p, opportunities: p.opportunities.filter((_, j) => j !== i) }))}
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 11, color: C.muted }}>
+                  Remove
+                </button>
+              </div>
+              <input style={inp(10)} type="text" placeholder="Headline (e.g. Appointment Confirmations via Apple Messages)"
+                value={opp.headline}
+                onChange={e => setA(p => { const ops = [...p.opportunities]; ops[i] = { ...ops[i], headline: e.target.value }; return { ...p, opportunities: ops }; })} />
+              <textarea style={ta(3, 0)} placeholder="2-3 sentences on what's possible and why it matters for this business…"
+                value={opp.description}
+                onChange={e => setA(p => { const ops = [...p.opportunities]; ops[i] = { ...ops[i], description: e.target.value }; return { ...p, opportunities: ops }; })} />
+            </div>
+          ))}
+          <button onClick={() => setA(p => ({ ...p, opportunities: [...p.opportunities, { headline: '', description: '' }] }))}
+            style={{
+              width: '100%', background: 'transparent', border: `1px dashed ${C.b1}`,
+              borderRadius: 10, color: C.teal, padding: 14, cursor: 'pointer',
+              fontSize: 14, fontFamily: 'Georgia,serif', marginBottom: 8,
+            }}>+ Add Opportunity</button>
 
           {/* Roadmap */}
           {sectionHead('Roadmap')}
@@ -859,6 +916,12 @@ Generate 3–8 findings based on what the notes reveal. If notes are sparse for 
               </div>
             );
           })}
+        </div>
+      )}
+      {a.opportunities.length > 0 && (
+        <div style={{ marginTop: 16, display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderTop: `1px solid ${C.b0}` }}>
+          <span style={{ fontSize: 12, color: C.teal }}>Opportunities</span>
+          <span style={{ fontSize: 12, color: C.cream }}>{a.opportunities.length}</span>
         </div>
       )}
     </div>
