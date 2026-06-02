@@ -2944,6 +2944,222 @@ serviceRationale: If the situation suggests a different fit than expected, say s
   );
 }
 
+function TechServicesPage({ go }) {
+  const MODULES = [
+    {
+      group: "Devices", color: C.teal,
+      items: [
+        { id:"C1", name:"Zero-Touch Device Setup",       desc:"New devices arrive pre-configured and ready to use. Your staff turns them on, signs in, and gets to work — no IT department required." },
+        { id:"C2", name:"Existing Device Enrollment",    desc:"Already have devices in use? We enroll them into your management system so they're properly secured, updated, and under your control." },
+      ],
+    },
+    {
+      group: "Connectivity", color: C.gold,
+      items: [
+        { id:"D1", name:"Carrier Audit & Recommendation", desc:"We analyze your current carrier plans, identify what you're overpaying for, and recommend the right setup for your team size and location." },
+        { id:"D2", name:"Carrier Implementation",         desc:"We handle the carrier changes — new lines, plan switches, number porting — so you don't have to navigate telecom alone." },
+        { id:"E",  name:"Business Internet Setup",        desc:"We source and configure the right ISP for your business location, from installation coordination to network setup." },
+      ],
+    },
+    {
+      group: "Brand & Communication", color: C.red,
+      items: [
+        { id:"G", name:"Apple Brands Layer",        desc:"Your business shows up professionally across Apple's ecosystem: branded email appearance, Verify with Apple Wallet, and Tap to Pay branding." },
+        { id:"H", name:"AI Phone System",           desc:"A professional phone experience built on Twilio — intelligent call routing, automated greetings, and custom handling for your team and hours." },
+        { id:"J", name:"Apple Business Messages",   desc:"An official messaging channel on Apple devices. Customers contact you directly from Maps, Search, and Safari — right from their iPhone." },
+      ],
+    },
+    {
+      group: "Web", color: C.beige,
+      items: [
+        { id:"F", name:"Business Website", desc:"A clean, professional website designed and launched for your business. Built for discoverability and built to represent you well." },
+      ],
+    },
+  ];
+
+  return (
+    <>
+      {/* ── PHILOSOPHY HERO ── */}
+      <section style={{background:C.espresso,paddingTop:100,paddingBottom:64,paddingLeft:"clamp(24px,5vw,40px)",paddingRight:"clamp(24px,5vw,40px)",textAlign:"center",position:"relative",overflow:"hidden"}}>
+        <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",opacity:0.05,pointerEvents:"none"}}><Sunburst size={700} color={C.gold} opacity={0.8} /></div>
+        <div style={{position:"relative",zIndex:2,maxWidth:640,margin:"0 auto"}}>
+          <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:16}}>Tech Services</div>
+          <h1 style={{fontFamily:"'Lilita One',cursive",fontSize:"clamp(36px,6vw,64px)",color:C.cream,lineHeight:1.1,marginBottom:20}}>
+            Built Around <span style={{color:C.gold}}>Your Business</span>
+          </h1>
+          <p style={{fontSize:16,color:"rgba(245,237,214,0.7)",fontWeight:600,lineHeight:1.8,maxWidth:520,margin:"0 auto 32px"}}>
+            We don't sell packages off a menu. We assess your business first, then build a plan specific to what you actually need.
+          </p>
+          <div style={{background:"rgba(212,169,122,0.08)",border:"1px solid rgba(212,169,122,0.22)",borderRadius:4,padding:"20px 28px",maxWidth:520,margin:"0 auto"}}>
+            <p style={{fontSize:14,color:C.beige,fontWeight:700,lineHeight:1.8,margin:0,fontStyle:"italic"}}>
+              "Every engagement starts with The Audit. No surprises, no hidden fees — your Total Investment Summary is signed before any work begins."
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <TextileBorder flip />
+
+      {/* ── THE AUDIT ── */}
+      <section className="section" style={{background:C.parchment}}>
+        <div style={{maxWidth:680,margin:"0 auto"}}>
+          <div style={{marginBottom:40}}>
+            <div className="section-eyebrow">Step One</div>
+            <h2 className="section-title">The <span>Audit</span></h2>
+            <p className="section-sub">Before we build anything, we assess everything. A full technology review of your business — scored, prioritized, and turned into a clear roadmap you keep forever.</p>
+          </div>
+
+          <div style={{display:"flex",gap:16,flexWrap:"wrap",marginBottom:32}}>
+            {[{label:"Remote",price:"$250"},{label:"On-Site",price:"$450"}].map(opt => (
+              <div key={opt.label} style={{flex:1,minWidth:180,background:C.espresso,borderRadius:4,padding:"24px 28px",textAlign:"center"}}>
+                <div style={{fontSize:10,letterSpacing:"0.18em",textTransform:"uppercase",color:C.beige,fontWeight:700,marginBottom:8}}>{opt.label}</div>
+                <div style={{fontFamily:"'Lilita One',cursive",fontSize:44,color:C.cream,lineHeight:1}}>{opt.price}</div>
+              </div>
+            ))}
+          </div>
+
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(270px,1fr))",gap:12,marginBottom:36}}>
+            {[
+              "Full assessment across 6 tech categories",
+              "Overall score + per-category scoring",
+              "Prioritized findings with severity ratings",
+              "Custom roadmap broken out by phase",
+              "Opportunities specific to your industry",
+              "30-day credit toward your project",
+            ].map(item => (
+              <div key={item} style={{display:"flex",gap:10,alignItems:"flex-start"}}>
+                <span style={{color:C.teal,fontWeight:800,fontSize:13,flexShrink:0,marginTop:1}}>✓</span>
+                <span style={{fontSize:14,color:C.espresso,fontWeight:600,lineHeight:1.5}}>{item}</span>
+              </div>
+            ))}
+          </div>
+
+          <button className="hero-cta" onClick={() => go("Discovery")}>Start with an Audit →</button>
+        </div>
+      </section>
+
+      <TextileBorder />
+
+      {/* ── FOUNDATION CORE ── */}
+      <section className="section section-dark">
+        <div style={{maxWidth:680,margin:"0 auto"}}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:16,marginBottom:28}}>
+            <div>
+              <div style={{fontSize:10,letterSpacing:"0.18em",textTransform:"uppercase",color:C.beige,opacity:0.6,fontWeight:700,marginBottom:8}}>The Baseline</div>
+              <h2 style={{fontFamily:"'Lilita One',cursive",fontSize:"clamp(28px,4vw,44px)",color:C.cream,margin:0,lineHeight:1.1}}>Foundation Core</h2>
+            </div>
+            <div style={{textAlign:"right",flexShrink:0}}>
+              <div style={{fontSize:10,letterSpacing:"0.14em",textTransform:"uppercase",color:C.beige,opacity:0.5,marginBottom:4}}>Starting at</div>
+              <div style={{fontFamily:"'Lilita One',cursive",fontSize:44,color:C.gold,lineHeight:1}}>$1,500</div>
+            </div>
+          </div>
+
+          <p style={{fontSize:15,color:"rgba(245,237,214,0.65)",fontWeight:600,lineHeight:1.8,marginBottom:32,maxWidth:520}}>
+            The infrastructure everything else runs on. Every client we work with gets this built first — it's the foundation your business needs before any other tech layer makes sense.
+          </p>
+
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))",gap:20}}>
+            {[
+              {title:"Business Email & Domain",   desc:"A professional email on your own domain, properly configured and secured."},
+              {title:"Apple Business Manager",    desc:"Apple's unified business platform — the backbone of everything Apple-related in your company."},
+              {title:"MDM Enrollment",            desc:"Your first device properly enrolled and managed. The starting point for your entire fleet."},
+              {title:"Apple Maps Listing",        desc:"Your business showing up correctly on Apple Maps and Apple Search — where your customers are already looking."},
+            ].map(item => (
+              <div key={item.title} style={{borderLeft:`3px solid rgba(212,169,122,0.25)`,paddingLeft:16}}>
+                <div style={{fontSize:13,fontWeight:800,color:C.cream,marginBottom:4}}>{item.title}</div>
+                <div style={{fontSize:13,color:"rgba(245,237,214,0.5)",lineHeight:1.6,fontWeight:600}}>{item.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <TextileBorder flip />
+
+      {/* ── MODULE CATALOG ── */}
+      <section className="section" style={{background:C.parchment}}>
+        <div style={{maxWidth:680,margin:"0 auto"}}>
+          <div style={{marginBottom:40}}>
+            <div className="section-eyebrow">Add-On Modules</div>
+            <h2 className="section-title">What We <span>Build</span></h2>
+            <p className="section-sub">Your audit tells us which of these apply. Each module is scoped, quoted, and scheduled before any work begins.</p>
+          </div>
+
+          <div style={{display:"flex",flexDirection:"column",gap:40}}>
+            {MODULES.map(grp => (
+              <div key={grp.group}>
+                <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:20,paddingBottom:10,borderBottom:`1px solid ${C.espresso}15`}}>
+                  <div style={{width:3,height:18,background:grp.color,borderRadius:2,flexShrink:0}} />
+                  <span style={{fontSize:10,letterSpacing:"0.2em",textTransform:"uppercase",fontWeight:700,color:C.espresso,opacity:0.45}}>{grp.group}</span>
+                </div>
+                <div style={{display:"flex",flexDirection:"column",gap:20}}>
+                  {grp.items.map(item => (
+                    <div key={item.id} style={{display:"flex",gap:14,alignItems:"flex-start"}}>
+                      <div style={{width:28,height:28,borderRadius:3,background:grp.color,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,fontSize:9,fontWeight:800,color:grp.color===C.beige?C.espresso:C.cream,letterSpacing:"0.04em",marginTop:1}}>
+                        {item.id}
+                      </div>
+                      <div style={{flex:1}}>
+                        <div style={{fontSize:14,fontWeight:800,color:C.espresso,marginBottom:3}}>{item.name}</div>
+                        <div style={{fontSize:13,color:"#6B5040",lineHeight:1.7,fontWeight:600}}>{item.desc}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div style={{marginTop:40,padding:"14px 20px",background:`${C.espresso}07`,border:`1px solid ${C.espresso}15`,borderRadius:4,fontSize:13,color:C.espresso,opacity:0.6,fontWeight:600,fontStyle:"italic",textAlign:"center",lineHeight:1.6}}>
+            Module pricing is scoped after your audit and included in your Total Investment Summary.
+          </div>
+        </div>
+      </section>
+
+      <TextileBorder />
+
+      {/* ── ONGOING PARTNERSHIP ── */}
+      <section className="section section-dark">
+        <div style={{maxWidth:680,margin:"0 auto"}}>
+          <div style={{marginBottom:36}}>
+            <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:12}}>After the Build</div>
+            <h2 style={{fontFamily:"'Lilita One',cursive",fontSize:"clamp(28px,4vw,44px)",color:C.cream,lineHeight:1.1,marginBottom:12}}>Ongoing <span style={{color:C.gold}}>Partnership</span></h2>
+            <p style={{fontSize:15,color:"rgba(245,237,214,0.6)",fontWeight:600,lineHeight:1.8,maxWidth:500,margin:0}}>We don't disappear after setup. Both plans keep your business running, your tech current, and Jason on speed dial.</p>
+          </div>
+
+          <div style={{display:"flex",gap:20,flexWrap:"wrap"}}>
+            {[
+              {name:"Apple Operations", range:"Starting at $35 / device / mo", color:C.teal,  desc:"Ongoing device management, security updates, app deployment, and support for your Apple fleet. Per device — scales as your team grows."},
+              {name:"Partner Access",   range:"Starting at $300 / mo",           color:C.gold, desc:"Direct access to Jason and the full CCP network — carrier management, vendor relationships, priority support, and a trusted contact for everything tech."},
+            ].map(plan => (
+              <div key={plan.name} style={{flex:1,minWidth:260,border:"1px solid rgba(212,169,122,0.12)",borderRadius:4,padding:"24px"}}>
+                <div style={{width:3,height:14,background:plan.color,borderRadius:2,marginBottom:12}} />
+                <div style={{fontSize:14,fontWeight:800,color:C.cream,marginBottom:4}}>{plan.name}</div>
+                <div style={{fontSize:10,letterSpacing:"0.1em",color:plan.color,fontWeight:700,marginBottom:14,textTransform:"uppercase"}}>{plan.range}</div>
+                <div style={{fontSize:13,color:"rgba(245,237,214,0.5)",lineHeight:1.7,fontWeight:600}}>{plan.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <TextileBorder flip />
+
+      {/* ── FINAL CTA ── */}
+      <section className="section" style={{background:C.parchment,textAlign:"center"}}>
+        <div style={{maxWidth:520,margin:"0 auto"}}>
+          <div className="section-eyebrow">Ready?</div>
+          <h2 className="section-title">Start with <span>The Audit</span></h2>
+          <p className="section-sub" style={{marginBottom:8}}>Fill out a quick intake form and we'll reach out within 24 hours to schedule your intro call.</p>
+          <p style={{fontSize:13,color:C.espresso,opacity:0.5,fontWeight:600,fontStyle:"italic",marginBottom:36,lineHeight:1.7}}>
+            No surprises, no hidden fees — your Total Investment Summary is signed before any work begins.
+          </p>
+          <button className="hero-cta" onClick={() => go("Discovery")}>Get Started →</button>
+        </div>
+      </section>
+    </>
+  );
+}
+
 export default function CafeConPan() {
   const [page, setPage] = useState(getPageFromHash);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -3001,24 +3217,7 @@ export default function CafeConPan() {
   const renderPage = () => {
     switch(page) {
       case "Home": return <HomePage go={go} t={t} lang={lang} />;
-      case "Tech Services": return (
-        <>
-          <TextileBorder />
-          <section className="section" style={{minHeight:"70vh",display:"flex",alignItems:"center",justifyContent:"center",background:C.parchment}}>
-            <div style={{maxWidth:520,margin:"0 auto",textAlign:"center",padding:"0 24px"}}>
-              <div className="section-eyebrow" style={{marginBottom:16}}>Coming Soon</div>
-              <h1 style={{fontFamily:"'Lilita One',cursive",fontSize:"clamp(32px,6vw,52px)",color:C.espresso,lineHeight:1.1,margin:"0 0 20px"}}>
-                Something Better <span style={{color:C.red}}>Is Brewing</span>
-              </h1>
-              <p style={{fontSize:16,lineHeight:1.8,color:"#555",fontWeight:600,maxWidth:400,margin:"0 auto 40px"}}>
-                We're reshaping our tech service offerings. Check back soon — or reach out directly if you have something in mind.
-              </p>
-              <button className="hero-cta" onClick={() => go("Discovery")}>Get in Touch →</button>
-            </div>
-          </section>
-          <TextileBorder flip />
-        </>
-      );
+      case "Tech Services": return <TechServicesPage go={go} />;
       case "Community": return null;
       case "Our Story": return <AboutPage t={t} go={go} />;
       case "Contact": return <ContactPage t={t} go={go} scrollToSocials={scrollToSocials} setGameActive={setGameActive} />;
