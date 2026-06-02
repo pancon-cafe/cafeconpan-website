@@ -2719,6 +2719,19 @@ serviceRationale: If the situation suggests a different fit than expected, say s
           <Sunburst size={600} color={C.gold} opacity={0.8} />
         </div>
         <div style={{ position:"relative", zIndex:2 }}>
+          <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:6, marginBottom:20 }}>
+            {[["The Grind","the-grind"],["The Cupping","audit-builder"],["The Pour","quote-builder"]].map(([name,hash],i) => (
+              <span key={hash} style={{ display:"flex", alignItems:"center", gap:6 }}>
+                {i > 0 && <span style={{ fontSize:9, color:`rgba(245,237,214,0.25)` }}>→</span>}
+                <button onClick={() => { if (name !== "The Grind") window.location.hash = `#${hash}`; }}
+                  disabled={name === "The Grind"}
+                  style={{ background:"none", border:"none", padding:"0 0 2px", cursor: name === "The Grind" ? "default" : "pointer", fontFamily:"'Nunito',sans-serif", fontSize:10, fontWeight:700, letterSpacing:"0.12em", textTransform:"uppercase", color: name === "The Grind" ? C.teal : `rgba(245,237,214,0.35)`, borderBottom: name === "The Grind" ? `1px solid ${C.teal}` : "1px solid transparent", transition:"color 0.15s" }}
+                  onMouseEnter={e => { if (name !== "The Grind") e.currentTarget.style.color = `rgba(245,237,214,0.8)`; }}
+                  onMouseLeave={e => { if (name !== "The Grind") e.currentTarget.style.color = `rgba(245,237,214,0.35)`; }}
+                >{name}</button>
+              </span>
+            ))}
+          </div>
           <div style={{ fontSize:10, letterSpacing:"0.22em", textTransform:"uppercase", color:C.teal, fontWeight:700, marginBottom:16 }}>Admin · Pre-Call Prep</div>
           <h1 style={{ fontFamily:"'Lilita One',cursive", fontSize:"clamp(40px,7vw,72px)", color:C.cream, lineHeight:1.1, marginBottom:16 }}>The <span style={{ color:C.gold }}>Grind</span></h1>
           <p style={{ fontSize:15, color:`rgba(245,237,214,0.6)`, fontWeight:600, maxWidth:480, margin:"0 auto" }}>

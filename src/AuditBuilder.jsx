@@ -959,6 +959,19 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
         flexShrink: 0, position: 'sticky', top: 64, zIndex: 50,
       }}>
         <div style={{ maxWidth: isDesktop ? 1040 : 480, margin: '0 auto' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, marginBottom: 10 }}>
+            {[['The Grind','the-grind'],['The Cupping','audit-builder'],['The Pour','quote-builder']].map(([name, hash], i) => (
+              <span key={hash} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                {i > 0 && <span style={{ fontSize: 9, color: C.muted }}>→</span>}
+                <button onClick={() => { window.location.hash = `#${hash}`; }}
+                  disabled={name === 'The Cupping'}
+                  style={{ background: 'none', border: 'none', padding: '0 0 2px', cursor: name === 'The Cupping' ? 'default' : 'pointer', fontFamily: "'Nunito',sans-serif", fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: name === 'The Cupping' ? C.teal : `${C.muted}`, borderBottom: name === 'The Cupping' ? `1px solid ${C.teal}` : '1px solid transparent', transition: 'color 0.15s' }}
+                  onMouseEnter={e => { if (name !== 'The Cupping') e.currentTarget.style.color = C.cream; }}
+                  onMouseLeave={e => { if (name !== 'The Cupping') e.currentTarget.style.color = C.muted; }}
+                >{name}</button>
+              </span>
+            ))}
+          </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 9 }}>
             <span style={{ fontSize: 11, color: C.beige, textTransform: 'uppercase', letterSpacing: '0.14em' }}>
               ☕ Café Con Pan · The Cupping
