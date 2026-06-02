@@ -476,7 +476,12 @@ const FIND_WIDTHS = [30, 68, null, 52, 38]; // null = flex:1
 // Document
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function AuditReportDocument({ data }) {
+// Redaction bar — used in teaser mode to obscure content
+function Redact({ width = '85%', height = 8, mb = 4 }) {
+  return <View style={{ height, width, backgroundColor: `${C.espresso}18`, borderRadius: 2, marginBottom: mb }} />;
+}
+
+export default function AuditReportDocument({ data, teaser = false }) {
   const overallColor = scoreColor(data.overallScore);
 
   // Sort findings by severity (critical first)
@@ -559,26 +564,44 @@ export default function AuditReportDocument({ data }) {
 
         <CCPTable>
           <CCPTableHead columns={FIND_COLS} widths={FIND_WIDTHS} />
-          {sortedFindings.map((f, i) => (
-            <CCPTableRow
-              key={f.id}
-              alt={i % 2 === 1}
-              widths={FIND_WIDTHS}
-              cells={[
-                { value: f.id,       variant: 'muted' },
-                { value: f.category, variant: 'muted' },
-                { value: f.finding },
-                {
-                  value:   f.severity.toUpperCase(),
-                  variant:
-                    f.severity === 'critical' ? 'red' :
-                    f.severity === 'high'     ? 'highlight' : 'default',
-                },
-                { value: f.effort },
-              ]}
-            />
-          ))}
+          {sortedFindings.map((f, i) => {
+            const isVisible = !teaser || i === 0;
+            return (
+              <CCPTableRow
+                key={f.id}
+                alt={i % 2 === 1}
+                widths={FIND_WIDTHS}
+                cells={isVisible ? [
+                  { value: f.id,       variant: 'muted' },
+                  { value: f.category, variant: 'muted' },
+                  { value: f.finding },
+                  {
+                    value:   f.severity.toUpperCase(),
+                    variant: f.severity === 'critical' ? 'red' : f.severity === 'high' ? 'highlight' : 'default',
+                  },
+                  { value: f.effort },
+                ] : [
+                  { value: f.id,       variant: 'muted' },
+                  { value: f.category, variant: 'muted' },
+                  { value: '— Included in full report —', variant: 'muted' },
+                  {
+                    value:   f.severity.toUpperCase(),
+                    variant: f.severity === 'critical' ? 'red' : f.severity === 'high' ? 'highlight' : 'default',
+                  },
+                  { value: f.effort },
+                ]}
+              />
+            );
+          })}
         </CCPTable>
+
+        {teaser && sortedFindings.length > 1 && (
+          <View style={{ backgroundColor: C.espCard, borderRadius: 3, padding: SP[3], marginTop: SP[2] }}>
+            <Text style={[rs.mutedText, { textAlign: 'center' }]}>
+              {sortedFindings.length - 1} additional finding{sortedFindings.length - 1 > 1 ? 's' : ''} with full details, impact analysis, and recommendations are included in the complete report.
+            </Text>
+          </View>
+        )}
 
         {/* Recommended roadmap */}
         <CCPSection title="Recommended Roadmap" />
@@ -590,23 +613,40 @@ export default function AuditReportDocument({ data }) {
         {data.roadmap.map((phase, i) => (
           <View key={i} style={rs.phase} wrap={false}>
             <Text style={rs.phaseLabel}>{phase.phase}</Text>
-            {phase.items.map((item, j) => (
-              <View key={j} style={rs.phaseItem}>
-                <Text style={rs.phaseArrow}>→</Text>
-                <Text style={rs.phaseText}>{item}</Text>
+            {teaser ? (
+              <View style={{ paddingLeft: SP[3] }}>
+                <Redact width="75%" height={7} mb={5} />
+                <Redact width="60%" height={7} mb={5} />
+                <Redact width="68%" height={7} mb={2} />
               </View>
-            ))}
+            ) : (
+              phase.items.map((item, j) => (
+                <View key={j} style={rs.phaseItem}>
+                  <Text style={rs.phaseArrow}>→</Text>
+                  <Text style={rs.phaseText}>{item}</Text>
+                </View>
+              ))
+            )}
           </View>
         ))}
+
+        {teaser && (
+          <View style={{ backgroundColor: C.espCard, borderRadius: 3, padding: SP[3], marginTop: SP[1] }}>
+            <Text style={[rs.mutedText, { textAlign: 'center' }]}>
+              Your complete prioritized action plan — with specific services, timelines, and investment estimates — is included in the full report.
+            </Text>
+          </View>
+        )}
 
         {/* Opportunities */}
         {data.opportunities?.length > 0 && (
           <>
             <CCPSection title="Opportunities" />
             <Text style={[rs.mutedText, { marginBottom: SP[4] }]}>
-              The following opportunities are not gaps to fix — they are possibilities
-              to explore. Each represents a way technology could help{' '}
-              {data.client.businessName} grow, differentiate, or operate better.
+              {teaser
+                ? `${data.opportunities.length} custom opportunit${data.opportunities.length > 1 ? 'ies' : 'y'} identified for ${data.client.businessName}. Full descriptions included in the complete report.`
+                : `The following opportunities are not gaps to fix — they are possibilities to explore. Each represents a way technology could help ${data.client.businessName} grow, differentiate, or operate better.`
+              }
             </Text>
             {data.opportunities.map((opp, i) => (
               <View key={i} wrap={false} style={{
@@ -614,29 +654,50 @@ export default function AuditReportDocument({ data }) {
                 backgroundColor: C.espCard, borderRadius: 3,
                 padding: SP[3], marginBottom: SP[3],
               }}>
-                <Text style={{
-                  fontSize: F.size.sm, fontWeight: 700, color: C.teal,
-                  letterSpacing: 0.3, marginBottom: SP[1],
-                }}>
+                <Text style={{ fontSize: F.size.sm, fontWeight: 700, color: C.teal, letterSpacing: 0.3, marginBottom: SP[1] }}>
                   {opp.headline}
                 </Text>
-                <Text style={rs.mutedText}>{opp.description}</Text>
+                {teaser
+                  ? <><Redact width="90%" /><Redact width="70%" mb={0} /></>
+                  : <Text style={rs.mutedText}>{opp.description}</Text>
+                }
               </View>
             ))}
           </>
         )}
 
-        {/* Closing callout */}
+        {/* Closing callout — full report OR unlock CTA */}
         <CCPDivider mt={SP[6]} mb={SP[4]} />
-        <CCPCallout accent="teal">
-          <Text style={rs.bodyText}>
-            This report was prepared exclusively for {data.client.businessName} by{' '}
-            {data.preparedBy} of Cafe Con Pan LLC. The findings and recommendations
-            are based on information gathered during the assessment and are intended
-            solely to guide technology strategy decisions for this organization.
-            Questions or follow-up? Reach us at jason@pancon.cafe or 808-868-6161.
-          </Text>
-        </CCPCallout>
+        {teaser ? (
+          <CCPCallout accent="teal">
+            <Text style={[rs.bodyText, { fontWeight: 700, color: C.teal, marginBottom: SP[2], fontSize: F.size.sm, letterSpacing: 0.5, textTransform: 'uppercase' }]}>
+              Unlock the Full Report
+            </Text>
+            <Text style={[rs.bodyText, { marginBottom: SP[3] }]}>
+              This preview includes your overall score and category breakdown.
+              The complete report contains {sortedFindings.length} detailed finding{sortedFindings.length !== 1 ? 's' : ''} with impact analysis,
+              a fully prioritized roadmap with investment estimates
+              {data.opportunities?.length > 0 ? `, and ${data.opportunities.length} custom opportunit${data.opportunities.length > 1 ? 'ies' : 'y'} specific to ${data.client.businessName}` : ''}.
+            </Text>
+            <Text style={[rs.bodyText, { marginBottom: SP[1] }]}>
+              Remote audit: $250 · On-site audit: $450
+            </Text>
+            <Text style={rs.mutedText}>
+              Audit fee applies in full toward any engagement of $500+ within 30 days.
+              Contact jason@pancon.cafe or 808-868-6161 to proceed.
+            </Text>
+          </CCPCallout>
+        ) : (
+          <CCPCallout accent="teal">
+            <Text style={rs.bodyText}>
+              This report was prepared exclusively for {data.client.businessName} by{' '}
+              {data.preparedBy} of Cafe Con Pan LLC. The findings and recommendations
+              are based on information gathered during the assessment and are intended
+              solely to guide technology strategy decisions for this organization.
+              Questions or follow-up? Reach us at jason@pancon.cafe or 808-868-6161.
+            </Text>
+          </CCPCallout>
+        )}
 
       </CCPPage>
     </Document>

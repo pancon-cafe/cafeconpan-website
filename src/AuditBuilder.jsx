@@ -798,19 +798,31 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
 
             <div style={{ width: '100%', marginBottom: 10 }}>
               <Suspense fallback={
-                <button style={{
-                  width: '100%', background: 'transparent', border: `1px solid ${C.b0}`,
-                  borderRadius: 9, color: C.muted, padding: 13, fontSize: 14,
-                  fontFamily: 'Georgia,serif', cursor: 'default',
-                }}>
+                <button style={{ width: '100%', background: 'transparent', border: `1px solid ${C.b0}`, borderRadius: 9, color: C.muted, padding: 13, fontSize: 14, fontFamily: 'Georgia,serif', cursor: 'default' }}>
                   Preparing PDF…
                 </button>
               }>
                 <DownloadPDFButton
                   doc={<AuditReportDocument data={data} />}
                   filename={pdfFilename}
-                  label="Download Audit Report PDF"
+                  label="Download Full Report PDF"
                   variant="solid"
+                  size="md"
+                />
+              </Suspense>
+            </div>
+
+            <div style={{ width: '100%', marginBottom: 10 }}>
+              <Suspense fallback={
+                <button style={{ width: '100%', background: 'transparent', border: `1px solid ${C.b0}`, borderRadius: 9, color: C.muted, padding: 13, fontSize: 14, fontFamily: 'Georgia,serif', cursor: 'default' }}>
+                  Preparing Teaser…
+                </button>
+              }>
+                <DownloadPDFButton
+                  doc={<AuditReportDocument data={data} teaser={true} />}
+                  filename={pdfFilename.replace('.pdf', '-Teaser.pdf')}
+                  label="Download Teaser PDF"
+                  variant="outline"
                   size="md"
                 />
               </Suspense>

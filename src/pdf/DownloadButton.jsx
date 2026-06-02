@@ -51,11 +51,14 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
 // ─────────────────────────────────────────────────────────────────────────────
 
 const BASE = {
-  display:        'inline-flex',
+  display:        'flex',
+  width:          '100%',
+  boxSizing:      'border-box',
+  justifyContent: 'center',
   alignItems:     'center',
   gap:            '8px',
   border:         'none',
-  borderRadius:   '4px',
+  borderRadius:   '9px',
   fontFamily:     'Georgia, "Times New Roman", serif',
   fontWeight:     '700',
   letterSpacing:  '0.5px',
@@ -159,7 +162,7 @@ export function DownloadPDFButton({
   const sz = SIZES[size] ?? SIZES.md;
 
   return (
-    <PDFDownloadLink document={doc} fileName={filename}>
+    <PDFDownloadLink document={doc} fileName={filename} style={{ display: 'block', width: '100%' }}>
       {({ loading, error }) => {
         if (error) {
           return (
