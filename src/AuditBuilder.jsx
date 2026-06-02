@@ -409,7 +409,7 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
     display: 'block', width: '100%', boxSizing: 'border-box',
     background: C.card, border: `1px solid ${C.b0}`, borderRadius: 8,
     padding: '11px 14px', color: C.cream, fontSize: 16, outline: 'none',
-    fontFamily: 'Georgia,serif', marginBottom: mb,
+    fontFamily: "'Nunito',sans-serif", marginBottom: mb,
   });
   const lbl = {
     fontSize: 11, color: C.muted, textTransform: 'uppercase',
@@ -448,7 +448,7 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
                 border: `1px solid ${a.auditType === t ? C.beige : C.b1}`,
                 color: a.auditType === t ? C.bg : C.muted,
                 borderRadius: 8, padding: '10px 0', cursor: 'pointer',
-                fontSize: 13, fontFamily: 'Georgia,serif',
+                fontSize: 13, fontFamily: "'Nunito',sans-serif",
                 fontWeight: a.auditType === t ? 'bold' : 'normal',
                 textTransform: 'capitalize',
               }}>{t === 'onsite' ? 'On-Site' : 'Remote'}</button>
@@ -516,7 +516,7 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
             background: 'rgba(90,158,150,0.06)', border: `1px solid rgba(90,158,150,0.25)`,
             borderRadius: 10, padding: 20, marginBottom: 16, textAlign: 'center',
           }}>
-            <div style={{ fontSize: 16, color: C.cream, marginBottom: 8, fontFamily: 'Georgia,serif' }}>
+            <div style={{ fontSize: 16, color: C.cream, marginBottom: 8, fontFamily: "'Nunito',sans-serif" }}>
               Generate with AI
             </div>
             <div style={{ fontSize: 12, color: C.muted, marginBottom: 16, lineHeight: 1.7, maxWidth: 380, margin: '0 auto 16px' }}>
@@ -536,7 +536,7 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
                 border: 'none', borderRadius: 8, padding: '11px 32px',
                 color: generating ? 'rgba(90,158,150,0.6)' : C.bg,
                 cursor: generating ? 'not-allowed' : 'pointer',
-                fontSize: 14, fontFamily: 'Georgia,serif', fontWeight: 'bold',
+                fontSize: 14, fontFamily: "'Nunito',sans-serif", fontWeight: 'bold',
                 transition: 'background 0.2s',
               }}
             >
@@ -672,7 +672,7 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
           <button onClick={addFinding} style={{
             width: '100%', background: 'transparent', border: `1px dashed ${C.b1}`,
             borderRadius: 10, color: C.beige, padding: 14, cursor: 'pointer',
-            fontSize: 14, fontFamily: 'Georgia,serif', marginBottom: 8,
+            fontSize: 14, fontFamily: "'Nunito',sans-serif", marginBottom: 8,
           }}>+ Add Finding</button>
 
           {/* Opportunities */}
@@ -706,7 +706,7 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
             style={{
               width: '100%', background: 'transparent', border: `1px dashed ${C.b1}`,
               borderRadius: 10, color: C.teal, padding: 14, cursor: 'pointer',
-              fontSize: 14, fontFamily: 'Georgia,serif', marginBottom: 8,
+              fontSize: 14, fontFamily: "'Nunito',sans-serif", marginBottom: 8,
             }}>+ Add Opportunity</button>
 
           {/* Roadmap */}
@@ -744,7 +744,7 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
                 <button onClick={() => addRoadmapItem(pi)} style={{
                   background: C.beige, border: 'none', borderRadius: 8,
                   color: C.bg, padding: '0 14px', cursor: 'pointer',
-                  fontSize: 13, fontFamily: 'Georgia,serif', fontWeight: 'bold', flexShrink: 0,
+                  fontSize: 13, fontFamily: "'Nunito',sans-serif", fontWeight: 'bold', flexShrink: 0,
                 }}>Add</button>
               </div>
             </div>
@@ -763,7 +763,7 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
               <div style={{ fontSize: 10, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 10 }}>
                 Report Summary
               </div>
-              <div style={{ fontSize: 20, color: C.white, fontFamily: 'Georgia,serif', marginBottom: 4 }}>
+              <div style={{ fontSize: 20, color: C.white, fontFamily: "'Nunito',sans-serif", marginBottom: 4 }}>
                 {data.client.businessName}
               </div>
               <div style={{ fontSize: 12, color: C.muted, marginBottom: 16 }}>
@@ -789,7 +789,7 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
                 <span style={{ fontSize: 12, color: C.muted }}>Overall Score</span>
                 <span style={{
                   fontSize: 20, color: scoreColor(data.overallScore),
-                  fontWeight: 'bold', fontFamily: 'Georgia,serif',
+                  fontWeight: 'bold', fontFamily: "'Nunito',sans-serif",
                 }}>
                   {data.overallScore}/100
                 </span>
@@ -798,7 +798,7 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
 
             <div style={{ width: '100%', marginBottom: 10 }}>
               <Suspense fallback={
-                <button style={{ width: '100%', background: 'transparent', border: `1px solid ${C.b0}`, borderRadius: 9, color: C.muted, padding: 13, fontSize: 14, fontFamily: 'Georgia,serif', cursor: 'default' }}>
+                <button style={{ width: '100%', background: 'transparent', border: `1px solid ${C.b0}`, borderRadius: 9, color: C.muted, padding: 13, fontSize: 14, fontFamily: "'Nunito',sans-serif", cursor: 'default' }}>
                   Preparing PDF…
                 </button>
               }>
@@ -814,7 +814,7 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
 
             <div style={{ width: '100%', marginBottom: 10 }}>
               <Suspense fallback={
-                <button style={{ width: '100%', background: 'transparent', border: `1px solid ${C.b0}`, borderRadius: 9, color: C.muted, padding: 13, fontSize: 14, fontFamily: 'Georgia,serif', cursor: 'default' }}>
+                <button style={{ width: '100%', background: 'transparent', border: `1px solid ${C.b0}`, borderRadius: 9, color: C.muted, padding: 13, fontSize: 14, fontFamily: "'Nunito',sans-serif", cursor: 'default' }}>
                   Preparing Teaser…
                 </button>
               }>
@@ -831,7 +831,7 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
             <button onClick={buildQuoteFromAudit} style={{
               width: '100%', background: C.teal, border: 'none',
               borderRadius: 9, color: C.bg, padding: 13, fontSize: 14,
-              fontFamily: 'Georgia,serif', fontWeight: 'bold', cursor: 'pointer',
+              fontFamily: "'Nunito',sans-serif", fontWeight: 'bold', cursor: 'pointer',
               marginBottom: 10,
             }}>
               Build Quote from This Audit →
@@ -840,7 +840,7 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
             <button style={{
               width: '100%', background: 'transparent', border: `1px solid ${C.b0}`,
               borderRadius: 9, color: C.muted, padding: 12, fontSize: 14,
-              fontFamily: 'Georgia,serif', cursor: 'pointer',
+              fontFamily: "'Nunito',sans-serif", cursor: 'pointer',
             }} onClick={() => { setA(blankState()); setStep(0); setRoadmapInput(['', '', '']); }}>
               ↩ Start new report
             </button>
@@ -863,14 +863,14 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
   const backBtn = (
     <button style={{
       flex: 1, background: 'transparent', border: `1px solid ${C.b0}`, borderRadius: 9,
-      color: C.muted, padding: 12, cursor: 'pointer', fontSize: 14, fontFamily: 'Georgia,serif',
+      color: C.muted, padding: 12, cursor: 'pointer', fontSize: 14, fontFamily: "'Nunito',sans-serif",
     }} onClick={() => setStep(s => s - 1)}>← Back</button>
   );
   const nextBtn = (
     <button style={{
       flex: step > 0 ? 2 : 1, background: C.beige, border: 'none', borderRadius: 9,
       color: C.bg, padding: 12, cursor: 'pointer', fontSize: 15, fontWeight: 'bold',
-      fontFamily: 'Georgia,serif',
+      fontFamily: "'Nunito',sans-serif",
     }} onClick={() => setStep(s => Math.min(s + 1, STEPS.length - 1))}>
       {step >= STEPS.length - 2 ? 'Finalize Report →' : 'Continue →'}
     </button>
@@ -948,7 +948,7 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
   // ── RENDER ──────────────────────────────────────────────────────────────────
   return (
     <div style={{
-      fontFamily: 'Georgia,serif', background: C.bg, minHeight: '100vh',
+      fontFamily: "'Nunito',sans-serif", background: C.bg, minHeight: '100vh',
       color: C.cream, paddingTop: 64,
       ...(isDesktop ? {} : { display: 'flex', flexDirection: 'column', maxWidth: 480, margin: '0 auto', position: 'relative' }),
     }}>
@@ -1005,7 +1005,7 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
             {/* Left: step form */}
             <div style={{ flex: 1, padding: '32px 40px 40px', overflowY: 'auto' }}>
               {stepQ && (
-                <h2 style={{ fontSize: 24, lineHeight: 1.3, color: C.white, fontFamily: 'Georgia,serif', margin: '0 0 24px 0' }}>
+                <h2 style={{ fontSize: 24, lineHeight: 1.3, color: C.white, fontFamily: "'Lilita One',cursive", margin: '0 0 24px 0' }}>
                   {stepQ}
                 </h2>
               )}
@@ -1030,7 +1030,7 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
         <>
           <div style={{ flex: 1, padding: '24px 20px 100px' }}>
             {stepQ && (
-              <h2 style={{ fontSize: 21, lineHeight: 1.3, color: C.white, fontFamily: 'Georgia,serif', margin: '0 0 20px 0' }}>
+              <h2 style={{ fontSize: 21, lineHeight: 1.3, color: C.white, fontFamily: "'Lilita One',cursive", margin: '0 0 20px 0' }}>
                 {stepQ}
               </h2>
             )}

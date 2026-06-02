@@ -281,7 +281,7 @@ export default function QuoteBuilder() {
     display:'block',width:'100%',boxSizing:'border-box',
     background:C.card,border:`1px solid ${C.b0}`,borderRadius:8,
     padding:'11px 14px',color:C.cream,fontSize:16,outline:'none',
-    fontFamily:'Georgia,serif',marginBottom:mb,
+    fontFamily:"'Nunito',sans-serif",marginBottom:mb,
   });
   const lbl={fontSize:11,color:C.muted,textTransform:'uppercase',
     letterSpacing:'0.1em',display:'block',marginBottom:6};
@@ -577,7 +577,7 @@ export default function QuoteBuilder() {
       return(
         <>
           <div style={{marginBottom:22}}>
-            <div style={{fontSize:20,color:C.white,fontFamily:'Georgia,serif'}}>{a.clientName||'Client'}</div>
+            <div style={{fontSize:20,color:C.white,fontFamily:"'Nunito',sans-serif"}}>{a.clientName||'Client'}</div>
             <div style={{fontSize:12,color:C.muted,marginTop:3}}>
               {a.vertical||'—'} · {a.stage==='pre'?'Pre-launch':a.stage==='operational'?'Operational':'Targeted'} · Founding Partner Phase
             </div>
@@ -606,7 +606,7 @@ export default function QuoteBuilder() {
           )}
           <div style={{display:'flex',justifyContent:'space-between',padding:'14px 0 0'}}>
             <span style={{fontSize:15,color:C.cream,fontWeight:'bold'}}>One-time total</span>
-            <span style={{fontSize:26,color:C.beige,fontFamily:'Georgia,serif',fontWeight:'bold'}}>{fmt(q.net)}</span>
+            <span style={{fontSize:26,color:C.beige,fontFamily:"'Nunito',sans-serif",fontWeight:'bold'}}>{fmt(q.net)}</span>
           </div>
           <div style={{background:C.card,border:`1px solid ${C.b0}`,borderRadius:8,padding:'13px 15px',margin:'16px 0'}}>
             <div style={{fontSize:10,color:C.muted,textTransform:'uppercase',letterSpacing:'0.1em',marginBottom:9}}>Payment schedule</div>
@@ -634,7 +634,7 @@ export default function QuoteBuilder() {
               ))}
               <div style={{display:'flex',justifyContent:'space-between',padding:'14px 0 3px'}}>
                 <span style={{fontSize:15,color:C.cream,fontWeight:'bold'}}>Monthly total</span>
-                <span style={{fontSize:26,color:C.beige,fontFamily:'Georgia,serif',fontWeight:'bold'}}>{fmt(q.mo)}/mo</span>
+                <span style={{fontSize:26,color:C.beige,fontFamily:"'Nunito',sans-serif",fontWeight:'bold'}}>{fmt(q.mo)}/mo</span>
               </div>
               <div style={{display:'flex',justifyContent:'space-between',paddingBottom:2}}>
                 <span style={{fontSize:12,color:C.muted}}>Annual recurring</span>
@@ -647,7 +647,7 @@ export default function QuoteBuilder() {
               </div>
               <div style={{background:'rgba(212,169,122,0.07)',border:`1px solid ${C.b1}`,borderRadius:12,padding:'18px',margin:'20px 0'}}>
                 <div style={{fontSize:10,color:C.muted,textTransform:'uppercase',letterSpacing:'0.12em',marginBottom:5}}>36-month client LTV</div>
-                <div style={{fontSize:32,color:C.beige,fontFamily:'Georgia,serif',fontWeight:'bold'}}>{fmt(q.ltv)}</div>
+                <div style={{fontSize:32,color:C.beige,fontFamily:"'Nunito',sans-serif",fontWeight:'bold'}}>{fmt(q.ltv)}</div>
                 <div style={{fontSize:11,color:C.muted,marginTop:5}}>{fmt(q.net)} + {fmt(q.mo)}/mo × 36</div>
               </div>
             </>
@@ -657,7 +657,7 @@ export default function QuoteBuilder() {
           </div>
           <button
             style={{width:'100%',background:copied?C.teal:C.beige,border:'none',borderRadius:9,
-              color:C.bg,padding:14,fontSize:15,fontWeight:'bold',fontFamily:'Georgia,serif',
+              color:C.bg,padding:14,fontSize:15,fontWeight:'bold',fontFamily:"'Nunito',sans-serif",
               cursor:'pointer',marginBottom:10,transition:'background 0.2s'}}
             onClick={()=>{
               try{navigator.clipboard.writeText(buildText(a,q));}catch(e){}
@@ -668,7 +668,7 @@ export default function QuoteBuilder() {
           <div style={{width:'100%',marginBottom:10}}>
             <Suspense fallback={
               <button style={{width:'100%',background:'transparent',border:`1px solid ${C.b0}`,
-                borderRadius:9,color:C.muted,padding:13,fontSize:14,fontFamily:'Georgia,serif',cursor:'default'}}>
+                borderRadius:9,color:C.muted,padding:13,fontSize:14,fontFamily:"'Nunito',sans-serif",cursor:'default'}}>
                 Preparing PDF…
               </button>
             }>
@@ -683,7 +683,7 @@ export default function QuoteBuilder() {
           </div>
           <button
             style={{width:'100%',background:'transparent',border:`1px solid ${C.b0}`,borderRadius:9,
-              color:C.muted,padding:12,fontSize:14,fontFamily:'Georgia,serif',cursor:'pointer',marginBottom:8}}
+              color:C.muted,padding:12,fontSize:14,fontFamily:"'Nunito',sans-serif",cursor:'pointer',marginBottom:8}}
             onClick={()=>{setA({});setSid('client');setCopied(false);}}>
             ↩ Start new quote
           </button>
@@ -712,7 +712,7 @@ export default function QuoteBuilder() {
   const progress=step?.progress??100;
 
   return(
-    <div style={{fontFamily:'Georgia,serif',background:C.bg,minHeight:'100vh',color:C.cream,paddingTop:64,
+    <div style={{fontFamily:"'Nunito',sans-serif",background:C.bg,minHeight:'100vh',color:C.cream,paddingTop:64,
       ...(isDesktop?{}:{display:'flex',flexDirection:'column',maxWidth:480,margin:'0 auto',position:'relative'})}}>
 
       {/* ── HEADER ── */}
@@ -763,7 +763,7 @@ export default function QuoteBuilder() {
             {/* Left: step wizard */}
             <div style={{flex:1,padding:'32px 40px 40px',overflowY:'auto'}}>
               {meta.q&&(
-                <h2 style={{fontSize:24,lineHeight:1.3,color:C.white,fontFamily:'Georgia,serif',margin:'0 0 24px 0'}}>
+                <h2 style={{fontSize:24,lineHeight:1.3,color:C.white,fontFamily:"'Lilita One',cursive",margin:'0 0 24px 0'}}>
                   {meta.q}
                 </h2>
               )}
@@ -771,11 +771,11 @@ export default function QuoteBuilder() {
               <div style={{display:'flex',gap:10,marginTop:32,paddingTop:20,borderTop:`1px solid ${C.b0}`}}>
                 {idx>0&&(
                   <button style={{flex:1,background:'transparent',border:`1px solid ${C.b0}`,borderRadius:9,
-                    color:C.muted,padding:12,cursor:'pointer',fontSize:14,fontFamily:'Georgia,serif'}}
+                    color:C.muted,padding:12,cursor:'pointer',fontSize:14,fontFamily:"'Nunito',sans-serif"}}
                     onClick={back}>← Back</button>
                 )}
                 <button style={{flex:idx>0?2:1,background:C.beige,border:'none',borderRadius:9,
-                  color:C.bg,padding:12,cursor:'pointer',fontSize:15,fontWeight:'bold',fontFamily:'Georgia,serif'}}
+                  color:C.bg,padding:12,cursor:'pointer',fontSize:15,fontWeight:'bold',fontFamily:"'Nunito',sans-serif"}}
                   onClick={next}>
                   {idx>=steps.length-2?'View Quote →':'Continue →'}
                 </button>
@@ -814,13 +814,13 @@ export default function QuoteBuilder() {
                   )}
                   <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',padding:'14px 0 0'}}>
                     <span style={{fontSize:12,color:C.cream,fontWeight:'bold'}}>One-time total</span>
-                    <span style={{fontSize:24,color:C.beige,fontFamily:'Georgia,serif',fontWeight:'bold'}}>{fmt(q.net)}</span>
+                    <span style={{fontSize:24,color:C.beige,fontFamily:"'Nunito',sans-serif",fontWeight:'bold'}}>{fmt(q.net)}</span>
                   </div>
                   {a.recurring===true&&q.mo>0&&(
                     <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',
                       marginTop:8,paddingTop:8,borderTop:`1px solid ${C.b0}`}}>
                       <span style={{fontSize:11,color:C.muted}}>Monthly retainer</span>
-                      <span style={{fontSize:16,color:C.beige,fontFamily:'Georgia,serif'}}>{fmt(q.mo)}/mo</span>
+                      <span style={{fontSize:16,color:C.beige,fontFamily:"'Nunito',sans-serif"}}>{fmt(q.mo)}/mo</span>
                     </div>
                   )}
                 </>
@@ -837,18 +837,18 @@ export default function QuoteBuilder() {
               display:'flex',flexShrink:0,position:'sticky',top:136,zIndex:49}}>
               <div style={{flex:1,textAlign:'center'}}>
                 <div style={{fontSize:9,color:C.muted,textTransform:'uppercase',letterSpacing:'0.1em',marginBottom:3}}>One-time</div>
-                <div style={{fontSize:18,color:C.beige,fontFamily:'Georgia,serif'}}>{fmt(q.net)}</div>
+                <div style={{fontSize:18,color:C.beige,fontFamily:"'Nunito',sans-serif"}}>{fmt(q.net)}</div>
               </div>
               {a.recurring===true&&(
                 <div style={{flex:1,textAlign:'center',borderLeft:`1px solid ${C.b0}`}}>
                   <div style={{fontSize:9,color:C.muted,textTransform:'uppercase',letterSpacing:'0.1em',marginBottom:3}}>Monthly</div>
-                  <div style={{fontSize:18,color:C.beige,fontFamily:'Georgia,serif'}}>{fmt(q.mo)}/mo</div>
+                  <div style={{fontSize:18,color:C.beige,fontFamily:"'Nunito',sans-serif"}}>{fmt(q.mo)}/mo</div>
                 </div>
               )}
               {q.savings>0&&(
                 <div style={{flex:1,textAlign:'center',borderLeft:`1px solid ${C.b0}`}}>
                   <div style={{fontSize:9,color:C.muted,textTransform:'uppercase',letterSpacing:'0.1em',marginBottom:3}}>Saved</div>
-                  <div style={{fontSize:18,color:C.teal,fontFamily:'Georgia,serif'}}>−{fmt(q.savings)}</div>
+                  <div style={{fontSize:18,color:C.teal,fontFamily:"'Nunito',sans-serif"}}>−{fmt(q.savings)}</div>
                 </div>
               )}
             </div>
@@ -856,7 +856,7 @@ export default function QuoteBuilder() {
           {/* Body */}
           <div style={{flex:1,padding:'24px 20px 100px'}}>
             {meta.q&&(
-              <h2 style={{fontSize:21,lineHeight:1.3,color:C.white,fontFamily:'Georgia,serif',margin:'0 0 20px 0'}}>
+              <h2 style={{fontSize:21,lineHeight:1.3,color:C.white,fontFamily:"'Lilita One',cursive",margin:'0 0 20px 0'}}>
                 {meta.q}
               </h2>
             )}
@@ -868,11 +868,11 @@ export default function QuoteBuilder() {
               padding:'14px 20px',display:'flex',gap:10,flexShrink:0,zIndex:50}}>
               {idx>0&&(
                 <button style={{flex:1,background:'transparent',border:`1px solid ${C.b0}`,borderRadius:9,
-                  color:C.muted,padding:12,cursor:'pointer',fontSize:14,fontFamily:'Georgia,serif'}}
+                  color:C.muted,padding:12,cursor:'pointer',fontSize:14,fontFamily:"'Nunito',sans-serif"}}
                   onClick={back}>← Back</button>
               )}
               <button style={{flex:idx>0?2:3,background:C.beige,border:'none',borderRadius:9,
-                color:C.bg,padding:12,cursor:'pointer',fontSize:15,fontWeight:'bold',fontFamily:'Georgia,serif'}}
+                color:C.bg,padding:12,cursor:'pointer',fontSize:15,fontWeight:'bold',fontFamily:"'Nunito',sans-serif"}}
                 onClick={next}>
                 {idx>=steps.length-2?'View Quote →':'Continue →'}
               </button>
