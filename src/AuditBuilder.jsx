@@ -137,6 +137,7 @@ function blankState() {
     categories: CATEGORIES.map(c => ({ name: c.name, score: 50, summary: '' })),
     executiveSummary: '', overallScore: null, findings: [],
     roadmap: DEFAULT_ROADMAP.map(r => ({ ...r, items: [] })),
+    recommendedModules: null,
   };
 }
 
@@ -263,8 +264,24 @@ Respond with ONLY valid JSON — no markdown, no code fences, no explanation —
     { "phase": "Immediate (0–30 days)", "items": ["action item, include CCP service + price where applicable"] },
     { "phase": "Short-Term (30–90 days)", "items": ["..."] },
     { "phase": "Long-Term (90+ days)", "items": ["..."] }
-  ]
+  ],
+  "recommendedModules": {
+    "A": false,
+    "B": false,
+    "D1": false,
+    "D2": false,
+    "E": false,
+    "G": false,
+    "H": false,
+    "F": false,
+    "J": false,
+    "c1": 0,
+    "c2": 0,
+    "recurring": false
+  }
 }
+
+Set each recommendedModules flag to true/count if that service appears in the roadmap. D2 only true if D1 is also true. c1 = number of new devices to deploy, c2 = number of existing devices to enroll. recurring = true if you recommend the Partner relationship. These will pre-populate the Quote Builder automatically.
 
 Generate 3–8 findings based on what the notes reveal. If notes are sparse for a category, score conservatively (assume the worst unless the notes suggest otherwise) and note that further assessment is needed. Include CCP service pricing in roadmap items where a specific service applies.`;
 
@@ -315,6 +332,7 @@ Generate 3–8 findings based on what the notes reveal. If notes are sparse for 
           const gen = parsed.roadmap?.find(rp => rp.phase === r.phase);
           return gen ? { ...r, items: gen.items || [] } : { ...r, items: [] };
         }),
+        recommendedModules: parsed.recommendedModules || null,
       }));
 
     } catch (err) {
@@ -323,6 +341,35 @@ Generate 3–8 findings based on what the notes reveal. If notes are sparse for 
     } finally {
       setGenerating(false);
     }
+  }
+
+  function buildQuoteFromAudit() {
+    const recs = a.recommendedModules || {};
+    const D1 = !!recs.D1, D2 = !!recs.D2, E = !!recs.E, H = !!recs.H;
+
+    let connectivity = 'none';
+    if (D1 && D2 && H) connectivity = 'comms';
+    else if (D1 && E)  connectivity = 'connectivity';
+    else if (D1 && D2) connectivity = 'd1d2';
+    else if (D1)       connectivity = 'd1';
+
+    const prefill = {
+      clientName:  a.clientName,
+      contactName: a.contactName,
+      clientEmail: a.clientEmail,
+      clientPhone: a.clientPhone,
+      stage:       'operational',
+      audit:       a.auditType === 'onsite' ? 'onsite' : 'remote',
+      A: !!recs.A, B: !!recs.B,
+      connectivity,
+      H: H && connectivity !== 'comms',
+      G: !!recs.G, F: !!recs.F, J: !!recs.J,
+      c1: recs.c1 || 0, c2: recs.c2 || 0,
+      recurring: !!recs.recurring,
+    };
+
+    localStorage.setItem('ccp_quote_prefill', JSON.stringify(prefill));
+    window.location.hash = '#quote-builder';
   }
 
   const avgScore = useMemo(() => {
@@ -705,6 +752,15 @@ Generate 3–8 findings based on what the notes reveal. If notes are sparse for 
                 />
               </Suspense>
             </div>
+
+            <button onClick={buildQuoteFromAudit} style={{
+              width: '100%', background: C.teal, border: 'none',
+              borderRadius: 9, color: C.bg, padding: 13, fontSize: 14,
+              fontFamily: 'Georgia,serif', fontWeight: 'bold', cursor: 'pointer',
+              marginBottom: 10,
+            }}>
+              Build Quote from This Audit →
+            </button>
 
             <button style={{
               width: '100%', background: 'transparent', border: `1px solid ${C.b0}`,

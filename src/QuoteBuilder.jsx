@@ -243,7 +243,13 @@ function buildPDFData(a, q) {
 
 // ─── MAIN ──────────────────────────────────────────────────────────────────────
 export default function QuoteBuilder() {
-  const [a, setA] = useState({});
+  const [a, setA] = useState(() => {
+    try {
+      const raw = localStorage.getItem('ccp_quote_prefill');
+      if (raw) { localStorage.removeItem('ccp_quote_prefill'); return JSON.parse(raw); }
+    } catch {}
+    return {};
+  });
   const [sid, setSid] = useState('client');
   const [copied, setCopied] = useState(false);
   const [isDesktop, setIsDesktop] = useState(() => window.innerWidth >= 700);
