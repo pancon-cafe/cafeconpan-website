@@ -1,0 +1,48 @@
+// Single source of truth for all CCP service pricing.
+// Update numbers here — The Pour, The Cupping, The Grind, and the
+// Tech Services page all derive their prices from this file.
+
+export const P = {
+  audit:      { remote: 250, onsite: 450 },
+  foundation: 1500,
+  A: 150, B: 175,
+  C1: 150, C2: 200, C3: 150, C4: 150,
+  D1: 300, D2: 300, E: 300,
+  F: 750, G: 450, H: 600, J: 400,
+  flagship: { complete: { price: 4200, dev: 3 }, fleet: { price: 5000, dev: 10 } },
+  ops: { m2m: 40, annual: 35, '2yr': 30 },
+  pa:  { m2m: 350, annual: 300, '2yr': 250 },
+  comm: { dev: 25, pa: 150 },
+  ivr: 75, extra: 150,
+  bundles: {
+    comms:         950,  // D1 + D2 + H  (saves $250)
+    connectivity:  475,  // D1 + E       (saves $125)
+    launchPrep:    275,  // A + B        (saves $50)
+    ofbEssentials: 300,  // B + C1×1     (saves $25)
+    applePresence: 750,  // C1×3 + G     (saves $150)
+  },
+};
+
+// Returns a formatted service catalog string for use in AI prompts.
+// Import and call this in The Grind and The Cupping prompts so price
+// changes here flow through automatically.
+export function catalogText() {
+  const fmt = n => `$${n.toLocaleString()}`;
+  return [
+    `- Foundation Core: ${fmt(P.foundation)} — business email+domain, Apple Business Manager, MDM first device, Apple Maps listing`,
+    `- Module C1: ${fmt(P.C1)}/device — new device zero-touch deployment`,
+    `- Module C2: ${fmt(P.C2)}/device — existing device enrollment`,
+    `- Module D1: ${fmt(P.D1)} — carrier audit & recommendation`,
+    `- Module D2: ${fmt(P.D2)} add-on — carrier implementation`,
+    `- Module E: ${fmt(P.E)} — ISP/business internet setup`,
+    `- Bundle — Connectivity (D1 + E): ${fmt(P.bundles.connectivity)} (saves $125)`,
+    `- Module G: ${fmt(P.G)} — Apple Brands full layer (Branded Mail, Verify with Wallet, Tap to Pay branding)`,
+    `- Module H: ${fmt(P.H)} — IVR/AI phone system (Twilio)`,
+    `- Module F: ${fmt(P.F)} — business website`,
+    `- Module J: ${fmt(P.J)} + MSP — Apple Business Messages`,
+    `- Bundle — Communications (D1 + D2 + H): ${fmt(P.bundles.comms)} (saves $250)`,
+    `- Recurring Apple Operations: ${fmt(P.ops['2yr'])}–${fmt(P.ops.m2m)}/device/mo`,
+    `- Recurring Partner Access: ${fmt(P.pa['2yr'])}–${fmt(P.pa.m2m)}/mo`,
+    `- IVR Management: ${fmt(P.ivr)}/mo + usage`,
+  ].join('\n');
+}

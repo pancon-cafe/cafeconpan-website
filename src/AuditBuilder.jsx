@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect, lazy, Suspense } from "react";
 import { DownloadPDFButton } from "./pdf/DownloadButton";
+import { catalogText } from "./pricing";
 
 const AuditReportDocument = lazy(() => import("./pdf/AuditReportDocument"));
 
@@ -215,22 +216,7 @@ DISCOVERY NOTES:
 ${discoveryText}
 
 CCP SERVICE CATALOG (reference these in roadmap items with exact pricing):
-- Foundation Core: $1,500 — business email+domain setup, Apple Business Manager, MDM first device, Apple Maps listing
-- Module C1: $150/device — new device deployment, zero-touch MDM enrollment
-- Module C2: $200/device — existing device enrollment (factory reset, manual MDM)
-- Module D1: $300 — carrier audit & recommendation (billable regardless of outcome)
-- Module D2: $300 add-on — carrier implementation (only if client proceeds after D1)
-- Module E: $300 — ISP/business internet setup
-- Connectivity Bundle (D1 + E): $475
-- Module G: $450 — Apple Brands full layer (Branded Mail, Verify with Wallet, Tap to Pay branding, full Brand Profile)
-- Module H: $600 — IVR setup (Twilio + AI call routing)
-- Communications Bundle (D1 + D2 + H): $950
-- Module F: $750 — business website (via Claude Code, webforms, payment integration)
-- Module J: $400 + MSP — Apple Business Messages setup
-- Security & Compliance (coming soon): endpoint protection, MFA/password manager setup
-- Recurring Apple Operations: $35–40/device/mo (MDM, device management)
-- Recurring Partner Access: $300–350/mo (check-ins, QBRs, SLA, procurement, renewals)
-- IVR Management: $75/mo + usage
+${catalogText()}
 
 SCORING GUIDE (0–100):
 - 0–25: Nothing in place, critical risk

@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect, lazy, Suspense } from "react";
 import { DownloadPDFButton } from "./pdf/DownloadButton";
+import { P } from "./pricing";
 
 const QuoteDocument = lazy(() => import("./pdf/QuoteDocument"));
 
@@ -13,19 +14,6 @@ const C = {
   teal:  '#5A9E96', tealL: '#80C0B8',
   red:   '#B8503E', redL:  '#D47060',
   blush: '#D89090', green: '#68AF88',
-};
-
-// ─── PRICING ───────────────────────────────────────────────────────────────────
-const P = {
-  audit: { remote: 250, onsite: 450 },
-  foundation: 1500,
-  A:150, B:175, C1:150, C2:200, C3:150, C4:150,
-  D1:300, D2:300, E:300, F:750, G:450, H:600, J:400,
-  flagship: { complete:{price:4200,dev:3}, fleet:{price:5000,dev:10} },
-  ops: { m2m:40, annual:35, '2yr':30 },
-  pa:  { m2m:350, annual:300, '2yr':250 },
-  comm:{ dev:25, pa:150 },
-  ivr:75, extra:150,
 };
 
 // ─── QUOTE ENGINE ──────────────────────────────────────────────────────────────
@@ -49,11 +37,11 @@ function calcQuote(a) {
     const c1=+(a.c1||0),c2=+(a.c2||0),c3=+(a.c3||0),c4=+(a.c4||0);
     const used=new Set();
 
-    if(D1&&D2&&H){ lines.push({id:'b-cm',label:'Bundle — Communications (D1 + D2 + H)',price:950,saving:250,tag:'bundle'}); savings+=250; used.add('D1');used.add('D2');used.add('H'); }
-    else if(D1&&E){ lines.push({id:'b-cn',label:'Bundle — Connectivity (D1 + E)',price:475,saving:125,tag:'bundle'}); savings+=125; used.add('D1');used.add('E'); }
-    if(a.A&&a.B){ lines.push({id:'b-lp',label:'Bundle — Launch Prep (A + B)',price:275,saving:50,tag:'bundle'}); savings+=50; used.add('A');used.add('B'); }
-    else if(a.B&&c1>=1){ lines.push({id:'b-oe',label:'Bundle — OFB Essentials (B + C1×1)',price:300,saving:25,tag:'bundle'}); savings+=25; used.add('B');used.add('C1_1'); }
-    if(c1>=3&&a.G){ lines.push({id:'b-ap',label:'Bundle — Apple Presence (C1×3 + G)',price:750,saving:150,tag:'bundle'}); savings+=150; used.add('G');used.add('C1_3'); }
+    if(D1&&D2&&H){ lines.push({id:'b-cm',label:'Bundle — Communications (D1 + D2 + H)',price:P.bundles.comms,saving:250,tag:'bundle'}); savings+=250; used.add('D1');used.add('D2');used.add('H'); }
+    else if(D1&&E){ lines.push({id:'b-cn',label:'Bundle — Connectivity (D1 + E)',price:P.bundles.connectivity,saving:125,tag:'bundle'}); savings+=125; used.add('D1');used.add('E'); }
+    if(a.A&&a.B){ lines.push({id:'b-lp',label:'Bundle — Launch Prep (A + B)',price:P.bundles.launchPrep,saving:50,tag:'bundle'}); savings+=50; used.add('A');used.add('B'); }
+    else if(a.B&&c1>=1){ lines.push({id:'b-oe',label:'Bundle — OFB Essentials (B + C1×1)',price:P.bundles.ofbEssentials,saving:25,tag:'bundle'}); savings+=25; used.add('B');used.add('C1_1'); }
+    if(c1>=3&&a.G){ lines.push({id:'b-ap',label:'Bundle — Apple Presence (C1×3 + G)',price:P.bundles.applePresence,saving:150,tag:'bundle'}); savings+=150; used.add('G');used.add('C1_3'); }
 
     let rC1=c1; if(used.has('C1_3'))rC1-=3; else if(used.has('C1_1'))rC1-=1;
     if(rC1>0) lines.push({id:'c1r',label:`C1 — New Device Deploy ×${rC1}`,price:rC1*P.C1,tag:'device'});

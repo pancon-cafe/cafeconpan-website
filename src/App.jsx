@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import CafeGame from "./CafeGame";
+import { P, catalogText } from "./pricing";
 const QuoteBuilder   = lazy(() => import("./QuoteBuilder"));
 const AuditBuilder   = lazy(() => import("./AuditBuilder"));
 
@@ -268,6 +269,56 @@ const STRINGS = {
     footer:{ tagline:"Tech · Coffee · Culture", copy:"© 2026 Cafe Con Pan LLC", disclaimer:"We provide guidance and implementation support — not legal, tax, or financial advice. For those needs, we recommend working with a licensed professional." },
     pay:{ eyebrow:"Pay Your Invoice", title:"Quick &", titleSpan:"Secure", body:"Enter your invoice number and amount on the next page. Payment is processed securely through Helcim.", cta:"Pay Now →", questions:"Questions? Email" },
     privacy:{ footerLink:"Privacy Policy" },
+    techServices:{
+      eyebrow:"Tech Services",
+      heroTitle:"Built Around", heroTitleSpan:"Your Business",
+      heroSub:"We don't sell packages off a menu. We assess your business first, then build a plan specific to what you actually need.",
+      heroQuote:"Every engagement starts with The Audit. No surprises, no hidden fees — your Total Investment Summary is signed before any work begins.",
+      auditEyebrow:"Step One", auditTitle:"The", auditTitleSpan:"Audit",
+      auditSub:"Before we build anything, we assess everything. A full technology review of your business — scored, prioritized, and turned into a clear roadmap you keep forever.",
+      auditRemote:"Remote", auditOnsite:"On-Site",
+      auditFeatures:["Full assessment across 6 tech categories","Overall score + per-category scoring","Prioritized findings with severity ratings","Custom roadmap broken out by phase","Opportunities specific to your industry","30-day credit toward your project"],
+      auditCta:"Start with an Audit →",
+      foundationEyebrow:"The Baseline", foundationTitle:"Foundation Core", foundationStartingAt:"Starting at",
+      foundationSub:"The infrastructure everything else runs on. Every client we work with gets this built first — it's the foundation your business needs before any other tech layer makes sense.",
+      foundationItems:[
+        { title:"Business Email & Domain",   desc:"A professional email on your own domain, properly configured and secured." },
+        { title:"Apple Business Manager",    desc:"Apple's unified business platform — the backbone of everything Apple-related in your company." },
+        { title:"MDM Enrollment",            desc:"Your first device properly enrolled and managed. The starting point for your entire fleet." },
+        { title:"Apple Maps Listing",        desc:"Your business showing up correctly on Apple Maps and Apple Search — where your customers are already looking." },
+      ],
+      modulesEyebrow:"Add-On Modules", modulesTitle:"What We", modulesTitleSpan:"Build",
+      modulesSub:"Your audit tells us which of these apply. Each module is scoped, quoted, and scheduled before any work begins.",
+      modulesNote:"Module pricing is scoped after your audit and included in your Total Investment Summary.",
+      modules:[
+        { group:"Devices", items:[
+          { id:"C1", name:"Zero-Touch Device Setup",      desc:"New devices arrive pre-configured and ready to use. Your staff turns them on, signs in, and gets to work — no IT department required." },
+          { id:"C2", name:"Existing Device Enrollment",   desc:"Already have devices in use? We enroll them into your management system so they're properly secured, updated, and under your control." },
+        ]},
+        { group:"Connectivity", items:[
+          { id:"D1", name:"Carrier Audit & Recommendation", desc:"We analyze your current carrier plans, identify what you're overpaying for, and recommend the right setup for your team size and location." },
+          { id:"D2", name:"Carrier Implementation",         desc:"We handle the carrier changes — new lines, plan switches, number porting — so you don't have to navigate telecom alone." },
+          { id:"E",  name:"Business Internet Setup",        desc:"We source and configure the right ISP for your business location, from installation coordination to network setup." },
+        ]},
+        { group:"Brand & Communication", items:[
+          { id:"G", name:"Apple Brands Layer",      desc:"Your business shows up professionally across Apple's ecosystem: branded email appearance, Verify with Apple Wallet, and Tap to Pay branding." },
+          { id:"H", name:"AI Phone System",         desc:"A professional phone experience built on Twilio — intelligent call routing, automated greetings, and custom handling for your team and hours." },
+          { id:"J", name:"Apple Business Messages", desc:"An official messaging channel on Apple devices. Customers contact you directly from Maps, Search, and Safari — right from their iPhone." },
+        ]},
+        { group:"Web", items:[
+          { id:"F", name:"Business Website", desc:"A clean, professional website designed and launched for your business. Built for discoverability and built to represent you well." },
+        ]},
+      ],
+      partnerEyebrow:"After the Build", partnerTitle:"Ongoing", partnerTitleSpan:"Partnership",
+      partnerSub:"We don't disappear after setup. Both plans keep your business running, your tech current, and Jason on speed dial.",
+      partnerPlan1Name:"Apple Operations", partnerPlan1Desc:"Ongoing device management, security updates, app deployment, and support for your Apple fleet. Per device — scales as your team grows.",
+      partnerPlan2Name:"Partner Access",   partnerPlan2Desc:"Direct access to Jason and the full CCP network — carrier management, vendor relationships, priority support, and a trusted contact for everything tech.",
+      partnerStartingAt:"Starting at",
+      ctaEyebrow:"Ready?", ctaTitle:"Start with", ctaTitleSpan:"The Audit",
+      ctaSub:"Fill out a quick intake form and we'll reach out within 24 hours to schedule your intro call.",
+      ctaDisclaimer:"No surprises, no hidden fees — your Total Investment Summary is signed before any work begins.",
+      ctaBtn:"Get Started →",
+    },
     discovery:{
       eyebrow:"Get Started", title:"Tell Us About", titleSpan:"Your Business",
       sub:"Fill this out and we'll reach out within 24 hours. We'll go over your setup, find the gaps, and map out a clear tech roadmap — starting with a quick intro call.",
@@ -491,6 +542,56 @@ const STRINGS = {
     footer:{ tagline:"Tech · Café · Cultura", copy:"© 2026 Cafe Con Pan LLC", disclaimer:"Ofrecemos orientación y apoyo operativo — no asesoría legal, fiscal ni financiera. Para esas necesidades, recomendamos trabajar con un profesional licenciado." },
     pay:{ eyebrow:"Paga tu Factura", title:"Rápido y", titleSpan:"Seguro", body:"Ingresa el número de factura y el monto en la siguiente página. El pago se procesa de forma segura a través de Helcim.", cta:"Pagar Ahora →", questions:"¿Preguntas? Escríbenos a" },
     privacy:{ footerLink:"Política de Privacidad" },
+    techServices:{
+      eyebrow:"Servicios Tech",
+      heroTitle:"Construido Alrededor de", heroTitleSpan:"Tu Negocio",
+      heroSub:"No vendemos paquetes de un menú. Primero evaluamos tu negocio, luego construimos un plan específico para lo que realmente necesitas.",
+      heroQuote:"Todo compromiso comienza con La Auditoría. Sin sorpresas, sin cargos ocultos — tu Resumen de Inversión Total se firma antes de que comience cualquier trabajo.",
+      auditEyebrow:"Paso Uno", auditTitle:"La", auditTitleSpan:"Auditoría",
+      auditSub:"Antes de construir nada, evaluamos todo. Una revisión tecnológica completa de tu negocio — calificada, priorizada y convertida en una hoja de ruta clara que conservas para siempre.",
+      auditRemote:"Remota", auditOnsite:"En Persona",
+      auditFeatures:["Evaluación completa en 6 categorías tecnológicas","Puntuación general + calificación por categoría","Hallazgos priorizados con clasificaciones de severidad","Hoja de ruta personalizada dividida por fase","Oportunidades específicas para tu industria","Crédito de 30 días hacia tu proyecto"],
+      auditCta:"Comenzar con una Auditoría →",
+      foundationEyebrow:"La Base", foundationTitle:"Foundation Core", foundationStartingAt:"Desde",
+      foundationSub:"La infraestructura sobre la que todo lo demás funciona. Cada cliente con el que trabajamos tiene esto construido primero — es la base que tu negocio necesita antes de que cualquier otra capa tecnológica tenga sentido.",
+      foundationItems:[
+        { title:"Correo y Dominio Empresarial", desc:"Un correo profesional en tu propio dominio, correctamente configurado y protegido." },
+        { title:"Apple Business Manager",       desc:"La plataforma empresarial unificada de Apple — la columna vertebral de todo lo relacionado con Apple en tu empresa." },
+        { title:"Inscripción MDM",              desc:"Tu primer dispositivo correctamente inscrito y gestionado. El punto de partida para toda tu flota." },
+        { title:"Listado en Apple Maps",        desc:"Tu negocio apareciendo correctamente en Apple Maps y Apple Search — donde tus clientes ya están buscando." },
+      ],
+      modulesEyebrow:"Módulos Adicionales", modulesTitle:"Lo Que", modulesTitleSpan:"Construimos",
+      modulesSub:"Tu auditoría nos dice cuáles aplican. Cada módulo se define, cotiza y programa antes de que comience cualquier trabajo.",
+      modulesNote:"El precio de los módulos se determina después de tu auditoría y se incluye en tu Resumen de Inversión Total.",
+      modules:[
+        { group:"Dispositivos", items:[
+          { id:"C1", name:"Configuración Zero-Touch",             desc:"Los nuevos dispositivos llegan preconfigurados y listos para usar. Tu personal los enciende, inicia sesión y comienza a trabajar — sin necesidad de un departamento de TI." },
+          { id:"C2", name:"Inscripción de Dispositivos Existentes", desc:"¿Ya tienes dispositivos en uso? Los inscribimos en tu sistema de gestión para que estén correctamente protegidos, actualizados y bajo tu control." },
+        ]},
+        { group:"Conectividad", items:[
+          { id:"D1", name:"Auditoría de Carrier",               desc:"Analizamos tus planes actuales de carrier, identificamos lo que estás pagando de más y recomendamos la configuración adecuada para el tamaño y ubicación de tu equipo." },
+          { id:"D2", name:"Implementación de Carrier",          desc:"Gestionamos los cambios de carrier — nuevas líneas, cambios de plan, portabilidad de número — para que no tengas que navegar las telecomunicaciones solo." },
+          { id:"E",  name:"Internet Empresarial",               desc:"Buscamos y configuramos el ISP adecuado para tu ubicación comercial, desde la coordinación de instalación hasta la configuración de red." },
+        ]},
+        { group:"Marca y Comunicación", items:[
+          { id:"G", name:"Capa Apple Brands",         desc:"Tu negocio aparece profesionalmente en todo el ecosistema de Apple: apariencia de correo con marca, Verificar con Apple Wallet y branding de Tap to Pay." },
+          { id:"H", name:"Sistema Telefónico IA",     desc:"Una experiencia telefónica profesional construida en Twilio — enrutamiento inteligente de llamadas, saludos automatizados y manejo personalizado para tu equipo y horarios." },
+          { id:"J", name:"Apple Business Messages",   desc:"Un canal de mensajería oficial en dispositivos Apple. Los clientes te contactan directamente desde Maps, Search y Safari — desde su iPhone." },
+        ]},
+        { group:"Web", items:[
+          { id:"F", name:"Sitio Web Empresarial", desc:"Un sitio web limpio y profesional diseñado y lanzado para tu negocio. Construido para la visibilidad y para representarte bien." },
+        ]},
+      ],
+      partnerEyebrow:"Después de la Construcción", partnerTitle:"Asociación", partnerTitleSpan:"Continua",
+      partnerSub:"No desaparecemos después de la configuración. Ambos planes mantienen tu negocio funcionando, tu tecnología al día y a Jason disponible.",
+      partnerPlan1Name:"Apple Operations", partnerPlan1Desc:"Gestión continua de dispositivos, actualizaciones de seguridad, implementación de apps y soporte para tu flota Apple. Por dispositivo — escala a medida que crece tu equipo.",
+      partnerPlan2Name:"Partner Access",   partnerPlan2Desc:"Acceso directo a Jason y a toda la red CCP — gestión de carrier, relaciones con proveedores, soporte prioritario y un contacto de confianza para todo lo relacionado con tecnología.",
+      partnerStartingAt:"Desde",
+      ctaEyebrow:"¿Listo?", ctaTitle:"Comienza con", ctaTitleSpan:"La Auditoría",
+      ctaSub:"Completa un formulario rápido y nos comunicaremos en 24 horas para programar tu llamada inicial.",
+      ctaDisclaimer:"Sin sorpresas, sin cargos ocultos — tu Resumen de Inversión Total se firma antes de que comience cualquier trabajo.",
+      ctaBtn:"Comenzar →",
+    },
     discovery:{
       eyebrow:"Comenzar", title:"Cuéntanos Sobre", titleSpan:"Tu Negocio",
       sub:"Completa esto y nos comunicaremos en menos de 24 horas. Revisaremos tu configuración, encontraremos las brechas y trazaremos un plan tech claro — empezando con una llamada introductoria.",
@@ -2397,18 +2498,7 @@ CLIENT:
 - Extra context: ${form.extra || 'None'}
 
 CCP SERVICE CATALOG:
-- Foundation Core: $1,500 — business email+domain, Apple Business Manager, MDM first device, Apple Maps
-- Module C1: $150/device — new device zero-touch deployment
-- Module C2: $200/device — existing device enrollment
-- Module D1: $300 — carrier audit & recommendation
-- Module D2: $300 add-on — carrier implementation
-- Module E: $300 — ISP/business internet setup
-- Module G: $450 — Apple Brands full layer (Branded Mail, Verify with Wallet, Tap to Pay branding)
-- Module H: $600 — IVR/AI phone system setup (Twilio)
-- Module F: $750 — business website
-- Module J: $400 + MSP — Apple Business Messages
-- Recurring Apple Operations: $35–40/device/mo
-- Recurring Partner Access: $300–350/mo
+${catalogText()}
 
 Respond with ONLY valid JSON — no markdown, no code fences — in this exact shape:
 {
@@ -2756,38 +2846,10 @@ ${intakePaste}` }],
   );
 }
 
-function TechServicesPage({ go }) {
-  const MODULES = [
-    {
-      group: "Devices", color: C.teal,
-      items: [
-        { id:"C1", name:"Zero-Touch Device Setup",       desc:"New devices arrive pre-configured and ready to use. Your staff turns them on, signs in, and gets to work — no IT department required." },
-        { id:"C2", name:"Existing Device Enrollment",    desc:"Already have devices in use? We enroll them into your management system so they're properly secured, updated, and under your control." },
-      ],
-    },
-    {
-      group: "Connectivity", color: C.gold,
-      items: [
-        { id:"D1", name:"Carrier Audit & Recommendation", desc:"We analyze your current carrier plans, identify what you're overpaying for, and recommend the right setup for your team size and location." },
-        { id:"D2", name:"Carrier Implementation",         desc:"We handle the carrier changes — new lines, plan switches, number porting — so you don't have to navigate telecom alone." },
-        { id:"E",  name:"Business Internet Setup",        desc:"We source and configure the right ISP for your business location, from installation coordination to network setup." },
-      ],
-    },
-    {
-      group: "Brand & Communication", color: C.red,
-      items: [
-        { id:"G", name:"Apple Brands Layer",        desc:"Your business shows up professionally across Apple's ecosystem: branded email appearance, Verify with Apple Wallet, and Tap to Pay branding." },
-        { id:"H", name:"AI Phone System",           desc:"A professional phone experience built on Twilio — intelligent call routing, automated greetings, and custom handling for your team and hours." },
-        { id:"J", name:"Apple Business Messages",   desc:"An official messaging channel on Apple devices. Customers contact you directly from Maps, Search, and Safari — right from their iPhone." },
-      ],
-    },
-    {
-      group: "Web", color: C.beige,
-      items: [
-        { id:"F", name:"Business Website", desc:"A clean, professional website designed and launched for your business. Built for discoverability and built to represent you well." },
-      ],
-    },
-  ];
+function TechServicesPage({ go, t }) {
+  const ts = t.techServices;
+  const MODULE_COLORS = { Devices:"Dispositivos", Connectivity:"Conectividad", "Brand & Communication":"Marca y Comunicación", Web:"Web" };
+  const groupColor = g => ({ Devices:C.teal, Dispositivos:C.teal, Connectivity:C.gold, Conectividad:C.gold, "Brand & Communication":C.red, "Marca y Comunicación":C.red })[g] ?? C.beige;
 
   return (
     <>
@@ -2795,16 +2857,16 @@ function TechServicesPage({ go }) {
       <section style={{background:C.espresso,paddingTop:100,paddingBottom:64,paddingLeft:"clamp(24px,5vw,40px)",paddingRight:"clamp(24px,5vw,40px)",textAlign:"center",position:"relative",overflow:"hidden"}}>
         <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",opacity:0.05,pointerEvents:"none"}}><Sunburst size={700} color={C.gold} opacity={0.8} /></div>
         <div style={{position:"relative",zIndex:2,maxWidth:640,margin:"0 auto"}}>
-          <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:16}}>Tech Services</div>
+          <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:16}}>{ts.eyebrow}</div>
           <h1 style={{fontFamily:"'Lilita One',cursive",fontSize:"clamp(36px,6vw,64px)",color:C.cream,lineHeight:1.1,marginBottom:20}}>
-            Built Around <span style={{color:C.gold}}>Your Business</span>
+            {ts.heroTitle} <span style={{color:C.gold}}>{ts.heroTitleSpan}</span>
           </h1>
           <p style={{fontSize:16,color:"rgba(245,237,214,0.7)",fontWeight:600,lineHeight:1.8,maxWidth:520,margin:"0 auto 32px"}}>
-            We don't sell packages off a menu. We assess your business first, then build a plan specific to what you actually need.
+            {ts.heroSub}
           </p>
           <div style={{background:"rgba(212,169,122,0.08)",border:"1px solid rgba(212,169,122,0.22)",borderRadius:4,padding:"20px 28px",maxWidth:520,margin:"0 auto"}}>
             <p style={{fontSize:14,color:C.beige,fontWeight:700,lineHeight:1.8,margin:0,fontStyle:"italic"}}>
-              "Every engagement starts with The Audit. No surprises, no hidden fees — your Total Investment Summary is signed before any work begins."
+              "{ts.heroQuote}"
             </p>
           </div>
         </div>
@@ -2816,13 +2878,13 @@ function TechServicesPage({ go }) {
       <section className="section" style={{background:C.parchment}}>
         <div style={{maxWidth:680,margin:"0 auto"}}>
           <div style={{marginBottom:40}}>
-            <div className="section-eyebrow">Step One</div>
-            <h2 className="section-title">The <span>Audit</span></h2>
-            <p className="section-sub">Before we build anything, we assess everything. A full technology review of your business — scored, prioritized, and turned into a clear roadmap you keep forever.</p>
+            <div className="section-eyebrow">{ts.auditEyebrow}</div>
+            <h2 className="section-title">{ts.auditTitle} <span>{ts.auditTitleSpan}</span></h2>
+            <p className="section-sub">{ts.auditSub}</p>
           </div>
 
           <div style={{display:"flex",gap:16,flexWrap:"wrap",marginBottom:32}}>
-            {[{label:"Remote",price:"$250"},{label:"On-Site",price:"$450"}].map(opt => (
+            {[{label:ts.auditRemote,price:`$${P.audit.remote}`},{label:ts.auditOnsite,price:`$${P.audit.onsite}`}].map(opt => (
               <div key={opt.label} style={{flex:1,minWidth:180,background:C.espresso,borderRadius:4,padding:"24px 28px",textAlign:"center"}}>
                 <div style={{fontSize:10,letterSpacing:"0.18em",textTransform:"uppercase",color:C.beige,fontWeight:700,marginBottom:8}}>{opt.label}</div>
                 <div style={{fontFamily:"'Lilita One',cursive",fontSize:44,color:C.cream,lineHeight:1}}>{opt.price}</div>
@@ -2831,14 +2893,7 @@ function TechServicesPage({ go }) {
           </div>
 
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(270px,1fr))",gap:12,marginBottom:36}}>
-            {[
-              "Full assessment across 6 tech categories",
-              "Overall score + per-category scoring",
-              "Prioritized findings with severity ratings",
-              "Custom roadmap broken out by phase",
-              "Opportunities specific to your industry",
-              "30-day credit toward your project",
-            ].map(item => (
+            {ts.auditFeatures.map(item => (
               <div key={item} style={{display:"flex",gap:10,alignItems:"flex-start"}}>
                 <span style={{color:C.teal,fontWeight:800,fontSize:13,flexShrink:0,marginTop:1}}>✓</span>
                 <span style={{fontSize:14,color:C.espresso,fontWeight:600,lineHeight:1.5}}>{item}</span>
@@ -2846,7 +2901,7 @@ function TechServicesPage({ go }) {
             ))}
           </div>
 
-          <button className="hero-cta" onClick={() => go("Discovery")}>Start with an Audit →</button>
+          <button className="hero-cta" onClick={() => go("Discovery")}>{ts.auditCta}</button>
         </div>
       </section>
 
@@ -2857,26 +2912,21 @@ function TechServicesPage({ go }) {
         <div style={{maxWidth:680,margin:"0 auto"}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:16,marginBottom:28}}>
             <div>
-              <div style={{fontSize:10,letterSpacing:"0.18em",textTransform:"uppercase",color:C.beige,opacity:0.6,fontWeight:700,marginBottom:8}}>The Baseline</div>
-              <h2 style={{fontFamily:"'Lilita One',cursive",fontSize:"clamp(28px,4vw,44px)",color:C.cream,margin:0,lineHeight:1.1}}>Foundation Core</h2>
+              <div style={{fontSize:10,letterSpacing:"0.18em",textTransform:"uppercase",color:C.beige,opacity:0.6,fontWeight:700,marginBottom:8}}>{ts.foundationEyebrow}</div>
+              <h2 style={{fontFamily:"'Lilita One',cursive",fontSize:"clamp(28px,4vw,44px)",color:C.cream,margin:0,lineHeight:1.1}}>{ts.foundationTitle}</h2>
             </div>
             <div style={{textAlign:"right",flexShrink:0}}>
-              <div style={{fontSize:10,letterSpacing:"0.14em",textTransform:"uppercase",color:C.beige,opacity:0.5,marginBottom:4}}>Starting at</div>
-              <div style={{fontFamily:"'Lilita One',cursive",fontSize:44,color:C.gold,lineHeight:1}}>$1,500</div>
+              <div style={{fontSize:10,letterSpacing:"0.14em",textTransform:"uppercase",color:C.beige,opacity:0.5,marginBottom:4}}>{ts.foundationStartingAt}</div>
+              <div style={{fontFamily:"'Lilita One',cursive",fontSize:44,color:C.gold,lineHeight:1}}>${P.foundation.toLocaleString()}</div>
             </div>
           </div>
 
           <p style={{fontSize:15,color:"rgba(245,237,214,0.65)",fontWeight:600,lineHeight:1.8,marginBottom:32,maxWidth:520}}>
-            The infrastructure everything else runs on. Every client we work with gets this built first — it's the foundation your business needs before any other tech layer makes sense.
+            {ts.foundationSub}
           </p>
 
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))",gap:20}}>
-            {[
-              {title:"Business Email & Domain",   desc:"A professional email on your own domain, properly configured and secured."},
-              {title:"Apple Business Manager",    desc:"Apple's unified business platform — the backbone of everything Apple-related in your company."},
-              {title:"MDM Enrollment",            desc:"Your first device properly enrolled and managed. The starting point for your entire fleet."},
-              {title:"Apple Maps Listing",        desc:"Your business showing up correctly on Apple Maps and Apple Search — where your customers are already looking."},
-            ].map(item => (
+            {ts.foundationItems.map(item => (
               <div key={item.title} style={{borderLeft:`3px solid rgba(212,169,122,0.25)`,paddingLeft:16}}>
                 <div style={{fontSize:13,fontWeight:800,color:C.cream,marginBottom:4}}>{item.title}</div>
                 <div style={{fontSize:13,color:"rgba(245,237,214,0.5)",lineHeight:1.6,fontWeight:600}}>{item.desc}</div>
@@ -2892,37 +2942,40 @@ function TechServicesPage({ go }) {
       <section className="section" style={{background:C.parchment}}>
         <div style={{maxWidth:680,margin:"0 auto"}}>
           <div style={{marginBottom:40}}>
-            <div className="section-eyebrow">Add-On Modules</div>
-            <h2 className="section-title">What We <span>Build</span></h2>
-            <p className="section-sub">Your audit tells us which of these apply. Each module is scoped, quoted, and scheduled before any work begins.</p>
+            <div className="section-eyebrow">{ts.modulesEyebrow}</div>
+            <h2 className="section-title">{ts.modulesTitle} <span>{ts.modulesTitleSpan}</span></h2>
+            <p className="section-sub">{ts.modulesSub}</p>
           </div>
 
           <div style={{display:"flex",flexDirection:"column",gap:40}}>
-            {MODULES.map(grp => (
-              <div key={grp.group}>
-                <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:20,paddingBottom:10,borderBottom:`1px solid ${C.espresso}15`}}>
-                  <div style={{width:3,height:18,background:grp.color,borderRadius:2,flexShrink:0}} />
-                  <span style={{fontSize:10,letterSpacing:"0.2em",textTransform:"uppercase",fontWeight:700,color:C.espresso,opacity:0.45}}>{grp.group}</span>
-                </div>
-                <div style={{display:"flex",flexDirection:"column",gap:20}}>
-                  {grp.items.map(item => (
-                    <div key={item.id} style={{display:"flex",gap:14,alignItems:"flex-start"}}>
-                      <div style={{width:28,height:28,borderRadius:3,background:grp.color,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,fontSize:9,fontWeight:800,color:grp.color===C.beige?C.espresso:C.cream,letterSpacing:"0.04em",marginTop:1}}>
-                        {item.id}
+            {ts.modules.map(grp => {
+              const color = groupColor(grp.group);
+              return (
+                <div key={grp.group}>
+                  <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:20,paddingBottom:10,borderBottom:`1px solid ${C.espresso}15`}}>
+                    <div style={{width:3,height:18,background:color,borderRadius:2,flexShrink:0}} />
+                    <span style={{fontSize:10,letterSpacing:"0.2em",textTransform:"uppercase",fontWeight:700,color:C.espresso,opacity:0.45}}>{grp.group}</span>
+                  </div>
+                  <div style={{display:"flex",flexDirection:"column",gap:20}}>
+                    {grp.items.map(item => (
+                      <div key={item.id} style={{display:"flex",gap:14,alignItems:"flex-start"}}>
+                        <div style={{width:28,height:28,borderRadius:3,background:color,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,fontSize:9,fontWeight:800,color:color===C.beige?C.espresso:C.cream,letterSpacing:"0.04em",marginTop:1}}>
+                          {item.id}
+                        </div>
+                        <div style={{flex:1}}>
+                          <div style={{fontSize:14,fontWeight:800,color:C.espresso,marginBottom:3}}>{item.name}</div>
+                          <div style={{fontSize:13,color:"#6B5040",lineHeight:1.7,fontWeight:600}}>{item.desc}</div>
+                        </div>
                       </div>
-                      <div style={{flex:1}}>
-                        <div style={{fontSize:14,fontWeight:800,color:C.espresso,marginBottom:3}}>{item.name}</div>
-                        <div style={{fontSize:13,color:"#6B5040",lineHeight:1.7,fontWeight:600}}>{item.desc}</div>
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <div style={{marginTop:40,padding:"14px 20px",background:`${C.espresso}07`,border:`1px solid ${C.espresso}15`,borderRadius:4,fontSize:13,color:C.espresso,opacity:0.6,fontWeight:600,fontStyle:"italic",textAlign:"center",lineHeight:1.6}}>
-            Module pricing is scoped after your audit and included in your Total Investment Summary.
+            {ts.modulesNote}
           </div>
         </div>
       </section>
@@ -2933,15 +2986,15 @@ function TechServicesPage({ go }) {
       <section className="section section-dark">
         <div style={{maxWidth:680,margin:"0 auto"}}>
           <div style={{marginBottom:36}}>
-            <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:12}}>After the Build</div>
-            <h2 style={{fontFamily:"'Lilita One',cursive",fontSize:"clamp(28px,4vw,44px)",color:C.cream,lineHeight:1.1,marginBottom:12}}>Ongoing <span style={{color:C.gold}}>Partnership</span></h2>
-            <p style={{fontSize:15,color:"rgba(245,237,214,0.6)",fontWeight:600,lineHeight:1.8,maxWidth:500,margin:0}}>We don't disappear after setup. Both plans keep your business running, your tech current, and Jason on speed dial.</p>
+            <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:12}}>{ts.partnerEyebrow}</div>
+            <h2 style={{fontFamily:"'Lilita One',cursive",fontSize:"clamp(28px,4vw,44px)",color:C.cream,lineHeight:1.1,marginBottom:12}}>{ts.partnerTitle} <span style={{color:C.gold}}>{ts.partnerTitleSpan}</span></h2>
+            <p style={{fontSize:15,color:"rgba(245,237,214,0.6)",fontWeight:600,lineHeight:1.8,maxWidth:500,margin:0}}>{ts.partnerSub}</p>
           </div>
 
           <div style={{display:"flex",gap:20,flexWrap:"wrap"}}>
             {[
-              {name:"Apple Operations", range:"Starting at $35 / device / mo", color:C.teal,  desc:"Ongoing device management, security updates, app deployment, and support for your Apple fleet. Per device — scales as your team grows."},
-              {name:"Partner Access",   range:"Starting at $300 / mo",           color:C.gold, desc:"Direct access to Jason and the full CCP network — carrier management, vendor relationships, priority support, and a trusted contact for everything tech."},
+              {name:ts.partnerPlan1Name, range:`${ts.partnerStartingAt} $${P.ops.annual} / device / mo`, color:C.teal, desc:ts.partnerPlan1Desc},
+              {name:ts.partnerPlan2Name, range:`${ts.partnerStartingAt} $${P.pa.annual} / mo`,           color:C.gold, desc:ts.partnerPlan2Desc},
             ].map(plan => (
               <div key={plan.name} style={{flex:1,minWidth:260,border:"1px solid rgba(212,169,122,0.12)",borderRadius:4,padding:"24px"}}>
                 <div style={{width:3,height:14,background:plan.color,borderRadius:2,marginBottom:12}} />
@@ -2959,13 +3012,13 @@ function TechServicesPage({ go }) {
       {/* ── FINAL CTA ── */}
       <section className="section" style={{background:C.parchment,textAlign:"center"}}>
         <div style={{maxWidth:520,margin:"0 auto"}}>
-          <div className="section-eyebrow">Ready?</div>
-          <h2 className="section-title">Start with <span>The Audit</span></h2>
-          <p className="section-sub" style={{marginBottom:8}}>Fill out a quick intake form and we'll reach out within 24 hours to schedule your intro call.</p>
+          <div className="section-eyebrow">{ts.ctaEyebrow}</div>
+          <h2 className="section-title">{ts.ctaTitle} <span>{ts.ctaTitleSpan}</span></h2>
+          <p className="section-sub" style={{marginBottom:8}}>{ts.ctaSub}</p>
           <p style={{fontSize:13,color:C.espresso,opacity:0.5,fontWeight:600,fontStyle:"italic",marginBottom:36,lineHeight:1.7}}>
-            No surprises, no hidden fees — your Total Investment Summary is signed before any work begins.
+            {ts.ctaDisclaimer}
           </p>
-          <button className="hero-cta" onClick={() => go("Discovery")}>Get Started →</button>
+          <button className="hero-cta" onClick={() => go("Discovery")}>{ts.ctaBtn}</button>
         </div>
       </section>
     </>
@@ -3029,7 +3082,7 @@ export default function CafeConPan() {
   const renderPage = () => {
     switch(page) {
       case "Home": return <HomePage go={go} t={t} lang={lang} />;
-      case "Tech Services": return <TechServicesPage go={go} />;
+      case "Tech Services": return <TechServicesPage go={go} t={t} />;
       case "Community": return null;
       case "Our Story": return <AboutPage t={t} go={go} />;
       case "Contact": return <ContactPage t={t} go={go} scrollToSocials={scrollToSocials} setGameActive={setGameActive} />;
