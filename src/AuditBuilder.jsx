@@ -146,7 +146,13 @@ function blankState() {
 
 // ─── MAIN ──────────────────────────────────────────────────────────────────────
 export default function AuditBuilder() {
-  const [a, setA]         = useState(blankState);
+  const [a, setA]         = useState(() => {
+    try {
+      const raw = localStorage.getItem('ccp_grind_handoff');
+      if (raw) { localStorage.removeItem('ccp_grind_handoff'); return { ...blankState(), ...JSON.parse(raw) }; }
+    } catch {}
+    return blankState();
+  });
   const [step, setStep]   = useState(0);
   const [roadmapInput, setRoadmapInput] = useState(['', '', '']);
   const [generating, setGenerating]     = useState(false);

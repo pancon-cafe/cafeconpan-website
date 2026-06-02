@@ -2598,108 +2598,219 @@ function AppleTeamsPage() {
 }
 
 function TheGrindPage({ go }) {
-  const PACKAGES = ["Open for Business","Apple Presence","Apple Operations","Connectivity Consulting","Tech Concierge"];
-  const PKG_DESC = {
-    "Open for Business":       "Full launch setup — devices, business email, banking, payments, and website.",
-    "Apple Presence":          "Apple Maps listing, Tap to Pay setup, and brand profile on Apple platforms.",
-    "Apple Operations":        "Ongoing device management, MDM, security, and IT support.",
-    "Connectivity Consulting": "Carrier audit and negotiation to lower phone and internet costs.",
-    "Tech Concierge":          "On-call tech support — one number to call when technology fails.",
-  };
-  const DEVICES   = ["iPhone","iPad","Mac","Windows PC","Android","Unknown/Mixed"];
-  const SIZES     = ["Solo","2–5","6–15","15+"];
-  const TIMELINES = ["ASAP","1 Month","3 Months","6 Months","Flexible"];
+  const DEVICES = ["iPhone","iPad","Mac","Windows PC","Android","Unknown/Mixed"];
+  const SIZES   = ["Solo","2–5","6–15","15+"];
 
-  const blank = {bizName:"",personName:"",website:"",industry:"",whatTheyDo:"",teamSize:"",devices:[],painPoints:"",timeline:"",timelineDate:"",services:[],extra:""};
-  const [form, setForm] = useState(blank);
-  const [output, setOutput] = useState("");
+  const blank = { bizName:"", personName:"", industry:"", whatTheyDo:"", painPoints:"", teamSize:"", devices:[], extra:"" };
+  const [form, setForm]       = useState(blank);
+  const [result, setResult]   = useState(null);
   const [brewing, setBrewing] = useState(false);
-  const [copied, setCopied] = useState(false);
-  const [tooltip, setTooltip] = useState(null);
-  const tipTimer = useRef(null);
+  const [error, setError]     = useState(null);
 
-  const toggle   = (field, val) => setForm(f => ({...f, [field]: f[field].includes(val) ? f[field].filter(x=>x!==val) : [...f[field],val]}));
-  const showTip  = i => { tipTimer.current = setTimeout(() => setTooltip(i), 500); };
-  const hideTip  = () => { clearTimeout(tipTimer.current); setTooltip(null); };
+  const toggle = (field, val) => setForm(f => ({
+    ...f, [field]: f[field].includes(val) ? f[field].filter(x => x !== val) : [...f[field], val]
+  }));
 
-  const buildPrompt = () => {
-    const {bizName,personName,website,industry,whatTheyDo,teamSize,devices,painPoints,timeline,timelineDate,services,extra} = form;
-    return `You are helping Jason, founder of Cafe Con Pan LLC — an Apple-focused tech consultancy for small businesses in the U.S. He is preparing for a discovery call with a potential client. Give him two things:
+  async function brew(e) {
+    e.preventDefault();
+    setBrewing(true);
+    setError(null);
 
-1. PRACTICAL RECOMMENDATIONS: Specific, actionable ways to apply Apple technology and Cafe Con Pan's services to improve this client's workflow, operations, and visibility. Reference specific Apple products, apps, features, or programs by name (Apple Business Manager, Tap to Pay, Apple Maps, MDM, Shortcuts, etc.).
+    const prompt = `You are helping Jason Reyes, founder of Cafe Con Pan LLC (Apple-focused tech consultancy for small businesses), prepare for an intro call with a potential client.
 
-2. CREATIVE IDEAS: Dream up 3–5 unique, unexpected ways technology — especially Apple's ecosystem — could transform how this specific type of business operates. Think beyond the obvious. Push into territory they wouldn't think to ask about.
+CLIENT:
+- Business: ${form.bizName}
+- Contact: ${form.personName || 'Not provided'}
+- Industry: ${form.industry}
+- What they do: ${form.whatTheyDo}
+- Why they reached out / pain points: ${form.painPoints || 'Not specified'}
+- Team size: ${form.teamSize || 'Unknown'}
+- Current devices: ${form.devices.length ? form.devices.join(', ') : 'Unknown'}
+- Extra context: ${form.extra || 'None'}
 
-CLIENT DETAILS:
-- Legal Business Name: ${bizName}
-- Contact Name: ${personName||"Not provided"}
-- Website: ${website||"Not provided"}
-- Industry: ${industry}
-- What they do: ${whatTheyDo}
-- Team size: ${teamSize||"Not specified"}
-- Current devices: ${devices.length?devices.join(", "):"Unknown"}
-- Pain points: ${painPoints||"Not provided"}
-- Timeline: ${timelineDate ? `By ${new Date(timelineDate+"T00:00:00").toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"})}` : timeline||"Not specified"}
-- Services Jason thinks apply: ${services.length?services.join(", "):"None selected"}
-- Additional context: ${extra||"None"}
+CCP SERVICE CATALOG:
+- Foundation Core: $1,500 — business email+domain, Apple Business Manager, MDM first device, Apple Maps
+- Module C1: $150/device — new device zero-touch deployment
+- Module C2: $200/device — existing device enrollment
+- Module D1: $300 — carrier audit & recommendation
+- Module D2: $300 add-on — carrier implementation
+- Module E: $300 — ISP/business internet setup
+- Module G: $450 — Apple Brands full layer (Branded Mail, Verify with Wallet, Tap to Pay branding)
+- Module H: $600 — IVR/AI phone system setup (Twilio)
+- Module F: $750 — business website
+- Module J: $400 + MSP — Apple Business Messages
+- Recurring Apple Operations: $35–40/device/mo
+- Recurring Partner Access: $300–350/mo
 
-CAFE CON PAN SERVICES (for reference):
-- Open for Business: Full business launch setup — devices, email, banking, payments, website
-- Apple Presence: Apple Maps listing, Tap to Pay, brand profile on Apple devices
-- Apple Operations: Ongoing MDM, device security, and IT management
-- Connectivity Consulting: Carrier audit, phone/internet cost negotiation
-- Tech Concierge: Ongoing on-call tech support
+Respond with ONLY valid JSON — no markdown, no code fences — in this exact shape:
+{
+  "discoveryQuestions": ["question 1", "question 2", "question 3", "question 4", "question 5"],
+  "lookFor": ["observation 1", "observation 2", "observation 3", "observation 4"],
+  "opportunities": [
+    { "headline": "short title (5-8 words)", "description": "2-3 sentences specific to this business and industry" }
+  ],
+  "likelyServices": ["service name 1", "service name 2"],
+  "serviceRationale": "2-3 sentences. Honest assessment of fit. If the situation suggests services beyond the obvious, say so."
+}
 
-IMPORTANT: If Jason's service assumptions seem off or incomplete based on the client details, say so and explain why. Recommend what actually fits — don't just confirm his selections.
+discoveryQuestions: 5-7 smart, specific questions tailored to their industry and situation. Not generic — make them count.
+lookFor: 4-6 specific things to observe, probe, or pay attention to during this call or a follow-up audit visit.
+opportunities: 3-5 creative, specific ways technology could transform how this type of business operates. Think beyond the obvious. These should make Jason look brilliant on the call.
+likelyServices: 2-6 services from the catalog that likely apply. Use the module names (e.g. "Foundation Core", "Module D1", "Recurring Partner Access").
+serviceRationale: If the situation suggests a different fit than expected, say so directly.`;
 
-Be specific, be creative, and make Jason look brilliant on his first call.`;
-  };
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': import.meta.env.VITE_ANTHROPIC_KEY,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true',
+        },
+        body: JSON.stringify({
+          model: 'claude-haiku-4-5-20251001',
+          max_tokens: 2048,
+          messages: [{ role: 'user', content: prompt }],
+        }),
+      });
 
-  const submit = e => { e.preventDefault(); setBrewing(true); setTimeout(() => { setOutput(buildPrompt()); setBrewing(false); }, 2100); };
-  const copy   = () => { navigator.clipboard.writeText(output); setCopied(true); setTimeout(()=>setCopied(false),2000); };
-  const reset  = () => { setForm(blank); setOutput(""); setCopied(false); setBrewing(false); };
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err?.error?.message || `API error ${res.status}`);
+      }
 
-  const fld  = {display:"block",width:"100%",padding:"12px 14px",fontFamily:"'Nunito',sans-serif",fontSize:16,fontWeight:600,color:C.espresso,background:C.cream,border:`2px solid ${C.espresso}22`,borderRadius:0,outline:"none",boxSizing:"border-box",marginTop:6};
-  const lbl  = {fontSize:11,letterSpacing:"0.14em",textTransform:"uppercase",fontWeight:700,color:C.espresso,opacity:0.6};
-  const chip = active => ({display:"inline-block",padding:"6px 14px",border:`2px solid ${active?C.teal:C.espresso}`,background:active?C.teal:"transparent",color:active?C.cream:C.espresso,fontFamily:"'Nunito',sans-serif",fontSize:12,fontWeight:700,cursor:"pointer",letterSpacing:"0.08em",textTransform:"uppercase",transition:"all 0.15s"});
+      const data = await res.json();
+      const raw = data.content[0].text.trim()
+        .replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/```\s*$/, '');
+      setResult(JSON.parse(raw));
+    } catch (err) {
+      console.error(err);
+      setError(err.message || 'Something went wrong. Check your API key and try again.');
+    } finally {
+      setBrewing(false);
+    }
+  }
+
+  function beginAudit() {
+    localStorage.setItem('ccp_grind_handoff', JSON.stringify({
+      clientName: form.bizName,
+      contactName: form.personName,
+    }));
+    window.location.hash = '#audit-builder';
+  }
+
+  const fld  = { display:"block", width:"100%", padding:"12px 14px", fontFamily:"'Nunito',sans-serif", fontSize:16, fontWeight:600, color:C.espresso, background:C.cream, border:`2px solid ${C.espresso}22`, borderRadius:0, outline:"none", boxSizing:"border-box", marginTop:6 };
+  const lbl  = { fontSize:11, letterSpacing:"0.14em", textTransform:"uppercase", fontWeight:700, color:C.espresso, opacity:0.6 };
+  const chip = active => ({ display:"inline-block", padding:"6px 14px", border:`2px solid ${active ? C.teal : C.espresso}`, background: active ? C.teal : "transparent", color: active ? C.cream : C.espresso, fontFamily:"'Nunito',sans-serif", fontSize:12, fontWeight:700, cursor:"pointer", letterSpacing:"0.08em", textTransform:"uppercase", transition:"all 0.15s" });
+
+  // ── Output section card
+  const OutSection = ({ label, color, children }) => (
+    <div style={{ marginBottom: 28 }}>
+      <div style={{ fontSize:10, letterSpacing:"0.2em", textTransform:"uppercase", fontWeight:700, color: color || C.teal, marginBottom:12 }}>{label}</div>
+      {children}
+    </div>
+  );
 
   return (
     <>
-      <section style={{background:C.espresso,paddingTop:100,paddingBottom:56,paddingLeft:"clamp(24px,5vw,40px)",paddingRight:"clamp(24px,5vw,40px)",textAlign:"center",position:"relative",overflow:"hidden"}}>
-        <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",opacity:0.06,pointerEvents:"none"}}><Sunburst size={600} color={C.gold} opacity={0.8} /></div>
-        <div style={{position:"relative",zIndex:2}}>
-          <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:16}}>Admin · Prompt Builder</div>
-          <h1 style={{fontFamily:"'Lilita One',cursive",fontSize:"clamp(40px,7vw,72px)",color:C.cream,lineHeight:1.1,marginBottom:16}}>The <span style={{color:C.gold}}>Grind</span></h1>
-          <p style={{fontSize:15,color:`rgba(245,237,214,0.6)`,fontWeight:600,maxWidth:480,margin:"0 auto"}}>Fill in what you know about a potential client. Get a ready-to-paste Claude prompt with service ideas and creative tech angles.</p>
+      <section style={{ background:C.espresso, paddingTop:100, paddingBottom:56, paddingLeft:"clamp(24px,5vw,40px)", paddingRight:"clamp(24px,5vw,40px)", textAlign:"center", position:"relative", overflow:"hidden" }}>
+        <div style={{ position:"absolute", top:"50%", left:"50%", transform:"translate(-50%,-50%)", opacity:0.06, pointerEvents:"none" }}>
+          <Sunburst size={600} color={C.gold} opacity={0.8} />
+        </div>
+        <div style={{ position:"relative", zIndex:2 }}>
+          <div style={{ fontSize:10, letterSpacing:"0.22em", textTransform:"uppercase", color:C.teal, fontWeight:700, marginBottom:16 }}>Admin · Pre-Call Prep</div>
+          <h1 style={{ fontFamily:"'Lilita One',cursive", fontSize:"clamp(40px,7vw,72px)", color:C.cream, lineHeight:1.1, marginBottom:16 }}>The <span style={{ color:C.gold }}>Grind</span></h1>
+          <p style={{ fontSize:15, color:`rgba(245,237,214,0.6)`, fontWeight:600, maxWidth:480, margin:"0 auto" }}>
+            Enter what you know before the intro call. Get smart discovery questions, what to look for, creative opportunities, and a one-click handoff to the Audit Builder.
+          </p>
         </div>
       </section>
 
       <TextileBorder flip />
 
-      <section className="section" style={{background:C.parchment}}>
-        <div style={{maxWidth:640,margin:"0 auto"}}>
+      <section className="section" style={{ background:C.parchment }}>
+        <div style={{ maxWidth:640, margin:"0 auto" }}>
+
           {brewing ? (
-            <div style={{textAlign:"center",padding:"64px 24px"}}>
-              <div style={{display:"inline-block",transform:"scale(2)",transformOrigin:"center top",marginBottom:56}}>
-                <SteamSVG />
+            <div style={{ textAlign:"center", padding:"64px 24px" }}>
+              <div style={{ display:"inline-block", transform:"scale(2)", transformOrigin:"center top", marginBottom:56 }}><SteamSVG /></div>
+              <div style={{ fontFamily:"'Lilita One',cursive", fontSize:26, color:C.espresso }}>Brewing<span className="brew-dots">...</span></div>
+              <div style={{ width:200, height:5, background:`${C.espresso}15`, margin:"20px auto 0", overflow:"hidden" }}>
+                <div className="brew-bar" style={{ height:"100%", background:C.espresso }} />
               </div>
-              <div style={{fontFamily:"'Lilita One',cursive",fontSize:26,color:C.espresso}}>
-                Brewing<span className="brew-dots">...</span>
-              </div>
-              <div style={{width:200,height:5,background:`${C.espresso}15`,margin:"20px auto 0",overflow:"hidden"}}>
-                <div className="brew-bar" style={{height:"100%",background:C.espresso}} />
-              </div>
-              <p style={{marginTop:14,fontSize:11,color:C.espresso,opacity:0.3,fontWeight:700,letterSpacing:"0.14em",textTransform:"uppercase"}}>
-                Grinding the beans...
-              </p>
+              <p style={{ marginTop:14, fontSize:11, color:C.espresso, opacity:0.3, fontWeight:700, letterSpacing:"0.14em", textTransform:"uppercase" }}>Grinding the beans...</p>
             </div>
-          ) : !output ? (
-            <form onSubmit={submit}>
-              <div style={{display:"flex",flexDirection:"column",gap:28}}>
+
+          ) : result ? (
+            <div>
+              {/* Header */}
+              <div style={{ marginBottom:32, paddingBottom:20, borderBottom:`2px solid ${C.espresso}18` }}>
+                <div style={{ fontSize:10, letterSpacing:"0.2em", textTransform:"uppercase", fontWeight:700, color:C.teal, marginBottom:6 }}>Pre-Call Brief</div>
+                <div style={{ fontFamily:"'Lilita One',cursive", fontSize:28, color:C.espresso, marginBottom:4 }}>{form.bizName}</div>
+                {form.personName && <div style={{ fontSize:14, color:C.espresso, opacity:0.5, fontWeight:600 }}>{form.personName} · {form.industry}</div>}
+              </div>
+
+              {/* Discovery questions */}
+              <OutSection label="Ask These Questions">
+                {result.discoveryQuestions?.map((q, i) => (
+                  <div key={i} style={{ display:"flex", gap:12, marginBottom:10, alignItems:"flex-start" }}>
+                    <span style={{ fontSize:11, color:C.teal, fontWeight:700, flexShrink:0, marginTop:2 }}>{i+1}.</span>
+                    <span style={{ fontSize:14, color:C.espresso, lineHeight:1.6, fontWeight:600 }}>{q}</span>
+                  </div>
+                ))}
+              </OutSection>
+
+              {/* Look for */}
+              <OutSection label="What to Look For" color={C.gold}>
+                {result.lookFor?.map((item, i) => (
+                  <div key={i} style={{ display:"flex", gap:12, marginBottom:8, alignItems:"flex-start" }}>
+                    <span style={{ fontSize:14, color:C.gold, flexShrink:0, marginTop:1 }}>→</span>
+                    <span style={{ fontSize:14, color:C.espresso, lineHeight:1.6, fontWeight:600 }}>{item}</span>
+                  </div>
+                ))}
+              </OutSection>
+
+              {/* Opportunities */}
+              <OutSection label="Creative Opportunities" color={C.red}>
+                {result.opportunities?.map((opp, i) => (
+                  <div key={i} style={{ borderLeft:`3px solid ${C.red}`, paddingLeft:14, marginBottom:14 }}>
+                    <div style={{ fontSize:13, fontWeight:800, color:C.espresso, marginBottom:4, letterSpacing:"0.02em" }}>{opp.headline}</div>
+                    <div style={{ fontSize:13, color:C.espresso, opacity:0.65, lineHeight:1.6, fontWeight:600 }}>{opp.description}</div>
+                  </div>
+                ))}
+              </OutSection>
+
+              {/* Services */}
+              <OutSection label="Services That Likely Apply">
+                <div style={{ display:"flex", flexWrap:"wrap", gap:8, marginBottom:12 }}>
+                  {result.likelyServices?.map(s => (
+                    <span key={s} style={{ background:`${C.teal}18`, border:`1px solid ${C.teal}44`, color:C.espresso, fontFamily:"'Nunito',sans-serif", fontSize:12, fontWeight:700, padding:"5px 12px", borderRadius:3 }}>{s}</span>
+                  ))}
+                </div>
+                {result.serviceRationale && (
+                  <p style={{ fontSize:13, color:C.espresso, opacity:0.6, lineHeight:1.7, fontWeight:600, margin:0 }}>{result.serviceRationale}</p>
+                )}
+              </OutSection>
+
+              {/* Actions */}
+              <div style={{ borderTop:`2px solid ${C.espresso}18`, paddingTop:24, display:"flex", gap:12, flexWrap:"wrap" }}>
+                <button className="hero-cta" onClick={beginAudit}>
+                  Begin Audit for {form.bizName} →
+                </button>
+                <button onClick={() => { setResult(null); setForm(blank); }} style={{ background:"none", border:`2px solid ${C.espresso}`, color:C.espresso, cursor:"pointer", fontFamily:"'Nunito',sans-serif", fontWeight:700, fontSize:13, letterSpacing:"0.1em", textTransform:"uppercase", padding:"12px 24px" }}>
+                  New Client
+                </button>
+              </div>
+            </div>
+
+          ) : (
+            <form onSubmit={brew}>
+              <div style={{ display:"flex", flexDirection:"column", gap:28 }}>
 
                 <div>
-                  <span style={lbl}><a href="https://opencorporates.com" target="_blank" rel="noopener noreferrer" style={{color:C.espresso,opacity:0.6,textDecoration:"underline",fontWeight:700,letterSpacing:"0.14em",fontSize:11,textTransform:"uppercase"}}>Legal Business Name</a> *</span>
-                  <input style={fld} required value={form.bizName} onChange={e=>setForm(f=>({...f,bizName:e.target.value}))} placeholder="e.g. Maria's Salon LLC  /  John Smith (sole prop)" />
+                  <span style={lbl}>Business Name *</span>
+                  <input style={fld} required value={form.bizName} onChange={e=>setForm(f=>({...f,bizName:e.target.value}))} placeholder="e.g. Maria's Salon LLC" />
                 </div>
 
                 <div>
@@ -2708,85 +2819,44 @@ Be specific, be creative, and make Jason look brilliant on his first call.`;
                 </div>
 
                 <div>
-                  <span style={lbl}>Website <span style={{opacity:0.4}}>(optional)</span></span>
-                  <input style={fld} value={form.website} onChange={e=>setForm(f=>({...f,website:e.target.value}))} placeholder="e.g. mariassalon.com" />
-                  <p style={{fontSize:11,color:C.espresso,opacity:0.4,fontWeight:600,marginTop:6,lineHeight:1.5}}>Tip: paste the URL into Claude.ai and ask it to browse the site for deeper context.</p>
-                </div>
-
-                <div>
                   <span style={lbl}>Industry *</span>
-                  <input style={fld} required value={form.industry} onChange={e=>setForm(f=>({...f,industry:e.target.value}))} placeholder="e.g. Restaurant, Law Office, Barbershop..." />
+                  <input style={fld} required value={form.industry} onChange={e=>setForm(f=>({...f,industry:e.target.value}))} placeholder="e.g. Restaurant, Dental Office, Barbershop…" />
                 </div>
 
                 <div>
                   <span style={lbl}>What they do *</span>
-                  <textarea style={{...fld,minHeight:80,resize:"vertical"}} required value={form.whatTheyDo} onChange={e=>setForm(f=>({...f,whatTheyDo:e.target.value}))} placeholder="Briefly describe their business and day-to-day operations..." />
+                  <textarea style={{...fld, minHeight:80, resize:"vertical"}} required value={form.whatTheyDo} onChange={e=>setForm(f=>({...f,whatTheyDo:e.target.value}))} placeholder="Brief description of their business and day-to-day operations…" />
                 </div>
 
                 <div>
-                  <span style={lbl}>Pain points</span>
-                  <textarea style={{...fld,minHeight:80,resize:"vertical"}} value={form.painPoints} onChange={e=>setForm(f=>({...f,painPoints:e.target.value}))} placeholder="What problems are they facing? What made them reach out?" />
+                  <span style={lbl}>Why they reached out / pain points</span>
+                  <textarea style={{...fld, minHeight:80, resize:"vertical"}} value={form.painPoints} onChange={e=>setForm(f=>({...f,painPoints:e.target.value}))} placeholder="What problems are they facing? What made them reach out?" />
                 </div>
 
                 <div>
                   <span style={lbl}>Team size</span>
-                  <div style={{marginTop:10,display:"flex",flexWrap:"wrap",gap:8}}>{SIZES.map(s=><button type="button" key={s} style={chip(form.teamSize===s)} onClick={()=>setForm(f=>({...f,teamSize:s}))}>{s}</button>)}</div>
-                </div>
-
-                <div>
-                  <span style={lbl}>Current devices</span>
-                  <div style={{marginTop:10,display:"flex",flexWrap:"wrap",gap:8}}>{DEVICES.map(d=><button type="button" key={d} style={chip(form.devices.includes(d))} onClick={()=>toggle("devices",d)}>{d}</button>)}</div>
-                </div>
-
-                <div>
-                  <span style={lbl}>Timeline</span>
-                  <div style={{marginTop:10,display:"flex",flexWrap:"wrap",gap:8,alignItems:"center"}}>
-                    {TIMELINES.map(tl=><button type="button" key={tl} style={chip(form.timeline===tl)} onClick={()=>setForm(f=>({...f,timeline:tl,timelineDate:""}))}>{tl}</button>)}
-                    <input type="date" value={form.timelineDate} onChange={e=>setForm(f=>({...f,timelineDate:e.target.value,timeline:""}))} style={{padding:"6px 10px",fontFamily:"'Nunito',sans-serif",fontSize:12,fontWeight:600,color:C.espresso,background:form.timelineDate?C.teal:"transparent",border:`2px solid ${form.timelineDate?C.teal:C.espresso}`,outline:"none",cursor:"pointer",colorScheme:"light"}} title="Pick a specific date" />
+                  <div style={{ marginTop:10, display:"flex", flexWrap:"wrap", gap:8 }}>
+                    {SIZES.map(s => <button type="button" key={s} style={chip(form.teamSize===s)} onClick={()=>setForm(f=>({...f,teamSize:s}))}>{s}</button>)}
                   </div>
                 </div>
 
                 <div>
-                  <span style={lbl}>Services I think apply <span style={{opacity:0.4,fontSize:10}}>(hover for details — Claude will challenge these)</span></span>
-                  <div style={{marginTop:10,display:"flex",flexWrap:"wrap",gap:8}}>
-                    {PACKAGES.map((p,i) => (
-                      <div key={p} style={{position:"relative"}}>
-                        <button
-                          type="button"
-                          style={chip(form.services.includes(p))}
-                          onClick={()=>toggle("services",p)}
-                          onMouseEnter={()=>showTip(i)}
-                          onMouseLeave={hideTip}
-                        >{p}</button>
-                        {tooltip === i && (
-                          <div style={{position:"absolute",bottom:"calc(100% + 8px)",left:"50%",transform:"translateX(-50%)",background:C.espresso,color:C.cream,fontSize:11,fontWeight:600,lineHeight:1.6,padding:"8px 12px",maxWidth:220,width:"max-content",zIndex:10,pointerEvents:"none",boxShadow:`2px 2px 0 ${C.gold}55`,textAlign:"center",textTransform:"none",letterSpacing:"0"}}>
-                            {PKG_DESC[p]}
-                            <div style={{position:"absolute",top:"100%",left:"50%",transform:"translateX(-50%)",width:0,height:0,borderLeft:"6px solid transparent",borderRight:"6px solid transparent",borderTop:`6px solid ${C.espresso}`}} />
-                          </div>
-                        )}
-                      </div>
-                    ))}
+                  <span style={lbl}>Current devices</span>
+                  <div style={{ marginTop:10, display:"flex", flexWrap:"wrap", gap:8 }}>
+                    {DEVICES.map(d => <button type="button" key={d} style={chip(form.devices.includes(d))} onClick={()=>toggle("devices",d)}>{d}</button>)}
                   </div>
                 </div>
 
                 <div>
                   <span style={lbl}>Extra context</span>
-                  <textarea style={{...fld,minHeight:80,resize:"vertical"}} value={form.extra} onChange={e=>setForm(f=>({...f,extra:e.target.value}))} placeholder="Referral source, budget signals, specific goals..." />
+                  <textarea style={{...fld, minHeight:80, resize:"vertical"}} value={form.extra} onChange={e=>setForm(f=>({...f,extra:e.target.value}))} placeholder="Referral source, budget signals, specific goals, anything else…" />
                 </div>
 
-                <button type="submit" className="hero-cta" style={{alignSelf:"flex-start"}}>Brew the Prompt →</button>
+                {error && <div style={{ fontSize:13, color:C.red, fontWeight:700, padding:"10px 14px", background:`${C.red}11`, border:`1px solid ${C.red}33` }}>{error}</div>}
+
+                <button type="submit" className="hero-cta" style={{ alignSelf:"flex-start" }}>Brew the Brief →</button>
               </div>
             </form>
-          ) : (
-            <div>
-              <div style={{fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:16}}>Your Prompt is Ready</div>
-              <textarea readOnly value={output} style={{...fld,minHeight:420,resize:"vertical",fontSize:13,lineHeight:1.7,fontFamily:"monospace"}} />
-              <div style={{display:"flex",gap:12,marginTop:16,flexWrap:"wrap"}}>
-                <button className="hero-cta" onClick={copy}>{copied?"Copied! ✓":"Copy to Clipboard"}</button>
-                <button onClick={reset} style={{background:"none",border:`2px solid ${C.espresso}`,color:C.espresso,cursor:"pointer",fontFamily:"'Nunito',sans-serif",fontWeight:700,fontSize:13,letterSpacing:"0.1em",textTransform:"uppercase",padding:"12px 24px"}}>Start Over</button>
-              </div>
-              <p style={{marginTop:16,fontSize:12,color:C.espresso,opacity:0.4,fontWeight:600}}>Paste into Claude.ai to get your ideas.</p>
-            </div>
           )}
         </div>
       </section>
