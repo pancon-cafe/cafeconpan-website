@@ -127,6 +127,7 @@ function buildPDFData(a) {
       .map(p => ({ ...p, items: p.items.filter(Boolean) }))
       .filter(p => p.items.length > 0),
     opportunities: (a.opportunities || []).filter(o => o.headline || o.description),
+    audit: a.auditType || 'remote',
   };
 }
 
@@ -358,7 +359,6 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
       }));
 
     } catch (err) {
-      console.error('AI generation error:', err);
       setGenError(err.message || 'Generation failed. Check your API key or try again.');
     } finally {
       setGenerating(false);

@@ -45,9 +45,6 @@
 
 import React from 'react';
 import { Document, Page, View, Text, StyleSheet, Link } from '@react-pdf/renderer';
-
-const PAYMENT_REMOTE = 'https://cafe-con-pan.myhelcim.com/hosted/?token=a7da2d64e189dc89089e0d&amount=250.00&amountHash=aa92f0e23a97cfa82d0e1e2fe0edcdf2245b09ebdb1a2b8b6daec312e79032d6';
-const PAYMENT_ONSITE = 'https://cafe-con-pan.myhelcim.com/hosted/?token=f7ae2b902051d272a8aa8f&amount=450.00&amountHash=a9f8499d6038c8568bfcab3d288d0cb5bbf43482d3310f12e227f207a00e19d6';
 import { C, F, SP, PAGE } from './tokens';
 import {
   CCPPage,
@@ -62,6 +59,9 @@ import { CCPTable, CCPTableHead, CCPTableRow } from './Table';
 import { registerCCPFonts } from './fonts';
 
 registerCCPFonts();
+
+const PAYMENT_REMOTE = 'https://cafe-con-pan.myhelcim.com/hosted/?token=a7da2d64e189dc89089e0d&amount=250.00&amountHash=aa92f0e23a97cfa82d0e1e2fe0edcdf2245b09ebdb1a2b8b6daec312e79032d6';
+const PAYMENT_ONSITE = 'https://cafe-con-pan.myhelcim.com/hosted/?token=f7ae2b902051d272a8aa8f&amount=450.00&amountHash=a9f8499d6038c8568bfcab3d288d0cb5bbf43482d3310f12e227f207a00e19d6';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Helpers

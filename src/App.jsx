@@ -2731,7 +2731,6 @@ serviceRationale: If the situation suggests a different fit than expected, say s
         .replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/```\s*$/, '');
       setResult(JSON.parse(raw));
     } catch (err) {
-      console.error(err);
       setError(err.message || 'Something went wrong. Check your API key and try again.');
     } finally {
       setBrewing(false);

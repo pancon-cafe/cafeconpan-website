@@ -211,7 +211,6 @@ function buildPDFData(a, q) {
     };
   });
 
-
   const noteLines = [
     q.savings > 0 ? `Bundle savings applied: −${fmt(q.savings)}` : null,
   ].filter(Boolean);
