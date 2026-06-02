@@ -2641,7 +2641,11 @@ function TheGrindPage({ go }) {
   const [result, setResult]   = useState(null);
   const [brewing, setBrewing] = useState(false);
   const [error, setError]     = useState(null);
-  const [isDesktop, setIsDesktop] = useState(() => window.innerWidth >= 700);
+  const [isDesktop, setIsDesktop]   = useState(() => window.innerWidth >= 700);
+  const [intakePaste, setIntakePaste] = useState('');
+  const [parsing, setParsing]         = useState(false);
+  const [parseError, setParseError]   = useState(null);
+  const [intakeFilled, setIntakeFilled] = useState(false);
 
   useEffect(() => {
     const onResize = () => setIsDesktop(window.innerWidth >= 700);
@@ -2740,6 +2744,63 @@ serviceRationale: If the situation suggests a different fit than expected, say s
       contactName: form.personName,
     }));
     window.location.hash = '#audit-builder';
+  }
+
+  async function parseIntake() {
+    if (!intakePaste.trim()) return;
+    setParsing(true);
+    setParseError(null);
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': import.meta.env.VITE_ANTHROPIC_KEY,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true',
+        },
+        body: JSON.stringify({
+          model: 'claude-haiku-4-5-20251001',
+          max_tokens: 512,
+          messages: [{ role: 'user', content: `Extract client info from this intake form submission. Respond with ONLY valid JSON, no markdown, no code fences:
+{
+  "bizName": "business name",
+  "personName": "contact or submitter name",
+  "industry": "industry or business type (infer from description if not explicit)",
+  "whatTheyDo": "what the business does day to day",
+  "painPoints": "combine frustration, wish list, and reason for reaching out into 2-3 sentences",
+  "teamSize": "one of exactly: Solo, 2–5, 6–15, 15+",
+  "devices": ["array using only values from: iPhone, iPad, Mac, Windows PC, Android, Unknown/Mixed"],
+  "extra": "timeline, services selected, referral source, and any other useful context"
+}
+
+INTAKE SUBMISSION:
+${intakePaste}` }],
+        }),
+      });
+      if (!res.ok) throw new Error(`API error ${res.status}`);
+      const data = await res.json();
+      const raw = data.content[0].text.trim()
+        .replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/```\s*$/, '');
+      const p = JSON.parse(raw);
+      setForm(f => ({
+        ...f,
+        bizName:    p.bizName    || f.bizName,
+        personName: p.personName || f.personName,
+        industry:   p.industry   || f.industry,
+        whatTheyDo: p.whatTheyDo || f.whatTheyDo,
+        painPoints: p.painPoints || f.painPoints,
+        teamSize:   SIZES.includes(p.teamSize) ? p.teamSize : f.teamSize,
+        devices:    Array.isArray(p.devices) ? p.devices.filter(d => DEVICES.includes(d)) : f.devices,
+        extra:      p.extra      || f.extra,
+      }));
+      setIntakeFilled(true);
+      setIntakePaste('');
+    } catch {
+      setParseError("Couldn't parse the intake — try again or fill manually.");
+    } finally {
+      setParsing(false);
+    }
   }
 
   const fld  = { display:"block", width:"100%", boxSizing:"border-box", background:C.card, border:`1px solid ${C.b0}`, borderRadius:8, padding:"12px 14px", color:C.dkCream, fontSize:16, outline:"none", fontFamily:"'Nunito',sans-serif", marginTop:6 };
@@ -2852,6 +2913,32 @@ serviceRationale: If the situation suggests a different fit than expected, say s
     </div>
   ) : null;
 
+  const IntakePanel = () => intakeFilled ? (
+    <div style={{ marginBottom:24, padding:"10px 14px", background:`${C.teal}15`, border:`1px solid ${C.teal}33`, borderRadius:6, display:"flex", justifyContent:"space-between", alignItems:"center" }}>
+      <span style={{ fontSize:12, color:C.teal, fontWeight:700 }}>Auto-filled from intake ✓</span>
+      <button type="button" onClick={() => { setIntakeFilled(false); setIntakePaste(''); }} style={{ background:"none", border:"none", fontSize:11, color:C.muted, cursor:"pointer", fontFamily:"'Nunito',sans-serif", fontWeight:700 }}>Clear</button>
+    </div>
+  ) : (
+    <div style={{ marginBottom:24, background:C.card, border:`1px solid ${C.b1}`, borderRadius:8, padding:"16px" }}>
+      <div style={{ fontSize:10, color:C.muted, letterSpacing:"0.14em", textTransform:"uppercase", fontWeight:700, marginBottom:8 }}>Auto-fill from Intake Email</div>
+      <textarea
+        value={intakePaste}
+        onChange={e => setIntakePaste(e.target.value)}
+        placeholder={"Paste the Web3Forms email body here and we'll fill in the fields automatically…"}
+        style={{ display:"block", width:"100%", boxSizing:"border-box", background:C.surf, border:`1px solid ${C.b0}`, borderRadius:6, padding:"10px 12px", color:C.dkCream, fontSize:13, outline:"none", fontFamily:"'Nunito',sans-serif", marginTop:4, minHeight:88, resize:"vertical" }}
+      />
+      {parseError && <div style={{ marginTop:6, fontSize:12, color:C.red, fontWeight:700 }}>{parseError}</div>}
+      <button
+        type="button"
+        onClick={parseIntake}
+        disabled={!intakePaste.trim() || parsing}
+        style={{ marginTop:10, background:!intakePaste.trim() || parsing ? C.dim : C.beige, border:"none", borderRadius:7, color:!intakePaste.trim() || parsing ? C.muted : C.bg, padding:"9px 18px", cursor:!intakePaste.trim() || parsing ? "not-allowed" : "pointer", fontFamily:"'Nunito',sans-serif", fontWeight:700, fontSize:12, letterSpacing:"0.05em" }}
+      >
+        {parsing ? "Parsing…" : "Auto-fill from Intake →"}
+      </button>
+    </div>
+  );
+
   return (
     <div style={{ fontFamily:"'Nunito',sans-serif", background:C.bg, minHeight:"100vh", color:C.dkCream, paddingTop:64,
       ...(isDesktop ? {} : { display:'flex', flexDirection:'column', maxWidth:480, margin:'0 auto', position:'relative' }) }}>
@@ -2893,6 +2980,7 @@ serviceRationale: If the situation suggests a different fit than expected, say s
             <h2 style={{ fontFamily:"'Lilita One',cursive", fontSize:24, lineHeight:1.3, color:C.white, margin:"0 0 24px 0" }}>
               Tell me about your prospect.
             </h2>
+            <IntakePanel />
             <GrindForm />
           </div>
 
@@ -2936,7 +3024,10 @@ serviceRationale: If the situation suggests a different fit than expected, say s
               <GrindResult />
             </div>
           ) : (
-            <GrindForm />
+            <>
+              <IntakePanel />
+              <GrindForm />
+            </>
           )}
         </div>
       )}
