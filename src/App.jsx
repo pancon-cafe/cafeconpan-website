@@ -2384,7 +2384,7 @@ function TheGrindPage({ go }) {
   const DEVICES = ["iPhone","iPad","Mac","Windows PC","Android","Unknown/Mixed"];
   const SIZES   = ["Solo","2–5","6–15","15+"];
 
-  const blank = { bizName:"", personName:"", industry:"", whatTheyDo:"", painPoints:"", teamSize:"", devices:[], extra:"" };
+  const blank = { bizName:"", personName:"", clientEmail:"", clientPhone:"", industry:"", whatTheyDo:"", painPoints:"", teamSize:"", devices:[], extra:"" };
   const [form, setForm]       = useState(blank);
   const [result, setResult]   = useState(null);
   const [brewing, setBrewing] = useState(false);
@@ -2476,8 +2476,10 @@ serviceRationale: If the situation suggests a different fit than expected, say s
 
   function beginAudit() {
     localStorage.setItem('ccp_grind_handoff', JSON.stringify({
-      clientName: form.bizName,
+      clientName:  form.bizName,
       contactName: form.personName,
+      clientEmail: form.clientEmail,
+      clientPhone: form.clientPhone,
     }));
     window.location.hash = '#audit-builder';
   }
@@ -2486,6 +2488,12 @@ serviceRationale: If the situation suggests a different fit than expected, say s
     if (!intakePaste.trim()) return;
     setParsing(true);
     setParseError(null);
+    // Strip HTML that iOS Mail / Gmail apps inject when copying
+    const plain = intakePaste
+      .replace(/<[^>]*>/g, ' ')
+      .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+      .replace(/\s{2,}/g, ' ').trim();
     try {
       const res = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
@@ -2497,11 +2505,13 @@ serviceRationale: If the situation suggests a different fit than expected, say s
         },
         body: JSON.stringify({
           model: 'claude-haiku-4-5-20251001',
-          max_tokens: 512,
+          max_tokens: 600,
           messages: [{ role: 'user', content: `Extract client info from this intake form submission. Respond with ONLY valid JSON, no markdown, no code fences:
 {
   "bizName": "business name",
   "personName": "contact or submitter name",
+  "clientEmail": "their email address or empty string",
+  "clientPhone": "their phone number or empty string",
   "industry": "industry or business type (infer from description if not explicit)",
   "whatTheyDo": "what the business does day to day",
   "painPoints": "combine frustration, wish list, and reason for reaching out into 2-3 sentences",
@@ -2511,29 +2521,34 @@ serviceRationale: If the situation suggests a different fit than expected, say s
 }
 
 INTAKE SUBMISSION:
-${intakePaste}` }],
+${plain}` }],
         }),
       });
-      if (!res.ok) throw new Error(`API error ${res.status}`);
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err?.error?.message || `API error ${res.status}`);
+      }
       const data = await res.json();
       const raw = data.content[0].text.trim()
         .replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/```\s*$/, '');
       const p = JSON.parse(raw);
       setForm(f => ({
         ...f,
-        bizName:    p.bizName    || f.bizName,
-        personName: p.personName || f.personName,
-        industry:   p.industry   || f.industry,
-        whatTheyDo: p.whatTheyDo || f.whatTheyDo,
-        painPoints: p.painPoints || f.painPoints,
-        teamSize:   SIZES.includes(p.teamSize) ? p.teamSize : f.teamSize,
-        devices:    Array.isArray(p.devices) ? p.devices.filter(d => DEVICES.includes(d)) : f.devices,
-        extra:      p.extra      || f.extra,
+        bizName:     p.bizName     || f.bizName,
+        personName:  p.personName  || f.personName,
+        clientEmail: p.clientEmail || f.clientEmail,
+        clientPhone: p.clientPhone || f.clientPhone,
+        industry:    p.industry    || f.industry,
+        whatTheyDo:  p.whatTheyDo  || f.whatTheyDo,
+        painPoints:  p.painPoints  || f.painPoints,
+        teamSize:    SIZES.includes(p.teamSize) ? p.teamSize : f.teamSize,
+        devices:     Array.isArray(p.devices) ? p.devices.filter(d => DEVICES.includes(d)) : f.devices,
+        extra:       p.extra       || f.extra,
       }));
       setIntakeFilled(true);
       setIntakePaste('');
-    } catch {
-      setParseError("Couldn't parse the intake — try again or fill manually.");
+    } catch (err) {
+      setParseError(err.message || "Couldn't parse the intake — try again or fill manually.");
     } finally {
       setParsing(false);
     }
