@@ -15,7 +15,7 @@ export const P = {
   C1: 150, C2: 200, C3: 150, C4: 150,
   D1: 300, D2: 300, E: 300,
   F: 750, G: 450, H: 600, J: 400,
-  flagship: { complete: { price: 4200, dev: 3 }, fleet: { price: 5000, dev: 10 } },
+  flagship: { complete: { price: 4000, dev: 3 }, fleet: { price: 5000, dev: 10 } },
   ops: { m2m: 40, annual: 35, '2yr': 30 },
   pa:  { m2m: 350, annual: 300, '2yr': 250 },
   comm: { dev: 25, pa: 150 },
