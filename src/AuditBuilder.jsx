@@ -886,14 +886,14 @@ jason@pancon.cafe | 808-868-6161`
     <button style={{
       flex: 1, background: 'transparent', border: `1px solid ${C.b0}`, borderRadius: 9,
       color: C.muted, padding: 12, cursor: 'pointer', fontSize: 14, fontFamily: "'Nunito',sans-serif",
-    }} onClick={() => setStep(s => s - 1)}>← Back</button>
+    }} onClick={() => { setStep(s => s - 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>← Back</button>
   );
   const nextBtn = (
     <button style={{
       flex: step > 0 ? 2 : 1, background: C.beige, border: 'none', borderRadius: 9,
       color: C.bg, padding: 12, cursor: 'pointer', fontSize: 15, fontWeight: 'bold',
       fontFamily: "'Nunito',sans-serif",
-    }} onClick={() => setStep(s => Math.min(s + 1, STEPS.length - 1))}>
+    }} onClick={() => { setStep(s => Math.min(s + 1, STEPS.length - 1)); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
       {step >= STEPS.length - 2 ? 'Finalize Report →' : 'Continue →'}
     </button>
   );
