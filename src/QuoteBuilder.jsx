@@ -670,6 +670,28 @@ export default function QuoteBuilder() {
           </div>
           <button
             style={{width:'100%',background:'transparent',border:`1px solid ${C.b0}`,borderRadius:9,
+              color:C.cream,padding:13,fontSize:14,fontFamily:"'Nunito',sans-serif",cursor:'pointer',marginBottom:10}}
+            onClick={()=>{
+              const name = pdfData.client.contactName || pdfData.client.businessName;
+              const hasRec = a.recurring===true && q.mo > 0;
+              const body = encodeURIComponent(
+`Hi ${name},
+
+I've put together your quote for ${pdfData.client.businessName} — I've attached the full PDF breakdown for your records.
+
+One-time total: ${fmt(pdfData.total)}${hasRec ? `\nMonthly recurring: ${fmt(q.mo)}/mo` : ''}
+
+This quote is valid for 30 days, expiring ${pdfData.expiresDate}. Third-party costs (software licenses, domains, etc.) are paid directly by you and not included above.
+
+Let me know if you have any questions or want to make adjustments before moving forward.`
+              );
+              const subject = encodeURIComponent(`Your Quote from Cafe Con Pan — ${pdfData.client.businessName}`);
+              window.open(`mailto:${pdfData.client.email}?subject=${subject}&body=${body}`, '_self');
+            }}>
+            ✉ Send quote to client
+          </button>
+          <button
+            style={{width:'100%',background:'transparent',border:`1px solid ${C.b0}`,borderRadius:9,
               color:C.muted,padding:12,fontSize:14,fontFamily:"'Nunito',sans-serif",cursor:'pointer',marginBottom:8}}
             onClick={()=>{setA({});setSid('client');setCopied(false);}}>
             ↩ Start new quote

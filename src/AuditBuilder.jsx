@@ -369,11 +369,7 @@ ${payUrl}
 
 The fee is ${price} and applies in full toward your project if you move forward within 30 days.
 
-Let me know if you have any questions.
-
-Jason Reyes
-Cafe Con Pan LLC
-jason@pancon.cafe | 808-868-6161`
+Let me know if you have any questions.`
     );
     window.open(`mailto:${to}?subject=${subject}&body=${body}`, '_self');
   }
