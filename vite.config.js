@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
     server: { port: 5173, strictPort: true },
     plugins: [react()],
     define: {
-      'import.meta.env.VITE_ANTHROPIC_KEY': JSON.stringify(anthropicKey),
+      __ANTHROPIC_KEY__: JSON.stringify(anthropicKey),
     },
   }
 })
