@@ -2443,7 +2443,7 @@ likelyServices: 2-6 services from the catalog that likely apply. Use the module 
 serviceRationale: If the situation suggests a different fit than expected, say so directly.`;
 
     try {
-      const res = await fetch('https://ai.pancon.cafe', {
+      const res = await fetch('https://anthropic-proxy.cafe-con-pan-llc.workers.dev', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2490,7 +2490,7 @@ serviceRationale: If the situation suggests a different fit than expected, say s
       .replace(/&lt;/g, '<').replace(/&gt;/g, '>')
       .replace(/\s{2,}/g, ' ').trim();
     try {
-      const res = await fetch('https://ai.pancon.cafe', {
+      const res = await fetch('https://anthropic-proxy.cafe-con-pan-llc.workers.dev', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
