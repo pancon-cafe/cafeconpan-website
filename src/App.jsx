@@ -2443,14 +2443,9 @@ likelyServices: 2-6 services from the catalog that likely apply. Use the module 
 serviceRationale: If the situation suggests a different fit than expected, say so directly.`;
 
     try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
+      const res = await fetch('https://ai.pancon.cafe', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': __ANTHROPIC_KEY__,
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-direct-browser-access': 'true',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           model: 'claude-haiku-4-5-20251001',
           max_tokens: 2048,
@@ -2495,14 +2490,9 @@ serviceRationale: If the situation suggests a different fit than expected, say s
       .replace(/&lt;/g, '<').replace(/&gt;/g, '>')
       .replace(/\s{2,}/g, ' ').trim();
     try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
+      const res = await fetch('https://ai.pancon.cafe', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': __ANTHROPIC_KEY__,
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-direct-browser-access': 'true',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           model: 'claude-haiku-4-5-20251001',
           max_tokens: 600,
