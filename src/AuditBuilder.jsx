@@ -340,7 +340,7 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
       }));
 
     } catch (err) {
-      setGenError(err.message || 'Generation failed. Check your API key or try again.');
+      setGenError(err.message || 'Generation failed. Try again.');
     } finally {
       setGenerating(false);
     }

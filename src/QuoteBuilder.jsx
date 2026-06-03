@@ -255,8 +255,8 @@ export default function QuoteBuilder() {
 
   function set(k,v){ setA(p=>({...p,[k]:v})); }
   function setMany(u){ setA(p=>({...p,...u})); }
-  function next(){ const ni=idx+1; if(ni<steps.length) setSid(steps[ni].id); }
-  function back(){ const pi=idx-1; if(pi>=0) setSid(steps[pi].id); }
+  function next(){ const ni=idx+1; if(ni<steps.length){ setSid(steps[ni].id); window.scrollTo({ top: 0, behavior: 'smooth' }); } }
+  function back(){ const pi=idx-1; if(pi>=0){ setSid(steps[pi].id); window.scrollTo({ top: 0, behavior: 'smooth' }); } }
 
   // ── STYLE FACTORIES ─────────────────────────────────────────────────────────
   const card = sel=>({

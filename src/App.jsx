@@ -868,7 +868,7 @@ const css = `
 const navKeys = ["Home","Tech Services","Our Story","Contact"];
 
 const PAGE_HASH = {
-  "Home":"home","Tech Services":"tech-services","Community":"community",
+  "Home":"home","Tech Services":"tech-services",
   "Our Story":"our-story","Contact":"contact","La Mesa":"la-mesa","Pay":"pay",
   "La Mesa Referral":"la-mesa-referral",
   "Privacy Policy":"privacy-policy",
@@ -2463,7 +2463,7 @@ serviceRationale: If the situation suggests a different fit than expected, say s
         .replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/```\s*$/, '');
       setResult(JSON.parse(raw));
     } catch (err) {
-      setError(err.message || 'Something went wrong. Check your API key and try again.');
+      setError(err.message || 'Something went wrong. Try again.');
     } finally {
       setBrewing(false);
     }
