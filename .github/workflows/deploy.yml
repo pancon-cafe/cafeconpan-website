@@ -24,6 +24,15 @@ jobs:
           node-version: 20
           cache: 'npm'
       - run: npm ci
+      - name: Check API key secret
+        run: |
+          if [ -z "$VITE_ANTHROPIC_KEY" ]; then
+            echo "WARNING: VITE_ANTHROPIC_KEY is empty or not set"
+          else
+            echo "VITE_ANTHROPIC_KEY is set (length: ${#VITE_ANTHROPIC_KEY})"
+          fi
+        env:
+          VITE_ANTHROPIC_KEY: ${{ secrets.VITE_ANTHROPIC_KEY }}
       - run: npm run build
         env:
           VITE_ANTHROPIC_KEY: ${{ secrets.VITE_ANTHROPIC_KEY }}
