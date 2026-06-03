@@ -24,21 +24,11 @@ jobs:
           node-version: 20
           cache: 'npm'
       - run: npm ci
-      - name: Check API key secret
-        run: |
-          if [ -z "$VITE_ANTHROPIC_KEY" ]; then
-            echo "WARNING: VITE_ANTHROPIC_KEY is empty or not set"
-          else
-            echo "VITE_ANTHROPIC_KEY is set (length: ${#VITE_ANTHROPIC_KEY})"
-            printf '%s' "$VITE_ANTHROPIC_KEY" | shasum -a 256 | cut -c1-16
-          fi
+      - name: Write env file
+        run: printf 'VITE_ANTHROPIC_KEY=%s\n' "$VITE_ANTHROPIC_KEY" > .env
         env:
           VITE_ANTHROPIC_KEY: ${{ secrets.VITE_ANTHROPIC_KEY }}
       - run: npm run build
-        env:
-          VITE_ANTHROPIC_KEY: ${{ secrets.VITE_ANTHROPIC_KEY }}
-      - name: Verify key baked into bundle
-        run: grep -rl "sk-ant-api03" dist/ && echo "Key IS in bundle" || echo "Key NOT in bundle"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
