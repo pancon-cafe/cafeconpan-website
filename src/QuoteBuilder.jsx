@@ -30,7 +30,17 @@ function calcQuote(a) {
     const ex=+(a.extraDev||0);
     if(ex>0) lines.push({id:'ex',label:`Extra Devices ×${ex} @ $150`,price:ex*P.extra,tag:'device'});
   } else {
-    lines.push({id:'fnd',label:'Tier 1 — Foundation Core',price:P.foundation,tag:'foundation'});
+    const fs=a.foundationStatus||{};
+    const FC=P.foundationComponents;
+    [{id:'fnd-abm',   key:'abm',   label:'Foundation — Apple Business Manager'},
+     {id:'fnd-mdm',   key:'mdm',   label:'Foundation — MDM + First Device'},
+     {id:'fnd-email', key:'email', label:'Foundation — Business Email & Domain'},
+     {id:'fnd-brands',key:'brands',label:'Foundation — Apple Brands Full Layer'},
+    ].forEach(c=>{
+      const st=fs[c.key]||'missing';
+      if(st==='missing')    lines.push({id:c.id,        label:c.label,                   price:FC[c.key].full,       tag:'foundation'});
+      if(st==='correction') lines.push({id:`${c.id}-c`, label:`${c.label} — Correction`, price:FC[c.key].correction, tag:'foundation'});
+    });
     const cm={d1:{D1:1},connectivity:{D1:1,E:1},d1d2:{D1:1,D2:1},comms:{D1:1,D2:1}}[a.connectivity]||{};
     const D1=!!cm.D1, D2=!!cm.D2, E=!!cm.E;
     const H=a.connectivity==='comms'||a.H===true;
@@ -41,9 +51,8 @@ function calcQuote(a) {
     else if(D1&&E){ lines.push({id:'b-cn',label:'Bundle — Connectivity (D1 + E)',price:P.bundles.connectivity,saving:125,tag:'bundle'}); savings+=125; used.add('D1');used.add('E'); }
     if(a.A&&a.B){ lines.push({id:'b-lp',label:'Bundle — Launch Prep (A + B)',price:P.bundles.launchPrep,saving:50,tag:'bundle'}); savings+=50; used.add('A');used.add('B'); }
     else if(a.B&&c1>=1){ lines.push({id:'b-oe',label:'Bundle — OFB Essentials (B + C1×1)',price:P.bundles.ofbEssentials,saving:25,tag:'bundle'}); savings+=25; used.add('B');used.add('C1_1'); }
-    if(c1>=3&&a.G){ lines.push({id:'b-ap',label:'Bundle — Apple Presence (C1×3 + G)',price:P.bundles.applePresence,saving:150,tag:'bundle'}); savings+=150; used.add('G');used.add('C1_3'); }
 
-    let rC1=c1; if(used.has('C1_3'))rC1-=3; else if(used.has('C1_1'))rC1-=1;
+    let rC1=c1; if(used.has('C1_1'))rC1-=1;
     if(rC1>0) lines.push({id:'c1r',label:`C1 — New Device Deploy ×${rC1}`,price:rC1*P.C1,tag:'device'});
 
     if(!used.has('A')&&a.A) lines.push({id:'ma',label:'A — Business Formation Guidance',price:P.A,tag:'module'});
@@ -52,7 +61,6 @@ function calcQuote(a) {
     if(!used.has('D2')&&D2) lines.push({id:'mD2',label:'D2 — Carrier Implementation',price:P.D2,tag:'module'});
     if(!used.has('E')&&E)   lines.push({id:'mE', label:'E — ISP Setup',price:P.E,tag:'module'});
     if(!used.has('H')&&H)   lines.push({id:'mH', label:'H — IVR Setup',price:P.H,tag:'module'});
-    if(!used.has('G')&&a.G) lines.push({id:'mG', label:'G — Apple Brands, Full Layer',price:P.G,tag:'module'});
     if(a.F) lines.push({id:'mF',label:'F — Website (Basic)',price:P.F,tag:'module'});
     if(a.J) lines.push({id:'mJ',label:'J — Apple Business Messages',price:P.J,tag:'module'});
     if(c2>0) lines.push({id:'c2',label:`C2 — Existing Device Deploy ×${c2}`,price:c2*P.C2,tag:'device'});
@@ -83,10 +91,11 @@ function getSteps(a) {
   let noFg=0;
   try{ noFg=calcQuote({...a,flagship:undefined,modifier:undefined}).lines.filter(l=>l.tag!=='audit').reduce((s,l)=>s+l.price,0); }catch(e){}
   const all=[
-    {id:'client',      title:'Client'},
-    {id:'stage',       title:'Stage'},
-    {id:'audit',       title:'Audit'},
-    {id:'formation',   title:'Foundation',   show:a.stage==='pre'||a.stage==='operational'},
+    {id:'client',          title:'Client'},
+    {id:'stage',           title:'Stage'},
+    {id:'audit',           title:'Audit'},
+    {id:'foundationStatus',title:'Foundation'},
+    {id:'formation',       title:'Modules A & B', show:a.stage==='pre'||a.stage==='operational'},
     {id:'apple',       title:'Apple'},
     {id:'connectivity',title:'Connectivity'},
     {id:'ivr',         title:'IVR',          show:!ivrInConn},
@@ -138,9 +147,17 @@ const TAG_CATEGORY = {
 };
 
 const CLIENT_DESC = {
+  'fnd-abm':     'Apple Business Manager setup — domain verification, Apple Customer Number (ACN) establishment, admin configuration, and enrollment preparation.',
+  'fnd-mdm':     'MDM platform configuration — device enrollment profiles, baseline policy setup, first device enrollment, and management verification.',
+  'fnd-email':   'Business email and domain — professional email on your own domain with DNS configuration, SPF, DKIM, and DMARC records properly secured.',
+  'fnd-brands':  'Apple Brands full layer — Branded Mail, Verify with Apple Wallet, Tap to Pay branding, and complete Apple Maps Business Profile.',
+  'fnd-abm-c':   'Apple Business Manager remediation — correction of existing ABM configuration, domain re-verification, or admin access recovery.',
+  'fnd-mdm-c':   'MDM remediation — re-enrollment, profile correction, or reconfiguration of an existing MDM setup to meet management standards.',
+  'fnd-email-c': 'Business email correction — DNS record fixes, email security remediation, or domain configuration updates.',
+  'fnd-brands-c':'Apple Brands correction — remediation of existing brand layer configuration across Apple surfaces.',
   'aud-r': 'Technology assessment and written scorecard delivered within 24 hours. Includes a screen-share review session. Fee credits in full toward any engagement of $500+ if signed within 30 days.',
   'aud-o': 'In-person technology walk-through and full written assessment report. Includes on-site visit and travel.',
-  'fnd':   'Apple Business Manager setup, first device enrollment, and MDM configuration. The operational foundation for all Apple-managed services.',
+  'fnd':   'Apple Business Manager setup, first device enrollment, MDM configuration, and business email + domain. Includes the full Apple Brands layer — Branded Mail, Verify with Apple Wallet, Tap to Pay branding, and Apple Maps Business Profile.',
   'fg':    'All-inclusive Apple Business setup — Foundation, device deployment, brand layer, connectivity, and communications at a single fixed price.',
   'ex':    'Additional device zero-touch enrollment and configuration beyond the included package allotment.',
   'b-cm':  'Carrier plan audit, carrier switch or new account implementation, and AI-powered business phone system — delivered as a bundled service at a reduced rate.',
@@ -247,6 +264,26 @@ export default function QuoteBuilder() {
     return () => window.removeEventListener('resize', check);
   }, []);
 
+  useEffect(() => {
+    if (sid === 'flagship' && a.flagship === undefined) {
+      // Only compare the services flagship actually replaces (not C2/C3/C4/J/F which stay on top either way)
+      const c2Cost = +(a.c2||0) * P.C2;
+      const c3Cost = +(a.c3||0) * P.C3;
+      const c4Cost = +(a.c4||0) * P.C4;
+      const jCost  = a.J ? P.J : 0;
+      const fCost  = a.F ? P.F : 0;
+      const nonFgCost = c2Cost + c3Cost + c4Cost + jCost + fCost;
+      const noFg = calcQuote({...a, flagship: undefined}).lines
+        .filter(l => l.tag !== 'audit')
+        .reduce((s, l) => s + l.price, 0);
+      const fgComparable = noFg - nonFgCost;
+      const rec = fgComparable >= P.flagship.fleet.price ? 'fleet'
+                : fgComparable >= P.flagship.complete.price ? 'complete'
+                : 'none';
+      set('flagship', rec);
+    }
+  }, [sid]);
+
   const steps = useMemo(()=>getSteps(a),[a]);
   const idx   = useMemo(()=>{ const i=steps.findIndex(s=>s.id===sid); return i<0?0:i; },[steps,sid]);
   const step  = steps[idx]||steps[0];
@@ -325,6 +362,59 @@ export default function QuoteBuilder() {
         ))}
       </>
     ),
+    foundationStatus:()=>{
+      const fs=a.foundationStatus||{};
+      const components=[
+        {key:'abm',   label:'Apple Business Manager', sub:'ABM enrollment, domain verification, ACN established, admin configured'},
+        {key:'mdm',   label:'MDM + First Device',     sub:'MDM platform configured, first device enrolled, profiles applied'},
+        {key:'email', label:'Business Email & Domain', sub:'Professional email on own domain, DNS, SPF/DKIM/DMARC secured'},
+        {key:'brands',label:'Apple Brands — Full Layer',sub:'Branded Mail, Verify with Wallet, Tap to Pay branding, Apple Maps Business Profile'},
+      ];
+      const statuses=[
+        {v:'missing',    t:'Missing',           color:C.red,  colorL:C.redL},
+        {v:'correction', t:'Needs Correction',  color:'#B8860B', colorL:'#E8B040'},
+        {v:'clean',      t:'Confirmed Clean',   color:C.teal, colorL:C.tealL},
+      ];
+      const allClean=components.every(c=>(fs[c.key]||'missing')==='clean');
+      function setFs(key,val){set('foundationStatus',{...fs,[key]:val});}
+      return(
+        <>
+          <p style={{fontSize:13,color:C.muted,marginBottom:16,lineHeight:1.6,marginTop:0}}>
+            Mark each Foundation deliverable based on what's confirmed in place. Missing = full rate · Correction = 50% · Confirmed Clean = no charge.
+          </p>
+          {components.map(c=>{
+            const val=fs[c.key]||'missing';
+            return(
+              <div key={c.key} style={{marginBottom:16}}>
+                <div style={{fontSize:13,color:C.cream,fontWeight:'bold',marginBottom:2}}>{c.label}</div>
+                <div style={{fontSize:11,color:C.muted,marginBottom:8,lineHeight:1.5}}>{c.sub}</div>
+                <div style={{display:'flex',gap:7}}>
+                  {statuses.map(s=>{
+                    const sel=val===s.v;
+                    return(
+                      <div key={s.v}
+                        style={{flex:1,background:sel?`${s.color}18`:'transparent',
+                          border:`1px solid ${sel?s.color:C.b0}`,borderRadius:8,
+                          padding:'10px 6px',cursor:'pointer',textAlign:'center'}}
+                        onClick={()=>setFs(c.key,s.v)}>
+                        <div style={{fontSize:11,color:sel?s.colorL:C.muted,
+                          fontWeight:sel?'bold':'normal',lineHeight:1.3}}>{s.t}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
+          {allClean&&(
+            <div style={{background:'rgba(90,158,150,0.09)',border:`1px solid rgba(90,158,150,0.28)`,
+              borderRadius:8,padding:'12px 14px',marginTop:4}}>
+              <span style={{fontSize:13,color:C.tealL}}>✓ All Foundation deliverables confirmed — no Foundation charges apply to this quote.</span>
+            </div>
+          )}
+        </>
+      );
+    },
     audit:()=>(
       <>
         <p style={{fontSize:13,color:C.muted,marginBottom:16,lineHeight:1.6,marginTop:0}}>
@@ -381,14 +471,6 @@ export default function QuoteBuilder() {
               value={a[f.k]??0} onChange={e=>set(f.k,e.target.value)}/>
           </div>
         ))}
-        <div style={{marginTop:10}}>
-          <div style={card(a.G===true)} onClick={()=>set('G',!a.G)}>
-            <span style={oPrc(a.G===true)}>$450</span>
-            <div style={oTit(a.G===true)}>G — Apple Brands, Full Layer</div>
-            <div style={oSub}>Branded Mail, Verify with Wallet, Tap to Pay branding, full Brand Profile beyond Maps core</div>
-          </div>
-          {+(a.c1||0)>=3&&a.G&&<div style={tealBox}><span style={{color:C.tealL,fontSize:13}}>✓ Apple Presence bundle — $750 for C1×3 + G (saves $150)</span></div>}
-        </div>
         <div style={{marginTop:16}}>
           <label style={lbl}>Retail/B2C procurement orders (C4) <span style={{textTransform:'none',letterSpacing:0,fontSize:11}}>× $150/order — if sourcing through non-kickback channels</span></label>
           <input style={inp(0)} type="number" min="0" max="20"
@@ -702,10 +784,11 @@ Let me know if you have any questions or want to make adjustments before moving 
   };
 
   const meta={
-    client:       {title:'New quote',              q:"Who are we building this for?"},
-    stage:        {title:'Business stage',         q:"Where is this client right now?"},
-    audit:        {title:'Tier 0',                 q:"Start with a diagnostic audit?"},
-    formation:    {title:'Tier 2 — Modules A & B', q:"Any business foundation gaps to fill?"},
+    client:          {title:'New quote',          q:"Who are we building this for?"},
+    stage:           {title:'Business stage',     q:"Where is this client right now?"},
+    audit:           {title:'Tier 0',             q:"Start with a diagnostic audit?"},
+    foundationStatus:{title:'Foundation scope',   q:"What's already in place for this client?"},
+    formation:       {title:'Modules A & B',      q:"Any business foundation gaps to fill?"},
     apple:        {title:'Tier 2 — Apple',         q:"What's their Apple footprint?"},
     connectivity: {title:'Tier 2 — Connectivity',  q:"What connectivity services do they need?"},
     ivr:          {title:'Tier 2 — Module H',      q:"Do they need an IVR or AI phone system?"},

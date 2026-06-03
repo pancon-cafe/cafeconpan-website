@@ -5,6 +5,12 @@
 export const P = {
   audit:      { remote: 250, onsite: 450 },
   foundation: 1500,
+  foundationComponents: {
+    abm:    { full: 500, correction: 250 },
+    mdm:    { full: 500, correction: 250 },
+    email:  { full: 300, correction: 150 },
+    brands: { full: 200, correction: 100 },
+  },
   A: 150, B: 175,
   C1: 150, C2: 200, C3: 150, C4: 150,
   D1: 300, D2: 300, E: 300,
@@ -19,7 +25,6 @@ export const P = {
     connectivity:  475,  // D1 + E       (saves $125)
     launchPrep:    275,  // A + B        (saves $50)
     ofbEssentials: 300,  // B + C1×1     (saves $25)
-    applePresence: 750,  // C1×3 + G     (saves $150)
   },
 };
 
@@ -29,7 +34,7 @@ export const P = {
 export function catalogText() {
   const fmt = n => `$${n.toLocaleString()}`;
   return [
-    `- Foundation Core: ${fmt(P.foundation)} — business email+domain, Apple Business Manager, MDM first device, Apple Maps listing`,
+    `- Foundation Core: ${fmt(P.foundation)} — business email+domain, Apple Business Manager, MDM first device, full Apple Brands layer (Branded Mail, Verify with Wallet, Tap to Pay branding, Apple Maps profile). Included in every engagement. Scoped by deliverable — partial setups priced at component level.`,
     `- Module C1: ${fmt(P.C1)}/device — new device zero-touch deployment`,
     `- Module C2: ${fmt(P.C2)}/device — existing device enrollment`,
     `- Module D1: ${fmt(P.D1)} — carrier audit & recommendation`,

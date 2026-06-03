@@ -68,10 +68,11 @@ const DEFAULT_ROADMAP = [
 ];
 
 const STEPS = [
-  { id: 'client',    title: 'Client Info' },
-  { id: 'discovery', title: 'Discovery' },
-  { id: 'review',    title: 'Review & Edit' },
-  { id: 'report',    title: 'Report' },
+  { id: 'client',          title: 'Client Info' },
+  { id: 'discovery',       title: 'Discovery' },
+  { id: 'foundationStatus',title: 'Foundation' },
+  { id: 'review',          title: 'Review & Edit' },
+  { id: 'report',          title: 'Report' },
 ];
 
 const SEV_COLOR = { critical: C.red, high: C.amber, medium: C.beige, low: C.teal };
@@ -143,6 +144,7 @@ function blankState() {
     roadmap: DEFAULT_ROADMAP.map(r => ({ ...r, items: [] })),
     opportunities: [],
     recommendedModules: null,
+    foundationStatus: { abm: 'missing', mdm: 'missing', email: 'missing', brands: 'missing' },
   };
 }
 
@@ -274,7 +276,6 @@ Respond with ONLY valid JSON — no markdown, no code fences, no explanation —
     "D1": false,
     "D2": false,
     "E": false,
-    "G": false,
     "H": false,
     "F": false,
     "J": false,
@@ -385,16 +386,17 @@ Let me know if you have any questions.`
     else if (D1)       connectivity = 'd1';
 
     const prefill = {
-      clientName:  a.clientName,
-      contactName: a.contactName,
-      clientEmail: a.clientEmail,
-      clientPhone: a.clientPhone,
-      stage:       'operational',
-      audit:       a.auditType === 'onsite' ? 'onsite' : 'remote',
+      clientName:      a.clientName,
+      contactName:     a.contactName,
+      clientEmail:     a.clientEmail,
+      clientPhone:     a.clientPhone,
+      stage:           'operational',
+      audit:           a.auditType === 'onsite' ? 'onsite' : 'remote',
+      foundationStatus: a.foundationStatus || { abm: 'missing', mdm: 'missing', email: 'missing', brands: 'missing' },
       A: !!recs.A, B: !!recs.B,
       connectivity,
       H: H && connectivity !== 'comms',
-      G: !!recs.G, F: !!recs.F, J: !!recs.J,
+      F: !!recs.F, J: !!recs.J,
       c1: recs.c1 || 0, c2: recs.c2 || 0,
       recurring: !!recs.recurring,
     };
@@ -517,6 +519,58 @@ Let me know if you have any questions.`
           ))}
         </>
       );
+
+      case 'foundationStatus': {
+        const fs = a.foundationStatus || {};
+        const components = [
+          { key: 'abm',    label: 'Apple Business Manager', sub: 'ABM enrollment, domain verification, ACN established, admin configured' },
+          { key: 'mdm',    label: 'MDM + First Device Enrollment', sub: 'MDM platform configured, first device enrolled, profiles applied' },
+          { key: 'email',  label: 'Business Email & Domain', sub: 'Professional email on own domain, DNS, SPF/DKIM/DMARC secured' },
+          { key: 'brands', label: 'Apple Brands — Full Layer', sub: 'Branded Mail, Verify with Wallet, Tap to Pay branding, Apple Maps Business Profile' },
+        ];
+        const statuses = [
+          { v: 'missing',    t: 'Missing',           color: C.red,    colorL: C.redL  },
+          { v: 'correction', t: 'Needs Correction',  color: '#B8860B', colorL: '#E8B040' },
+          { v: 'clean',      t: 'Confirmed Clean',   color: C.teal,   colorL: C.tealL },
+        ];
+        function setFs(key, val) { set('foundationStatus', { ...fs, [key]: val }); }
+        return (
+          <>
+            <p style={{ fontSize: 13, color: C.muted, marginTop: 0, marginBottom: 20, lineHeight: 1.6 }}>
+              Mark each Foundation deliverable based on what's confirmed in place. This drives Foundation scoping and pricing in The Pour.
+            </p>
+            {components.map(c => {
+              const val = fs[c.key] || 'missing';
+              return (
+                <div key={c.key} style={{ background: C.card, border: `1px solid ${C.b0}`, borderRadius: 10, padding: 16, marginBottom: 12 }}>
+                  <div style={{ fontSize: 13, color: C.beige, fontWeight: 'bold', marginBottom: 4 }}>{c.label}</div>
+                  <div style={{ fontSize: 11, color: C.muted, marginBottom: 12, lineHeight: 1.5 }}>{c.sub}</div>
+                  <div style={{ display: 'flex', gap: 8 }}>
+                    {statuses.map(s => {
+                      const sel = val === s.v;
+                      return (
+                        <button key={s.v}
+                          onClick={() => setFs(c.key, s.v)}
+                          style={{
+                            flex: 1, padding: '9px 6px',
+                            background: sel ? `${s.color}18` : 'transparent',
+                            border: `1px solid ${sel ? s.color : C.b0}`,
+                            borderRadius: 7, color: sel ? s.colorL : C.muted,
+                            fontSize: 11, cursor: 'pointer',
+                            fontFamily: "'Nunito',sans-serif",
+                            fontWeight: sel ? 'bold' : 'normal', lineHeight: 1.3,
+                          }}>
+                          {s.t}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </>
+        );
+      }
 
       case 'review': return (
         <>
