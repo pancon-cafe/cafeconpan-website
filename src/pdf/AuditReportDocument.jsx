@@ -701,7 +701,9 @@ export default function AuditReportDocument({ data, teaser = false }) {
               {data.preparedBy} of Cafe Con Pan LLC. The findings and recommendations
               are based on information gathered during the assessment and are intended
               solely to guide technology strategy decisions for this organization.
-              Questions or follow-up? Reach us at jason@pancon.cafe or 808-868-6161.
+            </Text>
+            <Text style={[rs.bodyText, { fontWeight: 700, marginTop: SP[3] }]}>
+              Ready to move forward? Reply to this email and we'll schedule your project kickoff.
             </Text>
           </CCPCallout>
         )}
