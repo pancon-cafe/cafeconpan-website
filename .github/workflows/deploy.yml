@@ -29,10 +29,6 @@ jobs:
         env:
           VITE_ANTHROPIC_KEY: ${{ secrets.VITE_ANTHROPIC_KEY }}
       - run: npm run build
-      - name: Show bundle filename and verify key
-        run: |
-          ls dist/assets/index-*.js
-          grep -o '"x-api-key":[^,}]*' dist/assets/index-*.js | head -c 60
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
