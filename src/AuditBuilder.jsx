@@ -767,7 +767,7 @@ Let me know if you have any questions.`
                 {a.ivrScenario.narrative}
               </p>
               {(a.ivrScenario.departments || []).length > 0 && (
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
                   {a.ivrScenario.departments.map((d, i) => (
                     <span key={i} style={{
                       background: 'rgba(94,155,255,0.1)', border: '1px solid rgba(94,155,255,0.25)',
@@ -776,6 +776,28 @@ Let me know if you have any questions.`
                   ))}
                 </div>
               )}
+              <button
+                onClick={() => {
+                  const depts = (a.ivrScenario.departments || []).map(d => {
+                    const parts = d.split(' — ');
+                    return { name: parts[0]?.trim() || d, description: parts[1]?.trim() || '', number: '' };
+                  });
+                  const prefill = {
+                    name: a.clientName || '',
+                    greeting: `Thank you for calling ${a.clientName || 'us'}. Please tell me how I can help you today.`,
+                    departments: depts,
+                  };
+                  const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(prefill))));
+                  window.open(`https://ivr.pancon.cafe/admin/new?prefill=${encoded}`, '_blank');
+                }}
+                style={{
+                  background: '#5e9bff', color: '#fff', border: 'none', borderRadius: 8,
+                  padding: '9px 18px', fontSize: 13, fontWeight: 600, cursor: 'pointer',
+                  fontFamily: "'Nunito',sans-serif",
+                }}
+              >
+                Set Up IVR →
+              </button>
             </div>
           </>)}
 
