@@ -143,6 +143,7 @@ function blankState() {
     executiveSummary: '', overallScore: null, findings: [],
     roadmap: DEFAULT_ROADMAP.map(r => ({ ...r, items: [] })),
     opportunities: [],
+    ivrScenario: null,
     recommendedModules: null,
     foundationStatus: { abm: 'missing', mdm: 'missing', email: 'missing', brands: 'missing' },
   };
@@ -270,6 +271,11 @@ Respond with ONLY valid JSON — no markdown, no code fences, no explanation —
       "description": "2-3 sentences. Forward-looking and specific to this business and industry. Connect naturally to a CCP service without making it a sales pitch — lead with the benefit to the client."
     }
   ],
+  "ivrScenario": {
+    "headline": "short headline describing how IVR fits this specific business (e.g. 'How AI Call Routing Would Work for a Dental Office')",
+    "narrative": "2-3 sentences written as a story — describe a real caller's experience from the moment they dial to the moment they reach the right person. Use this business's actual context, industry, and likely call types. Make it concrete and vivid, not generic.",
+    "departments": ["Department Name — what types of calls route here", "Department Name — what types of calls route here"]
+  },
   "recommendedModules": {
     "A": false,
     "B": false,
@@ -289,7 +295,9 @@ Generate 3-5 opportunities — these are NOT problems, they are possibilities. S
 
 Set each recommendedModules flag to true/count if that service appears in the roadmap. D2 only true if D1 is also true. c1 = number of new devices to deploy, c2 = number of existing devices to enroll. recurring = true if you recommend the Partner relationship.
 
-Generate 3–8 findings. If notes are sparse for a category, score conservatively and note further assessment is needed. Include CCP service pricing in roadmap items where applicable.`;
+Generate 3–8 findings. If notes are sparse for a category, score conservatively and note further assessment is needed. Include CCP service pricing in roadmap items where applicable.
+
+Always generate the ivrScenario regardless of whether H is in the roadmap. This is a discovery tool to help the consultant explain IVR value to clients who may not know they need it. Make it specific to this business's industry and likely call types — not generic.`;
 
     try {
       const res = await fetch('https://anthropic-proxy.cafe-con-pan-llc.workers.dev', {
@@ -337,6 +345,7 @@ Generate 3–8 findings. If notes are sparse for a category, score conservativel
           headline: o.headline || '',
           description: o.description || '',
         })),
+        ivrScenario: parsed.ivrScenario || null,
         recommendedModules: parsed.recommendedModules || null,
       }));
 
@@ -737,6 +746,38 @@ Let me know if you have any questions.`
             borderRadius: 10, color: C.beige, padding: 14, cursor: 'pointer',
             fontSize: 14, fontFamily: "'Nunito',sans-serif", marginBottom: 8,
           }}>+ Add Finding</button>
+
+          {/* IVR Scenario */}
+          {a.ivrScenario && (<>
+            {sectionHead('IVR Scenario')}
+            <p style={{ fontSize: 12, color: C.muted, marginTop: 0, marginBottom: 16, lineHeight: 1.6 }}>
+              Use this to explain how AI call routing would work for this specific client.
+            </p>
+            <div style={{
+              background: C.card, border: `1px solid ${C.b0}`, borderRadius: 10,
+              padding: 20, marginBottom: 24, borderLeft: `3px solid #5e9bff`,
+            }}>
+              <div style={{ fontSize: 11, color: '#5e9bff', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 10 }}>
+                IVR Use Case
+              </div>
+              <div style={{ fontSize: 14, fontWeight: 600, color: C.text, marginBottom: 10 }}>
+                {a.ivrScenario.headline}
+              </div>
+              <p style={{ fontSize: 13, color: C.muted, lineHeight: 1.7, marginBottom: 14 }}>
+                {a.ivrScenario.narrative}
+              </p>
+              {(a.ivrScenario.departments || []).length > 0 && (
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                  {a.ivrScenario.departments.map((d, i) => (
+                    <span key={i} style={{
+                      background: 'rgba(94,155,255,0.1)', border: '1px solid rgba(94,155,255,0.25)',
+                      borderRadius: 20, padding: '4px 12px', fontSize: 12, color: '#5e9bff',
+                    }}>{d}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </>)}
 
           {/* Opportunities */}
           {sectionHead('Opportunities')}
