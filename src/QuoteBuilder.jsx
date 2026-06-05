@@ -171,7 +171,7 @@ const CLIENT_DESC = {
   'mD1':   'Carrier plan analysis — rate comparison across providers, savings projection, and written findings report. Billable regardless of whether a switch is executed.',
   'mD2':   'Carrier switch execution — new business account setup, number porting, or plan restructuring on the client\'s behalf.',
   'mE':    'Business internet provider evaluation, referral coordination, install scheduling, and service verification.',
-  'mH':   'AI-powered business phone system setup — custom call routing, caller ID (CNAM) configuration, and post-deployment testing.',
+  'mH':   'AI-powered business phone system setup — custom call routing, caller ID (CNAM) configuration, and post-deployment testing. Your phone number is registered to your business and fully portable — you can take it with you at any time.',
   'mG':    'Full Apple brand layer — Branded Mail, Verify with Apple Wallet, Tap to Pay branding, and complete Apple Maps Business Profile.',
   'mF':    'Business website design and development — contact forms, payment integration, and brand-consistent design. Complex builds are quoted separately.',
   'mJ':    'Apple Messages for Business registration and Heymarket MSP setup for direct customer messaging on Apple platforms.',
@@ -505,7 +505,7 @@ export default function QuoteBuilder() {
         </p>
         {[
           {v:false, t:'No IVR — skip',      d:'Client handles their own call routing'},
-          {v:true,  t:'H — IVR Setup',       d:'Twilio + AI call routing, custom call flow, CNAM setup, post-deployment testing', p:'$600'},
+          {v:true,  t:'H — IVR Setup',       d:'Twilio + AI call routing, custom call flow, CNAM setup, post-deployment testing. Number is registered to the client\'s business and fully portable.', p:'$600'},
         ].map(o=>(
           <div key={String(o.v)} style={card(a.H===o.v)} onClick={()=>set('H',o.v)}>
             {o.p&&<span style={oPrc(a.H===o.v)}>{o.p}</span>}
