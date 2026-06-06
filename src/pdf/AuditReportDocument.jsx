@@ -260,7 +260,7 @@ function CoverPage({ data }) {
         </View>
         <View style={coverS.metaRow}>
           <Text style={coverS.metaLabel}>Contact</Text>
-          <Text style={coverS.metaValue}>jason@pancon.cafe  ·  808-868-6161</Text>
+          <Text style={coverS.metaValue}>jason@pancon.cafe  ·  (771) 223-3131</Text>
         </View>
 
         {/* Confidential strip */}
@@ -691,7 +691,7 @@ export default function AuditReportDocument({ data, teaser = false }) {
               </Text>
             </Link>
             <Text style={rs.mutedText}>
-              Questions? jason@pancon.cafe · 808-868-6161
+              Questions? jason@pancon.cafe · (771) 223-3131
             </Text>
           </CCPCallout>
         ) : (
