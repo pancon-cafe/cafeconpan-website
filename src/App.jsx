@@ -1223,7 +1223,7 @@ function ContactPage({ t, go, scrollToSocials, setGameActive }) {
           ))}
           <div className="contact-info-item" onClick={scrollToSocials} style={{cursor:"pointer"}}>
             <div className="contact-info-label">{t.socials.followLabel}</div>
-            <div className="contact-info-val" style={{textDecoration:"underline",textUnderlineOffset:3}}>{t.socials.contactNote}</div>
+            <div className="contact-info-val" style={{color:"#5A9E96"}}>{t.socials.contactNote}</div>
           </div>
           <div style={{marginTop:32}}>
             <div style={{cursor:"pointer",display:"inline-block",opacity:0.85,transition:"opacity 0.2s"}}
