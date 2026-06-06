@@ -225,7 +225,7 @@ const STRINGS = {
       tiktokLabel:"TikTok",
       twitterLabel:"Twitter",
       youtubeLabel:"YouTube",
-      followLabel:"Socials", contactNote:"Follow Us ↓",
+      followLabel:"Socials", contactNote:"FOLLOW US ↓",
     },
     contact:{
       eyebrow:"Get in Touch", title:"Let's", titleSpan:"Talk",
@@ -487,7 +487,7 @@ const STRINGS = {
       tiktokLabel:"TikTok",
       twitterLabel:"Twitter",
       youtubeLabel:"YouTube",
-      followLabel:"Redes Sociales", contactNote:"Síguenos ↓",
+      followLabel:"Redes Sociales", contactNote:"SÍGUENOS ↓",
     },
     contact:{
       eyebrow:"Ponte en Contacto", title:"", titleSpan:"Hablemos",
