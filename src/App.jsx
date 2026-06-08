@@ -280,7 +280,7 @@ const STRINGS = {
         ]},
         { group:"Brand & Communication", items:[
           { id:"G", name:"Apple Brands Layer",      desc:"Included with Foundation Core. Available as a standalone service for businesses that already have their Apple infrastructure in place but haven't built their brand layer yet." },
-          { id:"H", name:"AI Phone System",         desc:"A professional phone experience built on Twilio — intelligent call routing, automated greetings, and custom handling for your team and hours." },
+          { id:"H", name:"AI Phone System",         desc:"Our own AI-powered phone system — intelligent call routing, automated greetings, and custom call handling tailored to your team and business hours. Ongoing system management available separately." },
           { id:"J", name:"Apple Business Messages", desc:"An official messaging channel on Apple devices. Customers contact you directly from Maps, Search, and Safari — right from their iPhone." },
         ]},
         { group:"Web", items:[
@@ -542,7 +542,7 @@ const STRINGS = {
         ]},
         { group:"Marca y Comunicación", items:[
           { id:"G", name:"Capa Apple Brands",         desc:"Incluido con Foundation Core. Disponible como servicio independiente para empresas que ya tienen su infraestructura Apple pero aún no han construido su capa de marca." },
-          { id:"H", name:"Sistema Telefónico IA",     desc:"Una experiencia telefónica profesional construida en Twilio — enrutamiento inteligente de llamadas, saludos automatizados y manejo personalizado para tu equipo y horarios." },
+          { id:"H", name:"Sistema Telefónico IA",     desc:"Nuestro propio sistema telefónico con IA — enrutamiento inteligente de llamadas, saludos automatizados y manejo personalizado para tu equipo y horarios. La gestión continua del sistema está disponible por separado." },
           { id:"J", name:"Apple Business Messages",   desc:"Un canal de mensajería oficial en dispositivos Apple. Los clientes te contactan directamente desde Maps, Search y Safari — desde su iPhone." },
         ]},
         { group:"Web", items:[
