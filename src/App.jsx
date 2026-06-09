@@ -233,7 +233,7 @@ const STRINGS = {
       newClientEyebrow:"New to Café Con Pan?",
       newClientBody:"Looking to get started with tech services? Use the intake form — it's faster for both of us.",
       intakeCta:"Take Me to the Intake Form →",
-      info:[{label:"Email",val:"hello@pancon.cafe"},{label:"Phone",val:"1-771-CAFE-131 (1-771-223-3131)"},{label:"Response Time",val:"Within 24 Hours"},{label:"Business",val:"Cafe Con Pan LLC"},{label:"Services",val:"Tech · Coffee · Culture"}],
+      info:[{label:"Email",val:"hello@pancon.cafe",href:"mailto:hello@pancon.cafe"},{label:"Phone",val:"1-771-CAFE-131 (1-771-223-3131)",href:"tel:+17712233131"},{label:"Response Time",val:"Within 24 Hours"},{label:"Business",val:"Cafe Con Pan LLC"},{label:"Services",val:"Tech · Coffee · Culture"}],
       nameLabel:"Your Name", namePlaceholder:"Full name",
       emailLabel:"Email Address", emailPlaceholder:"Your email address",
       inquiryLabel:"Inquiry Type", messageLabel:"Message", messagePlaceholder:"What can we help you with?",
@@ -495,7 +495,7 @@ const STRINGS = {
       newClientEyebrow:"¿Nuevo en Café Con Pan?",
       newClientBody:"¿Quieres empezar con servicios tech? Usa el formulario de inicio — es más rápido para ambos.",
       intakeCta:"Ir al Formulario de Inicio →",
-      info:[{label:"Correo",val:"hello@pancon.cafe"},{label:"Teléfono",val:"1-771-CAFE-131 (1-771-223-3131)"},{label:"Tiempo de Respuesta",val:"Dentro de 24 Horas"},{label:"Negocio",val:"Cafe Con Pan LLC"},{label:"Servicios",val:"Tech · Café · Cultura"}],
+      info:[{label:"Correo",val:"hello@pancon.cafe",href:"mailto:hello@pancon.cafe"},{label:"Teléfono",val:"1-771-CAFE-131 (1-771-223-3131)",href:"tel:+17712233131"},{label:"Tiempo de Respuesta",val:"Dentro de 24 Horas"},{label:"Negocio",val:"Cafe Con Pan LLC"},{label:"Servicios",val:"Tech · Café · Cultura"}],
       nameLabel:"Tu Nombre", namePlaceholder:"Nombre completo",
       emailLabel:"Correo Electrónico", emailPlaceholder:"Tu correo electrónico",
       inquiryLabel:"Tipo de Consulta", messageLabel:"Mensaje", messagePlaceholder:"¿En qué podemos ayudarte?",
@@ -1219,15 +1219,15 @@ function ContactPage({ t, go, scrollToSocials, setGameActive }) {
             <div key={i.label} className="contact-info-item">
               <div className="contact-info-label">{i.label}</div>
               <div className="contact-info-val">
-                {i.val.includes('@')
-                  ? <a href={`mailto:${i.val}`} style={{color:'inherit',textDecoration:'none',borderBottom:`1px solid ${C.beige}`}}>{i.val}</a>
+                {i.href
+                  ? <a href={i.href} style={{color:'inherit',textDecoration:'none',borderBottom:`1px solid ${C.beige}`}}>{i.val}</a>
                   : i.val}
               </div>
             </div>
           ))}
           <div className="contact-info-item" onClick={scrollToSocials} style={{cursor:"pointer"}}>
             <div className="contact-info-label">{t.socials.followLabel}</div>
-            <div className="contact-info-val" style={{color:"#5A9E96"}}>{t.socials.contactNote}</div>
+            <div className="contact-info-val" style={{color:"#5A9E96",borderBottom:`1px solid ${C.beige}`,display:"inline-block"}}>{t.socials.contactNote}</div>
           </div>
           <div style={{marginTop:32}}>
             <div style={{cursor:"pointer",display:"inline-block",opacity:0.85,transition:"opacity 0.2s"}}
