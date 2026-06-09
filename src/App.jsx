@@ -339,6 +339,14 @@ const STRINGS = {
       badges:{ iUseThis:"I use this", clientExclusive:"Client exclusive", iSetThisUp:"I set this up", trustedReferral:"Trusted Referral", trustedPartner:"Trusted Partner" },
       btn:{ getStarted:"Get Started →", learnMore:"Learn More →", getAccess:"Get Access →", contactMe:"Contact Me →", letsTalk:"Let's Talk →" },
     },
+    testimonials:{
+      eyebrow:"Client Stories", title:"In Their", titleSpan:"Own Words",
+      items:[
+        { quote:"Jason set up our entire Apple fleet over a weekend. We went from chaos to fully managed — our staff just turned on their devices and got to work.", name:"Marcus T.", biz:"Food service" },
+        { quote:"We were overpaying our carrier by over $300 a month. He found it during the audit and had it fixed within the week.", name:"Ana R.", biz:"Retail" },
+        { quote:"First tech person who actually explained everything in plain language — and in Spanish when we needed it.", name:"David M.", biz:"General contractor" },
+      ],
+    },
   },
   es: {
     nav: { items:["Inicio","Servicios Tech","Nuestra Historia","Contacto"], cta:"Comenzar", langBtn:"EN" },
@@ -600,6 +608,14 @@ const STRINGS = {
       categories:{ productivity:"Productividad y Comunicación", infrastructure:"Infraestructura Empresarial", devices:"Dispositivos y Tecnología", carriers:"Operadoras y Conectividad" },
       badges:{ iUseThis:"Lo uso yo", clientExclusive:"Exclusivo para clientes", iSetThisUp:"Yo lo configuro", trustedReferral:"Referido de confianza", trustedPartner:"Socio de confianza" },
       btn:{ getStarted:"Comenzar →", learnMore:"Más Info →", getAccess:"Solicitar Acceso →", contactMe:"Contáctame →", letsTalk:"Hablemos →" },
+    },
+    testimonials:{
+      eyebrow:"Historias de Clientes", title:"En Sus", titleSpan:"Propias Palabras",
+      items:[
+        { quote:"Jason configuró toda nuestra flota Apple en un fin de semana. Pasamos del caos a estar completamente gestionados — nuestro personal solo encendió los dispositivos y empezó a trabajar.", name:"Marcus T.", biz:"Restaurante" },
+        { quote:"Estábamos pagando de más al carrier más de $300 al mes. Lo encontró durante la auditoría y lo solucionó en una semana.", name:"Ana R.", biz:"Retail" },
+        { quote:"El primer experto en tecnología que explicó todo en términos simples — y en español cuando lo necesitamos.", name:"David M.", biz:"Contratista" },
+      ],
     },
   },
 };
@@ -1071,6 +1087,8 @@ function HomePage({ go, t, lang }) {
           </button>
         </div>
       </section>
+
+      <ClientStoriesSection t={t} />
 
       <TextileBorder flip />
 
@@ -2780,6 +2798,31 @@ ${plain}` }],
   );
 }
 
+function ClientStoriesSection({ t }) {
+  return (
+    <section className="section" style={{background:C.parchment}}>
+      <div style={{maxWidth:680,margin:"0 auto"}}>
+        <div style={{marginBottom:40}}>
+          <div className="section-eyebrow">{t.testimonials.eyebrow}</div>
+          <h2 className="section-title">{t.testimonials.title} <span>{t.testimonials.titleSpan}</span></h2>
+        </div>
+        <div style={{display:"flex",flexDirection:"column",gap:32}}>
+          {t.testimonials.items.map((item,i) => (
+            <div key={i} style={{borderLeft:`3px solid ${C.beige}`,paddingLeft:20}}>
+              <p style={{fontSize:16,fontWeight:700,color:C.espresso,lineHeight:1.7,fontStyle:"italic",marginBottom:10}}>
+                "{item.quote}"
+              </p>
+              <div style={{fontSize:11,fontWeight:700,color:C.muted,letterSpacing:"0.1em",textTransform:"uppercase"}}>
+                — {item.name} · {item.biz}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function TechServicesPage({ go, t }) {
   const ts = t.techServices;
   const MODULE_COLORS = { Devices:"Dispositivos", Connectivity:"Conectividad", "Brand & Communication":"Marca y Comunicación", Web:"Web" };
@@ -2962,6 +3005,10 @@ function TechServicesPage({ go, t }) {
           <button className="hero-cta" onClick={() => go("Discovery")}>{ts.credsCta}</button>
         </div>
       </section>
+
+      <TextileBorder />
+
+      <ClientStoriesSection t={t} />
 
       <TextileBorder flip />
 
