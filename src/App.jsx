@@ -342,9 +342,8 @@ const STRINGS = {
     testimonials:{
       eyebrow:"Client Stories", title:"In Their", titleSpan:"Own Words",
       items:[
-        { quote:"Jason set up our entire Apple fleet over a weekend. We went from chaos to fully managed — our staff just turned on their devices and got to work.", name:"Marcus T.", biz:"Food service" },
-        { quote:"We were overpaying our carrier by over $300 a month. He found it during the audit and had it fixed within the week.", name:"Ana R.", biz:"Retail" },
-        { quote:"First tech person who actually explained everything in plain language — and in Spanish when we needed it.", name:"David M.", biz:"General contractor" },
+        { quote:"I was running my entire coaching practice out of a personal Gmail. Jason set up my professional email, got my MacBook enrolled and managed, and suddenly the whole thing felt like a real business. As a solo operator I didn't think I needed any of this — turns out it was exactly what was missing.", name:"Darwin R.", biz:"Driven Coaching LLC" },
+        { quote:"We had two iPads tied to personal Apple IDs with no real system behind them. Jason untangled everything, got us set up on Apple Business Manager, and found us a better carrier plan while he was at it. For the first time it actually felt like we had a tech setup that worked for the business.", name:"Diego & Kellie M.", biz:"OurThreads Shop" },
       ],
     },
   },
@@ -612,9 +611,8 @@ const STRINGS = {
     testimonials:{
       eyebrow:"Historias de Clientes", title:"En Sus", titleSpan:"Propias Palabras",
       items:[
-        { quote:"Jason configuró toda nuestra flota Apple en un fin de semana. Pasamos del caos a estar completamente gestionados — nuestro personal solo encendió los dispositivos y empezó a trabajar.", name:"Marcus T.", biz:"Restaurante" },
-        { quote:"Estábamos pagando de más al carrier más de $300 al mes. Lo encontró durante la auditoría y lo solucionó en una semana.", name:"Ana R.", biz:"Retail" },
-        { quote:"El primer experto en tecnología que explicó todo en términos simples — y en español cuando lo necesitamos.", name:"David M.", biz:"Contratista" },
+        { quote:"Llevaba toda mi práctica de coaching desde un Gmail personal. Jason configuró mi correo profesional, inscribió mi MacBook y de repente todo se sentía como un negocio de verdad. Como empresario solo pensé que no necesitaba nada de esto — resultó ser exactamente lo que faltaba.", name:"Darwin R.", biz:"Driven Coaching LLC" },
+        { quote:"Teníamos dos iPads vinculados a Apple IDs personales sin ningún sistema real detrás. Jason lo organizó todo, nos configuró en Apple Business Manager y de paso encontró un mejor plan de carrier. Por primera vez sentimos que teníamos una configuración tech que funcionaba para el negocio.", name:"Diego & Kellie M.", biz:"OurThreads Shop" },
       ],
     },
   },
