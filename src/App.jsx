@@ -1218,7 +1218,11 @@ function ContactPage({ t, go, scrollToSocials, setGameActive }) {
           {t.contact.info.map(i => (
             <div key={i.label} className="contact-info-item">
               <div className="contact-info-label">{i.label}</div>
-              <div className="contact-info-val">{i.val}</div>
+              <div className="contact-info-val">
+                {i.val.includes('@')
+                  ? <a href={`mailto:${i.val}`} style={{color:'inherit',textDecoration:'none',borderBottom:`1px solid ${C.beige}`}}>{i.val}</a>
+                  : i.val}
+              </div>
             </div>
           ))}
           <div className="contact-info-item" onClick={scrollToSocials} style={{cursor:"pointer"}}>
