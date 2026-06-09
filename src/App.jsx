@@ -343,7 +343,7 @@ const STRINGS = {
       eyebrow:"Client Stories", title:"In Their", titleSpan:"Own Words",
       items:[
         { quote:"I was running my entire coaching practice out of a personal Gmail. Jason set up my professional email, got my MacBook enrolled and managed, and suddenly the whole thing felt like a real business. As a solo operator I didn't think I needed any of this — turns out it was exactly what was missing.", name:"Darwin R.", biz:"Driven Coaching LLC" },
-        { quote:"We had two iPads tied to personal Apple IDs with no real system behind them. Jason untangled everything, got us set up on Apple Business Manager, and found us a better carrier plan while he was at it. For the first time it actually felt like we had a tech setup that worked for the business.", name:"Diego & Kellie M.", biz:"OurThreads Shop" },
+        { quote:"We had two iPads tied to personal Apple IDs with no real system behind them. Jason untangled everything, got us set up on Apple Business Manager, found us a better carrier plan, and set up our business phone system on top of it all. For the first time it actually felt like we had a tech setup that worked for the business.", name:"Diego & Kellie M.", biz:"OurThreads Shop" },
       ],
     },
   },
@@ -612,7 +612,7 @@ const STRINGS = {
       eyebrow:"Historias de Clientes", title:"En Sus", titleSpan:"Propias Palabras",
       items:[
         { quote:"Llevaba toda mi práctica de coaching desde un Gmail personal. Jason configuró mi correo profesional, inscribió mi MacBook y de repente todo se sentía como un negocio de verdad. Como empresario solo pensé que no necesitaba nada de esto — resultó ser exactamente lo que faltaba.", name:"Darwin R.", biz:"Driven Coaching LLC" },
-        { quote:"Teníamos dos iPads vinculados a Apple IDs personales sin ningún sistema real detrás. Jason lo organizó todo, nos configuró en Apple Business Manager y de paso encontró un mejor plan de carrier. Por primera vez sentimos que teníamos una configuración tech que funcionaba para el negocio.", name:"Diego & Kellie M.", biz:"OurThreads Shop" },
+        { quote:"Teníamos dos iPads vinculados a Apple IDs personales sin ningún sistema real detrás. Jason lo organizó todo, nos configuró en Apple Business Manager, encontró un mejor plan de carrier y además configuró nuestro sistema telefónico. Por primera vez sentimos que teníamos una configuración tech que funcionaba para el negocio.", name:"Diego & Kellie M.", biz:"OurThreads Shop" },
       ],
     },
   },
