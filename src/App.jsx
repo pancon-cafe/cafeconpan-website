@@ -1086,6 +1086,8 @@ function HomePage({ go, t, lang }) {
         </div>
       </section>
 
+      <TextileBorder />
+
       <ClientStoriesSection t={t} />
 
       <TextileBorder flip />
@@ -2804,14 +2806,16 @@ function ClientStoriesSection({ t }) {
           <div className="section-eyebrow">{t.testimonials.eyebrow}</div>
           <h2 className="section-title">{t.testimonials.title} <span>{t.testimonials.titleSpan}</span></h2>
         </div>
-        <div style={{display:"flex",flexDirection:"column",gap:32}}>
+        <div style={{display:"flex",gap:20,flexWrap:"wrap"}}>
           {t.testimonials.items.map((item,i) => (
-            <div key={i} style={{borderLeft:`3px solid ${C.beige}`,paddingLeft:20}}>
-              <p style={{fontSize:16,fontWeight:700,color:C.espresso,lineHeight:1.7,fontStyle:"italic",marginBottom:10}}>
-                "{item.quote}"
+            <div key={i} style={{flex:1,minWidth:260,background:C.espresso,borderRadius:4,padding:"32px 28px 24px",position:"relative"}}>
+              <div style={{fontFamily:"'Pacifico',cursive",fontSize:64,color:C.beige,opacity:0.3,position:"absolute",top:8,left:18,lineHeight:1}}>"</div>
+              <p style={{fontSize:15,fontWeight:600,color:C.cream,lineHeight:1.8,fontStyle:"italic",marginBottom:20,position:"relative"}}>
+                {item.quote}
               </p>
-              <div style={{fontSize:11,fontWeight:700,color:C.muted,letterSpacing:"0.1em",textTransform:"uppercase"}}>
-                — {item.name} · {item.biz}
+              <div style={{borderTop:`1px solid rgba(212,169,122,0.2)`,paddingTop:14}}>
+                <div style={{fontSize:13,fontWeight:700,color:C.beige}}>{item.name}</div>
+                <div style={{fontSize:11,fontWeight:700,color:"rgba(245,237,214,0.4)",letterSpacing:"0.1em",textTransform:"uppercase",marginTop:3}}>{item.biz}</div>
               </div>
             </div>
           ))}
