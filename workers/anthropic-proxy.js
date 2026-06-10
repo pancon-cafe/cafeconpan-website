@@ -1,5 +1,6 @@
 const ALLOWED_ORIGINS = new Set([
   'https://pancon.cafe',
+  'https://tools.pancon.cafe',
   'http://localhost:5173',
   'http://localhost:5174',
 ]);

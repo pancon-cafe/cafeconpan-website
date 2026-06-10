@@ -42,7 +42,7 @@ export function catalogText() {
     `- Module E: ${fmt(P.E)} — ISP/business internet setup`,
     `- Bundle — Connectivity (D1 + E): ${fmt(P.bundles.connectivity)} (saves $125)`,
     `- Module G: ${fmt(P.G)} — Apple Brands full layer (Branded Mail, Verify with Wallet, Tap to Pay branding)`,
-    `- Module H: ${fmt(P.H)} — IVR/AI phone system (Twilio)`,
+    `- Module H: ${fmt(P.H)} — CCP AI Phone System (proprietary AI-powered call routing, automated greetings, and custom call handling)`,
     `- Module F: ${fmt(P.F)} — business website`,
     `- Module J: ${fmt(P.J)} + MSP — Apple Business Messages`,
     `- Bundle — Communications (D1 + D2 + H): ${fmt(P.bundles.comms)} (saves $250)`,

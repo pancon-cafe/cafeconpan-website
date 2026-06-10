@@ -505,7 +505,7 @@ export default function QuoteBuilder() {
         </p>
         {[
           {v:false, t:'No IVR — skip',      d:'Client handles their own call routing'},
-          {v:true,  t:'H — IVR Setup',       d:'Twilio + AI call routing, custom call flow, CNAM setup, post-deployment testing. Number is registered to the client\'s business and fully portable.', p:'$600'},
+          {v:true,  t:'H — IVR Setup',       d:'CCP AI Phone System — AI call routing, custom call flow, CNAM setup, post-deployment testing. Number is registered to the client\'s business and fully portable.', p:'$600'},
         ].map(o=>(
           <div key={String(o.v)} style={card(a.H===o.v)} onClick={()=>set('H',o.v)}>
             {o.p&&<span style={oPrc(a.H===o.v)}>{o.p}</span>}

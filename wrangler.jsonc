@@ -1,0 +1,5 @@
+{
+  "name": "anthropic-proxy",
+  "compatibility_date": "2026-06-10",
+  "main": "workers/anthropic-proxy.js"
+}
