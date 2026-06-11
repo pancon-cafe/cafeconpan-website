@@ -547,7 +547,7 @@ export default function QuoteBuilder() {
           </div>
           {[
             {v:'none',     t:'Keep current selections',    d:`À la carte — ${fmt(noFg)}. Individual modules retained as configured.`,                                           p:fmt(noFg), hl:false},
-            {v:'complete', t:'Flagship — OFB Complete',    d:'Foundation + all bundles, 3-device deployment, single fixed price. Devices 4–15 add $150 each.',                  p:'$4,200',  hl:true},
+            {v:'complete', t:'Flagship — OFB Complete',    d:'Foundation + all bundles, 3-device deployment, single fixed price. Devices 4–15 add $150 each.',                  p:'$4,000',  hl:true},
             {v:'fleet',    t:'Flagship — OFB Fleet',       d:'Same as Complete but 10-device deployment. Best for fleet-first clients. Devices 11–15 add $150 each.',            p:'$5,000',  hl:false},
           ].map(o=>(
             <div key={o.v}
