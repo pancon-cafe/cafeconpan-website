@@ -1833,7 +1833,7 @@ function PrivacyPolicyPage({ lang }) {
             Privacy <span style={{color:C.blush}}>Policy</span>
           </h1>
           <p style={{fontSize:12,color:`rgba(245,237,214,0.4)`,letterSpacing:"0.14em",textTransform:"uppercase",fontWeight:700}}>
-            Effective Date: May 21, 2026 &nbsp;·&nbsp; Last Updated: May 21, 2026
+            Effective Date: May 21, 2026 &nbsp;·&nbsp; Last Updated: June 13, 2026
           </p>
         </div>
       </section>
@@ -1899,6 +1899,20 @@ function PrivacyPolicyPage({ lang }) {
 
           <div style={hr} />
 
+          {/* Phone & IVR */}
+          <div style={{marginBottom:52}}>
+            <div style={sLabel}>Phone System</div>
+            <h2 style={sTitle}>Calls, Voicemails & SMS</h2>
+            <p style={body}>Café Con Pan operates an AI-powered phone system reachable at <strong>1-833-724-CAFE</strong>. When you call this number, certain information is collected and processed as part of normal call handling.</p>
+            <p style={body}><strong>What we collect:</strong> Your phone number (as provided by your carrier), the date and time of your call, the department or option you selected, and — if your call is not answered — a voicemail recording of your message.</p>
+            <p style={body}><strong>SMS follow-ups:</strong> If you call and a client has enabled SMS follow-up, you may receive a single automated text message after your call. You can reply STOP at any time to opt out of future messages.</p>
+            <p style={body}><strong>How we use it:</strong> Call logs are used to track call volume and routing for our clients' businesses. Voicemail recordings are accessible only to the business you called and to Café Con Pan for system management. We do not use call data for advertising or share it with unaffiliated third parties.</p>
+            <p style={body}><strong>Data retention:</strong> Call logs are retained for operational and reporting purposes. Voicemail recordings are stored until deleted by the client or Café Con Pan, with a maximum retention of 60 days after a recording has been marked as heard.</p>
+            <p style={body}>Phone and SMS services are powered by <strong>Twilio</strong>. Your phone number and call data pass through Twilio's infrastructure and are subject to Twilio's Privacy Policy.</p>
+          </div>
+
+          <div style={hr} />
+
           {/* Cookies */}
           <div style={{marginBottom:52}}>
             <div style={sLabel}>Website</div>
@@ -1918,6 +1932,7 @@ function PrivacyPolicyPage({ lang }) {
               {[
                 {name:"Apple",role:"Verify with Wallet on the Web identity verification"},
                 {name:"Helcim",role:"Invoice payment processing"},
+                {name:"Twilio",role:"Phone system, call routing, voicemail recording, and SMS delivery"},
                 {name:"Google Workspace",role:"Business email (hello@pancon.cafe · jason@pancon.cafe)"},
                 {name:"Web3Forms",role:"Contact form and email sign-up processing"},
               ].map((p,i,arr) => (
