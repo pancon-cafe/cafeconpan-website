@@ -233,7 +233,7 @@ const STRINGS = {
       newClientEyebrow:"New to Café Con Pan?",
       newClientBody:"Looking to get started with tech services? Use the intake form — it's faster for both of us.",
       intakeCta:"Take Me to the Intake Form →",
-      info:[{label:"Email",val:"hello@pancon.cafe",href:"mailto:hello@pancon.cafe"},{label:"Phone",val:"1-771-CAFE-131 (1-771-223-3131)",href:"tel:+17712233131"},{label:"Response Time",val:"Within 24 Hours"},{label:"Business",val:"Cafe Con Pan LLC"},{label:"Services",val:"Tech · Coffee · Culture"}],
+      info:[{label:"Email",val:"hello@pancon.cafe",href:"mailto:hello@pancon.cafe"},{label:"Phone",val:"1-833-724-CAFE (1-833-724-2233)",href:"tel:+18337242233"},{label:"Response Time",val:"Within 24 Hours"},{label:"Business",val:"Cafe Con Pan LLC"},{label:"Services",val:"Tech · Coffee · Culture"}],
       nameLabel:"Your Name", namePlaceholder:"Full name",
       emailLabel:"Email Address", emailPlaceholder:"Your email address",
       inquiryLabel:"Inquiry Type", messageLabel:"Message", messagePlaceholder:"What can we help you with?",
@@ -502,7 +502,7 @@ const STRINGS = {
       newClientEyebrow:"¿Nuevo en Café Con Pan?",
       newClientBody:"¿Quieres empezar con servicios tech? Usa el formulario de inicio — es más rápido para ambos.",
       intakeCta:"Ir al Formulario de Inicio →",
-      info:[{label:"Correo",val:"hello@pancon.cafe",href:"mailto:hello@pancon.cafe"},{label:"Teléfono",val:"1-771-CAFE-131 (1-771-223-3131)",href:"tel:+17712233131"},{label:"Tiempo de Respuesta",val:"Dentro de 24 Horas"},{label:"Negocio",val:"Cafe Con Pan LLC"},{label:"Servicios",val:"Tech · Café · Cultura"}],
+      info:[{label:"Correo",val:"hello@pancon.cafe",href:"mailto:hello@pancon.cafe"},{label:"Teléfono",val:"1-833-724-CAFE (1-833-724-2233)",href:"tel:+18337242233"},{label:"Tiempo de Respuesta",val:"Dentro de 24 Horas"},{label:"Negocio",val:"Cafe Con Pan LLC"},{label:"Servicios",val:"Tech · Café · Cultura"}],
       nameLabel:"Tu Nombre", namePlaceholder:"Nombre completo",
       emailLabel:"Correo Electrónico", emailPlaceholder:"Tu correo electrónico",
       inquiryLabel:"Tipo de Consulta", messageLabel:"Mensaje", messagePlaceholder:"¿En qué podemos ayudarte?",
@@ -3163,6 +3163,7 @@ export default function CafeConPan() {
       <footer>
         <div className="footer-logo">Café Con <span>Pan</span></div>
         <div className="footer-tagline">{t.footer.tagline}</div>
+        <div style={{fontSize:10,letterSpacing:"0.12em",textTransform:"uppercase",color:`rgba(245,237,214,0.35)`,fontWeight:600,marginTop:2}}>Washington, D.C. Metro Area</div>
         <div id="footer-socials" style={{display:"flex",flexDirection:"column",alignItems:"center",gap:8}}>
           <div style={{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",color:C.teal,fontWeight:700,marginBottom:4}}>{t.socials.followLabel}</div>
           <div style={{display:"flex",flexWrap:"wrap",justifyContent:"center",gap:"12px 24px",textAlign:"center"}}>
