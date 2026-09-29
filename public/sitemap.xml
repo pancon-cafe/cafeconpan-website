@@ -10,4 +10,24 @@
     <priority>1.0</priority>
   </url>
 
+  <!-- Loops app pages are real static files in public/loops/ -->
+  <url>
+    <loc>https://pancon.cafe/loops/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pancon.cafe/loops/privacy/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://pancon.cafe/loops/terms/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
 </urlset>
